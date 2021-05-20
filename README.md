@@ -8,6 +8,6 @@ Members
 
 # Project Description
 
-## Timeslot Picking Tool
+## Feature
 
-## Group Messaging Tool
+## Add additional feature
