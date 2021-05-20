@@ -4,7 +4,7 @@ Members
 | ---------------------| ---------------|-------------------------------|
 | Alexander Samaniego  | alexsam29      | asamaniego@myseneca.ca        |
 | Nikita Mezhenskyi    | nmezhenskyi    | nmezhenskyi@myseneca.ca       |
-|
+| Atif Ali             | aali309        | aali309@myseneca.ca           |
 |
 
 
