@@ -5,8 +5,7 @@ Members
 | Alexander Samaniego  | alexsam29      | asamaniego@myseneca.ca        |
 | Nikita Mezhenskyi    | nmezhenskyi    | nmezhenskyi@myseneca.ca       |
 | Atif Ali             | aali309        | aali309@myseneca.ca           |
-|
-
+| Rad Eshghi           | Rad-tech-spec  | reshghi@myseneca.ca           |
 
 # Project Description
 
