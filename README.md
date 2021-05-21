@@ -31,4 +31,8 @@ The backbone of this application will be the web API that will connect the web a
 > automatically recommend options that are most relevant for their condition.  It will recommend the patient to book an in-person or virtual appointment with a doctor, or if 
 > severe enough, it will recommend the patient to visit a hospital or call 911 immediately. 
 
+- Patient Dashboard 
+> This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a 
+> diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history.  
+
 ## Add additional feature
