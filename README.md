@@ -32,3 +32,8 @@ severe enough, it will recommend the patient to visit a hospital or call 911 imm
 > This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history.  
 
 ## Add additional feature
+
+
+## Goal
+The goal of this project is to make health care more convenient and accessible. This can be achieved by connecting patients with doctors through the internet. A lot of routine operations such as booking appointments, reporting symptoms, getting test results, etc. could be done virtually. Our project provides means to do this and more. There are some applications that are out there doing something similar, but they don’t have most of the feature that we are trying to have with our application. Patients need to use one application to get most tasks done instead of jumping between different apps. This is our challenge to make it unique and simpler than other apps so everyone can figure it out in no time.  
+
