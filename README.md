@@ -23,12 +23,10 @@ The backbone of this application will be the web API that will connect the web a
 > cess to 
 > private information and to authorize user logins. 
 
-2. Onlline Booking System
+- Onlline Booking System
 > This tool will allow patients to book appointments with their doctor either in-person or virtually. It will show all the available timeslots and the patient will choose their > preferred time and date; patient will be able to request to reschedule meeting or cancel. Also, the doctor on the other end will be able to set available times, cancel meeting > or reschedule and request a meeting if needed.  
 
-4.
-
-3. Self-Assessment Tool
+- Self-Assessment Tool
 > The patient will be able to use this tool to self-assess their current condition if they are feeling ill.  Depending on their responses to a questionnaire, the system will 
 > automatically recommend options that are most relevant for their condition.  It will recommend the patient to book an in-person or virtual appointment with a doctor, or if 
 > severe enough, it will recommend the patient to visit a hospital or call 911 immediately. 
