@@ -15,7 +15,7 @@ We are going to create a web application that will be used by doctors and patien
 
 The backbone of this application will be the web API that will connect the web application to the database. Potentially, this API can be used by other kinds of client applications such as mobile and desktop apps.
 
-## Feature
+## Features
 
 - Web API 
 > A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment  results, etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent acess to private information and to authorize user logins. 
@@ -30,9 +30,6 @@ severe enough, it will recommend the patient to visit a hospital or call 911 imm
 
 - Patient Dashboard 
 > This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history.  
-
-## Add additional feature
-
 
 ## Goal
 The goal of this project is to make health care more **convenient** and **accessible**. This can be achieved by connecting patients with doctors through the internet. A lot of routine operations such as booking appointments, reporting symptoms, getting test results, etc. could be done virtually. Our project provides means to do this and more. There are some applications that are out there doing something similar, but they don’t have most of the feature that we are trying to have with our application. Patients need to use one application to get most tasks done instead of jumping between different apps. This is our challenge to make it **unique** and **simpler** than other apps so everyone can figure it out in no time.  
