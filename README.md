@@ -17,7 +17,7 @@ The backbone of this application will be the web API that will connect the web a
 
 ## Feature
 
-1. Web API 
+- Web API 
 > A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment 
 > results, etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent 
 > cess to 
@@ -25,6 +25,8 @@ The backbone of this application will be the web API that will connect the web a
 
 2. Onlline Booking System
 > This tool will allow patients to book appointments with their doctor either in-person or virtually. It will show all the available timeslots and the patient will choose their > preferred time and date; patient will be able to request to reschedule meeting or cancel. Also, the doctor on the other end will be able to set available times, cancel meeting > or reschedule and request a meeting if needed.  
+
+4.
 
 3. Self-Assessment Tool
 > The patient will be able to use this tool to self-assess their current condition if they are feeling ill.  Depending on their responses to a questionnaire, the system will 
