@@ -18,7 +18,9 @@ The backbone of this application will be the web API that will connect the web a
 ## Feature
 
 1. Web API 
-> A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment results, > etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent access to 
+> A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment 
+> results, etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent 
+> cess to 
 > private information and to authorize user logins. 
 
 2. Onlline Booking System
