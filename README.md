@@ -18,21 +18,17 @@ The backbone of this application will be the web API that will connect the web a
 ## Feature
 
 - Web API 
-> A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment 
-> results, etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent 
-> cess to 
-> private information and to authorize user logins. 
+> A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment  results, etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent acess to private information and to authorize user logins. 
 
 - Onlline Booking System
 > This tool will allow patients to book appointments with their doctor either in-person or virtually. It will show all the available timeslots and the patient will choose their  preferred time and date; patient will be able to request to reschedule meeting or cancel. Also, the doctor on the other end will be able to set available times, cancel meeting  or reschedule and request a meeting if needed.  
 
 - Self-Assessment Tool
 > The patient will be able to use this tool to self-assess their current condition if they are feeling ill.  Depending on their responses to a questionnaire, the system will 
-> automatically recommend options that are most relevant for their condition.  It will recommend the patient to book an in-person or virtual appointment with a doctor, or if 
-> severe enough, it will recommend the patient to visit a hospital or call 911 immediately. 
+automatically recommend options that are most relevant for their condition.  It will recommend the patient to book an in-person or virtual appointment with a doctor, or if 
+severe enough, it will recommend the patient to visit a hospital or call 911 immediately. 
 
 - Patient Dashboard 
-> This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a 
-> diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history.  
+> This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history.  
 
 ## Add additional feature
