@@ -21,4 +21,7 @@ The backbone of this application will be the web API that will connect the web a
 > A database will be used to hold all the information needed to run the system, such as account information for both patients and doctors, booking times, self-assessment results, > etc. The web API will allow us to get relevant information from the database to use for the web application. The API will also have security features to prevent access to 
 > private information and to authorize user logins. 
 
+2. Onlline Booking System
+> This tool will allow patients to book appointments with their doctor either in-person or virtually. It will show all the available timeslots and the patient will choose their > preferred time and date; patient will be able to request to reschedule meeting or cancel. Also, the doctor on the other end will be able to set available times, cancel meeting > or reschedule and request a meeting if needed.  
+
 ## Add additional feature
