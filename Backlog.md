@@ -26,3 +26,10 @@
 > - As a patient, I should be able to select multiple symptoms so that the survey includes every detail. 
 > - As a patient, I should be able to leave additional comments for the doctor, so that if there is something more that the doctor should be aware of, that survey does not include it.
 > - As a doctor, I should be able to view all patient surveys, so that I can monitor my patients and act immediately if needed (request to book an appointment, request to go to the emergency or contact immediately).
+
+### Appointments
+> - As a patient, I should be able to book an appointment.
+> - As a patient, I should be able to reschedule my appointment.
+> - As a patient, I should be able to cancel my appointment.
+> - As a doctor, I should be able to reschedule appointments.
+> - As a doctor, I should be able to cancel appointments.
