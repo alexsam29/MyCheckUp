@@ -33,3 +33,14 @@
 > - As a patient, I should be able to cancel my appointment.
 > - As a doctor, I should be able to reschedule appointments.
 > - As a doctor, I should be able to cancel appointments.
+
+### Profile
+> - As a patient, I should be able to update my profile page.
+> - As a doctor, I should be able to update my profile page.
+
+### FAQs 
+> - As a visitor, I should see FAQs and answers to it, so that I can save more time.
+> - As an admin, I should be able to maintain the FAQs section so that visitors have access to updated FAQs.  
+> - As a visitor, I should be able to search for an answer so that I can find a solution to the problem. 
+
+
