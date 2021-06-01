@@ -50,4 +50,11 @@
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 > - As a visitor, I should be able to understand.
 
+### Non-Functional Part
+> - As developers, we would want to produce a site which is compatible with HTML and CSS standards so that it could be supported on most devices and accessible by many.
+> - As a user, I want to see sensible and predictable URLs for appropriate logic.
+> - As a user, I want a quick response from the site.
+> - As a user, I want to see nice error pages when something goes wrong.
+> - As a developer I want to make the system reliable using correct paths and URLs to make the user feel comfortable.
+
 
