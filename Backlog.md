@@ -20,3 +20,9 @@
 > - As a doctor, I should be able to see all my patients. 
 > - As a patient, I should be able to select a clinic when creating an account.
 > - As a patient, I should be able to choose a doctor when creating an account
+
+### Survey 
+> - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
+> - As a patient, I should be able to select multiple symptoms so that the survey includes every detail. 
+> - As a patient, I should be able to leave additional comments for the doctor, so that if there is something more that the doctor should be aware of, that survey does not include it.
+> - As a doctor, I should be able to view all patient surveys, so that I can monitor my patients and act immediately if needed (request to book an appointment, request to go to the emergency or contact immediately).
