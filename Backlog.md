@@ -57,4 +57,16 @@
 > - As a user, I want to see nice error pages when something goes wrong.
 > - As a developer I want to make the system reliable using correct paths and URLs to make the user feel comfortable.
 
+### Dashboard
+> - As a doctor, I should be able to add a prescription to a patient.
+> - As a doctor, I should be able to edit the patient’s prescription.
+> - As a doctor, I should be able to view my profile page.
+> - As a doctor, I should be able to view my patients’ profiles.
+> - As a doctor, I should be able to view the patient’s medical history.
+> - As a doctor, I should be able to access appointments.
+> - As a patient, I should be able to view my profile page.
+> - As a patient, I should be able to see anything prescribed by the doctor.
+> - As a patient, I should be able to view my medical history.
+> - As a patient, I should be able to view all past and future appointments.
+
 
