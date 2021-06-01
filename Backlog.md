@@ -6,7 +6,7 @@
 
 ## System Functionalities
 ### Account 
-> As a patient, I should be able to create a new account.\
+> - As a patient, I should be able to create a new account.\
 As a patient, I should be able to update my account.\
 As a patient, I should be able to deactivate my account.\
 As a patient, I should be able to login on my account.\
