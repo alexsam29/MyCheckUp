@@ -23,13 +23,13 @@
 ### Dashboard
 > - As a doctor, I should be able to add a prescription to a patient so that the patient can view their prescription.
 > - As a doctor, I should be able to edit the patient’s prescription so that I can make changes if required.
-> - As a doctor, I should be able to view my profile page.
+> - As a doctor, I should be able to view my profile page and see that all information is legit.
 > - As a doctor, I should be able to view my patients’ profiles so that I can see all of the patients under my care.
 > - As a doctor, I should be able to view the patient’s medical history so that I can get a good understanding of the patient.
-> - As a doctor, I should be able to access all of my appointments.
-> - As a patient, I should be able to view my profile page.
+> - As a doctor, I should be able to see and access all of my appointments.
+> - As a patient, I should be able to view my profile page and see if all the information is correct.
 > - As a patient, I should be able to see anything prescribed by the doctor so that I can get the prescribed medicine from the pharmacy.
-> - As a patient, I should be able to view my medical history.
+> - As a patient, I should be able to view my medical history to help me keep track of my health condition.
 > - As a patient, I should be able to view all past and future appointments.
 
 ### Homepage
@@ -39,8 +39,8 @@
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
 ### Profile
-> - As a patient, I should be able to update my profile page so that my contact information stays up-to-date.
-> - As a doctor, I should be able to update my profile page so that my contact information stays up-to-date.
+> - As a patient, I should be able to update my profile page so that my contact information and adress stays up-to-date.
+> - As a doctor, I should be able to update my profile page so that my contact information and adress stays up-to-date.
 
 ### Survey 
 > - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
@@ -51,9 +51,9 @@
 ### Appointments
 > - As a patient, I should be able to book an appointment so that I can see my doctor.
 > - As a patient, I should be able to reschedule my appointment so that I can avoid any conflicts.
-> - As a patient, I should be able to cancel my appointment.
-> - As a doctor, I should be able to reschedule appointments so that I can avoid any conflicts..
-> - As a doctor, I should be able to cancel appointments.
+> - As a patient, I should be able to cancel my appointment if unable to attend so that the time slot could be utilised by another patient if there is.
+> - As a doctor, I should be able to reschedule appointments so that I can avoid any conflicts with my patients.
+> - As a doctor, I should be able to cancel appointments when need be.
 
 ### FAQs 
 > - As a visitor, I should see FAQs and answers to it, so that I can save more time.
