@@ -15,9 +15,8 @@
 > - As an admin, I should be able to add a clinic account so that the clinic's doctors and patients can set up profiles and use the system.
 > - As an admin, I should be able to remove a clinic account so that all information associated with the clinic is removed from the system.
 > - As an admin, I should be able to manage all accounts so that I can provide customer support and resolve system issues.
-> - As a doctor, I should be able to update my account.
-> - As a doctor, I should be able to login on my account.
-> - As a doctor, I should be able to see all my patients. 
+> - As a doctor, I should be able to update my account so that my credentials stay up-to-date and secure.
+> - As a doctor, I should be able to login on my account so that I can access the system functionality.
 > - As a patient, I should be able to select a clinic when creating an account.
 > - As a patient, I should be able to choose a doctor when creating an account.
 
