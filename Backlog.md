@@ -49,10 +49,10 @@
 > - As a doctor, I should be able to view all patient surveys, so that I can monitor my patients and act immediately if needed (request to book an appointment, request to go to the emergency or contact immediately).
 
 ### Appointments
-> - As a patient, I should be able to book an appointment.
-> - As a patient, I should be able to reschedule my appointment.
+> - As a patient, I should be able to book an appointment so that I can see my doctor.
+> - As a patient, I should be able to reschedule my appointment so that I can avoid any conflicts.
 > - As a patient, I should be able to cancel my appointment.
-> - As a doctor, I should be able to reschedule appointments.
+> - As a doctor, I should be able to reschedule appointments so that I can avoid any conflicts..
 > - As a doctor, I should be able to cancel appointments.
 
 ### FAQs 
@@ -62,8 +62,8 @@
 
 ### Non-Functional Part
 > - As developers, we would want to produce a site which is compatible with HTML and CSS standards so that it could be supported on most devices and accessible by many.
-> - As a user, I want to see sensible and predictable URLs for appropriate logic.
-> - As a user, I want a quick response from the site.
-> - As a user, I want to see nice error pages when something goes wrong.
+> - As a user, I want to see sensible and predictable URLs for appropriate logic so that I can easily navigate to a page.
+> - As a user, I want a quick response from the site so that I can naviaget the website smoothly.
+> - As a user, I want to see nice error pages when something goes wrong so that I can understand what went wrong.
 > - As a developer I want to make the system reliable using correct paths and URLs to make the user feel comfortable.
 
