@@ -34,7 +34,7 @@
 
 ### Homepage
 > - As a visitor, I should be able to see what this website provides, so that I can see if it suits my needs.
-> - As a visitor, I should be able to see if this website is secure enough for private information. 
+> - As a visitor, I should be able to see if this website is secure enough for private information so that I can make a decision whether to sign up or not. 
 > - As a visitor, I should easily be able to navigate through the site and read all the labels.
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
