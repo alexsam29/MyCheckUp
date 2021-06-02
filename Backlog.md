@@ -19,7 +19,6 @@
 > - As a doctor, I should be able to login on my account so that I can access the system functionality.
 > - As a patient, I should be able to select a clinic when creating an account so that the system connects me with my clinics.
 > - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
-> - Some placeholder info from Nikita 0/
 
 ### Dashboard
 > - As a doctor, I should be able to add a prescription to a patient.
