@@ -17,7 +17,7 @@
 > - As an admin, I should be able to manage all accounts so that I can provide customer support and resolve system issues.
 > - As a doctor, I should be able to update my account so that my credentials stay up-to-date and secure.
 > - As a doctor, I should be able to login on my account so that I can access the system functionality.
-> - As a patient, I should be able to select a clinic when creating an account so that the system connects me with my clinics.
+> - As a patient, I should be able to select a clinic when creating an account so that the system connects me with my clinic.
 > - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
 
 ### Dashboard
