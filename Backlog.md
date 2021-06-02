@@ -6,8 +6,8 @@
 
 ## System Functionalities
 ### Account 
-> - As a patient, I should be able to create a new account so that I can use the system.
-> - As a patient, I should be able to update my account.
+> - As a patient, I should be able to create a new account so that I can access and use the system.
+> - As a patient, I should be able to update my account credentials so that my credentials stay up-to-date and secure.
 > - As a patient, I should be able to deactivate my account.
 > - As a patient, I should be able to login on my account.
 > - As an admin, I should be able to add doctor’s account.
