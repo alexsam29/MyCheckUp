@@ -40,7 +40,7 @@
 
 ### Profile
 > - As a patient, I should be able to update my profile page so that my contact information stays up-to-date.
-> - As a doctor, I should be able to update my profile page so that my contact information stays up-to-date
+> - As a doctor, I should be able to update my profile page so that my contact information stays up-to-date.
 
 ### Survey 
 > - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
