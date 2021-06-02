@@ -40,8 +40,8 @@
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
 ### Profile
-> - As a patient, I should be able to update my profile page.
-> - As a doctor, I should be able to update my profile page.
+> - As a patient, I should be able to update my profile page so that my contact information stays up-to-date.
+> - As a doctor, I should be able to update my profile page so that my contact information stays up-to-date
 
 ### Survey 
 > - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
