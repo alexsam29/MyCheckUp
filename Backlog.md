@@ -21,14 +21,14 @@
 > - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
 
 ### Dashboard
-> - As a doctor, I should be able to add a prescription to a patient.
-> - As a doctor, I should be able to edit the patient’s prescription.
+> - As a doctor, I should be able to add a prescription to a patient so that the patient can view their prescription.
+> - As a doctor, I should be able to edit the patient’s prescription so that I can make changes if required.
 > - As a doctor, I should be able to view my profile page.
-> - As a doctor, I should be able to view my patients’ profiles.
-> - As a doctor, I should be able to view the patient’s medical history.
-> - As a doctor, I should be able to access appointments.
+> - As a doctor, I should be able to view my patients’ profiles so that I can see all of the patients under my care.
+> - As a doctor, I should be able to view the patient’s medical history so that I can get a good understanding of the patient.
+> - As a doctor, I should be able to access all of my appointments.
 > - As a patient, I should be able to view my profile page.
-> - As a patient, I should be able to see anything prescribed by the doctor.
+> - As a patient, I should be able to see anything prescribed by the doctor so that I can get the prescribed medicine from the pharmacy.
 > - As a patient, I should be able to view my medical history.
 > - As a patient, I should be able to view all past and future appointments.
 
