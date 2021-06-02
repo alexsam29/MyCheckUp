@@ -6,10 +6,10 @@
 
 ## System Functionalities
 ### Account 
-> - As a patient, I should be able to create a new account so that I can access and use the system.
+> - As a patient, I should be able to create a new account so that I can use the system.
 > - As a patient, I should be able to update my account credentials so that my credentials stay up-to-date and secure.
-> - As a patient, I should be able to deactivate my account.
-> - As a patient, I should be able to login on my account.
+> - As a patient, I should be able to deactivate my account if I wish to stop using the system, unsubscribe from all services, and remove my personal data from the system.
+> - As a patient, I should be able to login on my account so that I can access the system functionality.
 > - As an admin, I should be able to add doctor’s account.
 > - As an admin, I should be able to terminate the doctor's account.
 > - As an admin, I should be able to add a clinic account.
