@@ -1,8 +1,12 @@
 ## Potential Users
-- Admin 
+- Admin
+  - This role represents system supervisors. They are responsible for managing clinics, doctors, and patients.
 - Doctor
+  - This role represents 
 - Patient
+  - This role represents 
 - Visitor
+  - This role represents any visitor of the website that has not yet registered an account and/or logged in. Visitors can view the general information such as Home page, FAQs, and register a Patient account.
 
 ## System Functionalities
 ### Account 
@@ -23,7 +27,7 @@
 ### Dashboard
 > - As a doctor, I should be able to add a prescription to a patient so that the patient can view their prescription.
 > - As a doctor, I should be able to edit the patient’s prescription so that I can make changes if required.
-> - As a doctor, I should be able to view my profile page and see that all information is legit.
+> - As a doctor, I should be able to navigate to my profile page and see that all information is correct.
 > - As a doctor, I should be able to view my patients’ profiles so that I can see all of the patients under my care.
 > - As a doctor, I should be able to view the patient’s medical history so that I can get a good understanding of the patient.
 > - As a doctor, I should be able to see and access all of my appointments.
@@ -39,8 +43,10 @@
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
 ### Profile
-> - As a patient, I should be able to update my profile page so that my contact information and adress stays up-to-date.
-> - As a doctor, I should be able to update my profile page so that my contact information and adress stays up-to-date.
+> - As a patient, I should be able to create my profile to add my contact information and address.
+> - As a patient, I should be able to view and update my profile page so that my contact information and address stays up-to-date.
+> - As a doctor, I should be able to create my profile to add my contact information and address.
+> - As a doctor, I should be able to view and update my profile page so that my contact information and address stays up-to-date.
 
 ### Survey 
 > - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
@@ -66,4 +72,3 @@
 > - As a user, I want a quick response from the site so that I can naviaget the website smoothly.
 > - As a user, I want to see nice error pages when something goes wrong so that I can understand what went wrong.
 > - As a developer I want to make the system reliable using correct paths and URLs to make the user feel comfortable.
-
