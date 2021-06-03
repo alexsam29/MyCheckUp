@@ -1,10 +1,13 @@
 ## Potential Users
 - Admin
-  - This role represents system supervisors. They are responsible for managing clinics, doctors, and patients.
+  - This role represents system supervisors. They are responsible for managing clinics(add clinics), doctors (add doctors), and patients(bloack any accounts that violated terms of use i.e account inactive for 3 years).
+  
 - Doctor
   - This role represents doctors working in a clinic to treat patients. They are able to use the system to communicate with their patients, add prescriptions, review surveys, manage appointments.
+
 - Patient
   - This role represents patients who seek treatment. They are able to complete surveys, book appointments with their doctors.
+  
 - Visitor
   - This role represents any visitor of the website that has not yet registered an account and/or logged in. Visitors can view the general information such as Home page, FAQs, and register a Patient account.
 
@@ -25,7 +28,6 @@
 > - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
 
 ### Dashboard
-
 > - As a doctor,on the dashboard I should be able to:\
             i.  view all patients and select a patient and add a prescription to that patient.\
             ii. edit the patient’s prescription so that I can make changes if required.\
@@ -40,22 +42,27 @@
             iv. view all past and future of all my appointments.
 
 ### Homepage
+> - As a user, I should be able to see an option to create a patient account.
+> - As a doctor, I should be able to see an option to login in my account.
 > - As a visitor, I should be able to see what this website provides, so that I can see if it suits my needs.
 > - As a visitor, I should be able to see if this website is secure enough for private information so that I can make a decision whether to sign up or not. 
 > - As a visitor, I should easily be able to navigate through the site and read all the labels.
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
+### LoginPage
+> - As a patient/doctor, I should be able to recover my password or username incase I forget.
+> - As a patient, I should be able to login in my account.
+> - As a doctor, I should be able to login in my account.
+
 ### Profile
 > - As a patient, I should be able to create my profile to add my contact information and address.
 > - As a patient, I should be able to view and update my profile page so that my contact information and address stays up-to-date.
-> - As a doctor, I should be able to create my profile to add my contact information and address.
-> - As a doctor, I should be able to view and update my profile page so that my contact information and address stays up-to-date.
+> - As a doctor, I should be able to complete my profile page.
+> - As a doctor, I should be able to view and update my profile page so that my personal information stays up-to-date.
 
 ### Survey 
-> - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
-> - As a patient, I should be able to select multiple symptoms so that the survey includes every detail. 
-> - As a patient, I should be able to leave additional comments for the doctor, so that if there is something more that the doctor should be aware of, that survey does not include it.
-> - As a doctor, I should be able to view all patient surveys, so that I can monitor my patients and act immediately if needed (request to book an appointment, request to go to the emergency or contact immediately).
+> - As a patient, I should be able to complete a survey(select symptoms, leave additional comments) multiple times and get a response from the system based on the survey report that has been completed.
+> - As a doctor, I should be able to view all patient surveys if I choose to.
 
 ### Appointments
 > - As a patient, I should be able to book an appointment so that I can see my doctor.
@@ -65,9 +72,8 @@
 > - As a doctor, I should be able to cancel appointments when need be.
 
 ### FAQs 
-> - As a visitor, I should see FAQs and answers to it, so that I can save more time.
-> - As an admin, I should be able to maintain the FAQs section so that visitors have access to updated FAQs.  
-> - As a visitor, I should be able to search for an answer so that I can find a solution to the problem. 
+> - As a user, I should see FAQs and search for answers, so that I can save more time.
+> - As an admin, I should be able to maintain the FAQs section so that visitors have access to updated FAQs.   
 
 ### Non-Functional Part
 > - As developers, we would want to produce a site which is compatible with HTML and CSS standards so that it could be supported on most devices and accessible by many.
