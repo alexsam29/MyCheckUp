@@ -32,12 +32,12 @@
            iii. navigate to my profile page and see that all information is correct.\
             iv. view my patients’ profiles so that I can see all of the patients under my care.\
              v. view the patient’s medical history so that I can get a good understanding of the patient.\
-            vi. see and access all of my appointments and manage them.\
+            vi. see and access all of my appointments and manage them.
 > - As a patient on the dashboard, I should be able to:\
             i.  select my profile page and see if all the information is correct.\
             ii. see anything prescribed by the doctor so that I can get the prescribed medicine from the pharmacy.\
            iii. view my medical history to help me keep track of my health condition.\
-            iv. view all past and future of all my appointments.\
+            iv. view all past and future of all my appointments.
 
 ### Homepage
 > - As a visitor, I should be able to see what this website provides, so that I can see if it suits my needs.
