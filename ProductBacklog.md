@@ -2,7 +2,7 @@
 - Admin
   - This role represents system supervisors. They are responsible for managing clinics, doctors, and patients.
 - Doctor
-  - This role represents 
+  - This role represents doctors working in a clinic to treat patients. They are able to use the system to communicate with their patients, add prescriptions, review surveys, manage appointments.
 - Patient
   - This role represents 
 - Visitor
