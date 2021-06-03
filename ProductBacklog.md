@@ -4,7 +4,7 @@
 - Doctor
   - This role represents doctors working in a clinic to treat patients. They are able to use the system to communicate with their patients, add prescriptions, review surveys, manage appointments.
 - Patient
-  - This role represents patients who seek treatment. They are able to complete surveys, book appointments with their doctors.
+  - This role represents 
 - Visitor
   - This role represents any visitor of the website that has not yet registered an account and/or logged in. Visitors can view the general information such as Home page, FAQs, and register a Patient account.
 
@@ -49,9 +49,7 @@
 > - As a doctor, I should be able to view and update my profile page so that my contact information and address stays up-to-date.
 
 ### Survey 
-> - As a patient, I should be able to complete a survey and get a response from the system based on the survey report that has been completed.
-> - As a patient, I should be able to select multiple symptoms so that the survey includes every detail. 
-> - As a patient, I should be able to leave additional comments for the doctor, so that if there is something more that the doctor should be aware of, that survey does not include it.
+> - As a patient, I should be able to complete a survey (select all the symptoms, leave additional comment) and get a response from the system based on the survey report that has been completed.
 > - As a doctor, I should be able to view all patient surveys, so that I can monitor my patients and act immediately if needed (request to book an appointment, request to go to the emergency or contact immediately).
 
 ### Appointments
