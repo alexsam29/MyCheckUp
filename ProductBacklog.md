@@ -60,9 +60,7 @@
 > - As a doctor, I should be able to cancel appointments when need be.
 
 ### FAQs 
-> - As a visitor, I should be able see FAQs and search for answers, so that I can save more time.
-> - As a patient, I should be able to see FAQs and search for answers, so that I can save more time.
-> - As a doctor, I should be able to see FAQs and search for answers, so that I can save more time.
+> - As a user, I should be able see FAQs and search for answers, so that I can save more time.
 > - As an admin, I should be able to maintain the FAQs section so that visitors have access to updated FAQs.  
 
 
