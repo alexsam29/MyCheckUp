@@ -4,7 +4,7 @@
 - Doctor
   - This role represents doctors working in a clinic to treat patients. They are able to use the system to communicate with their patients, add prescriptions, review surveys, manage appointments.
 - Patient
-  - This role represents 
+  - This role represents patients who seek treatment. They are able to complete surveys, book appointments with their doctors.
 - Visitor
   - This role represents any visitor of the website that has not yet registered an account and/or logged in. Visitors can view the general information such as Home page, FAQs, and register a Patient account.
 
