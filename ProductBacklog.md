@@ -1,15 +1,15 @@
 ## Potential Users
 - Admin
-  - This role represents system supervisors. They are responsible for managing clinics(add clinics), doctors (add doctors), and patients(bloack any accounts that violated terms of use i.e account inactive for 3 years).
+  - This role represents system supervisors. They are responsible for managing clinics(add clinics), doctors (add doctors), and patients (block any accounts that violate terms of use i.e account is inactive for 3 years).
   
 - Doctor
   - This role represents doctors working in a clinic to treat patients. They are able to use the system to communicate with their patients, add prescriptions, review surveys, manage appointments.
 
 - Patient
-  - This role represents patients who seek treatment. They are able to complete surveys, book appointments with their doctors.
+  - This role represents patients who seek treatment. They are able to complete surveys, book appointments with their doctors, receive notes and prescriptions from doctors.
   
 - Visitor
-  - This role represents any visitor of the website that has not yet registered an account and/or logged in. Visitors can view the general information such as Home page, FAQs, and register a Patient account.
+  - This role represents any visitor of the website that has not yet registered an account and/or logged in. Visitors can view the general information such as Homepage, FAQs, and register a Patient account.
 
 ## System Functionalities
 ### Account 
@@ -42,15 +42,15 @@
             iv. view all past and future of all my appointments.
 
 ### Homepage
-> - As a user, I should be able to see an option to create a patient account.
-> - As a doctor, I should be able to see an option to login in my account.
+> - As a visitor, I should be able to see an option to create a patient account.
+> - As a patient/doctor, I should be able to see an option to login in my account.
 > - As a visitor, I should be able to see what this website provides, so that I can see if it suits my needs.
 > - As a visitor, I should be able to see if this website is secure enough for private information so that I can make a decision whether to sign up or not. 
 > - As a visitor, I should easily be able to navigate through the site and read all the labels.
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
-### LoginPage
-> - As a patient/doctor, I should be able to recover my password or username incase I forget.
+### Login Page
+> - As a patient/doctor, I should be able to recover my password or username in case I forget.
 > - As a patient, I should be able to login in my account.
 > - As a doctor, I should be able to login in my account.
 
