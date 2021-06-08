@@ -27,8 +27,8 @@ The backbone of this application will be the web API that will connect the web a
 > The patient will be able to use this tool to self-assess their current condition if they are feeling ill.  Depending on their responses (the system will flag the survey; Red, Orange, and Green) the system will automatically recommend options that are most relevant for their condition. It will recommend the patient to book an in-person or virtual appointment with a doctor, or if severe enough, it will recommend the patient to visit a hospital or call 911 immediately.
 
 > - Red: If the patients shows more than 4 symptoms and or have critical symptoms ex. shorthness of breath, chest pain, body temperature 37.5-38°C or higher.
-> (Visit hospital)
-> - Orange: Patients on red status with less than four symptoms or have mild symptoms ex. vomiting, dizziness, body temperature 37.3-37.5°C.
+> (Visit hospital or call 911)
+> - Orange: Patients on orange status with less than four symptoms or have mild symptoms ex. vomiting, dizziness, body temperature 37.3-37.5°C.
 > (Imidiate virtual appointment with the doctor or worse case senario emergency)
 > - Green: Patinet on the green status with less then three symptoms or basic symptoms ex. weakness, headaches, exhaustin.
 > (Virtaul or inperson appointment will be an option but base on the symptoms selected basic drugs that are avalible to everyone will be recomended to take ex. Tylenol, Advil..)
