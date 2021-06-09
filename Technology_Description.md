@@ -42,7 +42,7 @@ An Admin will use the system to add a clinic.\
 | A2| The provided contact information is invalid. | System asks to re-enter the information or cancel. |
 | A3| Admin rejects when asked to proceed. | System returns to the main menu. |
 | A4| Admin rejects when asked to confirm. | System allows Admin to edit the information or go back to the main menu.| 
-
+ ------------------------------------------------------------------------------------------------------------------------------------
 
 
 
