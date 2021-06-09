@@ -26,6 +26,13 @@ An Admin will use the system to add a clinic.\
 -	Clinics may request to receive and review all their data stored in the system.
 
 
+|   | Actor(s): Admin|           System              |
+| --| ---------------|-------------------------------|
+| 1 | alexsam29      | asamaniego@myseneca.ca        |
+| 2 | nmezhenskyi    | nmezhenskyi@myseneca.ca       |
+| 3 | aali309        | aali309@myseneca.ca           |
+| 4 | Rad-tech-spec  | reshghi@myseneca.ca           |
+
 
 
 
