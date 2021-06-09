@@ -28,8 +28,8 @@ An Admin will use the system to add a clinic.\
 
 |   | Actor(s): Admin|           System              |
 | --| ---------------|-------------------------------|
-| 1 | Requests to add a \ new clinic to the system.     | asamaniego@myseneca.ca        |
-| 2 | nmezhenskyi    | nmezhenskyi@myseneca.ca       |
+| 1 | Requests to add a new clinic to the system. | Asks to enter name, address, and postal code. |
+| 2 | Enters name, address, and postal code.    | Validates the clinic information (*1). If valid, asks to enter a clinic representative|
 | 3 | aali309        | aali309@myseneca.ca           |
 | 4 | Rad-tech-spec  | reshghi@myseneca.ca           |
 
