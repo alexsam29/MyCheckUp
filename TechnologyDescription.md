@@ -1,4 +1,4 @@
-# Technology Description
+# TechnologyDescription
 
 ### Context
 > This document will provide a description of the technology that we will use for this project. It will provide all the languages, database and possible developing tools that will be used to fully develop this web application from frontend as well as the backend.
