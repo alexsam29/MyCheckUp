@@ -63,7 +63,7 @@ This system will be adding a doctor’s account and producing a link that will b
 2.7 **Applicable Business Rules**:
 -	Clinic must provide proof of a valid Licentiate of the Medical Council of Canada (LMCC) for that doctor.
 
-1.8 **Main Flow**:
+2.8 **Main Flow**:
 |   | Actor(s): Admin|           System              |
 |---| ---------------|-------------------------------|
 | 1 | Request to add a doctor’s account. | System will ask the admin to choose the clinic the doctor is associated with.|
@@ -73,7 +73,7 @@ This system will be adding a doctor’s account and producing a link that will b
 | 5 | Re-enter password. |Validate password (*3). Then ask the admin to confirm and send email to the doctor with new account details. | 
 | 6 | Confirms. | Send email to doctor and save new account details to database.| 
 
-1.9 **Alternative Flow**: 
+2.9 **Alternative Flow**: 
 |   | Alternative Flow | Description |
 |---|------------------|-------------| 
 | A1|If doctor’s details are not valid. |  System will display doctor not found. Please enter valid doctor’s details.| 
