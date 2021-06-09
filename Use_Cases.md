@@ -83,3 +83,41 @@ This system will be adding a doctor’s account and producing a link that will b
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+### 3 System Use Case Name: Self Assesment Tool (Symptoms Survey)
+3.2 **Author**: Rad Eshghi\
+\
+3.3 **Description of the System Use Case**:\
+This tool will allow the patient to complete several surveys, to guide the patient what to do in three different scenarios red,orange, and green then saves the report into the database allowing the doctor to have access whenever is needed.\
+\
+3.4 **Actor(s)**: Patient\
+\
+3.5 **System Use Case Preconditions**:
+-	Website must be up and running.
+- Patients must be logged in to the system.
+
+3.6 **System Use Case Successful Post Conditions**:
+-	Patient successfully submitted a report.
+- Patients will be recommended to take further action after completing the survey based on the results status (Red, Orange, and Green). 
+- Doctors can access survey reports.
+
+3.7 **Applicable Business Rules**:
+-	Patients can complete three surveys per 24h.
+- Patient must select at least one checkbox. 
+- Patients can't edit or undo a survey after submission.
+
+3.8 **Main Flow**:
+|   | Actor(s): Admin|           System              |
+|---| ---------------|-------------------------------|
+| 1 | From the dashboard patient select “Self Assessment”. | Displays a form with checkboxes to select from and a comment section to write additional comments (optional). Survey includes common symptoms to select. |
+| 2 | Selects symptoms, and leave additional comment. |Save the selected checkboxes and comment. Ask the patient to submit. |
+| 3 | Submits.| Flags the report (Red, Orange, and Green) then adds the report into the database. Shows recommended action to the patient to take.|
+| 4 | Repeat steps 2 and 3 up to three times.(optional).  |Ask to repeat after 24h when survey is submitted for the 3rd time.|
+
+3.9 **Alternative Flow**: 
+|   | Alternative Flow | Description |
+|---|------------------|-------------| 
+| A1|No checkbox has been selected. | The system will ask the patient to select atleast one checkbox before submitting.| 
+| A2|Invalid submission. Patient exceeded the submission limit. |  The system will ask the patient to wait 24h before taking the survey again. |
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
