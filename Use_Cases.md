@@ -81,5 +81,5 @@ This system will be adding a doctor’s account and producing a link that will b
 | A3| Admin rejects when asked to proceed. | System returns to the main menu. |
 | A4| If passwords don’t match. | System will display a message passwords do not  match until both passwords are the same.| 
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
