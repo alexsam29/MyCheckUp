@@ -42,7 +42,44 @@ An Admin will use the system to add a clinic.\
 | A2| The provided contact information is invalid. | System asks to re-enter the information or cancel. |
 | A3| Admin rejects when asked to proceed. | System returns to the main menu. |
 | A4| Admin rejects when asked to confirm. | System allows Admin to edit the information or go back to the main menu.| 
+
  ------------------------------------------------------------------------------------------------------------------------------------
+ 
+### 2 System Use Case Name: Admin Add Doctor's Account
+2.2 **Author**: Atif Ali\
+\
+2.3 **Description of the System Use Case**:\
+This system will be adding a doctor’s account and producing a link that will be sent to the doctor’s email to access their created account.\
+\
+2.4 **Actor(s)**: Admin\
+\
+2.5 **System Use Case Preconditions**:
+-	Admin must be logged in to the system.
+- Admin must have doctor’s details from the clinic.
 
+2.6 **System Use Case Successful Post Conditions**:
+-	The system creates a new a doctor’s account.
 
+2.7 **Applicable Business Rules**:
+-	Clinic must provide proof of a valid Licentiate of the Medical Council of Canada (LMCC) for that doctor.
+
+2.8 **Main Flow**:
+|   | Actor(s): Admin|           System              |
+|---| ---------------|-------------------------------|
+| 1 | Request to add a doctor’s account. | System will ask the admin to choose the clinic the doctor is associated with.|
+| 2 | Select the name of the clinic the doctor is associated with. | Displays a form to provide the doctor’s details. |
+| 3 | Enter doctor’s details.| Validate doctor’s details if is associated with the clinic (*1). If validated, ask the admin to type username.|
+| 4 | Choose username for that doctor(first letter of first name and last name plus month of birth)(alternative add year of birth if username taken).  | Validate username (*2). If unique, The system will generate a random password for that doctor’s account and will ask the admin to re-enter the password.|
+| 5 | Re-enter password. |Validate password (*3). Then ask the admin to confirm and send email to the doctor with new account details. | 
+| 6 | Confirms. | Send email to doctor and save new account details to database.| 
+
+2.9 **Alternative Flow**: 
+|   | Alternative Flow | Description |
+|---|------------------|-------------| 
+| A1|If doctor’s details are not valid. |  System will display doctor not found. Please enter valid doctor’s details.| 
+| A2|If username is not unique. |  System will display username Please choose another username. System will do this until unique username is chosen. |
+| A3| Admin rejects when asked to proceed. | System returns to the main menu. |
+| A4| If passwords don’t match. | System will display a message passwords do not  match until both passwords are the same.| 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
