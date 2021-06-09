@@ -25,13 +25,15 @@ An Admin will use the system to add a clinic.\
 -	Clinics may have many patients.
 -	Clinics may request to receive and review all their data stored in the system.
 
-
+1.8 **Main Flow**:
 |   | Actor(s): Admin|           System              |
 | --| ---------------|-------------------------------|
-| 1 | Requests to add a new clinic to the system. | Asks to enter name, address, and postal code. |
+| 1 | Requests to add a new clinic to the system. | Asks to enter name, address, and postal code.|
 | 2 | Enters name, address, and postal code.    | Validates the clinic information (*1). If valid, asks to enter a clinic representative|
-| 3 | aali309        | aali309@myseneca.ca           |
-| 4 | Rad-tech-spec  | reshghi@myseneca.ca           |
+| 3 | Enters full name, phone number, email, position.| Validates the contact information (*2). Asks if there are any other clinic representatives.|
+| 4 | Repeats step 3 until all clinic representatives have been added.  | Asks to proceed.|
+| 5 | Proceeds (*3). | Displays all entered information. Asks to confirm. | 
+| 6 | Confirms (*4). | Saves the clinic to the database. Displays a confirmation message to the Admin and sends a confirmation email to clinic representatives.| 
 
 
 
