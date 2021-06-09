@@ -78,7 +78,7 @@ This system will be adding a doctor’s account and producing a link that will b
 |---|------------------|-------------| 
 | A1|If doctor’s details are not valid. |  System will display doctor not found. Please enter valid doctor’s details.| 
 | A2|If username is not unique. |  System will display username Please choose another username. System will do this until unique username is chosen. |
-| A4| If passwords don’t match. | System will display a message passwords do not  match until both passwords are the same.| 
+| A3| If passwords don’t match. | System will display a message passwords do not  match until both passwords are the same.| 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
