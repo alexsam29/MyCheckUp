@@ -78,12 +78,11 @@ This system will be adding a doctor’s account and producing a link that will b
 |---|------------------|-------------| 
 | A1|If doctor’s details are not valid. |  System will display doctor not found. Please enter valid doctor’s details.| 
 | A2|If username is not unique. |  System will display username Please choose another username. System will do this until unique username is chosen. |
-| A3| Admin rejects when asked to proceed. | System returns to the main menu. |
 | A4| If passwords don’t match. | System will display a message passwords do not  match until both passwords are the same.| 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### 3 System Use Case Name: Self Assesment Tool (Symptoms Survey)
+### 3 System Use Case Name: Patient Self Assesment Tool (Symptoms Survey)
 3.2 **Author**: Rad Eshghi\
 \
 3.3 **Description of the System Use Case**:\
@@ -121,3 +120,32 @@ This tool will allow the patient to complete several surveys, to guide the patie
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+### 4 System Use Case Name: Patient Book an Appointment
+4.2 **Author**: Alexander Samaniego\
+\
+4.3 **Description of the System Use Case**:\
+A patient can book an appointment to visit their doctor in-person.\
+\
+4.4 **Actor(s)**: Patient\
+\
+4.5 **System Use Case Preconditions**:
+- Must be logged into an existing account.
+
+4.6 **System Use Case Successful Post Conditions**:
+-	The patient will have a scheduled appointment to visit a doctor.
+
+4.7 **Applicable Business Rules**:
+-	The time and date of the patient’s appointment must not conflict with any other appointment their doctor has. 
+
+4.8 **Main Flow**:
+|   | Actor(s): Admin|           System              |
+|---| ---------------|-------------------------------|
+| 1 | From the dashboard, the patient selects “book an in-person appointment”. | Displays the input form to book an appointment.  Form includes a calendar to select a date and time (only displays available time slots). |
+| 2 | Selects the time and date for appointment. |Saves selected date and time. Asks the user to confirm if they want to book the appointment. |
+| 3 | Confirms.| Adds appointment date and time into the database.  Sends the patient a confirmation email to the email address associated with the account.  Adds the appointment to the patient’s dashboard.|
+
+4.9 **Alternative Flow**: 
+|   | Alternative Flow | Description |
+|---|------------------|-------------| 
+| A1|The patient has completed the self-assessment survey and has been recommended to book an appointment. | Redirect to the “book an in-person appointment” page (step 1).| 
+| A2|Patient does not confirm the appointment.| System does not submit the appointment time and date.  Asks the user to make necessary changes. |
