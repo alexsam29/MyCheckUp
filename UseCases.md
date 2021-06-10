@@ -12,7 +12,7 @@ An Admin will use the system to add a clinic.\
 -	The system is online and working.
 -	The Admin has logged in to use the system.
 -	The clinic representatives signed a partnership contract.
--	The clinic representatives provided all necessary documents with the information about.
+-	The clinic representatives provided all necessary documents with the information about the clinic.
 
 1.6 **System Use Case Successful Post Conditions**:
 -	An Admin has successfully added a clinic information to the system.
