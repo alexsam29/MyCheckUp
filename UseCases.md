@@ -29,7 +29,7 @@ An Admin will use the system to add a clinic.\
 |   | Actor(s): Admin|           System              |
 |---| ---------------|-------------------------------|
 | 1 | Requests to add a new clinic to the system. | Asks to enter name, address, and postal code.|
-| 2 | Enters name, address, and postal code.    | Validates the clinic information (*1). If valid, asks to enter a clinic representative|
+| 2 | Enters name, address, and postal code.    | Validates the clinic information (*1). If valid, asks to enter a clinic representative contact information.|
 | 3 | Enters full name, phone number, email, position.| Validates the contact information (*2). Asks if there are any other clinic representatives.|
 | 4 | Repeats step 3 until all clinic representatives have been added.  | Asks to proceed.|
 | 5 | Proceeds (*3). | Displays all entered information. Asks to confirm. | 
