@@ -29,9 +29,9 @@ The backbone of this application will be the web API that will connect the web a
 > - Red: If the patients shows more than 4 symptoms or have critical symptoms ex. shorthness of breath, chest pain, body temperature 37.5-38°C or higher.
 > (Visit hospital or call 911)
 > - Orange: Patients on orange status with less than four symptoms or have mild symptoms ex. vomiting, dizziness, body temperature 37.3-37.5°C.
-> (Imidiate virtual appointment with the doctor or worse case senario emergency)
+> (immediate virtual appointment with the doctor or worse case senario emergency)
 > - Green: Patinet on the green status with less then three symptoms or basic symptoms ex. weakness, headaches, exhaustin.
-> (Virtaul or inperson appointment will be an option, but base on the symptoms selected basic drugs that are avalible to everyone will be recomended to take ex. Tylenol, Advil..)
+> (Virtual or in-person appointment will be an option, but base on the symptoms selected basic drugs that are avalible to everyone will be recomended to take ex. Tylenol, Advil..)
 
 - Dashboard 
 > This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history. The patient will also be able to see what responses or prescription they got from the doctor.
