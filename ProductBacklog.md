@@ -63,7 +63,7 @@
 
 
 ### Survey 
-> - As a patient, I should be able to complete a survey(select symptoms, leave additional comments) multiple times and get a response from the system based on the survey report that has been completed.
+> - As a patient, I should be able to complete a survey(select symptoms, leave additional comments) three times per day and get a response from the system based on the survey report that has been completed.
 > - As a doctor, I should be able to view all patient surveys if I choose to.
 
 ### Appointments
