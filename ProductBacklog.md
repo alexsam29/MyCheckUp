@@ -57,8 +57,10 @@
 ### Profile
 > - As a patient, I should be able to create my profile to add my contact information and address.
 > - As a patient, I should be able to view and update my profile page so that my contact information and address stays up-to-date.
+> - As a patient, I should be able to delete my account. 
 > - As a doctor, I should be able to complete my profile page.
 > - As a doctor, I should be able to view and update my profile page so that my personal information stays up-to-date.
+
 
 ### Survey 
 > - As a patient, I should be able to complete a survey(select symptoms, leave additional comments) multiple times and get a response from the system based on the survey report that has been completed.
