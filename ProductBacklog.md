@@ -17,6 +17,8 @@
 > - As a patient, I should be able to update my account credentials so that my credentials stay up-to-date and secure.
 > - As a patient, I should be able to deactivate my account if I wish to stop using the system, unsubscribe from all services, and remove my personal data from the system.
 > - As a patient, I should be able to login on my account so that I can access the system functionality.
+> - As a patient, I should be able to select a clinic when creating an account so that the system connects me with my clinic.
+> - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
 > - As an admin, I should be able to add doctor’s account so that the doctor can use the system.
 > - As an admin, I should be able to terminate the doctor's account if the doctor quits the job or the doctor's clinic cancels the contract for using the system.
 > - As an admin, I should be able to add a clinic account so that the clinic's doctors and patients can set up profiles and use the system.
@@ -24,8 +26,6 @@
 > - As an admin, I should be able to manage all accounts so that I can provide customer support and resolve system issues.
 > - As a doctor, I should be able to update my account so that my credentials stay up-to-date and secure.
 > - As a doctor, I should be able to login on my account so that I can access the system functionality.
-> - As a patient, I should be able to select a clinic when creating an account so that the system connects me with my clinic.
-> - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
 
 ### Dashboard
 > - As a doctor,on the dashboard I should be able to:\
