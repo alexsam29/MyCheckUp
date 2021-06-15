@@ -18,4 +18,4 @@ HTML technology will be responsible for structuring and placement of the content
 CSS technology will be responsible for the representation of the data. Ie the colors, fonts, specifications of specific layouts and background stuff.
 
 ### Developing Tools
-> This web Application will be developed using Visual Studio Code. We will use Postman to test our custom web API requests. We will also use GitHub to share and distribute our code before we release our application.
+> To collaborate on the project, share and distribute the code, our team will use GitHub. We will use *Visual Studio Code* text editor and its extensions to develop the application. In order to test our Web API's functionality, we will use Postman to send HTTP requests and check responses.
