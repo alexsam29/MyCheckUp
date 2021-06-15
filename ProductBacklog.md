@@ -1,6 +1,6 @@
 ## Potential Users
 - Admin
-  - This role represents system supervisors. They are responsible for managing clinics(add clinics), doctors (add doctors), and patients (block any accounts that violate terms of use i.e account is inactive for 3 years).
+  - This role represents system supervisors. They are responsible for managing clinics(add clinics), doctors (add doctors, remove doctors), and patients (block any accounts that violate terms of use i.e account is inactive for 3 years).
   
 - Doctor
   - This role represents doctors working in a clinic to treat patients. They are able to use the system to communicate with their patients, add prescriptions, review surveys, manage appointments.
