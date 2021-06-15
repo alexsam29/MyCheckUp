@@ -16,7 +16,6 @@
 > - As a patient, I should be able to create a new account so that I can use the system.
 > - As a patient, I should be able to update my account credentials so that my credentials stay up-to-date and secure.
 > - As a patient, I should be able to deactivate my account if I wish to stop using the system, unsubscribe from all services, and remove my personal data from the system.
-> - As a patient, I should be able to login on my account so that I can access the system functionality.
 > - As a patient, I should be able to select a clinic when creating an account so that the system connects me with my clinic.
 > - As a patient, I should be able to choose a doctor when creating an account so that the system connects me with my doctor.
 > - As an admin, I should be able to add doctor’s account so that the doctor can use the system.
@@ -25,7 +24,7 @@
 > - As an admin, I should be able to remove a clinic account so that all information associated with the clinic is removed from the system.
 > - As an admin, I should be able to manage all accounts so that I can provide customer support and resolve system issues.
 > - As a doctor, I should be able to update my account so that my credentials stay up-to-date and secure.
-> - As a doctor, I should be able to login on my account so that I can access the system functionality.
+
 
 ### Dashboard
 > - As a doctor,on the dashboard I should be able to:\
@@ -50,9 +49,10 @@
 > - As a visitor, I should be able to communicate with an associate for any additional questions or technical issues. 
 
 ### Login Page
-> - As a patient/doctor, I should be able to recover my password or username in case I forget.
-> - As a patient, I should be able to login in my account.
-> - As a doctor, I should be able to login in my account.
+> - As a patient, I should be able to recover my password or username in case I forget.
+> - As a patient, I should be able to login on my account so that I can access the system functionality.
+> - As a doctor, I should be able to login on my account so that I can access the system functionality.
+> - As a doctor, I should be able to recover my password or username in case I forget.
 
 ### Profile
 > - As a patient, I should be able to create my profile to add my contact information and address.
