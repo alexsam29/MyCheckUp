@@ -1,7 +1,7 @@
 # Technology Description
 
 ### Context
-> This document will provide a description of the technology that we will use for this project. It will provide all the languages, database and possible developing tools that will be used to fully develop this web application from frontend as well as the backend.
+> This document will provide a description of technologies and programming languages that we will use for this project. It will specify all languages, the database and possible developing tools that will be used to fully develop this web application from frontend as well as the backend.
 
 ### Back-End
 > Below we describe the technologies with which the backend of our application will be built upon. We will provide a more detailed description of each backend service, including documentations of the APIs and database.  We will also create a custom API that will be linked to the database.  We will use the API to submit data into the database and fetch data from the database where appropriate.
