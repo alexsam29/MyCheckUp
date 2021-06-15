@@ -10,7 +10,7 @@
 > To develop the back-end of our application, we will be using Node.js 16.3.0 with TypeScript 4.3.2 . We did our research and managed to make a conclusion that with the functionality of our application, these programming languages will suit our application perfectly.
 
 ### Database
-> For the database we will be using MongoDB 4.4.6.
+> Our database of choice is MongoDB 4.4.6. We will access it programmatically by using *mongoose* ODM.
 
 ### Front-End
 > To develop our frontend, we decided to use Angular Framework together with HTML, and CSS. We decided to use Angular framework because it will provide the user with a convenient experience and accessible interface that has well organised internal structures.
