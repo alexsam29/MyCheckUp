@@ -15,7 +15,7 @@
 ### Front-End
 > To develop our frontend, we decided to use Angular Framework together with HTML, and CSS. We decided to use Angular framework because it will provide the user with a convenient experience and accessible interface that has well organised internal structures.
 HTML technology will be responsible for structuring and placement of the content we want to layout on our web application from the way the data is organised and where it is placed on the page. HTML organisation plays an important role in how the user will see our app.
-CSS technology will be responsible for the representation of the data. Ie the colors, fonts, specifications of specific layouts and background stuff.
+CSS technology will be responsible for the representation of the data. For example, the colors, fonts, specifications of specific layouts and background stuff.
 
 ### Developing Tools
 > To collaborate on the project, share and distribute the code, our team will use GitHub. We will use *Visual Studio Code* text editor and its extensions to develop the application. In order to test our Web API's functionality, we will use Postman to send HTTP requests and check responses.
