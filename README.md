@@ -34,7 +34,7 @@ The backbone of this application will be the web API that will connect the web a
 > (Virtual or in-person appointment will be an option, but base on the symptoms selected basic drugs that are avalible to everyone will be recomended to take ex. Tylenol, Advil..)
 
 - Dashboard 
-> This window will make possible for the doctor with the access to that specific patient and update their file. They can upload test results, write prescriptions and provide a diagnosis for each appointment. This dashboard will also be available to the doctor whenever needed to view and update patient’s history. The patient will also be able to see what responses or prescription they got from the doctor.
+> This window will be the main homepage for a logged in user (Patient or Doctor).  From this page, the Doctor or Patient will be able to navigate the web application according to the options stated in the ProductBacklog.md.
 
 ## Goal
 The goal of this project is to make health care more **convenient** and **accessible**. This can be achieved by connecting patients with doctors through the internet. A lot of routine operations such as booking appointments, reporting symptoms, getting test results, etc. could be done virtually. Our project provides means to do this and more. There are some applications that are out there doing something similar, but they don’t have most of the feature that we are trying to have with our application. Patients need to use one application to get most tasks done instead of jumping between different apps. This is our challenge to make it **unique** and **simpler** than other apps so everyone can figure it out in no time.  
