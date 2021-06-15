@@ -7,7 +7,7 @@
 > Below we describe the technologies with which the backend of our application will be built upon. We will provide a more detailed description of each backend service, including documentations of the APIs and database.  We will also create a custom API that will be linked to the database.  We will use the API to submit data into the database and fetch data from the database where appropriate.
 
 ### Programming languages
-> To develop the back-end of our application, we will be using Node.js 16.3.0 with TypeScript 4.3.2 . We did our research and managed to make a conclusion that with the functionality of our application, these programming languages will suit our application perfectly.
+> To develop the back-end of our application, we will be using Node.js 16.3.0 with TypeScript 4.3.2 . We did our research and came to a conclusion that with the functionality of our application, these technologies will suit our application perfectly.
 
 ### Database
 > Our database of choice is MongoDB 4.4.6. We will communicate with it programmatically by using *mongoose* ODM in our back-end.
