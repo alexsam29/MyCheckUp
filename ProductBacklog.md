@@ -40,7 +40,6 @@
             ii. see anything prescribed by the doctor so that I can get the prescribed medicine from the pharmacy.\
            iii. view my medical history to help me keep track of my health condition.\
             iv. view all past and future of all my appointments.\
-             v. view all the quizes that was completed before.
 
 ### Homepage
 > - As a visitor, I should be able to see an option to create a patient account.
