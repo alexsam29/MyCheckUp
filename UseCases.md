@@ -108,7 +108,7 @@ This tool will allow the patient to complete several surveys, to guide the patie
 |   | Actor(s): Admin|           System              |
 |---| ---------------|-------------------------------|
 | 1 | From the dashboard patient select “Self Assessment”. | Check if the patient have compeleted the 3rd time(*1). Displays a form with checkboxes to select from and a comment section to write additional comments (optional). Survey includes common symptoms to select. |
-| 2 | Selects symptoms, and leave additional comment. |Save the selected checkboxes and comment(*2). Ask the patient to submit. |
+| 2 | Selects symptoms(*2), and leave additional comment. |Save the selected checkboxes and comment. Ask the patient to submit. |
 | 3 | Submits.| Flags the report (Red, Orange, and Green) then adds the report into the database. Shows recommended action to the patient to take.|
 
 
