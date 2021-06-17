@@ -140,12 +140,11 @@ A patient can book an appointment to visit their doctor in-person.\
 4.8 **Main Flow**:
 |   | Actor(s): Admin|           System              |
 |---| ---------------|-------------------------------|
-| 1 | From the dashboard, the patient selects “book an in-person appointment”. | Displays the input form to book an appointment.  Form includes a calendar to select a date and time (only displays available time slots). |
+| 1 | From the dashboard or after the patient completes the survey (system recommends to book an appointment), the patient selects “book an in-person appointment”. | Displays the input form to book an appointment.  Form includes a calendar to select a date and time (only displays available time slots). |
 | 2 | Selects the time and date for appointment. |Saves selected date and time. Asks the user to confirm if they want to book the appointment. |
-| 3 | Confirms.| Adds appointment date and time into the database.  Sends the patient a confirmation email to the email address associated with the account.  Adds the appointment to the patient’s dashboard.|
+| 3 | Confirms.| Adds appointment date and time into the database.  Sends the patient a confirmation email to the email address associated with the account.  Adds the appointment to the patient and doctor's dashboard.|
 
 4.9 **Alternative Flow**: 
 |   | Alternative Flow | Description |
-|---|------------------|-------------| 
-| A1|The patient has completed the self-assessment survey and has been recommended to book an appointment. | Redirect to the “book an in-person appointment” page (step 1).| 
-| A2|Patient does not confirm the appointment.| System does not submit the appointment time and date.  Asks the user to make necessary changes. |
+|---|------------------|-------------|  
+| A1|Patient does not confirm the appointment.| System does not submit the appointment time and date.  Asks the user to make necessary changes. |
