@@ -142,7 +142,7 @@ A patient can book an appointment to visit their doctor in-person.\
 |---| ---------------|-------------------------------|
 | 1 | From the dashboard or after the patient completes the survey (system recommends to book an appointment), the patient selects “book an in-person appointment”. | Displays the input form to book an appointment.  Form includes a calendar to select a date and time (only displays available time slots). |
 | 2 | Selects the time and date for appointment. |Saves selected date and time. Asks the user to confirm if they want to book the appointment. |
-| 3 | (*1) Confirms.| Adds appointment date and time into the database.  Sends the patient a confirmation email to the email address associated with the account.  Adds the appointment to the patient and doctor's dashboard.|
+| 3 | Confirms (*1).| Adds appointment date and time into the database.  Sends the patient a confirmation email to the email address associated with the account.  Adds the appointment to the patient and doctor's dashboard.|
 
 4.9 **Alternative Flow**: 
 |   | Alternative Flow | Description |
