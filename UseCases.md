@@ -11,8 +11,6 @@ An Admin will use the system to add a clinic.\
 1.5 **System Use Case Preconditions**:
 -	The system is online and working.
 -	The Admin has logged in to use the system.
--	The clinic representatives signed a partnership contract.
--	The clinic representatives provided all necessary documents with the information about the clinic.
 
 1.6 **System Use Case Successful Post Conditions**:
 -	An Admin has successfully added a clinic information to the system.
@@ -20,10 +18,9 @@ An Admin will use the system to add a clinic.\
 -	Patients can select the newly added clinic as their clinic in the system.
 
 1.7 **Applicable Business Rules**:
+- The clinic representatives must sign a partnership contract.
+- The clinic representatives must provided all necessary documents with the information about the clinic.
 -	An Admin must receive an approval from the management before adding a clinic.
--	Clinics may have many doctors.
--	Clinics may have many patients.
--	Clinics may request to receive and review all their data stored in the system.
 
 1.8 **Main Flow**:
 |   | Actor(s): Admin|           System              |
