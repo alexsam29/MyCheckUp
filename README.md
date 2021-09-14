@@ -24,14 +24,8 @@ The backbone of this application will be the web API that will connect the web a
 > This tool will allow patients to book appointments with their doctor either in-person or virtually. It will show all the available timeslots and the patient will choose their  preferred time and date; patient will be able to request to reschedule meeting or cancel. Also, the doctor on the other end will be able to set available times, cancel meeting  or reschedule and request a meeting if needed.  
 
 - Self-Assessment Tool
-> The patient will be able to use this tool to self-assess their current condition if they are feeling ill.  Depending on their responses (the system will flag the survey; Red, Orange, and Green) the system will automatically recommend options that are most relevant for their condition. It will recommend the patient to book an in-person or virtual appointment with a doctor, or if severe enough, it will recommend the patient to visit a hospital or call 911 immediately.
+> The patient will be able to use this tool to self-assess their current condition or situation if they are feeling ill, to provide more information as a reason for booking an appointment with the doctor. Base on the information provided the system will decide the order of treatment of a large number of patients or casualties by red-flagging their request, base on the number of symptoms that patient might have or critical symptoms might have. 
 
-> - Red: If the patients shows more than 4 symptoms or have critical symptoms ex. shorthness of breath, chest pain, body temperature 37.5-38°C or higher.
-> (Visit hospital or call 911)
-> - Orange: Patients on orange status with less than four symptoms or have mild symptoms ex. vomiting, dizziness, body temperature 37.3-37.5°C.
-> (immediate virtual appointment with the doctor or worse case senario emergency)
-> - Green: Patinet on the green status with less then three symptoms or basic symptoms ex. weakness, headaches, exhaustin.
-> (Virtual or in-person appointment will be an option, but base on the symptoms selected basic drugs that are avalible to everyone will be recomended to take ex. Tylenol, Advil..)
 
 - Dashboard 
 > This window will be the main homepage for a logged in user (Patient or Doctor).  From this page, the Doctor or Patient will be able to navigate the web application according to the options stated in the ProductBacklog.md.
