@@ -24,7 +24,7 @@ The backbone of this application will be the web API that will connect the web a
 > This tool will allow patients to book appointments with their doctor either in-person or virtually. It will show all the available timeslots and the patient will choose their  preferred time and date; patient will be able to request to reschedule meeting or cancel. Also, the doctor on the other end will be able to set available times, cancel meeting  or reschedule and request a meeting if needed.  
 
 - Self-Assessment Tool
-> The patient will be able to use this tool to self-assess their current condition or situation if they are feeling ill, to provide more information as a reason for booking an appointment with the doctor. Base on the information provided the system will decide the order of treatment of a large number of patients or casualties by red-flagging their request, base on the number of symptoms that patient might have or critical symptoms might have. 
+> The patient will be able to use this tool to self-assess their current condition or situation if they are feeling ill, to provide more information as a reason for booking an appointment with the doctor. Base on the information provided the system will decide the order of treatment of a large number of patients by red-flagging their request, base on the number of symptoms that patient might have or critical symptoms might have. 
 
 
 - Dashboard 
