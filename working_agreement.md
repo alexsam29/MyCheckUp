@@ -15,6 +15,7 @@
 vote to change the time for that week.
 - Meeting will start and end on time.
 - Respect your team members time.
+- Be honest and open during meetings.
 
 ## Programming practices to be adopted
 
@@ -29,7 +30,7 @@ vote to change the time for that week.
 > git add filename \
 > git commit -m "message" \
 > git push origin nameOfyourBranch 
-- Before merging the code it most be approved by all team members.
+- Before merging the code (pull request) it most be approved by all team members.
 
 ## What to do when a member misses a meeting
 
