@@ -15,7 +15,9 @@
 
 
 ## How to merge the code into the shared repository
-
+- Before merging the code it most be approved by all team members.
+- Every code must before pull request must be uploaded on its own branch \
+then move to the main branch.
 
 
 ## What to do when a member misses a meeting
