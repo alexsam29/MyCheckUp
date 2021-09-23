@@ -5,7 +5,7 @@
 - All the team meeting will take place on Discord channel G7.
 - Email will also be used for necessary contact.
 - Every team member need to attend the meetings. 
-- Every team member must atleast have one avalible day in a week.
+- Every team member must at least have one avalible day in a week.
 
 ## Meeting schedules
 
@@ -23,8 +23,7 @@ vote to change the time for that week.
 - Complex functions and/or blocks of code must be accompanied by inline comments explaining the logic.
   - Descriptive comments will appear on the line before the code.
 - Encapsulate all function data members, when possible, to prevent unauthorized access to them.
-- For anything not mentione here, we will consult the respective languages official style guide.
-
+- For anything not mentioned here, we will consult the respective languages official style guide.
 
 ## How to merge the code into the shared repository
 - Every code must be uploaded on its own branch then move to the main branch.
