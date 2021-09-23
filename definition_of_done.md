@@ -1,6 +1,6 @@
 # Defintion of Done
 
-#### The following criteria must be met for any user story to be considered done:
+### The following criteria must be met for any user story to be considered done:
 
 1. Unit tests have passed, if present.
 1. Manual testing on all intended platforms has been successful.
