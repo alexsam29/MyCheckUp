@@ -20,4 +20,7 @@
 
 ## What to do when a member misses a meeting
 
-
+- Follow up and give him chance to expalain.
+- make decision based on all members input.
+- Give a warning based on the reasons explained.
+- If it affects the performance of the team let the professor know.
