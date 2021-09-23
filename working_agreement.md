@@ -1,3 +1,8 @@
 # WA (Working Agreement) 
 ---
-## Rules
+## Rules:
+
+### Be on time for the meetings:
+
+
+
