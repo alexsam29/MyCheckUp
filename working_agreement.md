@@ -2,13 +2,18 @@
 ---
 ## Preferred form of contact and overall availability
 
-- All team meeting will take place on Discord channel G7.
-- Contacting via Email will also take place for communicating.
+- All the team meeting will take place on Discord channel G7.
+- Email will also be used for necessary contact.
+- Every team member need to attend the meetings. 
+- Every team member must atleast have one avalible day in a week.
 
 ## Meeting schedules
 
-- Every Tuesday from 12pm - 1:30pm.
+- Every Tuesday from 12:00 pm - 1:30 pm.
 - More meetings will be added later on if needed.
+- Meeting times are flexibel base on the team memebers\
+vote to change the time for that week.
+- Meeting will start and end on time.
 
 ## Programming practices to be adopted
 
