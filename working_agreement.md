@@ -1,1 +1,3 @@
 # WA (Working Agreement) 
+** 
+## Rules
