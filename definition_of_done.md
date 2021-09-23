@@ -1,4 +1,4 @@
-# Defintion of Done
+# Definition of Done
 
 ### The following criteria must be met for any user story to be considered done:
 
