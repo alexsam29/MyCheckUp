@@ -18,7 +18,12 @@ vote to change the time for that week.
 - Be honest and open during meetings.
 
 ## Programming practices to be adopted
-
+- All variables should have meaningful names.
+- Functions must have descriptive names to give the reader an idea of it's purpose.
+- Complex functions and/or blocks of code must be accompanied by inline comments explaining the logic.
+  - Descriptive comments will appear on the line before the code.
+- Encapsulate all function data members, when possible, to prevent unauthorized access to them.
+- For anything not mentione here, we will consult the respective languages official style guide.
 
 
 ## How to merge the code into the shared repository
@@ -33,7 +38,6 @@ vote to change the time for that week.
 - Before merging the code (pull request) it most be approved by all team members.
 
 ## What to do when a member misses a meeting
-
 - Follow up and give them a chance to explain.
 - Make decision based on all members input.
 - Give a warning based on the reasons explained.
