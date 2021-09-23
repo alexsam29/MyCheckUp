@@ -2,6 +2,7 @@
 ---
 ## Preferred form of contact and overall availability
 
+- All team meeting will take place on Discord channel G7.
 
 
 ## Meeting schedules
