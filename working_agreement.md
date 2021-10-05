@@ -7,6 +7,10 @@
 - Every team member need to attend the meetings. 
 - Every team member must at least have one avalible day in a week.
 
+## Deadlines
+- At least 2 days before the meeting a pull request must be created.
+- The day before the meeting is used for reveiwing the pull request and merging the code.
+
 ## Meeting schedules
 
 - Every Tuesday from 12:00 pm - 1:30 pm.
