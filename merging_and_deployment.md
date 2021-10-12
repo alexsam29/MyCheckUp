@@ -5,6 +5,6 @@
 4. Push the code to Github once finished and passed all tests.
 5. Make a pull request to merge the feature's branch into the main branch.
 6. Once the pull request is successful, delete the feature's branch.
-
+--
 ## Deployment
 1.
