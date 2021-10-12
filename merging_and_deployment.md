@@ -7,4 +7,8 @@
 6. Once the pull request is successful, delete the feature's branch.
 ---
 ## Deployment
-1.
+1. Create your workflow.
+2. Create a GitHub secret.
+3. Edit your main.yml file.
+4. Commit main.yml file.
+5. Test your workflow.
