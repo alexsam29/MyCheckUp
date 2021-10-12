@@ -7,8 +7,11 @@
 6. Once the pull request is successful, delete the feature's branch.
 ---
 ## Deployment
-1. Create your workflow.
+Automatically deploy to Heroku when we merge to the main branch.
+
+Setup Github action to autmatically deploy code:
+1. Create workflow.
 3. Create a GitHub secret.
-4. Edit your main.yml file.
+4. Edit main.yml file.
 5. Commit main.yml file.
-6. Test your workflow.
+6. Test workflow.
