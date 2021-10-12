@@ -8,7 +8,8 @@
 ---
 ## Deployment
 1. Create your workflow.
-2. Create a GitHub secret.
-3. Edit your main.yml file.
-4. Commit main.yml file.
-5. Test your workflow.
+Our first step will be to create a new workflow. For this, go to your GitHub repository & click the Actions tab.
+3. Create a GitHub secret.
+4. Edit your main.yml file.
+5. Commit main.yml file.
+6. Test your workflow.
