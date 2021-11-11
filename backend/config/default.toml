@@ -4,11 +4,11 @@ title = "API Config"
 
 [database]
 type = "postgres"
-host = "localhost"
+host = "fanny.db.elephantsql.com"
 port = "5432"
-name = "healthapp"
-username = "pg-user"
-password = "pg-user"
+name = "urcorivq"
+username = "urcorivq"
+password = "IpwPwYcfuzEnkY8A6_y5zSQ-t_DqxOAC"
 
 [typeorm]
 entities = [ "src/models/**/*.ts" ]
