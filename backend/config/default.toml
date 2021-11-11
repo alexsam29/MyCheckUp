@@ -11,5 +11,5 @@ username = "urcorivq"
 password = "IpwPwYcfuzEnkY8A6_y5zSQ-t_DqxOAC"
 
 [typeorm]
-entities = [ "src/models/**/*.ts" ]
-migrations = [ "src/migrations/**/*.ts" ]
+entities = [ "dist/models/**/*.js" ]
+migrations = [ "dist/migrations/**/*.js" ]
