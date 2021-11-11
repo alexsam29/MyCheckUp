@@ -6,13 +6,19 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     SignInComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateAccountComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
