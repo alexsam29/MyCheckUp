@@ -1,0 +1,15 @@
+# Main config file
+
+title = "API Config"
+
+[database]
+type = "postgres"
+host = "fanny.db.elephantsql.com"
+port = "5432"
+name = "urcorivq"
+username = "urcorivq"
+password = "IpwPwYcfuzEnkY8A6_y5zSQ-t_DqxOAC"
+
+[typeorm]
+entities = [ "src/models/**/*.ts" ]
+migrations = [ "src/migrations/**/*.ts" ]
