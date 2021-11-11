@@ -1,3 +1,15 @@
 # Main config file
 
 title = "API Config"
+
+[database]
+type = "postgres"
+host = "localhost"
+port = "5432"
+name = "healthapp"
+username = "pg-user"
+password = "pg-user"
+
+[typeorm]
+entities = [ "src/models/**/*.ts" ]
+migrations = [ "src/migrations/**/*.ts" ]
