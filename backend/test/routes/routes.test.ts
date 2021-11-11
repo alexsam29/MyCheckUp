@@ -10,10 +10,16 @@ app.use(router)
 app.use(notFoundHandler)
 app.use(errorHandler)
 
-describe('Basic API Functionality Test Suite:', () => {
+describe('Main API End-Points Test Suite:', () => {
    it('GET /ping - success', async () => {
       const { body, statusCode } = await request(app).get('/ping')
       expect(body).toEqual({ success: true })
       expect(statusCode).toEqual(200)
+   })
+
+   it('GET /abcd - nonexistent', async () => {
+      const { body, statusCode } = await request(app).get('/abcd')
+      expect(body).toEqual({ error: 'Requested resource not found' })
+      expect(statusCode).toEqual(404)
    })
 })
