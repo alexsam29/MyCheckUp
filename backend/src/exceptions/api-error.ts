@@ -18,4 +18,8 @@ export class ApiError extends Error {
    static NotFound(message: string) {
       return new ApiError(404, message)
    }
+
+   static InternalError(message: string) {
+      return new ApiError(500, message)
+   }
 }
