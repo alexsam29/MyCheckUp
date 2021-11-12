@@ -10,14 +10,14 @@ import { Role } from './role'
  * User abstract model.
  * 
  * Fields:
- * - `id`
- * - `firstName`
- * - `lastName`
- * - `email`
- * - `password`
- * - `role`
- * - `createdAt`
- * - `updatedAt`
+ * - `id` - id.
+ * - `firstName` - first name.
+ * - `lastName` - last name.
+ * - `email` - email used to log in.
+ * - `password` - password used to log in.
+ * - `role` - role.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
 export abstract class User {
    @PrimaryGeneratedColumn('uuid')
