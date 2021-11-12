@@ -1,52 +1,26 @@
-import {
-   Entity,
-   PrimaryGeneratedColumn,
-   Column,
-   CreateDateColumn,
-   UpdateDateColumn
-} from 'typeorm'
+import { Entity, Column } from 'typeorm'
+import { User } from './user'
 import { Role } from './role'
 
 /**
  * Admin database model.
  * 
  * Fields:
- * - `id`
- * - `firstName`
- * - `lastName`
- * - `email`
- * - `password`
- * - `role`
- * - `createdAt`
- * - `updatedAt`
+ * - `id` - Admin id.
+ * - `firstName` - first name.
+ * - `lastName` - last name.
+ * - `email` - email used to log in.
+ * - `password` - password used to log in.
+ * - `role` - Admin role.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
 @Entity()
-export class Admin {
-   @PrimaryGeneratedColumn('uuid')
-   id!: string
-
-   @Column({ length: 50 })
-   firstName!: string
-
-   @Column({ length: 50 })
-   lastName!: string
-
-   @Column({ length: 255, unique: true })
-   email!: string
-
-   @Column({ length: 255 })
-   password!: string
-
+export class Admin extends User {
    @Column({
       type: 'enum',
       enum: Role,
       default: Role.ADMIN
    })
-   role!: Role.ADMIN
-
-   @CreateDateColumn()
-   createdAt!: Date
-
-   @UpdateDateColumn()
-   updatedAt!: Date
+   override role!: Role.ADMIN
 }
