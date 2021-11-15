@@ -7,4 +7,5 @@ import { MainController } from '../controllers/main-controller'
 export const router = express.Router()
 
 // Main:
+router.get('/', MainController.root)
 router.get('/ping', MainController.ping)
