@@ -13,7 +13,7 @@ export const AdminService = {
     * @param searchBy Search condition.
     * @param offset Search offset.
     * @param limit Maximum number of profiles to be returned.
-    * @returns Array of `Admin` model objects.
+    * @returns Array of found `Admin` objects.
     */
    async find(searchBy?: {
       firstName?: string,
@@ -33,5 +33,7 @@ export const AdminService = {
       if (!admins || !admins.length) throw ApiError.NotFound(`No admin profiles were found`)
 
       return admins
-   }
+   },
+
+   
 }
