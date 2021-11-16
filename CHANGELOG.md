@@ -7,9 +7,9 @@ All notable changes to this project will be documented in this file.
 Features:
 
 Backendl:
-Set up server instance;
-Two end-points: 'GET /', 'GET /ping';
-Error handling middleware;
-Logger;
-Database connection through Typeorm;
-Models: Admin, Patient, Doctor, Appointment, Self-assessment, Symptom, Task, Prescription;
+> Set up server instance;
+> Two end-points: 'GET /', 'GET /ping';
+> Error handling middleware;
+> Logger;
+> Database connection through Typeorm;
+> Models: Admin, Patient, Doctor, Appointment, Self-assessment, Symptom, Task, Prescription;
