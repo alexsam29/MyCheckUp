@@ -6,9 +6,9 @@ title = "API Config"
 type = "postgres"
 host = "fanny.db.elephantsql.com"
 port = "5432"
-name = "urcorivq"
-username = "urcorivq"
-password = "IpwPwYcfuzEnkY8A6_y5zSQ-t_DqxOAC"
+name = "dkwrpeby"
+username = "dkwrpeby"
+password = "SCM6PaXbLHNa7cc-zXadKqGlh8jRDdfD"
 
 [typeorm]
 entities = [ "dist/models/**/*.js" ]
