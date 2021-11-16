@@ -1,5 +1,6 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Task } from './task-class'
+import { Tasks } from './task-enum'
 
 /**
  * Ptient prescription database mdoel.
@@ -18,6 +19,9 @@ import { Task } from './task-class'
 @Entity()
 export class Prescription extends Task
 {
+    @PrimaryGeneratedColumn('uuid')
+    Pid!: string
+
     @Column()
     patientFName!: string
 
@@ -32,4 +36,10 @@ export class Prescription extends Task
 
     @Column()
     expiryDate!: Date
+
+    @Column({
+        type: 'enum',
+        enum: Tasks,
+    })
+    override task!: Tasks.PRESCRIPTION 
 }

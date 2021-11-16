@@ -3,6 +3,7 @@ import { User } from './user'
 import { Role } from './role'
 import { PatientToDoctor } from './patient-to-doctor'
 
+
 /**
  * Patient database model.
  * 
