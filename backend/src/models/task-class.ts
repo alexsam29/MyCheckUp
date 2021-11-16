@@ -3,19 +3,16 @@ import { Tasks } from './task-enum'
 import { Doctor } from './doctor'
 import { Patient } from './patient'
 
-
 /*
-* Task abstract model. 
-* 
-* Fields: 
-* id - TaskId, patientID, doctorID
-* Task - Task type (Appoinment, Prescription, Self-Assessment)
-* Created time - Task Create time. 
-*/
-
+ * Task abstract model. 
+ * 
+ * Fields: 
+ * id - TaskId, patientID, doctorID
+ * Task - Task type (Appoinment, Prescription, Self-Assessment)
+ * Created time - Task Create time. 
+ */
 @Entity()
-export class Task
-{
+export class Task {
     @PrimaryGeneratedColumn('uuid')
     Taskid!: string
 
@@ -36,6 +33,3 @@ export class Task
     @CreateDateColumn()
     TcreatedAt!: Date
 }
-
-
-
