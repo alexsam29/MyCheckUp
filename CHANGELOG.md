@@ -7,8 +7,8 @@ All notable changes to this project will be documented in this file.
 Features:
 
 Backendl:
-> Set up server instance. \n
-> Two end-points: 'GET /', 'GET /ping' \n
+> Set up server instance. /n 
+> Two end-points: 'GET /', 'GET /ping' 
 > Error handling middleware;
 > Logger;
 > Database connection through Typeorm;
