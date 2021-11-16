@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.0] - 2021-11-15
 
-Front-end Features:
+Frontend Features:
 - Angular app
 - Sign-in page component and page view
 - Dashboard component and page view
