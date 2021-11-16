@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 Features:
 
-Backendl:
+Backend:
 - Set up server instance. 
 - Two end-points: 'GET /', 'GET /ping' 
 - Error handling middleware;
