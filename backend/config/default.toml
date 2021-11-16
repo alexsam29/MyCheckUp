@@ -1,0 +1,15 @@
+# Main config file
+
+title = "API Config"
+
+[database]
+type = "postgres"
+host = "fanny.db.elephantsql.com"
+port = "5432"
+name = "dkwrpeby"
+username = "dkwrpeby"
+password = "SCM6PaXbLHNa7cc-zXadKqGlh8jRDdfD"
+
+[typeorm]
+entities = [ "dist/models/**/*.js" ]
+migrations = [ "dist/migrations/**/*.js" ]
