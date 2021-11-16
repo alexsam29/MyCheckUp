@@ -1,5 +1,4 @@
-
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Symptoms } from "./Symptoms-class";
 import { Task } from "./task-class"
 import { Tasks } from './task-enum'
@@ -26,8 +25,10 @@ export class SelfAssessment extends Task
     @PrimaryGeneratedColumn('uuid')
     SAid!: string
 
-    @OneToMany(() => Symptoms, symptoms => symptoms)
+    @ManyToMany(() => Symptoms, symptoms => symptoms)
+    @JoinTable()
     symptoms!: Symptoms[]
+
 
     @Column({
         type: 'enum',

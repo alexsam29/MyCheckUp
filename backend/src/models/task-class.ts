@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne, JoinColumn} from 'typeorm'
+import { Column, CreateDateColumn, ManyToOne, JoinColumn, Entity, PrimaryGeneratedColumn} from 'typeorm'
 import { Tasks } from './task-enum'
 import { Doctor } from './doctor'
 import { Patient } from './patient'
@@ -13,16 +13,17 @@ import { Patient } from './patient'
 * Created time - Task Create time. 
 */
 
-export abstract class Task
+@Entity()
+export class Task
 {
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn('uuid')
     Taskid!: string
 
-    @OneToOne(() => Patient)
+    @ManyToOne(() => Patient, patient => patient)
     @JoinColumn()
     patient!: Patient
 
-    @OneToOne(() => Doctor)
+    @ManyToOne(() => Doctor, doctor => doctor)
     @JoinColumn()
     doctor!: Doctor
 
