@@ -1,5 +1,5 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Symptoms } from "./Symptoms-class";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm"
+//import { Symptoms } from "./symptoms-class"
 import { Task } from "./task-class"
 import { Tasks } from './task-enum'
 
@@ -19,26 +19,26 @@ import { Tasks } from './task-enum'
  */
 
 
-@Entity()
-export class SelfAssessment extends Task
-{
-    @PrimaryGeneratedColumn('uuid')
-    SAid!: string
+// @Entity()
+// export class SelfAssessment extends Task
+// {
+//     @PrimaryGeneratedColumn('uuid')
+//     SAid!: string
 
-    @ManyToMany(() => Symptoms, symptoms => symptoms)
-    @JoinTable()
-    symptoms!: Symptoms[]
+//     @ManyToMany(() => Symptoms, symptoms => symptoms)
+//     @JoinTable()
+//     symptoms!: Symptoms[]
 
 
-    @Column({
-        type: 'enum',
-        enum: Tasks,
-    })
-    override task!: Tasks.SELFASSESSMENT
+//     @Column({
+//         type: 'enum',
+//         enum: Tasks,
+//     })
+//     override task!: Tasks.SELFASSESSMENT
 
-    @Column()
-    Mdescription!: string
+//     @Column()
+//     Mdescription!: string
 
-    @Column()
-    TermsPolicies!: boolean
-}
+//     @Column()
+//     TermsPolicies!: boolean
+// }
