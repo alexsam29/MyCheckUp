@@ -35,12 +35,6 @@ export abstract class User {
    @Column({ length: 50 })
    lastName!: string
 
-   @Column({ length: 50 })
-   phoneNumber!: string
-
-   @Column()
-   address!: string
-
    @Column({ type: 'enum', enum: Role })
    role!: Role
 

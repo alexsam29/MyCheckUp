@@ -1,40 +1,39 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm"
-import { Symptoms } from "./symptom"
-import { Task } from "./task-class"
-import { Tasks } from './task-enum'
+import {
+   Entity,
+   Column,
+   PrimaryGeneratedColumn,
+   CreateDateColumn,
+   UpdateDateColumn,
+   ManyToMany,
+   JoinTable
+} from 'typeorm'
+import { Symptom } from './symptom'
 
 /**
  * Self Assessment database model. 
  * 
  * Fields: 
- * Taskid - Id of the task that has benn done is unique
- * task - type of the task completed
- * TcreatedAt - date of the task that has been created
- * SAid - Self assissment task unique id 
- * Mdescription - more dicription provided by the patient
- * TermsPolicies - patient agree or do not agree to the terms
- * patientid - unique id of the patient
- * doctorid - uinqueid of the doctor
+ * - `id` - self assessment id.
+ * - `symptoms` - array of symptoms experienced by patient.
+ * - `notes` - notes added by patient.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
 @Entity()
-export class SelfAssessment extends Task {
+export class SelfAssessment {
    @PrimaryGeneratedColumn('uuid')
-   SAid!: string
+   id!: string
 
-   @ManyToMany(() => Symptoms, symptoms => symptoms)
-   @JoinTable()
-   symptoms!: Symptoms[]
-
-
-   @Column({
-      type: 'enum',
-      enum: Tasks,
-   })
-   override task!: Tasks.SELFASSESSMENT
+   @ManyToMany(() => Symptom)
+   @JoinTable({ name: 'self_assessment_symptom' })
+   symptoms!: Symptom[]
 
    @Column()
-   Mdescription!: string
+   notes!: string
 
-   @Column()
-   TermsPolicies!: boolean
+   @CreateDateColumn()
+   createdAt!: Date
+
+   @UpdateDateColumn()
+   updatedAt!: Date
 }
