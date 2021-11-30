@@ -2,6 +2,9 @@ import { Entity, Column, OneToMany } from 'typeorm'
 import { User } from './user'
 import { Role } from './role'
 import { PatientToDoctor } from './patient-to-doctor'
+import { Appointment } from './appointment'
+import { Prescription } from './prescription'
+import { Availability } from './Availability'
 
 /**
  * Doctor database model.
@@ -51,4 +54,14 @@ export class Doctor extends User {
 
    @OneToMany(() => PatientToDoctor, patientToDoctor => patientToDoctor.doctor)
    patients!: PatientToDoctor[]
+   
+   @OneToMany(() => Appointment, appointment => appointment)
+   appointment!: Appointment
+
+   @OneToMany(() => Prescription, prescription => prescription)
+   prescription!: Prescription
+
+   @OneToMany(() => Availability, avaliablity => avaliablity)
+   avaliablity!: Availability
+
 }

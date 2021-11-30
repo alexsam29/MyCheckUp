@@ -1,8 +1,9 @@
 import { Entity, Column, OneToMany } from 'typeorm'
-import { Task } from './task-class'
 import { User } from './user'
 import { Role } from './role'
 import { PatientToDoctor } from './patient-to-doctor'
+import { Appointment } from './appointment'
+import { Prescription } from './prescription'
 
 
 /**
@@ -34,6 +35,10 @@ export class Patient extends User {
    @OneToMany(() => PatientToDoctor, patientToDoctor => patientToDoctor.patient)
    doctors!: PatientToDoctor[]
 
-   @OneToMany(() => Task, task => task)
-   task!: Task[] 
+   @OneToMany(() => Appointment, appointment => appointment)
+   appointment!: Appointment
+
+   @OneToMany(() => Prescription, prescription => prescription)
+   prescription!: Prescription
+
 }

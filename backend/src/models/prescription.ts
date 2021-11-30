@@ -1,45 +1,50 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Task } from './task-class'
-import { Tasks } from './task-enum'
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Doctor } from "./doctor";
+import { Patient } from "./patient";
 
 /**
  * Ptient prescription database mdoel.
  * 
  * Fields:
- * id - patient , doctor, prescription. 
- * firstname - patient , doctor.
- * lastname - patient , doctor.
- * date - efective date. 
- * description - doctor.
+ * patient id - Id of the patient from patient table. *(Many to One) Relation.
+ * doctor id - Id of the doctor from doctor table. *(Many to One) Relation.
+ * prescriptionId - Primary id of the prescription table.
+ * effectiveDate - efective date of the prescription. 
+ * expirayDate - end date of prescription.
+ * description - provided by the doctor.
  * numOfRefill - number of times they can get the drug.
- * expirayDate - date of expiry.
+ * createdAt - Created date.
+ * updatedAt - Lateste updated date.
  */
 
 
 @Entity()
-export class Prescription extends Task
+export class Prescription 
 {
     @PrimaryGeneratedColumn('uuid')
-    Pid!: string
+    Id!: string
 
-    @Column()
-    patientFName!: string
+    @ManyToOne(() => Patient, patient => patient)
+    patient!: Patient
 
-    @Column()
-    patientLName!: string
+    @ManyToOne(() => Doctor, doctor => doctor)
+    doctor!: Doctor
 
-    @Column()
+    @Column({nullable: true})
     description!: string
 
-    @Column()
+    @Column({nullable: true})
     numOfRefill!: number
 
-    @Column()
+    @Column({type: 'date', nullable: true})
+    effectiveDate!: string
+
+    @Column({type:'date', nullable: true})
     expiryDate!: Date
 
-    @Column({
-        type: 'enum',
-        enum: Tasks,
-    })
-    override task!: Tasks.PRESCRIPTION 
+    @CreateDateColumn()
+    createdAt!: Date
+
+    @UpdateDateColumn()
+    updatedAt!: Date
 }
