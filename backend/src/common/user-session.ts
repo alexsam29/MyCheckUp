@@ -19,7 +19,7 @@ export const userSession = (repository: Repository<Session>) => {
       saveUninitialized: false,
       cookie: {
          maxAge: SESSION_COOKIE_MAXAGE,
-         sameSite: 'strict',
+         sameSite: 'none',
          secure: PROD
       }
    }))
