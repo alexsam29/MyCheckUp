@@ -13,3 +13,6 @@ password = "SCM6PaXbLHNa7cc-zXadKqGlh8jRDdfD"
 [typeorm]
 entities = [ "dist/models/**/*.js" ]
 migrations = [ "dist/migrations/**/*.js" ]
+
+[secrets]
+session = "jKyQtUyo0TfPqVuyomPs5uVwXfSxHDdy"
