@@ -1,45 +1,58 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Task } from './task-class'
-import { Tasks } from './task-enum'
+import {
+   Entity,
+   Column,
+   PrimaryGeneratedColumn,
+   CreateDateColumn,
+   UpdateDateColumn,
+   ManyToOne
+} from 'typeorm'
+import { Patient } from './patient'
+import { Doctor } from './doctor'
 
 /**
- * Ptient prescription database mdoel.
+ * Patient prescription database model.
  * 
  * Fields:
- * id - patient , doctor, prescription. 
- * firstname - patient , doctor.
- * lastname - patient , doctor.
- * date - efective date. 
- * description - doctor.
- * numOfRefill - number of times they can get the drug.
- * expirayDate - date of expiry.
+ * - `id` - prescription id.  
+ * - `patientId` - patient id.  
+ * - `doctorId` - doctor id.
+ * - `description` - description of prescribed medicaments. 
+ * - `numOfRefill` - number of times they can get the drug. 
+ * - `expiryDate` - date of expiry.
+ * - `patient` - associated patient object.
+ * - `doctor` - associated doctor object.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
-
-
 @Entity()
-export class Prescription extends Task
-{
-    @PrimaryGeneratedColumn('uuid')
-    Pid!: string
+export class Prescription {
+   @PrimaryGeneratedColumn('uuid')
+   id!: string
 
-    @Column()
-    patientFName!: string
+   @Column()
+   patientId!: string
 
-    @Column()
-    patientLName!: string
+   @Column()
+   doctorId!: string
 
-    @Column()
-    description!: string
+   @Column()
+   description!: string
 
-    @Column()
-    numOfRefill!: number
+   @Column()
+   numOfRefill!: number
 
-    @Column()
-    expiryDate!: Date
+   @Column()
+   expiryDate!: Date
 
-    @Column({
-        type: 'enum',
-        enum: Tasks,
-    })
-    override task!: Tasks.PRESCRIPTION 
+   @ManyToOne(() => Patient, patient => patient.prescriptions, { onDelete: 'CASCADE' })
+   patient!: Patient
+
+   @ManyToOne(() => Doctor, doctor => doctor.prescriptions, { onDelete: 'SET NULL' })
+   doctor!: Doctor
+
+   @CreateDateColumn()
+   createdAt!: Date
+
+   @UpdateDateColumn()
+   updatedAt!: Date
 }

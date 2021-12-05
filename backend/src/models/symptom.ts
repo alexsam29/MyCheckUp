@@ -1,42 +1,31 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import {
+   Entity,
+   Column,
+   PrimaryGeneratedColumn,
+   CreateDateColumn,
+   UpdateDateColumn
+} from 'typeorm'
 
 /**
- * Symptoms data base model. 
+ * Symptom database model. 
  * 
  * Fields:
- * 
- * Sid - uniqe id of the symptoms
- * Fever - type boolean (true or false)
- * Cough - type boolean (true or false)
- * Headache - type boolean (true or false)
- * SoreThroat - type boolean (true or false)
- * Diarrhea - type boolean (true or false)
- * BodyPain - type boolean (true or false)
- * BreathShortness - type boolean (true or false)
+ * - `id` - symptom id.
+ * - `description` - short description of the symptom (i.e. fever, runny nose).
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
 @Entity()
-export class Symptoms {
-   @PrimaryGeneratedColumn("uuid")
-   Sid!: string
+export class Symptom {
+   @PrimaryGeneratedColumn('uuid')
+   id!: string
 
-   @Column()
-   Fever!: boolean
-   
-   @Column()
-   Cough!: boolean
-   
-   @Column()
-   Headache!: boolean
-   
-   @Column()
-   SoreThroat!: boolean
-   
-   @Column()
-   Diarrhea!: boolean
-   
-   @Column()
-   BodyPain!: boolean
-   
-   @Column()
-   BreathShortness!: boolean
+   @Column({ length: 255 })
+   description!: string
+
+   @CreateDateColumn()
+   createdAt!: Date
+
+   @UpdateDateColumn()
+   updatedAt!: Date
 }

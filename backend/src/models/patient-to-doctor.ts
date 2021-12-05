@@ -20,6 +20,8 @@ import { Doctor } from './doctor'
  * - `active` - the state of the formal relationship between Patient and Doctor.
  * - `startDate` - start date of the formal relationship between Patient and Doctor.
  * - `endDate` - end date of the formal relationship between Patient and Doctor.
+ * - `patient` - associated patient.
+ * - `doctor` - associated doctor.
  * - `createdAt` - creation date in the database.
  * - `updatedAt` - last modified date in the database.
  */
