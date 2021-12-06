@@ -54,7 +54,7 @@
       "pg": "^8.7.1",
       "reflect-metadata": "^0.1.13",
       "toml": "^3.0.0",
-      "typeorm": "^0.2.40",
+      "typeorm": "^0.2.41",
       "winston": "^3.3.3"
    }
 }

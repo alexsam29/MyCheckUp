@@ -4,6 +4,7 @@ import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { MainController } from '../controllers/main-controller'
 import { AdminController } from '../controllers/admin-controller'
+import { PatientController } from '../controllers/patient-controller'
 
 /**
  * Provides routing for the whole API.
@@ -34,5 +35,22 @@ router.get('/admin/profile',
    body('lastName').notEmpty().trim().isLength({ min: 1, max: 50}),
    AdminController.getSelf)
 
+
 // Patient:
 
+router.post('/patient/login',
+   body('email').notEmpty().isEmail(),
+   body('password').notEmpty().isLength({ min: 6, max: 50 }),
+   PatientController.login)
+
+router.post('/patient/logout', PatientController.logout)
+
+router.post('/patient/register', PatientController.register)
+
+router.get('/patient/profile',
+   body('email').notEmpty().isEmail(),
+   body('password').notEmpty().isLength({ min: 6, max: 50 }),
+   body('firstname').notEmpty().trim().isLength({ min: 1, max: 50}),
+   body('lastname').notEmpty().trim().isLength({ min: 1, max: 50}),
+   body('dateOfBirth').notEmpty().trim().isLength({min: 1, max: 50}),
+   PatientController.getSelf)
