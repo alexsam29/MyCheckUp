@@ -48,13 +48,13 @@ router.post('/patient/logout', PatientController.logout)
 router.post('/patient/register',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
-   body('firstname').notEmpty().trim().isLength({ min: 1, max: 50}),
-   body('lastname').notEmpty().trim().isLength({ min: 1, max: 50}),
+   body('firstName').notEmpty().trim().isLength({ min: 1, max: 50}),
+   body('lastName').notEmpty().trim().isLength({ min: 1, max: 50}),
    body('dateOfBirth').notEmpty().trim().isLength({ min: 1, max: 50 }), 
    body('phoneNumber').notEmpty().trim().isLength({ min: 10, max: 10 }),
    body('address').notEmpty().trim().isLength({ min: 1, max: 50 }),
    PatientController.register)
 
-router.get('/patient/profile', 
-   authorize(Role.PATIENT),   
+router.get('/patient/profile',
+   authorize(Role.PATIENT),
    PatientController.getSelf)
