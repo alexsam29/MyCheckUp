@@ -51,8 +51,8 @@ router.post('/patient/register',
    body('firstName').notEmpty().trim().isLength({ min: 1, max: 50}),
    body('lastName').notEmpty().trim().isLength({ min: 1, max: 50}),
    body('dateOfBirth').notEmpty().trim().isLength({ min: 1, max: 50 }), 
-   body('phoneNumber').notEmpty().trim().isLength({ min: 10, max: 10 }),
-   body('address').notEmpty().trim().isLength({ min: 1, max: 50 }),
+   body('phoneNumber').optional().trim().isLength({ min: 10, max: 10 }),
+   body('address').optional().trim().isLength({ min: 1, max: 50 }),
    PatientController.register)
 
 router.get('/patient/profile',
