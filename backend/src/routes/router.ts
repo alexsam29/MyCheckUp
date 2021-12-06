@@ -23,7 +23,8 @@ router.post('/admin/login',
 
 router.post('/admin/logout', AdminController.logout)
 
-router.post('/admin/register', authorize(Role.ADMIN),
+router.post('/admin/register',
+   authorize(Role.ADMIN),
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    body('firstName').notEmpty().trim().isLength({ min: 1, max: 50}),
@@ -49,9 +50,11 @@ router.post('/patient/register',
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    body('firstname').notEmpty().trim().isLength({ min: 1, max: 50}),
    body('lastname').notEmpty().trim().isLength({ min: 1, max: 50}),
-   body('dateOfBirth').notEmpty().trim().isLength({min: 1, max: 50}), 
-   body('phoneNumber').notEmpty().trim().isLength({min: 10, max: 10}),
-   body('address').notEmpty().trim().isLength({min: 1, max: 50}),
+   body('dateOfBirth').notEmpty().trim().isLength({ min: 1, max: 50 }), 
+   body('phoneNumber').notEmpty().trim().isLength({ min: 10, max: 10 }),
+   body('address').notEmpty().trim().isLength({ min: 1, max: 50 }),
    PatientController.register)
 
-router.get('/patient/profile',PatientController.getSelf)
+router.get('/patient/profile', 
+   authorize(Role.PATIENT),   
+   PatientController.getSelf)
