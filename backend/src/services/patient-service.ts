@@ -1,8 +1,9 @@
-import { Patient } from "../models/patient"
 import { getRepository} from "typeorm"
 import bcrypt from 'bcrypt'
-import { ApiError } from "../exceptions/api-error"
+import { ApiError } from '../exceptions/api-error'
 import { Role } from '../models/role'
+import { Patient } from '../models/patient'
+
 /**
  * Handles business logic for `Patient` model.
  */
@@ -10,7 +11,6 @@ export const PatientService = {
 
 
     async create(patientData: {
-        
         firstName: string,
         lastName: string,
         password: string,
