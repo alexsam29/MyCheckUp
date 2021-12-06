@@ -80,13 +80,13 @@ export const PatientController = {
             }
 
             const patient = await PatientService.create({
-            firstname: req.body.firstName,
-            lastname: req.body.lastName,
-            email: req.body.email, 
-            password: req.body.password,
-            dateOfbirth: req.body.dataOfbirth,
-            phoneNumber: req.body.phoneNumber,
-            address: req.body.address
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email, 
+                password: req.body.password,
+                dateOfbirth: req.body.dateOfBirth,
+                phoneNumber: req.body.phoneNumber,
+                address: req.body.address
             })
 
             return res.status(200).json(patient)

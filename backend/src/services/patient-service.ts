@@ -2,6 +2,7 @@ import { Patient } from "../models/patient";
 import { getRepository} from "typeorm";
 import bcrypt from 'bcrypt'
 import { ApiError } from "../exceptions/api-error";
+import { Role } from "../models/role";
 /**
  * Handles business logic for `Patient` model.
  */
@@ -10,8 +11,8 @@ export const PatientService = {
 
     async create(patientData: {
         
-        firstname: string,
-        lastname: string,
+        firstName: string,
+        lastName: string,
         password: string,
         email: string,
         dateOfbirth: Date,
@@ -28,13 +29,15 @@ export const PatientService = {
 
         // Create new patient
         const newPatient = new Patient()
-        newPatient.firstName = patientData.firstname
-        newPatient.lastName = patientData.lastname
+        newPatient.firstName = patientData.firstName
+        newPatient.lastName = patientData.lastName
         newPatient.password = await bcrypt.hash(patientData.password, 10)
         newPatient.email = patientData.email
-        newPatient.dateOfBirth = patientData.dateOfbirth
+        console.log(patientData.dateOfbirth)
+        newPatient.dateOfBirth = new Date (patientData.dateOfbirth)
         newPatient.phoneNumber = patientData.phoneNumber
         newPatient.address = patientData.address
+        newPatient.role = Role.PATIENT
 
         // Insert to database
         const created = await repository.save(newPatient)
