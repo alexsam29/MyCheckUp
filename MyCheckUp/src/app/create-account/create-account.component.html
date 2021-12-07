@@ -1,38 +1,63 @@
 <div class="bg-dark">
     <div class="text-light text-center">
         <h2>Sign-up to your MyCheckUP Account</h2>
-    </div>
 
-    <form class="border border-secondary border-5" action="#" method="post">
+        <div *ngIf="fail" class="alert alert-danger" role="alert">
+            An error occured! {{message}}
+        </div>
+    </div>
+    <form ngNativeValidate #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)"
+        class="border border-secondary border-5" action="#" method="post">
         <div class="container">
 
             <div class="form-group text-light">
-                <label for="title"> Title </label> <br>
-                <input id="title" type="text" class="form-control">
-            </div><br>
-            <div class="form-group text-light">
-                <label for="firsName"> First Name</label> <br>
-                <input id="firstName" type="text" class="form-control"> <br><br>
+                <label for="firstName"> First Name</label> <br>
+                <input required ngModel name="firstName" class="form-control" placeholder="Your first name here"
+                    #firstName="ngModel">
+                <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is Required
+                </div>
+                <br><br>
             </div>
             <div class="form-group text-light">
                 <label for="lastName"> Last Name</label><br>
-                <input id="lasttName" type="text" class="form-control"><br><br>
+                <input required ngModel name="lastName" type="text" class="form-control"
+                    placeholder="Your last name here" #lastName="ngModel">
+                <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is Required</div>
+                <br><br>
             </div>
             <div class="form-group text-light">
+                <label for="dateOfBirth"> Date of Birth </label> <br>
+                <input required ngModel name="dateOfBirth" type="date" class="form-control"
+                    placeholder="Enter Date of Birth Here" #title="ngModel">
+                <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div>
+            </div><br>
+            <div class="form-group text-light">
                 <label for="email"> Email</label><br>
-                <input id="email" type="text" class="form-control"><br><br>
+                <input required ngModel name="email" type="text" class="form-control"
+                    placeholder="input valid email address" #email="ngModel">
+                <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required</div><br><br>
             </div>
             <div class="form-group text-light">
                 <label for="password1"> Enter Password</label><br>
-                <input id="password1" type="text" class="form-control"><br><br>
+                <input required minlength="8" ngModel name="password" type="password" class="form-control"
+                    #password1="ngModel">
+                <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
+                    <div *ngIf="password1.hasError('required')">Password is Required</div>
+                    <div *ngIf="password1.hasError('minlength')">Password should be minimum 8 characters</div>
+                </div>
             </div>
             <div class="form-group text-light">
                 <label for="password2"> Confirm Password</label><br>
-                <input id="password2" type="text" class="form-control"><br><br>
+                <input required ngModel name="password2" type="password" class="form-control" #password2="ngModel">
+                <div class="alert alert-danger" *ngIf="password2.touched && password2.invalid">
+                    <div *ngIf="password2.hasError('required')">Confirm Password is Required</div>
+                    <div *ngIf="password2 !== password1">Passwords do not Match</div>
+
+                </div><br><br>
             </div>
-            <div class="form-group text-light">
+            <!-- <div class="form-group text-light">
                 <label for="phone"> Phone</label><br>
-                <input id="phone" type="text" class="form-control">
+                <input ngModel name="phone" type="text" class="form-control" #phone="ngModel">
             </div>
 
             <div class="form-group text-light text-center">
@@ -59,13 +84,16 @@
             <div class="form-group text-light">
                 <label for="province"> Province</label><br>
                 <input id="province" type="text" class="form-control"><br><br>
-            </div>
+            </div> -->
             <button class="btn btn-primary" type='submit'>SignUp</button>
             <label class="text-light text-center"></label><br>
             <pre></pre>
             <div class="container bg-secondary text-light text-center">
                 <button routerLink="/" routerLinkActive="active" type="button" class="cancelbtn">Cancel</button>
             </div>
+        </div>
+        <div *ngIf="success" class="alert alert-success" role="alert">
+            {{message}}
         </div>
     </form>
 </div>
