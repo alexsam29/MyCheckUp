@@ -8,27 +8,46 @@
 
             <div class="form-group text-light">
                 <label for="title"> Title </label> <br>
-                <input id="title" type="text" class="form-control">
+                <input required ngModel name="title" class="form-control" placeholder="Enter Title here"
+                    #title="ngModel">
+                <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Title is Required</div>
             </div><br>
             <div class="form-group text-light">
-                <label for="firsName"> First Name</label> <br>
-                <input id="firstName" type="text" class="form-control"> <br><br>
+                <label for="firstName"> First Name</label> <br>
+                <input required ngModel name="firstName" class="form-control" placeholder="Your first name here"
+                    #firstName="ngModel">
+                <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is Required
+                </div>
+                <br><br>
             </div>
             <div class="form-group text-light">
                 <label for="lastName"> Last Name</label><br>
-                <input id="lasttName" type="text" class="form-control"><br><br>
+                <input required ngModel name="lastName" type="text" class="form-control"
+                    placeholder="Your last name here" #lastName="ngModel">
+                <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is Required</div>
+                <br><br>
             </div>
             <div class="form-group text-light">
                 <label for="email"> Email</label><br>
-                <input id="email" type="text" class="form-control"><br><br>
+                <input required ngModel name="email" type="text" class="form-control"
+                    placeholder="input valid email address" #email="ngModel">
+                <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required</div><br><br>
             </div>
             <div class="form-group text-light">
                 <label for="password1"> Enter Password</label><br>
-                <input id="password1" type="text" class="form-control"><br><br>
+                <input required minlength="8" ngModel name="password1" type="text" class="form-control"
+                    #password1="ngModel">
+                <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
+                    <div *ngIf="password1.hasError('required')">Password is Required</div>
+                    <div *ngIf="password1.hasError('minlength')">Password should be minimum 8 characters</div>
+                </div>
             </div>
             <div class="form-group text-light">
                 <label for="password2"> Confirm Password</label><br>
-                <input id="password2" type="text" class="form-control"><br><br>
+                <input required ngModel name="password2" type="text" class="form-control" #password2="ngModel">
+                <div class="alert alert-danger" *ngIf="password2.touched && password2.invalid">
+
+                </div><br><br>
             </div>
             <div class="form-group text-light">
                 <label for="phone"> Phone</label><br>
