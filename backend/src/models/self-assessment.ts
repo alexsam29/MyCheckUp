@@ -1,41 +1,39 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Appointment } from "./appointment";
-import { AssessmentSymptoms } from "./AssessmentSymptoms";
-
-
-
+import {
+   Entity,
+   Column,
+   PrimaryGeneratedColumn,
+   CreateDateColumn,
+   UpdateDateColumn,
+   ManyToMany,
+   JoinTable
+} from 'typeorm'
+import { Symptom } from './symptom'
 
 /**
  * Self Assessment database model. 
  * 
  * Fields: 
- * SelfAssessmentId - Primary generated ID of the SelfAssessment table.
- * appointmentId - Id of the appointment table. *(One to One) Relation. 
- * Notes - Notes provided by the patient or the doctor.
- * createdAt - Created date.
- * updatedAt - Lateste updated date.
+ * - `id` - self assessment id.
+ * - `symptoms` - array of symptoms experienced by patient.
+ * - `notes` - notes added by patient.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
-
-
 @Entity()
-export class SelfAssessment 
-{
-    @PrimaryGeneratedColumn('uuid')
-    id!: string
+export class SelfAssessment {
+   @PrimaryGeneratedColumn('uuid')
+   id!: string
 
-    @OneToOne(() => Appointment)
-    @JoinColumn()
-    appointment!: Appointment
+   @ManyToMany(() => Symptom)
+   @JoinTable({ name: 'self_assessment_symptom' })
+   symptoms!: Symptom[]
 
-    @OneToMany(() => AssessmentSymptoms, assessmentSymptoms => assessmentSymptoms)
-    assessmentSymptoms!: AssessmentSymptoms
+   @Column()
+   notes!: string
 
-    @Column({nullable: true})
-    Notes!: string
+   @CreateDateColumn()
+   createdAt!: Date
 
-    @CreateDateColumn()
-    createdAt!: Date
-
-    @UpdateDateColumn()
-    updatedAt!: Date
+   @UpdateDateColumn()
+   updatedAt!: Date
 }

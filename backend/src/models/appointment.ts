@@ -1,65 +1,81 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn} from 'typeorm'
-import { Doctor } from './doctor'
+import {
+   Entity,
+   PrimaryGeneratedColumn,
+   Column,
+   CreateDateColumn,
+   UpdateDateColumn,
+   ManyToOne,
+   OneToOne,
+   JoinColumn
+} from 'typeorm'
+import { AppointmentStatus } from './appointment-status'
 import { Patient } from './patient'
-
-
+import { Doctor } from './doctor'
+import { SelfAssessment } from './self-assessment'
 
 /**
- * Appointment database mdoel.
+ * Appointment database model.
  * 
  * Fields: 
- * patient id - Id of the patient from patient table. *(Many to One) Relation.
- * doctor id - Id of the doctor from doctor table. *(Many to One) Relation.
- * appointmentId - Primary id of the appointment table.
- * startDate - Start date of the appointment.
- * endDate - End date of the appointment.  
- * startTime - Start time of the appointment.
- * endTime - End time of the appointment.
- * status - Current status of the patient.
- * notes - Optional notes provided by the patient or the doctor.
- * createdAt - Created date.
- * updatedAt - Lateste updated date.
+ * - `id` - appointment id.
+ * - `patientId` - patient id.
+ * - `doctorId` - doctor id.
+ * - `date` - appointment date.
+ * - `startTime` - appointment start time.
+ * - `endTime` - appointment end time.
+ * - `status` - appointment status.
+ * - `doctorNotes` - appointment notes made by doctor.
+ * - `patient` - associated `Patient` object.
+ * - `doctor` - associated `Doctor` object.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
-
 @Entity()
-export class Appointment 
-{
-    @PrimaryGeneratedColumn('uuid')
-    Id!: string
+export class Appointment {
+   @PrimaryGeneratedColumn('uuid')
+   id!: string
 
-    @ManyToOne(() => Patient, patient => patient)
-    patient!: Patient
+   @Column()
+   patientId!: string
 
-    @ManyToOne(() => Doctor, doctor => doctor)
-    doctor!: Doctor
+   @Column()
+   doctorId!: string
 
-    @Column({ type: 'date', nullable: true})
-    startDate!: Date
+   @Column({ nullable: true })
+   selfAssessmentId!: string | null
 
-    @Column({type: 'date', nullable: true})
-    endDate!: Date
+   @Column('date')
+   date!: Date
 
-    @Column({type:'time', nullable: true})
-    startTime!: Date
+   @Column('time')
+   startTime!: Date
 
-    @Column({type:'time', nullable: true})
-    endTime!: Date
+   @Column('time')
+   endTime!: Date
 
-    @Column({nullable: true})
-    satus!: string 
+   @Column({
+      type: 'enum',
+      enum: AppointmentStatus,
+      default: AppointmentStatus.PENDING
+   })
+   status!: AppointmentStatus
 
-    @Column({nullable: true})
-    notes!: string
+   @Column({ type: 'text', nullable: true })
+   doctorNotes!: string | null
 
-    @CreateDateColumn()
-    createdAt!: Date
+   @ManyToOne(() => Patient, patient => patient.appointments, { onDelete: 'CASCADE' })
+   patient!: Patient
 
-    @UpdateDateColumn()
-    updatedAt!: Date
+   @ManyToOne(() => Doctor, doctor => doctor.appointments, { onDelete: 'SET NULL' })
+   doctor!: Doctor
 
-    
+   @OneToOne(() => SelfAssessment, { onDelete: 'SET NULL' })
+   @JoinColumn()
+   selfAssessment!: SelfAssessment
+
+   @CreateDateColumn()
+   createdAt!: Date
+
+   @UpdateDateColumn()
+   updatedAt!: Date
 }
-
-
-
-

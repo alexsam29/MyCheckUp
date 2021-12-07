@@ -6,7 +6,7 @@
  * - `DOCTOR`
  * - `PATIENT`
  */
- export enum Role {
+export enum Role {
    ADMIN = 'admin',
    DOCTOR = 'doctor',
    PATIENT = 'patient'

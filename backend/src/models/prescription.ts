@@ -1,50 +1,58 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Doctor } from "./doctor";
-import { Patient } from "./patient";
+import {
+   Entity,
+   Column,
+   PrimaryGeneratedColumn,
+   CreateDateColumn,
+   UpdateDateColumn,
+   ManyToOne
+} from 'typeorm'
+import { Patient } from './patient'
+import { Doctor } from './doctor'
 
 /**
- * Ptient prescription database mdoel.
+ * Patient prescription database model.
  * 
  * Fields:
- * patient id - Id of the patient from patient table. *(Many to One) Relation.
- * doctor id - Id of the doctor from doctor table. *(Many to One) Relation.
- * prescriptionId - Primary id of the prescription table.
- * effectiveDate - efective date of the prescription. 
- * expirayDate - end date of prescription.
- * description - provided by the doctor.
- * numOfRefill - number of times they can get the drug.
- * createdAt - Created date.
- * updatedAt - Lateste updated date.
+ * - `id` - prescription id.  
+ * - `patientId` - patient id.  
+ * - `doctorId` - doctor id.
+ * - `description` - description of prescribed medicaments. 
+ * - `numOfRefill` - number of times they can get the drug. 
+ * - `expiryDate` - date of expiry.
+ * - `patient` - associated patient object.
+ * - `doctor` - associated doctor object.
+ * - `createdAt` - creation date in the database.
+ * - `updatedAt` - last modified date in the database.
  */
-
-
 @Entity()
-export class Prescription 
-{
-    @PrimaryGeneratedColumn('uuid')
-    Id!: string
+export class Prescription {
+   @PrimaryGeneratedColumn('uuid')
+   id!: string
 
-    @ManyToOne(() => Patient, patient => patient)
-    patient!: Patient
+   @Column()
+   patientId!: string
 
-    @ManyToOne(() => Doctor, doctor => doctor)
-    doctor!: Doctor
+   @Column()
+   doctorId!: string
 
-    @Column({nullable: true})
-    description!: string
+   @Column()
+   description!: string
 
-    @Column({nullable: true})
-    numOfRefill!: number
+   @Column()
+   numOfRefill!: number
 
-    @Column({type: 'date', nullable: true})
-    effectiveDate!: string
+   @Column()
+   expiryDate!: Date
 
-    @Column({type:'date', nullable: true})
-    expiryDate!: Date
+   @ManyToOne(() => Patient, patient => patient.prescriptions, { onDelete: 'CASCADE' })
+   patient!: Patient
 
-    @CreateDateColumn()
-    createdAt!: Date
+   @ManyToOne(() => Doctor, doctor => doctor.prescriptions, { onDelete: 'SET NULL' })
+   doctor!: Doctor
 
-    @UpdateDateColumn()
-    updatedAt!: Date
+   @CreateDateColumn()
+   createdAt!: Date
+
+   @UpdateDateColumn()
+   updatedAt!: Date
 }

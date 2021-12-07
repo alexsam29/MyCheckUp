@@ -2,9 +2,9 @@ import { Entity, Column, OneToMany } from 'typeorm'
 import { User } from './user'
 import { Role } from './role'
 import { PatientToDoctor } from './patient-to-doctor'
-import { Appointment } from './appointment'
 import { Prescription } from './prescription'
-import { Availability } from './Availability'
+import { Availability } from './availability'
+import { Appointment } from './appointment'
 
 /**
  * Doctor database model.
@@ -19,6 +19,11 @@ import { Availability } from './Availability'
  * - `license` - medical license number.
  * - `specialty` - medical specialty.
  * - `title` - job title.
+ * - `phoneNumber` - phone number.
+ * - `patients` - array of associated patients.
+ * - `prescriptions` - array of issued prescriptions.
+ * - `availabilities` - array of availabilities.
+ * - `appointments` - array of associated appointments.
  * - `createdAt` - creation date in the database.
  * - `updatedAt` - last modified date in the database.
  */
@@ -52,16 +57,22 @@ export class Doctor extends User {
    })
    title!: string | null
 
+   @Column({
+      type: 'varchar',
+      length: 20,
+      nullable: true
+   })
+   phoneNumber!: string | null
+
    @OneToMany(() => PatientToDoctor, patientToDoctor => patientToDoctor.doctor)
    patients!: PatientToDoctor[]
-   
-   @OneToMany(() => Appointment, appointment => appointment)
-   appointment!: Appointment
 
-   @OneToMany(() => Prescription, prescription => prescription)
-   prescription!: Prescription
+   @OneToMany(() => Prescription, prescription => prescription.doctor)
+   prescriptions!: Prescription[]
 
-   @OneToMany(() => Availability, avaliablity => avaliablity)
-   avaliablity!: Availability
+   @OneToMany(() => Availability, availability => availability.doctor)
+   availabilities!: Availability[]
 
+   @OneToMany(() => Appointment, appointment => appointment.doctor)
+   appointments!: Appointment[]
 }
