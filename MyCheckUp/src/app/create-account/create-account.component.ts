@@ -13,10 +13,7 @@ export class CreateAccountComponent implements OnInit {
   loading: boolean = true;
   message: string = '';
 
-  constructor(
-    private router: Router,
-    private userService: UserService
-  ) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {}
 

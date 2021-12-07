@@ -8,7 +8,11 @@ import { SignInComponent } from './sign-in/sign-in.component';
 
 const routes: Routes = [
   { path: 'signin', component: SignInComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate : [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'createaccount', component: CreateAccountComponent },
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
 ];

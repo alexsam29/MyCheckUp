@@ -32,7 +32,6 @@ export class SignInComponent implements OnInit {
             this.router.navigate([this.returnUrl]);
           },
           (err) => {
-
             this.message = err.error.error;
             this.loginFail = true;
           }
