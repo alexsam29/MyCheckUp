@@ -14,7 +14,6 @@ Web Application
 - Create-account component and page view
 
 Backend API
-
 ---
 
 - Configured server instance
@@ -27,5 +26,4 @@ Backend API
 ## [0.2.0] - 2021-12-07
 
 Web Application
-
 ---
