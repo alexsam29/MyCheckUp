@@ -27,8 +27,8 @@
             </div>
             <div class="form-group text-light">
                 <label for="dateOfBirth"> Date of Birth </label> <br>
-                <input required ngModel name="dateOfBirth" type="date" class="form-control" placeholder="Enter Date of Birth Here"
-                    #title="ngModel">
+                <input required ngModel name="dateOfBirth" type="date" class="form-control"
+                    placeholder="Enter Date of Birth Here" #title="ngModel">
                 <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div>
             </div><br>
             <div class="form-group text-light">
@@ -91,6 +91,9 @@
             <div class="container bg-secondary text-light text-center">
                 <button routerLink="/" routerLinkActive="active" type="button" class="cancelbtn">Cancel</button>
             </div>
+        </div>
+        <div *ngIf="success" class="alert alert-success" role="alert">
+            {{message}}
         </div>
     </form>
 </div>

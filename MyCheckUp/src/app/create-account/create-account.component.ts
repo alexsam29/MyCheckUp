@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class CreateAccountComponent implements OnInit {
   fail: boolean = false;
+  success: boolean = false;
   loading: boolean = true;
   message: string = '';
 
@@ -29,7 +30,11 @@ export class CreateAccountComponent implements OnInit {
         )
         .subscribe(
           (data) => {
-            this.router.navigate(['signin']);
+            this.success = true;
+            this.message = "Account Successfully Created!"
+            setTimeout( () => {
+             this.router.navigate(['signin']);
+          }, 3000);
           },
           (error) => {
             console.log(error);
