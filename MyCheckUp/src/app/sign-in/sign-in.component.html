@@ -2,13 +2,19 @@
   <div class="text-light text-center">
     <h2>Sign-in to your MyCheckUP Account</h2>
   </div>
-  <form class="border border-secondary border-5" action="#" method="post">
+
+  <div *ngIf="loginFail" class="alert alert-danger" role="alert">
+    An error occured! {{message}}
+  </div>
+
+  <form ngNativeValidate #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="border border-secondary border-5"
+    action="#" method="post">
     <div class="container">
-      <label class="text-light" for="uname"><b>Username</b></label>
-      <input class="bg-light" type="text" placeholder="Enter Username" name="uname" required />
+      <label class="text-light" for="uname"><b>Email</b></label>
+      <input ngModel class="bg-light" type="email" placeholder="Enter email address" name="email" required />
 
       <label class="text-light" for="psw"><b>Password</b></label>
-      <input class="bg-light" type="password" placeholder="Enter Password" name="psw" required />
+      <input ngModel class="bg-light" type="password" placeholder="Enter Password" name="psw" required />
 
       <button type="submit">Login</button>
       <label class="text-light">
