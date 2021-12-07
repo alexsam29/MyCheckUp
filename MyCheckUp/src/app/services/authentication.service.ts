@@ -10,14 +10,15 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`https://mycheckup-api.herokuapp.com/login`, {
-        username,
-        password,
+      .post<any>(`https://mycheckup-api.herokuapp.com/patient/login`, {
+        email: username,
+        password: password,
       })
       .pipe(
         map((res) => {
+          console.log(res);
           // login successful if response is 200
-          if (res.status == 200) {
+          if (res.sucess) {
             return true;
           }
           return false;

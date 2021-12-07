@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subject } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -22,8 +21,10 @@ export class SignInComponent implements OnInit {
         .subscribe(
           (data) => {
             this.loginSuccess = true;
+            console.log(data);
           },
           (err) => {
+            console.log(err);
             this.loginFail = true;
           }
         );
