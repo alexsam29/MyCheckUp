@@ -4,11 +4,7 @@
   </div>
 
   <div *ngIf="loginFail" class="alert alert-danger" role="alert">
-    An error occured! Unable to login at this time
-  </div>
-
-  <div *ngIf="loginSuccess" class="alert alert-success" role="alert">
-    Success you are logged in!
+    An error occured! {{message}}
   </div>
 
   <form ngNativeValidate #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="border border-secondary border-5"

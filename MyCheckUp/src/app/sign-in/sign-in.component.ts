@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
+import { ILogin } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,11 +10,20 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  loginSuccess: boolean = false;
   loginFail: boolean = false;
-  constructor(private authenticationService: AuthenticationService) {}
+  message: string = '';
+  returnUrl: string = '';
+  model: ILogin = { userid: '', password: '' };
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit(): void {
+    this.returnUrl = '/dashboard';
+    this.authenticationService.logout();
+  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {
@@ -20,11 +31,17 @@ export class SignInComponent implements OnInit {
         .login(form.value.email, form.value.psw)
         .subscribe(
           (data) => {
-            this.loginSuccess = true;
-            console.log(data);
+            this.router.navigate([this.returnUrl]);
           },
           (err) => {
-            console.log(err);
+            if(err.status == 400)
+            {
+              this.message = "Incorrect email and/or password."
+            }
+            else{
+              this.message = "Server issue, unable to login at this time."
+            }
+            console.log(err)
             this.loginFail = true;
           }
         );
