@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { ILogin } from 'src/app/interfaces/login';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +31,9 @@ export class AuthenticationService {
   logout() {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('token');
+    this.http.post<any>(
+      `https://mycheckup-api.herokuapp.com/patient/login`,
+      {}
+    );
   }
 }

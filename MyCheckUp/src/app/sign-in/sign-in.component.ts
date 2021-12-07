@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
-import { ILogin } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +12,6 @@ export class SignInComponent implements OnInit {
   loginFail: boolean = false;
   message: string = '';
   returnUrl: string = '';
-  model: ILogin = { userid: '', password: '' };
 
   constructor(
     private router: Router,
@@ -34,14 +32,8 @@ export class SignInComponent implements OnInit {
             this.router.navigate([this.returnUrl]);
           },
           (err) => {
-            if(err.status == 400)
-            {
-              this.message = "Incorrect email and/or password."
-            }
-            else{
-              this.message = "Server issue, unable to login at this time."
-            }
-            console.log(err)
+
+            this.message = err.error.error;
             this.loginFail = true;
           }
         );

@@ -1,13 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.css']
+  styleUrls: ['./create-account.component.css'],
 })
-export class CreateAccountComponent {
-    
-  //log(x) {console.log(x);}
+export class CreateAccountComponent implements OnInit {
+  fail: boolean = false;
+  loading: boolean = true;
+  message: string = '';
 
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {}
+
+  ngOnInit() {}
+
+  onSubmit(signUpForm: NgForm) {
+    if (signUpForm.valid) {
+      this.userService
+        .register(
+          signUpForm.value.firstName,
+          signUpForm.value.lastName,
+          signUpForm.value.email,
+          signUpForm.value.password,
+          signUpForm.value.dateOfBirth
+        )
+        .subscribe(
+          (data) => {
+            this.router.navigate(['signin']);
+          },
+          (error) => {
+            console.log(error);
+            this.message = error.error.error;
+            this.fail = true;
+          }
+        );
+    }
+  }
 }
