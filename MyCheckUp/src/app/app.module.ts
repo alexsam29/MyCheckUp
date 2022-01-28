@@ -11,7 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './guards/auth.guard'; 
+import { AuthGuard } from './guards/auth.guard';
+import { ProfilePageComponent } from './profile-page/profile-page.component'; 
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthGuard } from './guards/auth.guard';
     DashboardComponent,
     CreateAccountComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
