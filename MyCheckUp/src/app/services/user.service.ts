@@ -39,11 +39,7 @@ url = 'https://mycheckup-api.herokuapp.com/';
 
   getProfile(): Observable<any>{
     return this.http
-      .get<any>(this.url + 'patient/profile', {headers:
-        new HttpHeaders (
-        {   
-            "Content-Type": "application/x-www-form-urlencoded"
-        }), withCredentials: true})
+      .get<any>(this.url + 'patient/profile')
       .pipe(
         map((res) => {
           console.log(res)
