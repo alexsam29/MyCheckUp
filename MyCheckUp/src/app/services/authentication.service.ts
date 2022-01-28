@@ -6,11 +6,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthenticationService {
+  url = 'https://mycheckup-api.herokuapp.com/';
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`https://mycheckup-api.herokuapp.com/patient/login`, {
+      .post<any>(this.url + `patient/login`, {
         email: username,
         password: password,
       })
@@ -31,9 +32,6 @@ export class AuthenticationService {
   logout() {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('token');
-    this.http.post<any>(
-      `https://mycheckup-api.herokuapp.com/patient/login`,
-      {}
-    );
+    this.http.post<any>(this.url + `patient/login`, {});
   }
 }
