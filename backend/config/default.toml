@@ -16,3 +16,6 @@ migrations = [ "dist/migrations/**/*.js" ]
 
 [secrets]
 session = "jKyQtUyo0TfPqVuyomPs5uVwXfSxHDdy"
+
+[client]
+origin = "*"
