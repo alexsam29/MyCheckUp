@@ -11,6 +11,40 @@ export class UserService {
 url = 'https://mycheckup-api.herokuapp.com/';
 
   constructor(private http: HttpClient) {}
+  editprofile(
+    pName: string,
+    email: string,
+    gender: RadioNodeList,
+    dob: string,
+    healthcard: string,
+    phone: string,
+    adress: string,
+    city: string,
+    province: string,
+    pcode: string,
+  ) {
+    return this.http
+      .post<any>(this.url + 'patient/editprofile', {
+        profileName: pName,
+        email: email,
+        gender: gender,
+        dateOfBirth: dob,
+        healthcardnumber: healthcard,
+        phoneNumber: phone,
+        adress: adress,
+        city: city,
+        province: province,
+        postalCode: pcode,
+      })
+      .pipe(
+        map((res) => {
+          if (res) {
+            return true;
+          }
+          return false;
+        })
+      );
+  }
 
   register(
     first: string,
