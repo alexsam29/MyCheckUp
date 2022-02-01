@@ -37,11 +37,11 @@ router.get('/admin/profile',
 
 
 // Patient:
-
 router.post('/patient/login',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    PatientController.login)
+
 
 router.post('/patient/logout', PatientController.logout)
 
@@ -80,6 +80,4 @@ router.post('/patient/password',
    body('id').notEmpty().isLength({min: 1, max: 100}),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    PatientController.updatecredentials)
-
-
 
