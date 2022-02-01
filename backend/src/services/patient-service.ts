@@ -40,6 +40,7 @@ export const PatientService = {
         newPatient.address = patientData.address
         newPatient.healthCardNum = patientData.healthCardNum
         newPatient.role = Role.PATIENT
+        newPatient.gender = patientData.gender
 
         // Insert to database
         const created = await repository.save(newPatient)
