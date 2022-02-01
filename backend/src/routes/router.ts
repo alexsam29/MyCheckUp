@@ -45,6 +45,7 @@ router.post('/patient/login',
 
 router.post('/patient/logout', PatientController.logout)
 
+
 router.post('/patient/register',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
@@ -57,21 +58,28 @@ router.post('/patient/register',
    body('gender').notEmpty().trim().isLength({min: 1, max: 7}),
    PatientController.register)
 
+
 router.get('/patient/profile',
    authorize(Role.PATIENT),
    PatientController.getSelf)
 
 
 router.post('/patient/edit',
-body('id').notEmpty().isLength({min: 1, max: 100}),
-body('email').optional().isEmail(),
-body('firstName').optional().trim().isLength({ min: 0, max: 50}),
-body('lastName').optional().trim().isLength({ min: 0, max: 50}),
-body('phoneNumber').optional().trim().isLength({ min: 0, max: 15 }),
-body('address').optional().trim().isLength({ min: 0, max: 50 }),
-body('gender').optional().trim().isLength({min: 0, max: 10}),
+   body('id').notEmpty().isLength({min: 1, max: 100}),
+   body('email').optional().isEmail(),
+   body('firstName').optional().trim().isLength({ min: 0, max: 50}),
+   body('lastName').optional().trim().isLength({ min: 0, max: 50}),
+   body('phoneNumber').optional().trim().isLength({ min: 0, max: 15 }),
+   body('address').optional().trim().isLength({ min: 0, max: 50 }),
+   body('gender').optional().trim().isLength({min: 0, max: 10}),
+   PatientController.updateProfile)
 
-PatientController.updateProfile)
+
+
+router.post('/patient/password',
+   body('id').notEmpty().isLength({min: 1, max: 100}),
+   body('password').notEmpty().isLength({ min: 6, max: 50 }),
+   PatientController.updatecredentials)
 
 
 

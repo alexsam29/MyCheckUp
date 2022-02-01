@@ -100,7 +100,39 @@ export const PatientService = {
         return {...updated, password: ''}
     },
 
-      /**
+    /**
+     * Update Patient password only.
+     * @param patientData patient id and updated information.
+     * @returns Updated patient.
+     */
+    async updateCredentials(patientData: {
+
+        id: string,
+        password: string
+
+    }): Promise<Patient> {
+
+        const repository = getRepository(Patient)
+        
+        // Find pateint account by id: 
+        const patient = await repository.findOne(patientData.id)
+        
+        if(!patient)
+            throw ApiError.NotFound('Pateint not found')
+
+
+        if(patientData.password)
+            patient.password = await bcrypt.hash(patientData.password, 10)
+
+
+        // Save data to data base
+        const updated = await repository.save(patient)
+
+        return {...updated, password: ''}
+    },
+
+
+    /**
     * Finds patient accounts in the database that match given conditions.
     * 
     * @param searchBy Search condition (optional).
@@ -130,6 +162,7 @@ export const PatientService = {
 
       return patients
    },
+
 
     /**
     * Finds one (first matching) patient account in the database.
