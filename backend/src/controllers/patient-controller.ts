@@ -5,6 +5,7 @@ import { PatientService } from "../services/patient-service";
 import { SESSION_COOKIE } from '../common/constants'
 
 
+
 // Manages operations on Patient account.
 export const PatientController = {
 
@@ -127,6 +128,9 @@ export const PatientController = {
             return next(err)
         }
     }
+
+
+
 
 }
 
