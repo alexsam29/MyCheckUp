@@ -1,8 +1,8 @@
-<div class="container-fluid bg-dark">
+<div *ngIf="user" class="container-fluid bg-dark">
     <br>
     <div class="container">
         <div class="row justify-content-center">
-            <h3 class="col text-white text-center">Welcome, {{id}}</h3>
+            <h3 class="col text-white text-center">{{user.firstName}}'s Dashboard</h3>
         </div>
         <div class="row justify-content-end">
             <div class="col-1">
@@ -16,10 +16,10 @@
                         <h5 class="card-subtitle text-muted">Personal Details</h5>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title">Profile name</h1>
+                        <h1 class="card-title">{{user.firstName}} {{user.lastName}}</h1>
                         <div class="row">
                             <div class="col-md">
-                                <p>Email: </p>
+                                <p><b>Email: </b>{{user.email}}</p>
                                 <p>Gender: </p>
                                 <p>Date of Birth: </p>
                                 <p>Health Card Number: </p>

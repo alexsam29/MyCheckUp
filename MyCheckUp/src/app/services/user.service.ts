@@ -61,7 +61,7 @@ url = 'http://localhost:5000/';
         firstName: first,
         lastName: last,
         dateOfBirth: dob,
-      })
+      }, {withCredentials: true})
       .pipe(
         map((res) => {
           if (res) {
@@ -74,10 +74,10 @@ url = 'http://localhost:5000/';
 
   getProfile(): Observable<any>{
     return this.http
-      .get<any>(this.url + 'patient/profile')
+      .get<any>(this.url + 'patient/profile', {withCredentials: true})
       .pipe(
         map((res) => {
-          console.log(res)
+          return res;
         })
       );
   }

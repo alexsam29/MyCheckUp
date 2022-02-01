@@ -15,7 +15,7 @@ export class AuthenticationService {
       .post<any>(this.url + `patient/login`, {
         email: username,
         password: password,
-      })
+      }, {withCredentials: true})
       .pipe(
         map((res) => {
           console.log(res);
