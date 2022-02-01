@@ -177,7 +177,9 @@ export const PatientService = {
         // Find one patient account that matches searchBy condition
         // and select only the specified columns
         const patient = await repository.findOne({
-           select: ['id', 'firstName', 'lastName', 'email', 'role'],
+           select: ['id', 'firstName', 'lastName', 'email', 'role', 
+           'dateOfBirth', 'phoneNumber', 'address', 'healthCardNum', 
+           'gender'],
            where: searchBy
         })
   
