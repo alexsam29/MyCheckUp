@@ -49,7 +49,7 @@ export class ProfilePageComponent implements OnInit {
         .subscribe(
           (data) => {
             this.success = true;
-            this.message = 'Account Successfully Created!';
+            this.message = 'Profile Successfully Updated!';
             setTimeout(() => {
               this.router.navigate(['dashboard']);
             }, 3000);

@@ -6,8 +6,8 @@
             An error occured! {{message}}
         </div>
     </div>
-    <form ngNativeValidate #EditProfileForm="ngForm" (ngSubmit)="onSubmit(EditProfileForm)"
-        class="p-3" action="#" method="post">
+    <form ngNativeValidate #EditProfileForm="ngForm" (ngSubmit)="onSubmit(EditProfileForm)" class="p-3" action="#"
+        method="post">
         <div class="container">
             <div class="row">
                 <div class="col-md">
@@ -29,7 +29,7 @@
 
                     <div class="form-group text-light">
                         <label for="email"> Email</label> <br>
-                        <input required ngModel name="email" class="form-control" [(ngModel)]="user.email"
+                        <input required ngModel name="email" type="email" class="form-control" [(ngModel)]="user.email"
                             #email="ngModel">
                         <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required
                         </div>
@@ -63,14 +63,14 @@
                     <div class="form-group text-light">
                         <label for="dateOfBirth"> Date of Birth </label> <br>
                         <input required ngModel name="dateOfBirth" type="date" class="form-control"
-                        [(ngModel)]="user.dateOfBirth" #title="ngModel">
+                            [(ngModel)]="user.dateOfBirth" #title="ngModel">
                         <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div>
                     </div>
 
                     <div class="form-group text-light">
                         <label for="healthcare"> Health Card Number</label> <br>
-                        <input required ngModel name="healthcard" class="form-control"
-                        [(ngModel)]="user.healthCardNum" #healthcard="ngModel">
+                        <input required ngModel name="healthcard" class="form-control" [(ngModel)]="user.healthCardNum"
+                            #healthcard="ngModel">
                         <div class="alert alert-danger" *ngIf="healthcard.touched && healthcard.invalid">Health card is
                             Required
                         </div>
@@ -80,9 +80,11 @@
                 <div class="col-md">
                     <div class="form-group text-light">
                         <label for="phone"> Phone Number</label> <br>
-                        <input required ngModel minlength="10" maxlength="12" [(ngModel)]="user.phoneNumber" name="phone" class="form-control"
-                            #phone="ngModel" type="number">
-                        <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">Phone number is Required
+                        <input required ngModel pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
+                            [(ngModel)]="user.phoneNumber" name="phone" class="form-control" #phone="ngModel"
+                            type="number">
+                        <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">A valid 10-digit Phone
+                            number is Required
                         </div>
                         <div *ngIf="phone.hasError('minlength')">Phone number should be minimum 10 characters</div>
                         <div *ngIf="phone.hasError('maxlength')">Phone number should be maximum 12 characters</div>
@@ -96,22 +98,29 @@
 
                     <div class="form-group text-light">
                         <label for="city"> City</label> <br>
-                        <input required ngModel name="city" [(ngModel)]="fullAddress[1]" class="form-control" placeholder="Your city here"
-                            #city="ngModel">
+                        <input required ngModel name="city" [(ngModel)]="fullAddress[1]" class="form-control"
+                            placeholder="Your city here" #city="ngModel">
                     </div>
 
                     <div class="form-group text-light">
                         <label for="province"> Province</label> <br>
-                        <input required ngModel name="province" [(ngModel)]="fullAddress[2]" class="form-control" placeholder="Your Province here"
-                            #province="ngModel">
+                        <input required ngModel name="province" [(ngModel)]="fullAddress[2]" class="form-control"
+                            placeholder="Your Province here" #province="ngModel">
                     </div>
 
                     <div class="form-group text-light">
-                        <label for="pcode"> Postal Code</label> <br>
-                        <input required ngModel name="pcode" [(ngModel)]="fullAddress[3]" class="form-control" placeholder="Your Postal Code here"
-                            #pcode="ngModel">
+                        <label for="pcode"> Postal Code (A1A1A1 / A1A 1A1)</label> <br>
+                        <input required ngModel pattern="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$"
+                            name="pcode" [(ngModel)]="fullAddress[3]" class="form-control"
+                            placeholder="Your Postal Code here" #pcode="ngModel">
+                        <div class="alert alert-danger" *ngIf="pcode.touched && pcode.invalid">A valid postal code is
+                            required
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="success" class="alert alert-success text-center" role="alert">
+                {{message}}
             </div>
             <br>
             <div class="row justify-content-center">
@@ -122,13 +131,6 @@
                 <button routerLink="/dashboard" routerLinkActive="active" type="button"
                     class="cancelbtn btn-danger btn-lg">Cancel</button>
             </div>
-            
-            <div>
-               
-            </div>
-        </div>
-        <div *ngIf="success" class="alert alert-success" role="alert">
-            {{message}}
         </div>
     </form>
 </div>

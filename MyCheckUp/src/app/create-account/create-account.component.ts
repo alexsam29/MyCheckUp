@@ -34,10 +34,10 @@ export class CreateAccountComponent implements OnInit {
         .subscribe(
           (data) => {
             this.success = true;
-            this.message = "Account Successfully Created!"
-            setTimeout( () => {
-             this.router.navigate(['signin']);
-          }, 3000);
+            this.message = 'Account Successfully Created!';
+            setTimeout(() => {
+              this.router.navigate(['signin']);
+            }, 3000);
           },
           (error) => {
             console.log(error);

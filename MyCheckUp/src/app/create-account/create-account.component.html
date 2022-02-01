@@ -33,7 +33,7 @@
             </div><br>
             <div class="form-group text-light">
                 <label for="email"> Email</label><br>
-                <input required ngModel name="email" type="text" class="form-control"
+                <input required ngModel name="email" type="email" class="form-control"
                     placeholder="input valid email address" #email="ngModel">
                 <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required</div><br><br>
             </div>
@@ -41,7 +41,8 @@
                 <label for="healthCardNum"> Health Card Number</label><br>
                 <input required ngModel name="healthCardNum" type="number" class="form-control"
                     placeholder="input valid health card #" #healthCardNum="ngModel">
-                <div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">Health Card is Required</div><br><br>
+                <div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">Health Card is
+                    Required</div><br><br>
             </div>
             <div class="form-group text-light">
                 <label for="gender">Gender</label> <br>
