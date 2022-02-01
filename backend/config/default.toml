@@ -18,4 +18,4 @@ migrations = [ "dist/migrations/**/*.js" ]
 session = "jKyQtUyo0TfPqVuyomPs5uVwXfSxHDdy"
 
 [client]
-origin = "*"
+origin = "http://localhost:4200"
