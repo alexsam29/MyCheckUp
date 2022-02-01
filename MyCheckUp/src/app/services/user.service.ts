@@ -13,29 +13,23 @@ url = 'http://localhost:5000/';
 
   constructor(private http: HttpClient) {}
   editprofile(
-    pName: string,
+    id: string,
     email: string,
-    gender: RadioNodeList,
-    dob: string,
-    healthcard: string,
-    phone: string,
-    adress: string,
-    city: string,
-    province: string,
-    pcode: string,
+    firstName: string,
+    lastName: string,
+    phoneNumber: string,
+    address: string,
+    gender: string
   ) {
     return this.http
-      .post<any>(this.url + 'patient/editprofile', {
-        profileName: pName,
+      .post<any>(this.url + 'patient/edit', {
+        id: id,
         email: email,
-        gender: gender,
-        dateOfBirth: dob,
-        healthcardnumber: healthcard,
-        phoneNumber: phone,
-        adress: adress,
-        city: city,
-        province: province,
-        postalCode: pcode,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        address: address,
+        gender: gender,        
       })
       .pipe(
         map((res) => {
@@ -52,7 +46,9 @@ url = 'http://localhost:5000/';
     last: string,
     email: string,
     psw: string,
-    dob: string
+    dob: string,
+    healthCardNum: string,
+    gender: string
   ) {
     return this.http
       .post<any>(this.url + 'patient/register', {
@@ -61,6 +57,8 @@ url = 'http://localhost:5000/';
         firstName: first,
         lastName: last,
         dateOfBirth: dob,
+        healthCardNum: healthCardNum,
+        gender: gender
       }, {withCredentials: true})
       .pipe(
         map((res) => {

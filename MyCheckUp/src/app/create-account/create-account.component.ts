@@ -19,6 +19,7 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(signUpForm: NgForm) {
+    console.log(signUpForm.value.gender);
     if (signUpForm.valid) {
       this.userService
         .register(
@@ -26,7 +27,9 @@ export class CreateAccountComponent implements OnInit {
           signUpForm.value.lastName,
           signUpForm.value.email,
           signUpForm.value.password,
-          signUpForm.value.dateOfBirth
+          signUpForm.value.dateOfBirth,
+          signUpForm.value.healthCardNum,
+          signUpForm.value.gender
         )
         .subscribe(
           (data) => {

@@ -38,6 +38,18 @@
                 <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required</div><br><br>
             </div>
             <div class="form-group text-light">
+                <label for="healthCardNum"> Health Card Number</label><br>
+                <input required ngModel name="healthCardNum" type="number" class="form-control"
+                    placeholder="input valid health card #" #healthCardNum="ngModel">
+                <div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">Health Card is Required</div><br><br>
+            </div>
+            <div class="form-group text-light">
+                <label for="gender">Gender</label> <br>
+                <input type="radio" value="male" id="male" name="gender" ngModel> Male <br>
+                <input type="radio" value="female" id="female" name="gender" ngModel> Female <br>
+                <input type="radio" value="other" id="other" name="gender" ngModel> Other
+            </div>
+            <div class="form-group text-light">
                 <label for="password1"> Enter Password</label><br>
                 <input required minlength="8" ngModel name="password" type="password" class="form-control"
                     #password1="ngModel">
@@ -60,15 +72,7 @@
                 <input ngModel name="phone" type="text" class="form-control" #phone="ngModel">
             </div>
 
-            <div class="form-group text-light text-center">
-                <h3>Select Gender</h3>
-                <label for="male"> Male </label>
-                <input id="male" type="checkbox" class="form-control">
-                <label for="female"> Female </label>
-                <input id="female" type="checkbox" class="form-control">
-                <label for="pnta"> Prefer not to Answer </label>
-                <input id="pnta" type="checkbox" class="form-control">
-            </div><br>
+            <br>
             <div class="form-group text-light">
                 <label for="address"> Address</label><br>
                 <input id="address" type="text" class="form-control"><br><br>

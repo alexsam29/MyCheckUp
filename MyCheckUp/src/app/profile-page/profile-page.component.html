@@ -1,4 +1,4 @@
-<div class="bg-dark">
+<div *ngIf="user" class="bg-dark">
     <div class="text-light text-center">
         <h2>Edit Profile</h2>
 
@@ -12,38 +12,65 @@
             <div class="row">
                 <div class="col-md">
                     <div class="form-group text-light">
-                        <label for="profileName"> Profile Name</label> <br>
-                        <input required ngModel name="pName" class="form-control" placeholder="Your profile name here"
-                            #pName="ngModel">
-                        <div class="alert alert-danger" *ngIf="pName.touched && pName.invalid">Profile Name is Required
-                        </div>
+                        <label for="firstName"> First Name</label> <br>
+                        <input required ngModel name="firstName" class="form-control" [(ngModel)]="user.firstName"
+                            #fName="ngModel" type="text">
+                        <!-- <div class="alert alert-danger" *ngIf="pName.touched && pName.invalid">First Name is Required
+                        </div> -->
+                    </div>
+
+                    <div class="form-group text-light">
+                        <label for="lastName"> Last Name</label> <br>
+                        <input required ngModel name="lastName" class="form-control" [(ngModel)]="user.lastName"
+                            #lName="ngModel">
+                        <!-- <div class="alert alert-danger" *ngIf="lName.touched && lName.invalid">Last Name is Required
+                        </div> -->
                     </div>
 
                     <div class="form-group text-light">
                         <label for="email"> Email</label> <br>
-                        <input required ngModel name="email" class="form-control" placeholder="Your valid email here"
+                        <input required ngModel name="email" class="form-control" [(ngModel)]="user.email"
                             #email="ngModel">
                         <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required
                         </div>
                     </div>
 
-                    <div class="form-group text-light">
+                    <div *ngIf="!user.gender" class="form-group text-light">
                         <label for="gender">Gender</label> <br>
                         <input type="radio" value="male" id="gender" name="gender"> Male <br>
-                        <input type="radio" value="female" id="gender" name="gender"> Female
+                        <input type="radio" value="female" id="gender" name="gender"> Female <br>
+                        <input type="radio" value="Other" id="gender" name="gender"> Other
+                    </div>
+                    <div *ngIf="user.gender === 'male'" class="form-group text-light">
+                        <label for="gender">Gender</label> <br>
+                        <input type="radio" value="male" id="gender" name="gender" checked> Male <br>
+                        <input type="radio" value="female" id="gender" name="gender"> Female <br>
+                        <input type="radio" value="Other" id="gender" name="gender"> Other
+                    </div>
+                    <div *ngIf="user.gender === 'female'" class="form-group text-light">
+                        <label for="gender">Gender</label> <br>
+                        <input type="radio" value="male" id="gender" name="gender"> Male <br>
+                        <input type="radio" value="female" id="gender" name="gender" checked> Female <br>
+                        <input type="radio" value="Other" id="gender" name="gender"> Other
+                    </div>
+                    <div *ngIf="user.gender === 'other'" class="form-group text-light">
+                        <label for="gender">Gender</label> <br>
+                        <input type="radio" value="male" id="gender" name="gender" checked> Male <br>
+                        <input type="radio" value="female" id="gender" name="gender"> Female <br>
+                        <input type="radio" value="Other" id="gender" name="gender" checked> Other
                     </div>
 
                     <div class="form-group text-light">
                         <label for="dateOfBirth"> Date of Birth </label> <br>
                         <input required ngModel name="dateOfBirth" type="date" class="form-control"
-                            placeholder="Enter Date of Birth Here" #title="ngModel">
+                        [(ngModel)]="user.dateOfBirth" #title="ngModel">
                         <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div>
                     </div>
 
                     <div class="form-group text-light">
                         <label for="healthcare"> Health Card Number</label> <br>
                         <input required ngModel name="healthcard" class="form-control"
-                            placeholder="Your Health card number here" #healthcard="ngModel">
+                        [(ngModel)]="user.healthCardNum" #healthcard="ngModel">
                         <div class="alert alert-danger" *ngIf="healthcard.touched && healthcard.invalid">Health card is
                             Required
                         </div>
@@ -53,8 +80,8 @@
                 <div class="col-md">
                     <div class="form-group text-light">
                         <label for="phone"> Phone Number</label> <br>
-                        <input required minlength="10" maxlength="12" ngModel name="phone" class="form-control"
-                            placeholder="Your phone number here" #phone="ngModel">
+                        <input required ngModel minlength="10" maxlength="12" [(ngModel)]="user.phoneNumber" name="phone" class="form-control"
+                            #phone="ngModel" type="number">
                         <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">Phone number is Required
                         </div>
                         <div *ngIf="phone.hasError('minlength')">Phone number should be minimum 10 characters</div>
@@ -62,26 +89,26 @@
                     </div>
 
                     <div class="form-group text-light">
-                        <label for="adress"> Adress</label> <br>
-                        <input required ngModel name="adress" class="form-control"
+                        <label for="address"> Address</label> <br>
+                        <input required ngModel name="address" [(ngModel)]="fullAddress[0]" class="form-control"
                             placeholder="Your street/apartment number here" #adress="ngModel">
                     </div>
 
                     <div class="form-group text-light">
                         <label for="city"> City</label> <br>
-                        <input required ngModel name="city" class="form-control" placeholder="Your city here"
+                        <input required ngModel name="city" [(ngModel)]="fullAddress[1]" class="form-control" placeholder="Your city here"
                             #city="ngModel">
                     </div>
 
                     <div class="form-group text-light">
                         <label for="province"> Province</label> <br>
-                        <input required ngModel name="province" class="form-control" placeholder="Your Province here"
+                        <input required ngModel name="province" [(ngModel)]="fullAddress[2]" class="form-control" placeholder="Your Province here"
                             #province="ngModel">
                     </div>
 
                     <div class="form-group text-light">
                         <label for="pcode"> Postal Code</label> <br>
-                        <input required ngModel name="pcode" class="form-control" placeholder="Your Postal Code here"
+                        <input required ngModel name="pcode" [(ngModel)]="fullAddress[3]" class="form-control" placeholder="Your Postal Code here"
                             #pcode="ngModel">
                     </div>
                 </div>
