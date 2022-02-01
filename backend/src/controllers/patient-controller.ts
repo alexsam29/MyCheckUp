@@ -127,10 +127,30 @@ export const PatientController = {
         {
             return next(err)
         }
+    },
+
+
+    async updatecredentials(req: Request, res: Response, next: NextFunction)
+    {
+        try
+        {
+            const errors = validationResult(req)
+
+            if(!errors.isEmpty())
+                throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+
+                const UpdatePateint = await PatientService.updateCredentials({
+                    id: req.body.id, 
+                    password: req.body.password
+                })
+    
+                return res.status(200).json(UpdatePateint)
+        }
+        catch(err: unknown)
+        {
+            return next(err)
+        }
     }
-
-
-
 
 }
 
