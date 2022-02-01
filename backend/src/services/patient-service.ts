@@ -17,7 +17,9 @@ export const PatientService = {
         email: string,
         dateOfBirth: string,
         phoneNumber: string,
-        address: string     
+        address: string, 
+        healthCardNum: string,
+        gender: string  
     }): Promise<Patient>{
 
         const repository = getRepository(Patient)
@@ -36,6 +38,7 @@ export const PatientService = {
         newPatient.dateOfBirth = new Date(patientData.dateOfBirth)
         newPatient.phoneNumber = patientData.phoneNumber
         newPatient.address = patientData.address
+        newPatient.healthCardNum = patientData.healthCardNum
         newPatient.role = Role.PATIENT
 
         // Insert to database
@@ -56,27 +59,25 @@ export const PatientService = {
 
         id: string, 
         email?: string,
-        password?: string
         firstname?: string
         lastname?: string  
         address?: string
-        phonenumber: string 
+        phonenumber?: string 
+        gender?: string;
 
     }): Promise<Patient> {
 
         const repository = getRepository(Patient)
         
         // Find pateint account by id: 
-        const patient = await repository.findOne(patientData)
+        const patient = await repository.findOne(patientData.id)
+        
         if(!patient)
             throw ApiError.NotFound('Pateint not found')
 
         // Update fields:
         if(patientData.email)
             patient.email = patientData.email
-        
-        if(patientData.password)
-            patient.password = await bcrypt.hash(patientData.password, 10)
         
         if(patientData.firstname)
             patient.firstName = patientData.firstname
@@ -89,6 +90,9 @@ export const PatientService = {
         
         if(patientData.phonenumber)
             patient.phoneNumber = patientData.phonenumber
+
+        if(patientData.gender)
+            patient.gender = patientData.gender
 
         // Save data to data base
         const updated = await repository.save(patient)
