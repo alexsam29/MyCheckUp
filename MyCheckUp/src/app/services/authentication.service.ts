@@ -6,7 +6,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  url = 'https://mycheckup-api.herokuapp.com/';
+  /* url = 'https://mycheckup-api.herokuapp.com/'; */
+  url = 'http://localhost:5000/'
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
