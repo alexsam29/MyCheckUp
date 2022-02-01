@@ -71,7 +71,7 @@ router.post('/patient/edit',
    body('lastName').optional().trim().isLength({ min: 0, max: 50}),
    body('phoneNumber').optional().trim().isLength({ min: 0, max: 15 }),
    body('address').optional().trim().isLength({ min: 0, max: 50 }),
-   body('gender').optional().trim().isLength({min: 0, max: 10}),
+   body('gender').optional().trim().isLength({min: 0, max: 7}),
    PatientController.updateProfile)
 
 
