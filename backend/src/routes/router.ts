@@ -4,6 +4,7 @@ import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { MainController } from '../controllers/main-controller'
 import { AdminController } from '../controllers/admin-controller'
+import { DoctorController } from '../controllers/doctor-controller'
 import { PatientController } from '../controllers/patient-controller'
 
 /**
@@ -11,11 +12,17 @@ import { PatientController } from '../controllers/patient-controller'
  */
 export const router = express.Router()
 
-// Main:
+
+// Main Routes
+
 router.get('/', MainController.root)
 router.get('/ping', MainController.ping)
 
-// Admin:
+// End of Main Routes
+
+
+// Admin Routes
+
 router.post('/admin/login',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
@@ -35,8 +42,27 @@ router.get('/admin/profile',
    authorize(Role.ADMIN),
    AdminController.getSelf)
 
+// End of Admin Routes
 
-// Patient:
+
+// Doctor Routes
+
+router.post('/doctor/login',
+   body('email').notEmpty().isEmail(),
+   body('password').notEmpty().isLength({ min: 6, max: 50 }),
+   DoctorController.login)
+
+router.post('/doctor/logout', DoctorController.logout)
+
+router.get('/doctor/profile',
+   authorize(Role.DOCTOR),
+   DoctorController.getSelf)
+
+// End of Doctor Routes
+
+
+// Patient Routes
+
 router.post('/patient/login',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
@@ -81,3 +107,4 @@ router.post('/patient/password',
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    PatientController.updatecredentials)
 
+// End of Patient Routes
