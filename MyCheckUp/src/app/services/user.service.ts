@@ -9,32 +9,27 @@ import { User } from '../models/user';
 export class UserService {
 
 url = 'https://mycheckup-api.herokuapp.com/';
+/* url = 'http://localhost:5000/'; */
 
   constructor(private http: HttpClient) {}
   editprofile(
-    pName: string,
+    id: string,
     email: string,
-    gender: RadioNodeList,
-    dob: string,
-    healthcard: string,
-    phone: string,
-    adress: string,
-    city: string,
-    province: string,
-    pcode: string,
+    firstName: string,
+    lastName: string,
+    phoneNumber: string,
+    address: string,
+    gender: string
   ) {
     return this.http
-      .post<any>(this.url + 'patient/editprofile', {
-        profileName: pName,
+      .post<any>(this.url + 'patient/edit', {
+        id: id,
         email: email,
-        gender: gender,
-        dateOfBirth: dob,
-        healthcardnumber: healthcard,
-        phoneNumber: phone,
-        adress: adress,
-        city: city,
-        province: province,
-        postalCode: pcode,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        address: address,
+        gender: gender,        
       })
       .pipe(
         map((res) => {
@@ -51,7 +46,9 @@ url = 'https://mycheckup-api.herokuapp.com/';
     last: string,
     email: string,
     psw: string,
-    dob: string
+    dob: string,
+    healthCardNum: string,
+    gender: string
   ) {
     return this.http
       .post<any>(this.url + 'patient/register', {
@@ -60,7 +57,9 @@ url = 'https://mycheckup-api.herokuapp.com/';
         firstName: first,
         lastName: last,
         dateOfBirth: dob,
-      })
+        healthCardNum: healthCardNum,
+        gender: gender
+      }, {withCredentials: true})
       .pipe(
         map((res) => {
           if (res) {
@@ -73,10 +72,10 @@ url = 'https://mycheckup-api.herokuapp.com/';
 
   getProfile(): Observable<any>{
     return this.http
-      .get<any>(this.url + 'patient/profile')
+      .get<any>(this.url + 'patient/profile', {withCredentials: true})
       .pipe(
         map((res) => {
-          console.log(res)
+          return res;
         })
       );
   }

@@ -6,41 +6,59 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.css']
+  styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
   fail: boolean = false;
   success: boolean = false;
   loading: boolean = true;
   message: string = '';
+  errors: boolean = false;
+  user: any;
+  fullAddress: string[] = [];
 
   constructor(private router: Router, private userService: UserService) {}
 
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.getProfile().subscribe(
+      (profile) => {
+        this.user = profile;
+        this.fullAddress = this.user.address.split(',', 4);
+      },
+      (error) => {
+        this.errors = true;
+      }
+    );
+  }
 
   onSubmit(EditProForm: NgForm) {
+    var address =
+      EditProForm.value.address +
+      ',' +
+      EditProForm.value.city +
+      ',' +
+      EditProForm.value.province +
+      ',' +
+      EditProForm.value.pcode;
+
     if (EditProForm.valid) {
       this.userService
         .editprofile(
-          EditProForm.value.firstName,
+          this.user.id,
           EditProForm.value.email,
-          EditProForm.value.gender,
-          EditProForm.value.dateOfBirth,
-          EditProForm.value.healthcard,
+          EditProForm.value.firstName,
+          EditProForm.value.lastName,
           EditProForm.value.phone,
-          EditProForm.value.adress,
-          EditProForm.value.city,
-          EditProForm.value.province,
-          EditProForm.value.pcode,
+          address,
+          EditProForm.value.gender
         )
         .subscribe(
           (data) => {
             this.success = true;
-            this.message = "Account Successfully Created!"
-            setTimeout( () => {
-             this.router.navigate(['signin']);
-          }, 3000);
+            this.message = 'Profile Successfully Updated!';
+            setTimeout(() => {
+              this.router.navigate(['dashboard']);
+            }, 3000);
           },
           (error) => {
             console.log(error);
@@ -51,4 +69,3 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 }
-

@@ -12,11 +12,25 @@ import { UserService } from '../services/user.service';
 })
 export class DashboardComponent implements OnInit {
   id: string = '';
-  user: Observable<any> | undefined;
-  constructor(private router: Router, private authService: AuthenticationService, private userService: UserService) {}
+  user: any;
+  fullAddress: string[] = [];
+  errors: boolean = false;
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    private userService: UserService
+  ) {}
   ngOnInit() {
     this.id = localStorage.getItem('token') || '';
-    this.userService.getProfile().subscribe();
+    this.userService.getProfile().subscribe(
+      (profile) => {
+        this.user = profile;
+        this.fullAddress = this.user.address.split(',', 4);
+      },
+      (error) => {
+        this.errors = true;
+      }
+    );
   }
   logout() {
     this.authService.logout();
