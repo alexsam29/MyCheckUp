@@ -1,6 +1,70 @@
-<div class="container">
-    <div class="col-md-6 col-md-offset-3 loginBox">
-        Welcome, {{id}}
-        <button (click)="logout()">Logout</button>
+<div *ngIf="user" class="container-fluid bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center">{{user.firstName}}'s Dashboard</h3>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-1">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xl-7">
+                <div class="card border-primary rounded mb-5 bg-light">
+                    <div class="card-header border-dark">
+                        <h5 class="card-subtitle text-muted">Personal Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title">{{user.firstName}} {{user.lastName}}</h1>
+                        <div class="row">
+                            <div class="col-md">
+                                <p><b>Email: </b>{{user.email}}</p>
+                                <p><b>Gender: </b>{{user.gender}}</p>
+                                <p><b>Date of Birth: </b>{{user.dateOfBirth}}</p>
+                                <p><b>Health Card Number: </b>{{user.healthCardNum}}</p>
+                                <p><b>Phone Number: </b>{{user.phoneNumber}}</p>
+                            </div>
+                            <div class="col-md">
+                                <p><b>Address: </b>{{fullAddress[0]}}</p>
+                                <p><b>City: </b>{{fullAddress[1]}}</p>
+                                <p><b>Province: </b>{{fullAddress[2]}}</p>
+                                <p><b>Postal Code: </b>{{fullAddress[3]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer border-dark">
+                        <div class="row justify-content-center">
+                            <a href="/profile" class="btn btn-primary">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row p-3">
+                    <button type="button" class="col btn btn-primary btn-lg">Book an Appointment</button>
+                </div>
+                <div class="row p-3">
+                    <button type="button" class="col btn btn-primary btn-lg">Take a Self-Assessment</button>
+                </div>
+                <div class="row p-3">
+                    <button type="button" class="col btn btn-primary btn-lg">Request New Prescription</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row p-3">
+                    <button type="button" class="col btn btn-primary btn-lg">View Appointments</button>
+                </div>
+                <div class="row p-3">
+                    <button type="button" class="col btn btn-primary btn-lg">View Prescriptions</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-3 justify-content-end">
+            <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+        </div>
     </div>
+</div>
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
 </div>

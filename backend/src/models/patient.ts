@@ -38,6 +38,14 @@ export class Patient extends User {
 
    @Column({
       type: 'varchar',
+      length: 7,
+      nullable: true
+   })
+   gender!: string | null
+
+
+   @Column({
+      type: 'varchar',
       length: 20,
       nullable: true
    })
@@ -49,6 +57,15 @@ export class Patient extends User {
       nullable: true
    })
    address!: string | null
+
+   @Column({
+      type: 'varchar',
+      length: 255,
+      nullable: true
+   })
+   healthCardNum!: string | null
+
+
 
    @OneToMany(() => PatientToDoctor, patientToDoctor => patientToDoctor.patient)
    doctors!: PatientToDoctor[]

@@ -4,9 +4,15 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 
 const routes: Routes = [
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'signin', component: SignInComponent },
   {
     path: 'dashboard',
