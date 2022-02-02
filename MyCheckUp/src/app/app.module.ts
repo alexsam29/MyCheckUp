@@ -12,7 +12,12 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
-import { ProfilePageComponent } from './profile-page/profile-page.component'; 
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { SelfAssessmentComponent } from './self-assessment/self-assessment.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
+import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
+import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component'; 
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     CreateAccountComponent,
     HeaderComponent,
     FooterComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    BookAppointmentComponent,
+    SelfAssessmentComponent,
+    PrescriptionComponent,
+    ViewAppointmentsComponent,
+    ViewPrescriptionsComponent
   ],
   imports: [
     BrowserModule,
