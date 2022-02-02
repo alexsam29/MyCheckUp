@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   id: string = '';
   user: any;
   fullAddress: string[] = [];
+  errors: boolean = false;
   constructor(
     private router: Router,
     private authService: AuthenticationService,
@@ -24,6 +25,9 @@ export class DashboardComponent implements OnInit {
     this.userService.getProfile().subscribe((profile) => {
       this.user = profile;
       this.fullAddress = this.user.address.split(',', 4);
+    },
+    error => {
+      this.errors = true;
     });
   }
   logout() {

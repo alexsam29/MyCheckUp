@@ -33,6 +33,6 @@ export class AuthenticationService {
   logout() {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('token');
-    this.http.post<any>(this.url + `patient/login`, {});
+    this.http.post<any>(this.url + `patient/logout`, {}, {withCredentials: true});
   }
 }

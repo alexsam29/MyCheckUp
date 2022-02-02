@@ -13,15 +13,19 @@ export class ProfilePageComponent implements OnInit {
   success: boolean = false;
   loading: boolean = true;
   message: string = '';
+  errors: boolean = false;
   user: any;
   fullAddress: string[] = [];
 
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe((profile) => {
+    this.userService.getProfile().subscribe(profile => {
       this.user = profile;
       this.fullAddress = this.user.address.split(',', 4);
+    },
+    error => {
+      this.errors = true;
     });
   }
 
