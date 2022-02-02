@@ -52,3 +52,28 @@ Improvements:
 
 - Updated Models
 - Improved Error Handling and Logging
+
+## [0.3.0] - 2022-02-01
+
+### Web Application
+
+New Features:
+
+-
+
+### Backend API
+
+New Features:
+
+- Doctor service layer
+- Doctor login and logout end-points
+- Doctor get profile information end-point
+- Patient change password end-point
+
+Improvements:
+
+- Added gender and health card number fields to the Patient profile
+
+Bug Fixes:
+
+- Resolved CORS policy issue
