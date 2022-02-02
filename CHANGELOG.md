@@ -59,7 +59,14 @@ Improvements:
 
 New Features:
 
--
+- Dashboard UI
+- Profile page UI
+- Ability to edit/add information to patient profile
+
+Improvements:
+
+- Redirect to login page when session expires
+- Register page now has input fields for gender and health card number
 
 ### Backend API
 
