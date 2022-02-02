@@ -16,8 +16,10 @@ import { Appointment } from './appointment'
  * - `password` - password used to log in.
  * - `role` - Patient role.
  * - `dateOfBirth` - date of birth.
+ * - `gender` - gender.
  * - `phoneNumber` - phone number.
  * - `address` - address.
+ * - `healthCardNum` - health card number.
  * - `doctors` - array of associated doctors.
  * - `prescriptions` - array of received prescriptions.
  * - `appointments` - array of initiated appointments.
@@ -43,7 +45,6 @@ export class Patient extends User {
    })
    gender!: string | null
 
-
    @Column({
       type: 'varchar',
       length: 20,
@@ -64,8 +65,6 @@ export class Patient extends User {
       nullable: true
    })
    healthCardNum!: string | null
-
-
 
    @OneToMany(() => PatientToDoctor, patientToDoctor => patientToDoctor.patient)
    doctors!: PatientToDoctor[]
