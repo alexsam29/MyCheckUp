@@ -14,7 +14,7 @@
                     <div class="form-group text-light">
                         <label for="firstName"> First Name</label> <br>
                         <input required ngModel name="firstName" class="form-control" [(ngModel)]="user.firstName"
-                            #fName="ngModel" type="text">
+                            #fName="ngModel" type="text" placeholder="Your first name here">
                         <!-- <div class="alert alert-danger" *ngIf="pName.touched && pName.invalid">First Name is Required
                         </div> -->
                     </div>
@@ -22,7 +22,7 @@
                     <div class="form-group text-light">
                         <label for="lastName"> Last Name</label> <br>
                         <input required ngModel name="lastName" class="form-control" [(ngModel)]="user.lastName"
-                            #lName="ngModel">
+                            #lName="ngModel" placeholder="Your last name here">
                         <!-- <div class="alert alert-danger" *ngIf="lName.touched && lName.invalid">Last Name is Required
                         </div> -->
                     </div>
@@ -30,7 +30,7 @@
                     <div class="form-group text-light">
                         <label for="email"> Email</label> <br>
                         <input required ngModel name="email" type="email" class="form-control" [(ngModel)]="user.email"
-                            #email="ngModel">
+                            #email="ngModel" placeholder="Your email here">
                         <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="form-group text-light">
                         <label for="healthcare"> Health Card Number</label> <br>
                         <input required ngModel name="healthcard" class="form-control" [(ngModel)]="user.healthCardNum"
-                            #healthcard="ngModel">
+                            #healthcard="ngModel" placeholder="Your health card number here">
                         <div class="alert alert-danger" *ngIf="healthcard.touched && healthcard.invalid">Health card is
                             Required
                         </div>
@@ -82,7 +82,7 @@
                         <label for="phone"> Phone Number</label> <br>
                         <input required ngModel pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
                             [(ngModel)]="user.phoneNumber" name="phone" class="form-control" #phone="ngModel"
-                            type="number">
+                            type="number" placeholder="Your phone number here">
                         <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">A valid 10-digit Phone
                             number is Required
                         </div>

@@ -22,13 +22,15 @@ export class DashboardComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.id = localStorage.getItem('token') || '';
-    this.userService.getProfile().subscribe((profile) => {
-      this.user = profile;
-      this.fullAddress = this.user.address.split(',', 4);
-    },
-    error => {
-      this.errors = true;
-    });
+    this.userService.getProfile().subscribe(
+      (profile) => {
+        this.user = profile;
+        this.fullAddress = this.user.address.split(',', 4);
+      },
+      (error) => {
+        this.errors = true;
+      }
+    );
   }
   logout() {
     this.authService.logout();
