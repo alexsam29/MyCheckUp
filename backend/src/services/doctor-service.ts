@@ -9,7 +9,7 @@ import { ApiError } from '../exceptions/api-error'
  */
 export const DoctorService = {
    /**
-    * Adds new doctor to the database.
+    * Adds new doctor to the database. Sets account as inactive.
     * 
     * @param doctorDto New doctor information.
     * @returns Created doctor.
@@ -35,6 +35,7 @@ export const DoctorService = {
       newDoctor.firstName = doctorDto.firstName
       newDoctor.lastName = doctorDto.lastName
       newDoctor.role = Role.DOCTOR
+      newDoctor.active = false
       if (doctorDto.license) newDoctor.license = doctorDto.license
       if (doctorDto.specialty) newDoctor.specialty = doctorDto.specialty
       if (doctorDto.title) newDoctor.title = doctorDto.title
