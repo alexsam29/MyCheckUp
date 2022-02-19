@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import { Doctor } from '../models/doctor'
 import { Role } from '../models/role'
 import { ApiError } from '../exceptions/api-error'
+import { SearchQuery } from './utils/search-query'
 
 /**
  * Handles business logic for `Doctor` model.
@@ -64,6 +65,7 @@ export const DoctorService = {
       specialty?: string,
       title?: string,
       phoneNumber?: string
+      active?: boolean
    }): Promise<Doctor> {
       const repository = getRepository(Doctor)
 
@@ -78,6 +80,7 @@ export const DoctorService = {
       if (doctorDto.specialty) doctor.specialty = doctorDto.specialty
       if (doctorDto.title) doctor.title = doctorDto.title
       if (doctorDto.phoneNumber) doctor.phoneNumber = doctorDto.phoneNumber
+      if (doctorDto.active) doctor.active = doctorDto.active
 
       const updated = await repository.save(doctor)
 
@@ -101,13 +104,15 @@ export const DoctorService = {
       specialty?: string,
       title?: string,
       phoneNumber?: string
-   }, exact = false, offset = 0, limit = 100): Promise<Doctor[]> {
+      active?: boolean
+   }, options?: SearchQuery): Promise<Doctor[]> {
       const repository = getRepository(Doctor)
 
       const where: { [key: string]: any } = { ...searchBy }
-      if (!exact) {
+      if (!options?.exact) {
          for (let key in where) {
-            where[key] = Like(`%${where[key]}%`)
+            if (typeof where[key] === 'string')
+               where[key] = Like(`%${where[key]}%`)
          }
       }
 
@@ -116,8 +121,8 @@ export const DoctorService = {
             'specialty', 'title', 'phoneNumber', 'active'],
          where: where,
          order: { createdAt: 'DESC' },
-         skip: offset,
-         take: limit
+         skip: options?.offset,
+         take: options?.limit
       })
 
       if (!doctors || !doctors.length) throw ApiError.NotFound(`No doctor profiles were found`)
