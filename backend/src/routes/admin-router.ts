@@ -24,6 +24,8 @@ AdminRouter.post('/admin/logout', AdminController.logout)
  *     tags:
  *       - Admin
  *     description: Register Admin account. Can only be done by another Admin.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -45,6 +47,8 @@ AdminRouter.post('/admin/register',
  *     tags:
  *       - Admin
  *     description: Get profile of currently logged in Admin.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -52,3 +56,100 @@ AdminRouter.post('/admin/register',
 AdminRouter.get('/admin/profile',
    authorize(Role.ADMIN),
    AdminController.getSelf)
+
+/**
+ * @openapi
+ * /admin/doctors:
+ *   get:
+ *     summary: get doctor accounts
+ *     tags:
+ *       - Admin
+ *     description: Get doctor accounts information as an Admin.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+AdminRouter.get('/admin/doctors',
+   authorize(Role.ADMIN),
+   AdminController.getDoctors)
+
+
+/**
+ * @openapi
+ * /admin/doctors/{doctorId}/activate:
+ *   put:
+ *     summary: activate doctor account
+ *     tags:
+ *       - Admin
+ *     description: Activate Doctor account as an Admin.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: doctorId
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: Id of the doctor to activate
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+AdminRouter.put('/admin/doctors/:doctorId/activate',
+   authorize(Role.ADMIN),
+   AdminController.activateDoctorById)
+
+/**
+ * @openapi
+ * /admin/doctors/{doctorId}/deactivate:
+ *   put:
+ *     summary: deactivate doctor account
+ *     tags:
+ *       - Admin
+ *     description: Deactivate Doctor account as an Admin.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: doctorId
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: Id of the doctor to deactivate
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+AdminRouter.put('/admin/doctors/:doctorId/deactivate',
+   authorize(Role.ADMIN),
+   AdminController.deactivateDoctorById)
+
+/**
+ * @openapi
+ * /admin/doctors/{doctorId}:
+ *   delete:
+ *     summary: delete doctor account
+ *     tags:
+ *       - Admin
+ *     description: Delete Doctor account as an Admin.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: doctorId
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: Id of the doctor to delete
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+AdminRouter.delete('/admin/doctors/:doctorId',
+   authorize(Role.ADMIN),
+   AdminController.deleteDoctorById)
