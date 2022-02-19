@@ -8,6 +8,15 @@ const options: jsdoc.Options = {
          title: 'MyCheckUp API',
          version: VERSION,
       },
+      components: {
+         securitySchemes: {
+            bearerAuth: {
+               type: 'http',
+               scheme: 'bearer',
+               bearerFormat: 'JWT'
+            }
+         }
+      }
    },
    apis: ['./dist/routes/*.js']
 }
