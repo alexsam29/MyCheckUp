@@ -11,6 +11,7 @@ export const PatientRouter = express.Router()
  * @openapi
  * /patient/login:
  *   post:
+ *     deprecated: true
  *     summary: login as patient
  *     tags:
  *       - Patient
@@ -20,14 +21,15 @@ export const PatientRouter = express.Router()
  *         description: OK
  */
 PatientRouter.post('/patient/login',
-   body('email').notEmpty().isEmail(),
-   body('password').notEmpty().isLength({ min: 6, max: 50 }),
+   body('email').isEmail(),
+   body('password').isLength({ min: 6, max: 50 }),
    PatientController.login)
 
 /**
  * @openapi
  * /patient/logout:
  *   post:
+ *     deprecated: true
  *     summary: logout as patient
  *     tags:
  *       - Patient

@@ -7,35 +7,12 @@ import { DoctorController } from '../controllers/doctor-controller'
 
 export const DoctorRouter = express.Router()
 
-/**
- * @openapi
- * /doctor/login:
- *   post:
- *     summary: login as doctor
- *     tags:
- *       - Doctor
- *     description: Login as Doctor.
- *     responses:
- *       200:
- *         description: OK
- */
+
 DoctorRouter.post('/doctor/login',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    DoctorController.login)
 
-/**
- * @openapi
- * /doctor/logout:
- *   post:
- *     summary: logout as doctor
- *     tags:
- *       - Doctor
- *     description: Logout as Doctor.
- *     responses:
- *       200:
- *         description: OK
- */
 DoctorRouter.post('/doctor/logout', DoctorController.logout)
 
 /**

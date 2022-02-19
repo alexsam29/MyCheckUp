@@ -7,44 +7,13 @@ import { AdminController } from '../controllers/admin-controller'
 
 export const AdminRouter = express.Router()
 
-/**
- * @openapi
- *   /admin/login:
- *     post:
- *       summary: login as admin
- *       tags:
- *         - Admin
- *       description: Login as Admin.
- *       responses:
- *         200:
- *           description: OK
- *           content:
- *             application/json:
- *               schema: 
- *                 type: object
- *                 properties:
- *                   status:
- *                     type: boolean
- *                     description: api status
- */
+
 AdminRouter.post('/admin/login',
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    AdminController.login)
 
 
-/**
- * @openapi
- * /admin/logout:
- *   post:
- *     summary: logout
- *     tags:
- *       - Admin
- *     description: Logout as Admin.
- *     responses:
- *       200:
- *         description: OK
- */
 AdminRouter.post('/admin/logout', AdminController.logout)
 
 /**
