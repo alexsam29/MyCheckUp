@@ -5,7 +5,7 @@ const options: jsdoc.Options = {
    definition: {
       openapi: '3.0.0',
       info: {
-         title: 'MyCheckUp Api',
+         title: 'MyCheckUp API',
          version: VERSION,
       },
    },
