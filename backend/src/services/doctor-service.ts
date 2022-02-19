@@ -111,7 +111,8 @@ export const DoctorService = {
       }
 
       const doctors = await repository.find({
-         select: ['id', 'firstName', 'lastName', 'email', 'license', 'specialty', 'title', 'phoneNumber'],
+         select: ['id', 'firstName', 'lastName', 'email', 'license',
+            'specialty', 'title', 'phoneNumber', 'active'],
          where: where,
          order: { createdAt: 'DESC' },
          skip: offset,
@@ -137,7 +138,8 @@ export const DoctorService = {
       const repository = getRepository(Doctor)
 
       const doctor = await repository.findOne({
-         select: ['id', 'firstName', 'lastName', 'email', 'license', 'specialty', 'title', 'phoneNumber'],
+         select: ['id', 'firstName', 'lastName', 'email', 'license',
+            'specialty', 'title', 'phoneNumber', 'active'],
          where: searchBy
       })
 
