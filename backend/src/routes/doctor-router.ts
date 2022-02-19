@@ -46,6 +46,8 @@ DoctorRouter.post('/doctor/register',
  *     tags:
  *       - Doctor
  *     description: Get profile of currently logged in Doctor.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: OK
