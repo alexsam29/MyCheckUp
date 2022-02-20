@@ -11,6 +11,7 @@ import { errorHandler } from './middleware/error-handler'
 import { PORT, PROD } from './common/constants'
 import { logger } from './common/logger'
 
+
 const app = express()
 if (PROD) app.set('trust proxy', 1)
 app.use(express.json())
