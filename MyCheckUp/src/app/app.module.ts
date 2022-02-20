@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
+import { CreateAccountComponent } from './sign-up-page/create-account/create-account.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
@@ -18,9 +18,9 @@ import { SelfAssessmentComponent } from './self-assessment/self-assessment.compo
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
-import { CreatePatientComponent } from './create-patient/create-patient.component';
-import { CreateDoctorComponent } from './create-doctor/create-doctor.component';
-import { CreateAdminComponent } from './create-admin/create-admin.component'; 
+import { CreatePatientComponent } from './sign-up-page/create-patient/create-patient.component';
+import { CreateDoctorComponent } from './sign-up-page/create-doctor/create-doctor.component';
+import { CreateAdminComponent } from './sign-up-page/create-admin/create-admin.component'; 
 
 @NgModule({
   declarations: [
