@@ -1,5 +1,5 @@
 import jsdoc from 'swagger-jsdoc'
-import { VERSION } from './constants'
+import { VERSION ,SESSION_COOKIE } from './constants'
 
 const options: jsdoc.Options = {
    definition: {
@@ -10,10 +10,10 @@ const options: jsdoc.Options = {
       },
       components: {
          securitySchemes: {
-            bearerAuth: {
-               type: 'http',
-               scheme: 'bearer',
-               bearerFormat: 'JWT'
+            cookieAuth: {
+               type: 'apiKey',
+               in: 'cookie',
+               name: SESSION_COOKIE
             }
          }
       }
