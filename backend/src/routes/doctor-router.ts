@@ -7,14 +7,6 @@ import { DoctorController } from '../controllers/doctor-controller'
 
 export const DoctorRouter = express.Router()
 
-
-DoctorRouter.post('/doctor/login',
-   body('email').isEmail(),
-   body('password').isLength({ min: 6, max: 50 }),
-   DoctorController.login)
-
-DoctorRouter.post('/doctor/logout', DoctorController.logout)
-
 /**
  * @openapi
  * /doctor/register:
@@ -47,7 +39,7 @@ DoctorRouter.post('/doctor/register',
  *       - Doctor
  *     description: Get profile of currently logged in Doctor.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK

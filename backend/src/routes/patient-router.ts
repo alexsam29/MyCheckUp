@@ -51,6 +51,8 @@ PatientRouter.post('/patient/logout', PatientController.logout)
  *     responses:
  *       200:
  *         description: OK
+ *       400:
+ *         description: Bad request (i.e., email is already used)
  */
 PatientRouter.post('/patient/register',
    body('email').notEmpty().isEmail(),
@@ -72,6 +74,8 @@ PatientRouter.post('/patient/register',
  *     tags:
  *       - Patient
  *     description: Get profile of currently logged in Patient.
+ *     security:
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -88,6 +92,8 @@ PatientRouter.get('/patient/profile',
  *     tags:
  *       - Patient
  *     description: Update Patient profile.
+ *     security:
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -110,6 +116,8 @@ PatientRouter.put('/patient/edit',
  *     tags:
  *       - Patient
  *     description: Update Patient's password.
+ *     security:
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK
