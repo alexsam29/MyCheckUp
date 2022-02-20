@@ -3,13 +3,14 @@ import bcrypt from 'bcrypt'
 import { Doctor } from '../models/doctor'
 import { Role } from '../models/role'
 import { ApiError } from '../exceptions/api-error'
+import { SearchQuery } from './utils/search-query'
 
 /**
  * Handles business logic for `Doctor` model.
  */
 export const DoctorService = {
    /**
-    * Adds new doctor to the database.
+    * Adds new doctor to the database. Sets account as inactive.
     * 
     * @param doctorDto New doctor information.
     * @returns Created doctor.
@@ -35,6 +36,7 @@ export const DoctorService = {
       newDoctor.firstName = doctorDto.firstName
       newDoctor.lastName = doctorDto.lastName
       newDoctor.role = Role.DOCTOR
+      newDoctor.active = false
       if (doctorDto.license) newDoctor.license = doctorDto.license
       if (doctorDto.specialty) newDoctor.specialty = doctorDto.specialty
       if (doctorDto.title) newDoctor.title = doctorDto.title
@@ -63,6 +65,7 @@ export const DoctorService = {
       specialty?: string,
       title?: string,
       phoneNumber?: string
+      active?: boolean
    }): Promise<Doctor> {
       const repository = getRepository(Doctor)
 
@@ -77,6 +80,7 @@ export const DoctorService = {
       if (doctorDto.specialty) doctor.specialty = doctorDto.specialty
       if (doctorDto.title) doctor.title = doctorDto.title
       if (doctorDto.phoneNumber) doctor.phoneNumber = doctorDto.phoneNumber
+      if (doctorDto.active) doctor.active = doctorDto.active
 
       const updated = await repository.save(doctor)
 
@@ -100,22 +104,25 @@ export const DoctorService = {
       specialty?: string,
       title?: string,
       phoneNumber?: string
-   }, exact = false, offset = 0, limit = 100): Promise<Doctor[]> {
+      active?: boolean
+   }, options?: SearchQuery): Promise<Doctor[]> {
       const repository = getRepository(Doctor)
 
       const where: { [key: string]: any } = { ...searchBy }
-      if (!exact) {
+      if (!options?.exact) {
          for (let key in where) {
-            where[key] = Like(`%${where[key]}%`)
+            if (typeof where[key] === 'string')
+               where[key] = Like(`%${where[key]}%`)
          }
       }
 
       const doctors = await repository.find({
-         select: ['id', 'firstName', 'lastName', 'email', 'license', 'specialty', 'title', 'phoneNumber'],
+         select: ['id', 'firstName', 'lastName', 'email', 'license',
+            'specialty', 'title', 'phoneNumber', 'active'],
          where: where,
          order: { createdAt: 'DESC' },
-         skip: offset,
-         take: limit
+         skip: options?.offset,
+         take: options?.limit
       })
 
       if (!doctors || !doctors.length) throw ApiError.NotFound(`No doctor profiles were found`)
@@ -137,7 +144,8 @@ export const DoctorService = {
       const repository = getRepository(Doctor)
 
       const doctor = await repository.findOne({
-         select: ['id', 'firstName', 'lastName', 'email', 'license', 'specialty', 'title', 'phoneNumber'],
+         select: ['id', 'firstName', 'lastName', 'email', 'license',
+            'specialty', 'title', 'phoneNumber', 'active'],
          where: searchBy
       })
 

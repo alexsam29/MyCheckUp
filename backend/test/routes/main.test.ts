@@ -1,6 +1,6 @@
 import express from 'express'
 import request from 'supertest'
-import { router } from '../../src/routes/router'
+import { router } from '../../src/routes'
 import { notFoundHandler } from '../../src/middleware/not-found-handler'
 import { errorHandler } from '../../src/middleware/error-handler'
 
@@ -12,12 +12,6 @@ app.use(errorHandler)
 describe('Main API End-Points Test Suite:', () => {
    it('GET / - root end-point', async () => {
       const { statusCode } = await request(app).get('/')
-      expect(statusCode).toEqual(200)
-   })
-
-   it('GET /ping - success', async () => {
-      const { body, statusCode } = await request(app).get('/ping')
-      expect(body).toEqual({ success: true })
       expect(statusCode).toEqual(200)
    })
 
