@@ -17,7 +17,10 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
 import { SelfAssessmentComponent } from './self-assessment/self-assessment.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
-import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component'; 
+import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
+import { CreateDoctorComponent } from './create-doctor/create-doctor.component';
+import { CreateAdminComponent } from './create-admin/create-admin.component'; 
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescripti
     SelfAssessmentComponent,
     PrescriptionComponent,
     ViewAppointmentsComponent,
-    ViewPrescriptionsComponent
+    ViewPrescriptionsComponent,
+    CreatePatientComponent,
+    CreateDoctorComponent,
+    CreateAdminComponent
   ],
   imports: [
     BrowserModule,

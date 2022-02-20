@@ -1,0 +1,141 @@
+<div class="bg-dark">
+    <div class="text-light text-center">
+        <div *ngIf="fail" class="alert alert-danger" role="alert">
+            An error occured! {{message}}
+        </div>
+    </div>
+    <form ngNativeValidate #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)"
+        class="p-3" action="#" method="post">
+        <div class="container">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="firstName"> First Name</label> <br>
+                            <input required ngModel name="firstName" class="form-control"
+                                placeholder="Your first name here" #firstName="ngModel">
+                            <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is
+                                Required
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="lastName"> Last Name</label><br>
+                            <input required ngModel name="lastName" type="text" class="form-control"
+                                placeholder="Your last name here" #lastName="ngModel">
+                            <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is
+                                Required</div>
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="dateOfBirth"> Date of Birth </label> <br>
+                            <input required ngModel name="dateOfBirth" type="date" class="form-control"
+                                placeholder="Enter Date of Birth Here" #title="ngModel">
+                            <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="email"> Email</label><br>
+                            <input required ngModel name="email" type="email" class="form-control"
+                                placeholder="input valid email address" #email="ngModel">
+                            <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="healthCardNum"> Health Card Number</label><br>
+                            <input required ngModel name="healthCardNum" type="number" class="form-control"
+                                placeholder="input valid health card #" #healthCardNum="ngModel">
+                            <div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">
+                                Health Card is
+                                Required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="gender">Gender</label> <br>
+                            <input type="radio" value="male" id="male" name="gender" ngModel> Male <br>
+                            <input type="radio" value="female" id="female" name="gender" ngModel> Female <br>
+                            <input type="radio" value="other" id="other" name="gender" ngModel> Other
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="password1"> Enter Password</label><br>
+                            <input required minlength="8" ngModel name="password" type="password" class="form-control"
+                                #password1="ngModel">
+                            <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
+                                <div *ngIf="password1.hasError('required')">Password is Required</div>
+                                <div *ngIf="password1.hasError('minlength')">Password should be minimum 8 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="password2"> Confirm Password</label><br>
+                            <input required ngModel name="password2" type="password" class="form-control"
+                                #password2="ngModel">
+                            <div class="alert alert-danger" *ngIf="password2.touched && password2.invalid">
+                                <div *ngIf="password2.hasError('required')">Confirm Password is Required</div>
+                                <div *ngIf="password2 !== password1">Passwords do not Match</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="form-group text-light">
+                <label for="phone"> Phone</label><br>
+                <input ngModel name="phone" type="text" class="form-control" #phone="ngModel">
+            </div>
+
+            <br>
+            <div class="form-group text-light">
+                <label for="address"> Address</label><br>
+                <input id="address" type="text" class="form-control"><br><br>
+            </div>
+            <div class="form-group text-light">
+                <label for="pCode"> Postal Code</label><br>
+                <input id="pCode" type="text" class="form-control"><br><br>
+            </div>
+            <div class="form-group text-light">
+                <label for="city"> City</label><br>
+                <input id="city" type="text" class="form-control"><br><br>
+            </div>
+            <div class="form-group text-light">
+                <label for="province"> Province</label><br>
+                <input id="province" type="text" class="form-control"><br><br>
+            </div> -->
+            <div class="row justify-content-center">
+                <button class="btn btn-success btn-lg text-center" type='submit'>SignUp</button>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <button routerLink="/" routerLinkActive="active" type="button" class="cancelbtn btn-danger">Cancel</button>
+            </div>
+        </div>
+        <div *ngIf="success" class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+    </form>
+</div>
