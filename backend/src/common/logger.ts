@@ -6,7 +6,11 @@ import { PROD, LOG_DIR } from './constants'
  * Main logger instance throughout the API.
  */
 export const logger = winston.createLogger({
-   level: 'info',
+   levels: {
+      error: 0,
+      info: 6,
+      debug: 7
+   },
    format: format.combine(
       format.timestamp({
          format: 'YYYY-MM-DD HH:mm:ss'
@@ -17,7 +21,7 @@ export const logger = winston.createLogger({
    ),
    transports: [
       new transports.File({ filename: path.join(LOG_DIR, 'error.log'), level: 'error' }),
-      new transports.File({ filename: path.join(LOG_DIR, 'global.log') })
+      new transports.File({ filename: path.join(LOG_DIR, 'global.log'), level: 'info' })
    ]
 })
 
@@ -25,7 +29,7 @@ export const logger = winston.createLogger({
 if (!PROD) {
    logger.add(new transports.Console({
       format: format.combine(
-         format.colorize({ all: true, colors: { info: 'yellow', error: 'red', debug: 'blue' } }),
+         format.colorize({ all: true, colors: { info: 'yellow', error: 'red', debug: 'bold blue' } }),
          format.simple()
       )
    }))
