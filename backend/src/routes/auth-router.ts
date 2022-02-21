@@ -13,9 +13,29 @@ export const AuthRouter = express.Router()
  *       tags:
  *         - Auth
  *       description: Login.
+ *       requestBody:
+ *         description: object with credentials and role
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                   role:
+ *                     type: string
+ *                     description: patient / doctor / admin
+ *                     example: patient
+ *                   email:
+ *                     type: string
+ *                     description: valid email
+ *                     example: patient@gmail.com
+ *                   password:
+ *                     type: string
+ *                     description: 6-50 characters
+ *                     example: 12345678
  *       responses:
  *         200:
- *           description: OK
+ *           description: Success + set session cookie
  *           content:
  *             application/json:
  *               schema: 

@@ -4,6 +4,7 @@ import { AdminService } from '../services/admin-service'
 import { DoctorService } from '../services/doctor-service'
 import { ApiError } from '../exceptions/api-error'
 import { SESSION_COOKIE } from '../common/constants'
+import { mailTransport } from '../common/mail-transport'
 import { GetDoctorsQuery } from './utils/admin-utils'
 
 
@@ -123,6 +124,14 @@ export const AdminController = {
             active: true
          })
 
+         const transport = await mailTransport()
+         await transport.sendMail({
+            from: 'MyCheckUp Team <info@mycheckup.com>',
+            to: updatedDoctor.email,
+            subject: 'Your doctor account have been activated!',
+            text: `Hello, ${updatedDoctor.firstName}, your doctor account have been activated!`
+         })
+
          return res.status(200).json(updatedDoctor)
       }
       catch (error: unknown) {
@@ -142,6 +151,14 @@ export const AdminController = {
             active: false
          })
 
+         const transport = await mailTransport()
+         await transport.sendMail({
+            from: 'MyCheckUp Team <info@mycheckup.com>',
+            to: updatedDoctor.email,
+            subject: 'Your doctor account have been deactivated',
+            text: `Hello, ${updatedDoctor.firstName}, your doctor account have been deactivated.`
+         })
+
          return res.status(200).json(updatedDoctor)
       }
       catch (error: unknown) {
@@ -155,7 +172,15 @@ export const AdminController = {
    async deleteDoctorById(req: Request, res: Response, next: NextFunction) {
       try {
          const { doctorId } = req.params
-         await DoctorService.remove(doctorId)
+         const removedDoctor = await DoctorService.remove(doctorId)
+
+         const transport = await mailTransport()
+         await transport.sendMail({
+            from: 'MyCheckUp Team <info@mycheckup.com>',
+            to: removedDoctor.email,
+            subject: 'Your doctor account have been deleted',
+            text: `Hello, ${removedDoctor.firstName}, your doctor have been deleted by the administration.`
+         })
 
          return res.status(200).send()
       }

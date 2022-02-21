@@ -7,15 +7,6 @@ import { AdminController } from '../controllers/admin-controller'
 
 export const AdminRouter = express.Router()
 
-
-AdminRouter.post('/admin/login',
-   body('email').notEmpty().isEmail(),
-   body('password').notEmpty().isLength({ min: 6, max: 50 }),
-   AdminController.login)
-
-
-AdminRouter.post('/admin/logout', AdminController.logout)
-
 /**
  * @openapi
  * /admin/register:
@@ -25,7 +16,7 @@ AdminRouter.post('/admin/logout', AdminController.logout)
  *       - Admin
  *     description: Register Admin account. Can only be done by another Admin.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -48,7 +39,7 @@ AdminRouter.post('/admin/register',
  *       - Admin
  *     description: Get profile of currently logged in Admin.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -66,7 +57,7 @@ AdminRouter.get('/admin/profile',
  *       - Admin
  *     description: Get doctor accounts information as an Admin.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -85,7 +76,7 @@ AdminRouter.get('/admin/doctors',
  *       - Admin
  *     description: Activate Doctor account as an Admin.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: doctorId
@@ -111,7 +102,7 @@ AdminRouter.put('/admin/doctors/:doctorId/activate',
  *       - Admin
  *     description: Deactivate Doctor account as an Admin.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: doctorId
@@ -137,7 +128,7 @@ AdminRouter.put('/admin/doctors/:doctorId/deactivate',
  *       - Admin
  *     description: Delete Doctor account as an Admin.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: doctorId

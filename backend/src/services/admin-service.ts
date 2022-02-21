@@ -33,6 +33,7 @@ export const AdminService = {
       newAdmin.firstName = adminDto.firstName
       newAdmin.lastName = adminDto.lastName
       newAdmin.role = Role.ADMIN
+      newAdmin.active = true
 
       // Save (insert) new Admin in the database:
       const created = await repository.save(newAdmin)
