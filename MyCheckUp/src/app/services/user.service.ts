@@ -107,6 +107,35 @@ export class UserService {
         })
       );
   }
+  
+  book(
+    first: string,
+    last: string,
+    date: string,
+    phone: string,
+    time: string,
+    doc: string,
+    reason: string 
+  ) {
+    return this.http
+      .post<any>(this.url + 'patient/bookApp', {
+        firstName: first,
+        lastName: last,
+        dateOfApp: date,
+        phone: phone,
+        timeOfApp: time,
+        prefDoc: doc,
+        reasonOfApp: reason
+      }, {withCredentials: true})
+      .pipe(
+        map((res) => {
+          if (res) {
+            return true;
+          }
+          return false;
+        })
+      );
+  }
 
   getProfile(): Observable<any> {
     return this.http
