@@ -1,15 +1,50 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-doctor',
   templateUrl: './create-doctor.component.html',
-  styleUrls: ['./create-doctor.component.css']
+  styleUrls: ['./create-doctor.component.css'],
 })
 export class CreateDoctorComponent implements OnInit {
+  fail: boolean = false;
+  success: boolean = false;
+  loading: boolean = true;
+  message: string = '';
 
-  constructor() { }
+  constructor(private router: Router, private userService: UserService) {}
+  ngOnInit() {}
 
-  ngOnInit(): void {
+  onSubmit(signUpForm: NgForm) {
+    console.log(signUpForm.value.gender);
+    if (signUpForm.valid) {
+      this.userService
+        .registerDoctor(
+          signUpForm.value.email,
+          signUpForm.value.password,
+          signUpForm.value.firstName,
+          signUpForm.value.lastName,
+          signUpForm.value.license,
+          signUpForm.value.specialty,
+          signUpForm.value.title,
+          signUpForm.value.phone
+        )
+        .subscribe(
+          (data) => {
+            this.success = true;
+            this.message = 'Account Successfully Created!';
+            setTimeout(() => {
+              this.router.navigate(['signin']);
+            }, 3000);
+          },
+          (error) => {
+            console.log(error);
+            this.message = error.error.error;
+            this.fail = true;
+          }
+        );
+    }
   }
-
 }
