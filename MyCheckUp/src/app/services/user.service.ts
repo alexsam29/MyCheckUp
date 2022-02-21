@@ -7,9 +7,8 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UserService {
-
-/* url = 'https://mycheckup-api.herokuapp.com/'; */
-url = 'http://localhost:5000/';
+  /* url = 'https://mycheckup-api.herokuapp.com/'; */
+  url = 'http://localhost:5000/';
 
   constructor(private http: HttpClient) {}
   editprofile(
@@ -29,7 +28,7 @@ url = 'http://localhost:5000/';
         lastName: lastName,
         phoneNumber: phoneNumber,
         address: address,
-        gender: gender,        
+        gender: gender,
       })
       .pipe(
         map((res) => {
@@ -41,7 +40,7 @@ url = 'http://localhost:5000/';
       );
   }
 
-  register(
+  registerPatient(
     first: string,
     last: string,
     email: string,
@@ -51,15 +50,19 @@ url = 'http://localhost:5000/';
     gender: string
   ) {
     return this.http
-      .post<any>(this.url + 'patient/register', {
-        email: email,
-        password: psw,
-        firstName: first,
-        lastName: last,
-        dateOfBirth: dob,
-        healthCardNum: healthCardNum,
-        gender: gender
-      }, {withCredentials: true})
+      .post<any>(
+        this.url + 'patient/register',
+        {
+          email: email,
+          password: psw,
+          firstName: first,
+          lastName: last,
+          dateOfBirth: dob,
+          healthCardNum: healthCardNum,
+          gender: gender,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         map((res) => {
           if (res) {
@@ -70,9 +73,44 @@ url = 'http://localhost:5000/';
       );
   }
 
-  getProfile(): Observable<any>{
+  registerDoctor(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    license: string,
+    specialty: string,
+    title: string,
+    phoneNumber: string
+  ) {
     return this.http
-      .get<any>(this.url + 'patient/profile', {withCredentials: true})
+      .post<any>(
+        this.url + 'doctor/register',
+        {
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          license: license,
+          specialty: specialty,
+          title: title,
+          phoneNumber: phoneNumber,
+        },
+        { withCredentials: true }
+      )
+      .pipe(
+        map((res) => {
+          if (res) {
+            return true;
+          }
+          return false;
+        })
+      );
+  }
+
+  getProfile(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'patient/profile', { withCredentials: true })
       .pipe(
         map((res) => {
           return res;

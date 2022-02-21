@@ -22,7 +22,7 @@ export class CreatePatientComponent implements OnInit {
     console.log(signUpForm.value.gender);
     if (signUpForm.valid) {
       this.userService
-        .register(
+        .registerPatient(
           signUpForm.value.firstName,
           signUpForm.value.lastName,
           signUpForm.value.email,

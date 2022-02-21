@@ -14,11 +14,6 @@
                 [(ngModel)]="type">
             <label class="form-check-label" for="inlineRadio2">Doctor</label>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="radioOptions" id="adminRadio" value="admin"
-                [(ngModel)]="type">
-            <label class="form-check-label" for="inlineRadio3">Admin</label>
-        </div>
     </div>
 </div>
 
@@ -27,7 +22,4 @@
 </div>
 <div *ngIf="type === 'doctor'">
     <app-create-doctor></app-create-doctor>
-</div>
-<div *ngIf="type === 'admin'">
-    <app-create-admin></app-create-admin>
 </div>
