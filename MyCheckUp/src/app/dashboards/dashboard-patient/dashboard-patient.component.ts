@@ -20,7 +20,7 @@ export class DashboardPatientComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.id = localStorage.getItem('token') || '';
-    this.userService.getProfile().subscribe(
+    this.userService.getPatientProfile().subscribe(
       (profile) => {
         this.user = profile;
         this.fullAddress = this.user.address.split(',', 4);
