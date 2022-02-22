@@ -25,7 +25,7 @@ export class AuthenticationService {
         map((res) => {
           console.log(res);
           // login successful if response is 200
-          if (res.sucess) {
+          if (res.sucess || res.success) {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('token', username);
             return true;
