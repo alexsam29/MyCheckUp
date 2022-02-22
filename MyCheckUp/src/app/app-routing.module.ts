@@ -11,8 +11,14 @@ import { SelfAssessmentComponent } from './self-assessment/self-assessment.compo
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
+import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
 
 const routes: Routes = [
+  {
+    path: 'approve-doctors',
+    component: ApproveDoctorsComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'view-prescriptions',
     component: ViewPrescriptionsComponent,

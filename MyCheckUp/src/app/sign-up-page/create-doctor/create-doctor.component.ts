@@ -19,11 +19,14 @@ export class CreateDoctorComponent implements OnInit {
 
   onSubmit(signUpForm: NgForm) {
     console.log(signUpForm.value.gender);
-    if (signUpForm.valid) {
+    if (
+      signUpForm.valid &&
+      signUpForm.value.password1 == signUpForm.value.password2
+    ) {
       this.userService
         .registerDoctor(
           signUpForm.value.email,
-          signUpForm.value.password,
+          signUpForm.value.password1,
           signUpForm.value.firstName,
           signUpForm.value.lastName,
           signUpForm.value.license,
@@ -34,6 +37,7 @@ export class CreateDoctorComponent implements OnInit {
         .subscribe(
           (data) => {
             this.success = true;
+            this.fail = false;
             this.message = 'Account Successfully Created!';
             setTimeout(() => {
               this.router.navigate(['signin']);
@@ -45,6 +49,9 @@ export class CreateDoctorComponent implements OnInit {
             this.fail = true;
           }
         );
+    } else {
+      this.fail = true;
+      this.message = 'Passwords must match.';
     }
   }
 }
