@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
-import { AuthenticationService } from '../services/authentication.service';
-import { UserService } from '../services/user.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-dashboard-patient',
+  templateUrl: './dashboard-patient.component.html',
+  styleUrls: ['./dashboard-patient.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardPatientComponent implements OnInit {
   id: string = '';
   user: any;
   fullAddress: string[] = [];

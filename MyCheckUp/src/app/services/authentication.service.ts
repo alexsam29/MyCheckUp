@@ -28,6 +28,7 @@ export class AuthenticationService {
           if (res.sucess || res.success) {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('token', username);
+            localStorage.setItem('role', role)
             return true;
           }
           return false;
@@ -38,6 +39,7 @@ export class AuthenticationService {
   logout() {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.http.post<any>(
       this.url + `auth/logout`,
       {},

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
 import { CreateAccountComponent } from './sign-up-page/create-account/create-account.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboards/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
