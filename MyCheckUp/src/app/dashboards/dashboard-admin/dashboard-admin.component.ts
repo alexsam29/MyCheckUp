@@ -29,7 +29,7 @@ export class DashboardAdminComponent implements OnInit {
     );
   }
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe();
     this.router.navigate(['/signin']);
   }
 }
