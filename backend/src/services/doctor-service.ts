@@ -82,7 +82,7 @@ export const DoctorService = {
       if (doctorDto.specialty) doctor.specialty = doctorDto.specialty
       if (doctorDto.title) doctor.title = doctorDto.title
       if (doctorDto.phoneNumber) doctor.phoneNumber = doctorDto.phoneNumber
-      if (doctorDto.active) doctor.active = doctorDto.active
+      if (doctorDto.active !== undefined) doctor.active = doctorDto.active
 
       const updated = await repository.save(doctor)
 
