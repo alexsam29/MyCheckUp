@@ -81,7 +81,7 @@
                     <div class="col-md">
                         <div class="form-group text-light">
                             <label for="password1"> Enter Password</label><br>
-                            <input required minlength="8" ngModel name="password" type="password" class="form-control"
+                            <input required minlength="8" ngModel name="password1" type="password" class="form-control"
                                 #password1="ngModel">
                             <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
                                 <div *ngIf="password1.hasError('required')">Password is Required</div>

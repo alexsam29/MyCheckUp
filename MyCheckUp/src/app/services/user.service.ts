@@ -107,7 +107,7 @@ export class UserService {
         })
       );
   }
-  
+
   book(
     first: string,
     last: string,
@@ -115,18 +115,22 @@ export class UserService {
     phone: string,
     time: string,
     doc: string,
-    reason: string 
+    reason: string
   ) {
     return this.http
-      .post<any>(this.url + 'patient/bookApp', {
-        firstName: first,
-        lastName: last,
-        dateOfApp: date,
-        phone: phone,
-        timeOfApp: time,
-        prefDoc: doc,
-        reasonOfApp: reason
-      }, {withCredentials: true})
+      .post<any>(
+        this.url + 'patient/bookApp',
+        {
+          firstName: first,
+          lastName: last,
+          dateOfApp: date,
+          phone: phone,
+          timeOfApp: time,
+          prefDoc: doc,
+          reasonOfApp: reason,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         map((res) => {
           if (res) {
@@ -137,9 +141,64 @@ export class UserService {
       );
   }
 
-  getProfile(): Observable<any> {
+  getPatientProfile(): Observable<any> {
     return this.http
       .get<any>(this.url + 'patient/profile', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getAdminProfile(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'admin/profile', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getDoctorProfile(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'doctor/profile', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getDoctors(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'admin/doctors', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  approveDoctor(doctorID: string): Observable<any> {
+    console.log(doctorID);
+    return this.http
+      .put<any>(this.url + `admin/doctors/${doctorID}/activate`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  deleteDoctor(doctorID: string) {
+    return this.http
+      .delete<any>(this.url + `admin/doctors/${doctorID}`, {
+        withCredentials: true,
+      })
       .pipe(
         map((res) => {
           return res;
