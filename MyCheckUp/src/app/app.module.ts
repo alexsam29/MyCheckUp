@@ -24,7 +24,8 @@ import { CreateAdminComponent } from './sign-up-page/create-admin/create-admin.c
 import { DashboardPatientComponent } from './dashboards/dashboard-patient/dashboard-patient.component';
 import { DashboardDoctorComponent } from './dashboards/dashboard-doctor/dashboard-doctor.component';
 import { DashboardAdminComponent } from './dashboards/dashboard-admin/dashboard-admin.component';
-import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component'; 
+import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
+import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component'; 
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors
     DashboardPatientComponent,
     DashboardDoctorComponent,
     DashboardAdminComponent,
-    ApproveDoctorsComponent
+    ApproveDoctorsComponent,
+    ViewDoctorsComponent
   ],
   imports: [
     BrowserModule,

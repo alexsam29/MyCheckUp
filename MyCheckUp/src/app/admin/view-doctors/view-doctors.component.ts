@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-approve-doctors',
-  templateUrl: './approve-doctors.component.html',
-  styleUrls: ['./approve-doctors.component.css'],
+  selector: 'app-view-doctors',
+  templateUrl: './view-doctors.component.html',
+  styleUrls: ['./view-doctors.component.css'],
 })
-export class ApproveDoctorsComponent implements OnInit {
+export class ViewDoctorsComponent implements OnInit {
   doctors: any;
   user: any;
   errors: boolean = false;
@@ -32,13 +31,8 @@ export class ApproveDoctorsComponent implements OnInit {
     );
   }
 
-  approve(doctorID: string) {
-    this.userService.approveDoctor(doctorID).subscribe();
-    window.location.reload();
-  }
-
-  decline(doctorID: string) {
-    this.userService.deleteDoctor(doctorID).subscribe();
+  deactivate(doctorID: string) {
+    this.userService.deactivateDoctor(doctorID).subscribe();
     window.location.reload();
   }
 }

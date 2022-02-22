@@ -184,7 +184,20 @@ export class UserService {
   approveDoctor(doctorID: string): Observable<any> {
     console.log(doctorID);
     return this.http
-      .put<any>(this.url + `admin/doctors/${doctorID}/activate`, {
+      .put<any>(this.url + `admin/doctors/${doctorID}/activate`, {},{
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  deactivateDoctor(doctorID: string): Observable<any> {
+    console.log(doctorID);
+    return this.http
+      .put<any>(this.url + `admin/doctors/${doctorID}/deactivate`, {},{
         withCredentials: true,
       })
       .pipe(

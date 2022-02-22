@@ -12,8 +12,14 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
 import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
+import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component';
 
 const routes: Routes = [
+  {
+    path: 'view-doctors',
+    component: ViewDoctorsComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'approve-doctors',
     component: ApproveDoctorsComponent,
