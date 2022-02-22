@@ -22,6 +22,7 @@ export class DashboardDoctorComponent implements OnInit {
     this.userService.getDoctorProfile().subscribe(
       (profile) => {
         this.user = profile;
+        console.log(this.user);
       },
       (error) => {
         this.errors = true;
