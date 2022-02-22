@@ -7,15 +7,20 @@ import { map } from 'rxjs/operators';
 })
 export class AuthenticationService {
   /* url = 'https://mycheckup-api.herokuapp.com/'; */
-  url = 'http://localhost:5000/'
+  url = 'http://localhost:5000/';
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
+  login(role: string, username: string, password: string) {
     return this.http
-      .post<any>(this.url + `patient/login`, {
-        email: username,
-        password: password,
-      }, {withCredentials: true})
+      .post<any>(
+        this.url + `auth/login`,
+        {
+          role: role,
+          email: username,
+          password: password,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         map((res) => {
           console.log(res);
@@ -33,6 +38,10 @@ export class AuthenticationService {
   logout() {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('token');
-    this.http.post<any>(this.url + `patient/logout`, {}, {withCredentials: true});
+    this.http.post<any>(
+      this.url + `auth/logout`,
+      {},
+      { withCredentials: true }
+    );
   }
 }
