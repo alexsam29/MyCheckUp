@@ -3,42 +3,18 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { PatientController } from '../controllers/patient-controller'
+import { AppointmentsController } from '../controllers/appointment-controller'
 
 
 export const PatientRouter = express.Router()
 
-/**
- * @openapi
- * /patient/login:
- *   post:
- *     deprecated: true
- *     summary: login as patient
- *     tags:
- *       - Patient
- *     description: Login as Patient.
- *     responses:
- *       200:
- *         description: OK
- */
-PatientRouter.post('/patient/login',
-   body('email').isEmail(),
-   body('password').isLength({ min: 6, max: 50 }),
-   PatientController.login)
+/*PatientRouter.post('/patient/login',
+ body('email').isEmail(),
+ body('password').isLength({ min: 6, max: 50 }),
+ PatientController.login)
 
-/**
- * @openapi
- * /patient/logout:
- *   post:
- *     deprecated: true
- *     summary: logout as patient
- *     tags:
- *       - Patient
- *     description: Logout as Patient.
- *     responses:
- *       200:
- *         description: OK
- */
-PatientRouter.post('/patient/logout', PatientController.logout)
+
+PatientRouter.post('/patient/logout', PatientController.logout) */
 
 /**
  * @openapi
@@ -126,3 +102,48 @@ PatientRouter.put('/patient/password',
    body('id').notEmpty().isLength({min: 1, max: 100}),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    PatientController.updatecredentials)
+
+
+/**
+ * @openapi
+ * /patient/appointment:
+ *    put:
+ *       summary: Book appointment for patient
+ *       tags: 
+ *          - Patient
+ *       description: Book appointment for patient.
+ *       security: 
+ *          - cookieAuth: []
+ *       responses: 
+ *          200:
+ *             description: OK
+ */
+PatientRouter.post('/patient/appointment', 
+   body('patientId').notEmpty().isLength({min: 1, max: 100}),
+   body('doctorId').notEmpty().isLength({min:1, max: 100}), 
+   //body('selfAssessmentId').optional().isLength({min: 0, max: 100}), 
+   body('date').optional().trim().isLength({min: 1, max: 10}), 
+   body('startTime').optional().trim().isLength({min: 1, max: 10}), 
+   body('endTime').optional().trim().isLength({min: 1, max: 10}),
+   body('doctorNotes').optional().isLength({min: 0, max: 200}), 
+   AppointmentsController.setAppointment)
+
+
+/**
+ * @openapi
+ * /patient/{patientId}/appointments:
+ *    put:  
+ *       summary: Get all patient appointments from the appointment tabel.
+ *       tags: 
+ *          - Patient
+ *       description: Get patient appointments from the appointment tabel.
+ *       security: 
+ *          - cookieAuth: []
+ *       responses: 
+ *          200: 
+ *             description: OK
+ */
+PatientRouter.get('/patient/:patientId/appointments', 
+   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]), 
+   AppointmentsController.getAppointments)
+
