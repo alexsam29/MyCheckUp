@@ -51,7 +51,6 @@ export class CreateDoctorComponent implements OnInit {
         );
     } else {
       this.fail = true;
-      this.message = 'Passwords must match.';
     }
   }
 }

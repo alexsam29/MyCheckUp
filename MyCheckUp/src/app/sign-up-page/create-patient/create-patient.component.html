@@ -7,27 +7,27 @@
     <form ngNativeValidate #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" class="p-3" action="#" method="post">
         <div class="container">
             <div class="container">
-
+                <p class="text-light">(*) Required Field</p>
                 <div class="row">
                     <div class="col-md">
                         <div class="form-group text-light">
-                            <label for="firstName"> First Name</label> <br>
+                            <label for="firstName"> First Name*</label> <br>
                             <input required ngModel name="firstName" class="form-control"
                                 placeholder="Your first name here" #firstName="ngModel">
-                            <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is
+                            <!-- <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is
                                 Required
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
 
                     <div class="col-md">
                         <div class="form-group text-light">
-                            <label for="lastName"> Last Name</label><br>
+                            <label for="lastName"> Last Name*</label><br>
                             <input required ngModel name="lastName" type="text" class="form-control"
                                 placeholder="Your last name here" #lastName="ngModel">
-                            <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is
-                                Required</div>
+                            <!-- <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is
+                                Required</div> -->
 
                         </div>
                     </div>
@@ -36,20 +36,20 @@
                 <div class="row">
                     <div class="col-md">
                         <div class="form-group text-light">
-                            <label for="dateOfBirth"> Date of Birth </label> <br>
+                            <label for="dateOfBirth"> Date of Birth* </label> <br>
                             <input required ngModel name="dateOfBirth" type="date" class="form-control"
                                 placeholder="Enter Date of Birth Here" #title="ngModel">
-                            <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div>
+                            <!-- <div class="alert alert-danger" *ngIf="title.touched && title.invalid">DOB is Required</div> -->
                         </div>
                     </div>
 
                     <div class="col-md">
                         <div class="form-group text-light">
-                            <label for="email"> Email</label><br>
+                            <label for="email"> Email*</label><br>
                             <input required ngModel name="email" type="email" class="form-control"
                                 placeholder="input valid email address" #email="ngModel">
-                            <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required
-                            </div>
+                            <!-- <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is Required
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -57,62 +57,64 @@
                 <div class="row">
                     <div class="col-md">
                         <div class="form-group text-light">
-                            <label for="healthCardNum"> Health Card Number</label><br>
+                            <label for="healthCardNum"> Health Card Number*</label><br>
                             <input required ngModel name="healthCardNum" type="number" class="form-control"
                                 placeholder="input valid health card #" #healthCardNum="ngModel">
-                            <div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">
+                            <<!-- div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">
                                 Health Card is
-                                Required</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="gender">Gender</label> <br>
-                            <input type="radio" value="male" id="male" name="gender" ngModel> Male <br>
-                            <input type="radio" value="female" id="female" name="gender" ngModel> Female <br>
-                            <input type="radio" value="other" id="other" name="gender" ngModel> Other
-                        </div>
+                                Required
+                        </div> -->
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="password1"> Enter Password</label><br>
-                            <input required minlength="8" ngModel name="password1" type="password" class="form-control"
-                                #password1="ngModel">
-                            <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
-                                <div *ngIf="password1.hasError('required')">Password is Required</div>
-                                <div *ngIf="password1.hasError('minlength')">Password should be minimum 8 characters
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-md">
+                    <div class="form-group text-light">
+                        <label for="gender">Gender*</label> <br>
+                        <input type="radio" value="male" id="male" name="gender" ngModel> Male <br>
+                        <input type="radio" value="female" id="female" name="gender" ngModel> Female <br>
+                        <input type="radio" value="other" id="other" name="gender" ngModel> Other
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="password2"> Confirm Password</label><br>
-                            <input required ngModel name="password2" type="password" class="form-control"
-                                #password2="ngModel">
-                            <div class="alert alert-danger" *ngIf="password2.touched && password2.invalid">
-                                <div *ngIf="password2.hasError('required')">Confirm Password is Required</div>
-                                <div *ngIf="password2 !== password1">Passwords do not Match</div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group text-light">
+                        <label for="password1"> Enter Password*</label><br>
+                        <input required minlength="8" ngModel name="password1" type="password" class="form-control"
+                            #password1="ngModel">
+                        <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
+                            <!-- <div *ngIf="password1.hasError('required')">Password is Required</div> -->
+                            <div *ngIf="password1.hasError('minlength')">Password should be minimum 8 characters
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <button class="btn btn-success btn-lg btn-block text-center" type='submit'>Sign Up</button>
-                    <button routerLink="/" type="button" class="cancelbtn btn-block btn-danger">Cancel</button>
+
+                <div class="col-md">
+                    <div class="form-group text-light">
+                        <label for="password2"> Confirm Password*</label><br>
+                        <input required ngModel name="password2" type="password" class="form-control"
+                            #password2="ngModel">
+                        <div class="alert alert-danger"
+                            *ngIf="password2.touched && password2.invalid && password2.hasError('required')">Confirm
+                            Password is Required</div>
+                        <div class="alert alert-danger" *ngIf="password2.touched && password2 !== password1">
+                            Passwords do not Match</div>
+                    </div>
                 </div>
             </div>
-            <br>
         </div>
-        <div *ngIf="success" class="alert alert-success" role="alert">
-            {{message}}
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <button class="btn btn-success btn-lg btn-block text-center" type='submit'>Sign Up</button>
+                <button routerLink="/" type="button" class="cancelbtn btn-block btn-danger">Cancel</button>
+            </div>
         </div>
-    </form>
+        <br>
+</div>
+<div *ngIf="success" class="alert alert-success" role="alert">
+    {{message}}
+</div>
+</form>
 </div>

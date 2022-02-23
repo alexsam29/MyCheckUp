@@ -15,11 +15,11 @@
             <label class="form-check-label" for="inlineRadio2">Doctor</label>
         </div>
     </div>
+    <div *ngIf="type === 'patient'">
+        <app-create-patient></app-create-patient>
+    </div>
+    <div *ngIf="type === 'doctor'">
+        <app-create-doctor></app-create-doctor>
+    </div>
 </div>
 
-<div *ngIf="type === 'patient'">
-    <app-create-patient></app-create-patient>
-</div>
-<div *ngIf="type === 'doctor'">
-    <app-create-doctor></app-create-doctor>
-</div>
