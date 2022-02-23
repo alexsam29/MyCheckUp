@@ -1,0 +1,42 @@
+<div *ngIf="user" class="container-fluid bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center">Active Doctors</h3>
+        </div>
+        <div *ngFor="let doctor of doctors">
+            <div *ngIf="doctor.active" class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card border-primary rounded bg-light">
+                        <div class="card-header border-dark">
+                            <h5 class="card-subtitle text-muted"> Doctor Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title"> {{doctor.firstName}} {{doctor.lastName}}</h1>
+                            <div class="row align-items-center">
+                                <div class="col-md">
+                                    <p><b>Email: </b>{{doctor.email}}</p>
+                                    <p><b>License: </b>{{doctor.license}}</p>
+                                    <p><b>Specialty: </b>{{doctor.specialty}}</p>
+                                    <p><b>Title: </b>{{doctor.title}}</p>
+                                    <p><b>Phone Number: </b>{{doctor.phoneNumber}}</p>
+                                </div>
+                                <div class="col-md">
+                                    <button class="btn btn-danger btn-block" (click)="deactivate(doctor.id)">Deactivate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <button routerLink="/dashboard" routerLinkActive="active" type="button"
+                class="cancelbtn btn-danger btn-lg">Go Back</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
+</div>

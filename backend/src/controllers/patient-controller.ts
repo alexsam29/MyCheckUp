@@ -43,10 +43,10 @@ export const PatientController = {
    {
         try 
         {
-        req.session.destroy(() => 
-        {
-            return res.clearCookie(SESSION_COOKIE).status(200).send()
-            })
+            req.session.destroy(() => 
+            {
+                return res.clearCookie(SESSION_COOKIE).status(200).send()
+                })
         }
         catch (err: unknown) 
         {
@@ -100,7 +100,7 @@ export const PatientController = {
         }
     },
 
-
+    // Update patient profile
     async updateProfile(req: Request, res: Response, next: NextFunction)
     {
         try
@@ -108,7 +108,7 @@ export const PatientController = {
             const errors = validationResult(req)
 
             if(!errors.isEmpty())
-                throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+                throw ApiError.BadRequest('Invalid data in the request body!', errors.array())
 
             const UpdatePateint = await PatientService.update({
 
@@ -129,7 +129,7 @@ export const PatientController = {
         }
     },
 
-
+    // Update patient password
     async updatecredentials(req: Request, res: Response, next: NextFunction)
     {
         try
@@ -137,7 +137,7 @@ export const PatientController = {
             const errors = validationResult(req)
 
             if(!errors.isEmpty())
-                throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+                throw ApiError.BadRequest('Invalid data in the request body!', errors.array())
 
                 const UpdatePateint = await PatientService.updateCredentials({
                     id: req.body.id, 
@@ -151,7 +151,6 @@ export const PatientController = {
             return next(err)
         }
     }
-
 }
 
 

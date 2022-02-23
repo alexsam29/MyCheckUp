@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (form.valid) {
       this.authenticationService
-        .login(form.value.email, form.value.psw)
+        .login(form.value.role, form.value.email, form.value.psw)
         .subscribe(
           (data) => {
             this.router.navigate([this.returnUrl]);

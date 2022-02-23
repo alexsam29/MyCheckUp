@@ -3,6 +3,7 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { DoctorController } from '../controllers/doctor-controller'
+import { AppointmentsController } from '../controllers/appointment-controller'
 
 
 export const DoctorRouter = express.Router()
@@ -141,3 +142,22 @@ DoctorRouter.put('/doctor/availability/:weekDay',
    body('availableTo').isNumeric({ no_symbols: true }),
    body('appointmentDuration').isNumeric({ no_symbols: true }),
    DoctorController.setAvailability)
+
+
+/**
+ * @openapi
+ * /doctor/{doctorId}/bookedTimes:
+ *    put: 
+ *       summary: collect all the times for the doctor 
+ *       tags: 
+ *          - Doctor
+ *       description: collect all the times for the doctor.
+ *       security: 
+ *          - coockieAuth: []
+ *       responses: 
+ *          200:
+ *             description: OK
+ */
+DoctorRouter.get('/doctor/:doctorId/bookedTimes',
+   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
+   AppointmentsController.getAppointmentTimes)
