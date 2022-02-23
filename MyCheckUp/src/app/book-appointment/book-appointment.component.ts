@@ -13,7 +13,7 @@ export class BookAppointmentComponent implements OnInit {
   success: boolean = false;
   loading: boolean = true;
   message: string = '';
-
+  user: any;
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {}

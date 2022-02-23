@@ -13,12 +13,8 @@
                     <div class="col-md">
                         <div class="form-group text-light">
                             <label for="firstName"> First Name</label> <br>
-                            <input required ngModel name="firstName" class="form-control"
-                                placeholder="Your first name here" #firstName="ngModel">
-                            <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is
-                                Required
-                            </div>
-
+                            <input required ngModel name="firstName" class="form-control" [(ngModel)]="user.firstName"
+                                #firstName="ngModel" disabled>
                         </div>
                     </div>
 
@@ -26,10 +22,7 @@
                         <div class="form-group text-light">
                             <label for="lastName"> Last Name</label>
                             <input required ngModel name="lastName" type="text" class="form-control"
-                                placeholder="Your last name here" #lastName="ngModel">
-                            <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is
-                                Required</div>
-
+                                [(ngModel)]="user.lastName" #lastName="ngModel" disabled>
                         </div>
                     </div>
                 </div>
