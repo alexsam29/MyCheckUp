@@ -10,46 +10,48 @@
             <h3 class="col text-white text-center"> Book an Appointment</h3>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{doctorName}}
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <div *ngFor="let doctor of doctors" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" (click)="selectedDoctor(doctor)">{{doctor.firstName}}
+                    {{doctor.lastName}}</button>
             </div>
-          </div>
+        </div>
     </div>
-    
+
     <form ngNativeValidate #bookAppForm="ngForm" (ngSubmit)="onSubmit(bookAppForm)" class="p-3" action="#"
         method="post">
         <div class="container">
             <div class="container">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-md">
                         <div class="form-group text-light">
-                            <label for="firstName"> First Name</label> <br>
-                            <input ngModel name="firstName" class="form-control" [(ngModel)]="user.firstName"
-                                #firstName="ngModel" disabled>
+                            <label for="dateOfApp"> Appointment Date </label> <br>
+                            <input required ngModel name="dateOfApp" type="date" class="form-control"
+                                placeholder="Enter Date of Appointment Here" #title="ngModel">
+                            <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Date is Required
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="lastName"> Last Name</label>
-                            <input ngModel name="lastName" type="text" class="form-control" [(ngModel)]="user.lastName"
-                                #lastName="ngModel" disabled>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="firstName"> docName</label>
-                            <input ngModel name="doc.profile.firstName" type="text" class="form-control"
-                                [(ngModel)]="doc.profile.firstName" #lastName="ngModel" disabled>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Available Times
+                            </button>
+                            <div class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item">9:00 AM - 10:00 PM</button>
+                                <button class="dropdown-item">12:00 PM - 1:00 PM</button>
+                                <button class="dropdown-item">1:00 PM - 2:00 PM</button>
+                                <button class="dropdown-item">3:00 PM - 4:00 PM</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md">
                         <div class="form-group text-light">
@@ -61,56 +63,14 @@
                                 Required</div>
                         </div>
                     </div>
-
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="phone"> Phone Number</label><br>
-                            <input required ngModel name="phone" type="number" class="form-control"
-                                placeholder="phone # here" #phone="ngModel">
-                            <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">Phone number
-                                is Required
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="dateOfApp"> Appointment Date </label> <br>
-                            <input required ngModel name="dateOfApp" type="date" class="form-control"
-                                placeholder="Enter Date of Appointment Here" #title="ngModel">
-                            <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Date is Required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-group text-light">
-                            <label for="timeOfApp">Select Time</label> <br>
-                            <input type="radio" value="time1" id="time1" name="timeOfApp" ngModel> Time1 <br>
-                            <input type="radio" value="time2" id="time2" name="timeOfApp" ngModel> Time2 <br>
-                            <input type="radio" value="time3" id="time3" name="timeOfApp" ngModel> Time3
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md">
-                    <div class="form-group text-light">
-                        <label for="gender">Preffered Doctor</label> <br>
-                        <input type="radio" value="doc1" id="doc1" name="prefDoc" ngModel> Doctor1 <br>
-                        <input type="radio" value="doc2" id="doc2" name="prefDoc" ngModel> Doctor2 <br>
-                        <input type="radio" value="doc3" id="doc3" name="prefDoc" ngModel> Doctor3
-                    </div>
                 </div>
             </div>
 
             <div class="row justify-content-center">
-                <button class="btn btn-success btn-lg text-center" type='submit'>Book Appointment</button>
-            </div>
-            <br>
-            <div class="row justify-content-center">
-                <button routerLink="/dashboard" routerLinkActive="active" type="button"
-                    class="cancelbtn btn-danger">Cancel Booking</button>
+                <div class="col-lg-7">
+                    <button class="btn btn-success btn-lg btn-block text-center" type='submit'>Book Appointment</button>
+                    <button routerLink="/" type="button" class="cancelbtn btn-block btn-danger">Go Back</button>
+                </div>
             </div>
         </div>
         <div *ngIf="success" class="alert alert-success" role="alert">
