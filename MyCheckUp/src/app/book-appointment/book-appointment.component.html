@@ -1,0 +1,104 @@
+<div class="bg-dark">
+    <div class="text-light text-center">
+        <div *ngIf="fail" class="alert alert-danger" role="alert">
+            An error occured! {{message}}
+        </div>
+    </div>
+    <form ngNativeValidate #bookAppForm="ngForm" (ngSubmit)="onSubmit(bookAppForm)" class="p-3" action="#"
+        method="post">
+        <div class="container">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="firstName"> First Name</label> <br>
+                            <input required ngModel name="firstName" class="form-control"
+                                placeholder="Your first name here" #firstName="ngModel">
+                            <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is
+                                Required
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="lastName"> Last Name</label>
+                            <input required ngModel name="lastName" type="text" class="form-control"
+                                placeholder="Your last name here" #lastName="ngModel">
+                            <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is
+                                Required</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="reasonOfApp"> Reason of Appointment</label><br>
+                            <input required ngModel name="reasonOfApp" type="text" class="form-control"
+                                placeholder="input reason of Appointment here" #reasonOfApp="ngModel">
+                            <div class="alert alert-danger" *ngIf="reasonOfApp.touched && reasonOfApp.invalid">
+                                Reason is
+                                Required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="phone"> Phone Number</label><br>
+                            <input required ngModel name="phone" type="number" class="form-control"
+                                placeholder="phone # here" #phone="ngModel">
+                            <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">Phone number
+                                is Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="dateOfApp"> Appointment Date </label> <br>
+                            <input required ngModel name="dateOfApp" type="date" class="form-control"
+                                placeholder="Enter Date of Appointment Here" #title="ngModel">
+                            <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Date is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="timeOfApp">Select Time</label> <br>
+                            <input type="radio" value="time1" id="time1" name="timeOfApp" ngModel> Time1 <br>
+                            <input type="radio" value="time2" id="time2" name="timeOfApp" ngModel> Time2 <br>
+                            <input type="radio" value="time3" id="time3" name="timeOfApp" ngModel> Time3
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="form-group text-light">
+                        <label for="gender">Preffered Doctor</label> <br>
+                        <input type="radio" value="doc1" id="doc1" name="prefDoc" ngModel> Doctor1 <br>
+                        <input type="radio" value="doc2" id="doc2" name="prefDoc" ngModel> Doctor2 <br>
+                        <input type="radio" value="doc3" id="doc3" name="prefDoc" ngModel> Doctor3
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <button class="btn btn-success btn-lg text-center" type='submit'>Book Appointment</button>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <button routerLink="/dashboard" routerLinkActive="active" type="button"
+                    class="cancelbtn btn-danger">Cancel Booking</button>
+            </div>
+        </div>
+        <div *ngIf="success" class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+    </form>
+</div>

@@ -7,9 +7,8 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UserService {
-
-url = 'https://mycheckup-api.herokuapp.com/';
-/* url = 'http://localhost:5000/'; */
+  /* url = 'https://mycheckup-api.herokuapp.com/'; */
+  url = 'http://localhost:5000/';
 
   constructor(private http: HttpClient) {}
   editprofile(
@@ -29,7 +28,7 @@ url = 'https://mycheckup-api.herokuapp.com/';
         lastName: lastName,
         phoneNumber: phoneNumber,
         address: address,
-        gender: gender,        
+        gender: gender,
       })
       .pipe(
         map((res) => {
@@ -41,7 +40,7 @@ url = 'https://mycheckup-api.herokuapp.com/';
       );
   }
 
-  register(
+  registerPatient(
     first: string,
     last: string,
     email: string,
@@ -51,15 +50,19 @@ url = 'https://mycheckup-api.herokuapp.com/';
     gender: string
   ) {
     return this.http
-      .post<any>(this.url + 'patient/register', {
-        email: email,
-        password: psw,
-        firstName: first,
-        lastName: last,
-        dateOfBirth: dob,
-        healthCardNum: healthCardNum,
-        gender: gender
-      }, {withCredentials: true})
+      .post<any>(
+        this.url + 'patient/register',
+        {
+          email: email,
+          password: psw,
+          firstName: first,
+          lastName: last,
+          dateOfBirth: dob,
+          healthCardNum: healthCardNum,
+          gender: gender,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         map((res) => {
           if (res) {
@@ -70,9 +73,145 @@ url = 'https://mycheckup-api.herokuapp.com/';
       );
   }
 
-  getProfile(): Observable<any>{
+  registerDoctor(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    license: string,
+    specialty: string,
+    title: string,
+    phoneNumber: string
+  ) {
     return this.http
-      .get<any>(this.url + 'patient/profile', {withCredentials: true})
+      .post<any>(
+        this.url + 'doctor/register',
+        {
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          license: license,
+          specialty: specialty,
+          title: title,
+          phoneNumber: phoneNumber,
+        },
+        { withCredentials: true }
+      )
+      .pipe(
+        map((res) => {
+          if (res) {
+            return true;
+          }
+          return false;
+        })
+      );
+  }
+
+  book(
+    first: string,
+    last: string,
+    date: string,
+    phone: string,
+    time: string,
+    doc: string,
+    reason: string
+  ) {
+    return this.http
+      .post<any>(
+        this.url + 'patient/bookApp',
+        {
+          firstName: first,
+          lastName: last,
+          dateOfApp: date,
+          phone: phone,
+          timeOfApp: time,
+          prefDoc: doc,
+          reasonOfApp: reason,
+        },
+        { withCredentials: true }
+      )
+      .pipe(
+        map((res) => {
+          if (res) {
+            return true;
+          }
+          return false;
+        })
+      );
+  }
+
+  getPatientProfile(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'patient/profile', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getAdminProfile(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'admin/profile', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getDoctorProfile(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'doctor/profile', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getDoctors(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'admin/doctors', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  approveDoctor(doctorID: string): Observable<any> {
+    console.log(doctorID);
+    return this.http
+      .put<any>(this.url + `admin/doctors/${doctorID}/activate`, {},{
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  deactivateDoctor(doctorID: string): Observable<any> {
+    console.log(doctorID);
+    return this.http
+      .put<any>(this.url + `admin/doctors/${doctorID}/deactivate`, {},{
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  deleteDoctor(doctorID: string) {
+    return this.http
+      .delete<any>(this.url + `admin/doctors/${doctorID}`, {
+        withCredentials: true,
+      })
       .pipe(
         map((res) => {
           return res;

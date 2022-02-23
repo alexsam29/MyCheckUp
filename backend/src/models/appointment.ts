@@ -48,10 +48,10 @@ export class Appointment {
    date!: Date
 
    @Column('time')
-   startTime!: Date
+   startTime!: string
 
    @Column('time')
-   endTime!: Date
+   endTime!: string
 
    @Column({
       type: 'enum',

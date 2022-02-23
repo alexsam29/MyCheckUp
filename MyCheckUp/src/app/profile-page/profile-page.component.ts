@@ -20,7 +20,7 @@ export class ProfilePageComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe(
+    this.userService.getPatientProfile().subscribe(
       (profile) => {
         this.user = profile;
         this.fullAddress = this.user.address.split(',', 4);

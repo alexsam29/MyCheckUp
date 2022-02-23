@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import { ApiError } from '../exceptions/api-error'
 import { Role } from '../models/role'
 import { Patient } from '../models/patient'
+import { SelfAssessment } from "../models/self-assessment"
 
 /**
  * Handles business logic for `Patient` model.
@@ -41,6 +42,7 @@ export const PatientService = {
       newPatient.healthCardNum = patientData.healthCardNum
       newPatient.role = Role.PATIENT
       newPatient.gender = patientData.gender
+      newPatient.active = true
 
       // Insert to database
       const created = await repository.save(newPatient)
@@ -217,6 +219,7 @@ export const PatientService = {
 
    /**
     * Removes specified patient account from the database.
+    * 
     * @param id Patient id.
     * @returns Removed patient.
     */
@@ -232,5 +235,32 @@ export const PatientService = {
       await repository.remove(patient)
 
       return { ...patient, password: '' }
-   }
+   },
+
+
+   /**
+    * Find self assessment for a passed id.
+    * 
+    * @param searchBy slef assessment id.
+    * @returns Founded self assessment.
+    */
+   async findSelfAssessment(searchBy?: {
+      id?: string
+   }): Promise<SelfAssessment> {
+
+      const repository = getRepository(SelfAssessment)
+
+      const selfAssess = await repository.findOne({
+         select: ['id'], where: searchBy
+      })
+
+      if (!selfAssess)
+         throw ApiError.NotFound('SelfAssessment not found!')
+
+      return selfAssess
+   },
+
 }
+
+
+

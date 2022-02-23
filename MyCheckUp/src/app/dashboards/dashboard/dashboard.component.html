@@ -1,0 +1,9 @@
+<div *ngIf="user === 'patient'">
+    <app-dashboard-patient></app-dashboard-patient>
+</div>
+<div *ngIf="user ==='doctor'">
+    <app-dashboard-doctor></app-dashboard-doctor>
+</div>
+<div *ngIf="user ==='admin'">
+    <app-dashboard-admin></app-dashboard-admin>
+</div>

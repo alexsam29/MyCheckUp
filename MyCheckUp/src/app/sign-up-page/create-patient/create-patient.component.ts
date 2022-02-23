@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-create-account',
-  templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.css'],
+  selector: 'app-create-patient',
+  templateUrl: './create-patient.component.html',
+  styleUrls: ['./create-patient.component.css']
 })
-export class CreateAccountComponent implements OnInit {
+export class CreatePatientComponent implements OnInit {
   fail: boolean = false;
   success: boolean = false;
   loading: boolean = true;
@@ -22,7 +22,7 @@ export class CreateAccountComponent implements OnInit {
     console.log(signUpForm.value.gender);
     if (signUpForm.valid) {
       this.userService
-        .register(
+        .registerPatient(
           signUpForm.value.firstName,
           signUpForm.value.lastName,
           signUpForm.value.email,
