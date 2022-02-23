@@ -84,3 +84,41 @@ Improvements:
 Bug Fixes:
 
 - Resolved CORS policy issue
+
+## [0.4.0] - 2022-02-23
+
+### Web Application
+
+New Features:
+
+- Create Doctor account added to sign-up page
+- Doctor Dashboard (can't be accessed without admin approval)
+- Admin Dashboard
+- Admin can approve, decline, and deactivate Doctor Accounts
+- Book Appointment form UI implemented (not fully functional yet)
+
+Improvements:
+
+- Landing page sign-in and create account buttons are bigger and disappear when a user is logged in
+- Sign-up form UI improved
+- Sign-up page includes radio buttons to specify user type
+- Log-in form UI improved
+- Log-in form includes radio buttons to specify user type
+- Logout destroys session cookie
+- Improvements to form validation for all forms
+
+### Backend API
+
+New Features:
+
+- Doctor registration
+- Admins can now approve/reject newly registered doctor accounts
+- Doctor availability to determine when Patients can book appointments
+- Patients can now book and cancel appointments
+- System ensures that each booked appointment does not cause conflicts
+- API documentation with all end-points
+
+Improvements:
+
+- Modified Availability model to reflect Doctor's availability for each day of the week
+- Replaced role-specific login and logout endpoints with universal ones
