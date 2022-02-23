@@ -13,10 +13,32 @@ export class BookAppointmentComponent implements OnInit {
   success: boolean = false;
   loading: boolean = true;
   message: string = '';
+   errors: boolean = false;
   user: any;
+  doc: any;
   constructor(private router: Router, private userService: UserService) {}
 
-  ngOnInit() {}
+  
+  ngOnInit(): void {
+    this.userService.getPatientProfile().subscribe(
+      (profile) => {
+        this.user = profile;
+      },
+      (error) => {
+        this.errors = true;
+      }
+    );
+
+    this.userService.getAllDoctorsProf().subscribe(
+      (profile) => {
+        this.doc = profile.doc;
+      },
+      (error) => {
+        this.errors = true;
+      }
+    );   
+  }
+  
 
   onSubmit(bookAppForm: NgForm) {
     console.log(bookAppForm.value.firstName);

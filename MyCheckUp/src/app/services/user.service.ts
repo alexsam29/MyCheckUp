@@ -151,6 +151,16 @@ export class UserService {
       );
   }
 
+  getAllDoctorsProf(): Observable<any> {
+    return this.http
+      .get<any>(this.url + 'doctors', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
   getAdminProfile(): Observable<any> {
     return this.http
       .get<any>(this.url + 'admin/profile', { withCredentials: true })

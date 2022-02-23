@@ -13,7 +13,7 @@
                     <div class="col-md">
                         <div class="form-group text-light">
                             <label for="firstName"> First Name</label> <br>
-                            <input required ngModel name="firstName" class="form-control" [(ngModel)]="user.firstName"
+                            <input ngModel name="firstName" class="form-control" [(ngModel)]="user.firstName"
                                 #firstName="ngModel" disabled>
                         </div>
                     </div>
@@ -21,8 +21,15 @@
                     <div class="col-md">
                         <div class="form-group text-light">
                             <label for="lastName"> Last Name</label>
-                            <input required ngModel name="lastName" type="text" class="form-control"
-                                [(ngModel)]="user.lastName" #lastName="ngModel" disabled>
+                            <input ngModel name="lastName" type="text" class="form-control" [(ngModel)]="user.lastName"
+                                #lastName="ngModel" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group text-light">
+                            <label for="firstName"> docName</label>
+                            <input ngModel name="doc.profile.firstName" type="text" class="form-control"
+                                [(ngModel)]="doc.profile.firstName" #lastName="ngModel" disabled>
                         </div>
                     </div>
                 </div>
