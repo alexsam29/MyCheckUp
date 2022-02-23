@@ -3,13 +3,16 @@ import bcrypt from 'bcrypt'
 import { Doctor } from '../models/doctor'
 import { Role } from '../models/role'
 import { ApiError } from '../exceptions/api-error'
+import { SearchQuery } from './utils/search-query'
+import { Availability } from '../models/availability'
+import { WeekDay } from '../models/week-day'
 
 /**
  * Handles business logic for `Doctor` model.
  */
 export const DoctorService = {
    /**
-    * Adds new doctor to the database.
+    * Adds new doctor to the database. Sets account as inactive.
     * 
     * @param doctorDto New doctor information.
     * @returns Created doctor.
@@ -35,6 +38,7 @@ export const DoctorService = {
       newDoctor.firstName = doctorDto.firstName
       newDoctor.lastName = doctorDto.lastName
       newDoctor.role = Role.DOCTOR
+      newDoctor.active = false
       if (doctorDto.license) newDoctor.license = doctorDto.license
       if (doctorDto.specialty) newDoctor.specialty = doctorDto.specialty
       if (doctorDto.title) newDoctor.title = doctorDto.title
@@ -63,6 +67,7 @@ export const DoctorService = {
       specialty?: string,
       title?: string,
       phoneNumber?: string
+      active?: boolean
    }): Promise<Doctor> {
       const repository = getRepository(Doctor)
 
@@ -77,6 +82,7 @@ export const DoctorService = {
       if (doctorDto.specialty) doctor.specialty = doctorDto.specialty
       if (doctorDto.title) doctor.title = doctorDto.title
       if (doctorDto.phoneNumber) doctor.phoneNumber = doctorDto.phoneNumber
+      if (doctorDto.active !== undefined) doctor.active = doctorDto.active
 
       const updated = await repository.save(doctor)
 
@@ -100,22 +106,25 @@ export const DoctorService = {
       specialty?: string,
       title?: string,
       phoneNumber?: string
-   }, exact = false, offset = 0, limit = 100): Promise<Doctor[]> {
+      active?: boolean
+   }, options?: SearchQuery): Promise<Doctor[]> {
       const repository = getRepository(Doctor)
 
       const where: { [key: string]: any } = { ...searchBy }
-      if (!exact) {
+      if (!options?.exact) {
          for (let key in where) {
-            where[key] = Like(`%${where[key]}%`)
+            if (typeof where[key] === 'string')
+               where[key] = Like(`%${where[key]}%`)
          }
       }
 
       const doctors = await repository.find({
-         select: ['id', 'firstName', 'lastName', 'email', 'license', 'specialty', 'title', 'phoneNumber'],
+         select: ['id', 'firstName', 'lastName', 'email', 'license',
+            'specialty', 'title', 'phoneNumber', 'active'],
          where: where,
          order: { createdAt: 'DESC' },
-         skip: offset,
-         take: limit
+         skip: options?.offset,
+         take: options?.limit
       })
 
       if (!doctors || !doctors.length) throw ApiError.NotFound(`No doctor profiles were found`)
@@ -137,7 +146,8 @@ export const DoctorService = {
       const repository = getRepository(Doctor)
 
       const doctor = await repository.findOne({
-         select: ['id', 'firstName', 'lastName', 'email', 'license', 'specialty', 'title', 'phoneNumber'],
+         select: ['id', 'firstName', 'lastName', 'email', 'license',
+            'specialty', 'title', 'phoneNumber', 'active'],
          where: searchBy
       })
 
@@ -180,5 +190,85 @@ export const DoctorService = {
       await repository.remove(doctor)
 
       return { ...doctor, password: '' }
+   },
+
+   /**
+    * Sets doctor availability for selected week day.
+    * 
+    * @param details Availability details. Appointment duration is in minutes.
+    * @return Availability.
+    */
+   async setAvailability(details: {
+      doctorId: string,
+      weekDay: WeekDay,
+      availableFrom: number,
+      availableTo: number,
+      appointmentDuration: number
+   }): Promise<Availability> {
+      const availabilityRepo = getRepository(Availability)
+
+      const candidate = await availabilityRepo.findOne({
+         doctorId: details.doctorId,
+         weekDay: details.weekDay
+      })
+
+      if (candidate) {
+         candidate.weekDay = details.weekDay
+         candidate.availableFrom = details.availableFrom
+         candidate.availableTo = details.availableTo
+         candidate.appointmentDuration = details.appointmentDuration
+         const updated = await availabilityRepo.save(candidate)
+
+         return updated
+      }
+
+      const doctorRepo = getRepository(Doctor)
+      const doctor = await doctorRepo.findOne(details.doctorId)
+
+      if (!doctor) throw ApiError.NotFound('Doctor not found')
+      
+      const availability = new Availability()
+      availability.doctor = doctor
+      availability.weekDay = details.weekDay
+      availability.availableFrom = details.availableFrom
+      availability.availableTo = details.availableTo
+      availability.appointmentDuration = details.appointmentDuration
+
+      const saved = await availabilityRepo.save(availability)
+
+      return saved
+   },
+
+   /**
+    * Finds all available days & times for the doctor.
+    * 
+    * @param doctorId Doctor id.
+    * @returns Array of found availability days.
+    */
+   async findAvailability(doctorId: string): Promise<Availability[]> { 
+      const repository = getRepository(Availability)
+
+      const availabilities = await repository.find({ doctorId })
+      if (!availabilities) throw ApiError.NotFound('Availability not found')
+
+      return availabilities
+   },
+
+   /**
+    * Find doctor availability for the specified week day.
+    * 
+    * I.e., Sunday = 0, Monday = 1, etc.
+    * 
+    * @param doctorId Doctor id.
+    * @param weekDay Day of the week (0-6).
+    * @returns Found availability.
+    */
+   async findAvailabilityByDay(doctorId: string, weekDay: number ): Promise<Availability> {
+      const repository = getRepository(Availability)
+
+      const availability = await repository.findOne({ doctorId, weekDay })
+      if (!availability) throw ApiError.NotFound('Availability not found')
+
+      return availability
    }
 }

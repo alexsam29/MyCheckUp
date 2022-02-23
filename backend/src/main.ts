@@ -5,11 +5,12 @@ import config from 'config'
 import { createConnection, ConnectionOptions, getRepository } from 'typeorm'
 import { userSession } from './common/user-session'
 import { Session } from './models/session'
-import { router } from './routes/router'
+import { router } from './routes'
 import { notFoundHandler } from './middleware/not-found-handler'
 import { errorHandler } from './middleware/error-handler'
 import { PORT, PROD } from './common/constants'
 import { logger } from './common/logger'
+
 
 const app = express()
 if (PROD) app.set('trust proxy', 1)

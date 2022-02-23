@@ -27,8 +27,8 @@ export const DoctorController = {
 
          return res.status(200).json({ success: true })
       }
-      catch (err: unknown) {
-         return next(err)
+      catch (error: unknown) {
+         return next(error)
       }
    },
 
@@ -41,8 +41,8 @@ export const DoctorController = {
             return res.clearCookie(SESSION_COOKIE).status(200).send()
          })
       }
-      catch (err: unknown) {
-         return next(err)
+      catch (error: unknown) {
+         return next(error)
       }
    },
 
@@ -69,8 +69,8 @@ export const DoctorController = {
 
          return res.status(200).json(doctor)
       }
-      catch (err: unknown) {
-         return next(err)
+      catch (error: unknown) {
+         return next(error)
       }
    },
 
@@ -85,7 +85,7 @@ export const DoctorController = {
          }
 
          const doctor = await DoctorService.update({
-            id: req.session.userId || '',
+            id: req.session.userId!,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -98,8 +98,8 @@ export const DoctorController = {
 
          return res.status(200).json(doctor)
       }
-      catch (err: unknown) {
-         return next(err)
+      catch (error: unknown) {
+         return next(error)
       }
    },
 
@@ -111,8 +111,40 @@ export const DoctorController = {
          const doctor = await DoctorService.findOne({ id: req.session.userId })
          return res.status(200).json(doctor)
       }
-      catch (err: unknown) {
-         return next(err)
+      catch (error: unknown) {
+         return next(error)
+      }
+   },
+
+   /**
+    * Find all active doctors.
+    */
+   async getAll(_: Request, res: Response, next: NextFunction) {
+      try {
+         const doctors = await DoctorService.find({ active: true })
+         return res.status(200).json(doctors)
+      }
+      catch (error: unknown) {
+         return next(error)
+      }
+   },
+
+   /**
+    * Find active doctor by id.
+    */
+   async getOneById(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { doctorId } = req.params
+         const doctor = await DoctorService.findOne({ id: doctorId })
+
+         if (!doctor.active) {
+            throw ApiError.NotFound('Doctor not found')
+         }
+
+         return res.status(200).json(doctor)
+      }
+      catch (error: unknown) {
+         return next(error)
       }
    },
 
@@ -124,8 +156,93 @@ export const DoctorController = {
          const doctor = await DoctorService.remove(req.session.userId || '')
          return res.status(200).json({ message: `Doctor account ${doctor.id} has been deleted` })
       }
-      catch (err: unknown) {
-         return next(err)
+      catch (error: unknown) {
+         return next(error)
+      }
+   },
+
+   /**
+    * Set doctor availability for selected week day.
+    */
+   async setAvailability(req: Request, res: Response, next: NextFunction) {
+      try {
+         const errors = validationResult(req)
+         if (!errors.isEmpty()) {
+            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+         }
+
+         const { weekDay } = req.params
+         const weekDayNum = Number(weekDay)
+         if (isNaN(weekDayNum) || weekDayNum < 0 || weekDayNum > 6) {
+            throw ApiError.BadRequest('Invalid week day parameter. It must be an integer number between 0 and 6.')
+         }
+
+         const timeFrom = Number(req.body.availableFrom)
+         const timeTo = Number(req.body.availableTo)
+         const duration = Number(req.body.appointmentDuration)
+
+         if (isNaN(timeFrom) || timeFrom < 0 || timeFrom > 1440) {
+            throw ApiError.BadRequest('Invalid available from time. It must be a value in minutes after midnight (0-1440).')
+         }
+         if (isNaN(timeTo) || timeTo < 0 || timeTo > 1440) {
+            throw ApiError.BadRequest('Invalid available to time. It must be a value in minutes after midnight (0-1440).')
+         }
+         if (timeFrom > timeTo) {
+            throw ApiError.BadRequest('Invalid time. Available from must be less than available to.')
+         }
+         if (isNaN(duration) || duration < 0 || duration > 60) {
+            throw ApiError.BadRequest('Invalid appointment duration in minutes. It must be an integer number between 0 and 60.')
+         }
+
+         const availability = await DoctorService.setAvailability({
+            doctorId: req.session.userId!,
+            weekDay: weekDayNum,
+            availableFrom: timeFrom,
+            availableTo: timeTo,
+            appointmentDuration: duration,
+         })
+
+         return res.status(200).json(availability)
+      }
+      catch (error: unknown) {
+         return next(error)
+      }
+   },
+
+   /**
+    * 
+    */
+   async getAvailabilityByDay(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { doctorId, weekDay } = req.params
+
+         const weekDayNum = Number(weekDay)
+         if (isNaN(weekDayNum) || weekDayNum < 0 || weekDayNum > 6) {
+            throw ApiError.BadRequest('Invalid week day parameter. It must be an integer number between 0 and 6.')
+         }
+
+         const availability = await DoctorService.findAvailabilityByDay(doctorId, weekDayNum)
+
+         return res.status(200).json(availability)
+      }
+      catch (error: unknown) {
+         return next(error)
+      }
+   },
+
+   /**
+    * 
+    */
+   async getFullAvailability(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { doctorId } = req.params
+
+         const availability = await DoctorService.findAvailability(doctorId)
+
+         return res.status(200).json(availability)
+      }
+      catch (error: unknown) {
+         return next(error)
       }
    }
 }

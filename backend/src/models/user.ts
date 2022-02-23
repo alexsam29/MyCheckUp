@@ -6,6 +6,7 @@ import {
 } from 'typeorm'
 import { Role } from './role'
 
+
 /**
  * User abstract model.
  * 
@@ -37,6 +38,9 @@ export abstract class User {
 
    @Column({ type: 'enum', enum: Role })
    role!: Role
+
+   @Column({ type: 'boolean', default: false })
+   active!: boolean
 
    @CreateDateColumn()
    createdAt!: Date

@@ -7,6 +7,9 @@ import {
    ManyToOne
 } from 'typeorm'
 import { Doctor } from './doctor'
+import { WeekDay } from './week-day'
+
+
 
 /**
  * Availability database model. Represents doctor's availability for the day.
@@ -14,10 +17,10 @@ import { Doctor } from './doctor'
  * Fields:
  * - `id` - availability id.
  * - `doctorId` - doctor id.
- * - `date` - availability date.
- * - `availableFrom` - time available from.
- * - `availableTo` - time available to.
- * - `appointmentDuration` - standard length of a single appointment.
+ * - `weekDay` - availability week day.
+ * - `availableFrom` - time available from in minutes after midnight (0-1440).
+ * - `availableTo` - time available to in minutes after midnight (0-1440).
+ * - `appointmentDuration` - standard length of a single appointment in minutes (0-60).
  * - `doctor` - associated doctor.
  * - `createdAt` - creation date in the database.
  * - `updatedAt` - last modified date in the database.
@@ -30,14 +33,14 @@ export class Availability {
    @Column()
    doctorId!: string
 
-   @Column('date')
-   date!: Date
+   @Column({ type: 'enum', enum: WeekDay })
+   weekDay!: WeekDay
 
-   @Column('time')
-   availableFrom!: Date
+   @Column('integer')
+   availableFrom!: number
 
-   @Column('time')
-   availableTo!: Date
+   @Column('integer')
+   availableTo!: number
 
    @Column('integer')
    appointmentDuration!: number
