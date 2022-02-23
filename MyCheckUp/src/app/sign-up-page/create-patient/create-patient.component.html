@@ -60,7 +60,7 @@
                             <label for="healthCardNum"> Health Card Number*</label><br>
                             <input required ngModel name="healthCardNum" type="number" class="form-control"
                                 placeholder="input valid health card #" #healthCardNum="ngModel">
-                            <<!-- div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">
+                            <!-- div class="alert alert-danger" *ngIf="healthCardNum.touched && healthCardNum.invalid">
                                 Health Card is
                                 Required
                         </div> -->
@@ -99,7 +99,7 @@
                         <div class="alert alert-danger"
                             *ngIf="password2.touched && password2.invalid && password2.hasError('required')">Confirm
                             Password is Required</div>
-                        <div class="alert alert-danger" *ngIf="password2.touched && password2 !== password1">
+                        <div class="alert alert-danger" *ngIf="password2.touched && password2.value != password1.value">
                             Passwords do not Match</div>
                     </div>
                 </div>

@@ -26,7 +26,7 @@ export class CreatePatientComponent implements OnInit {
           signUpForm.value.firstName,
           signUpForm.value.lastName,
           signUpForm.value.email,
-          signUpForm.value.password,
+          signUpForm.value.password1,
           signUpForm.value.dateOfBirth,
           signUpForm.value.healthCardNum,
           signUpForm.value.gender
