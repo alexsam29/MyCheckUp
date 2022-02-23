@@ -51,5 +51,24 @@ export const AppointmentsController = {
       {
           return next(err)
       }
-  }
+  },
+
+
+
+    async getAppointmentTimes(req: Request, res: Response, next: NextFunction)
+    {
+        try
+        {
+            const { doctorId } = req.params
+
+            const appointmentTimes = await AppointmentService.appointmentTimesBooked({doctorId})
+            return res.status(200).json(appointmentTimes)
+        }
+        catch(err: unknown)
+        {
+            return next(err)
+        }
+    }
+
+    
 }

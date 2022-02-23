@@ -93,11 +93,32 @@ export const AppointmentService = {
         })
 
         if(!appointments || !appointments.length)
-        throw ApiError.NotFound('No appointment found for this patient!')
+            throw ApiError.NotFound('No appointment found for this patient!')
 
 
         return appointments
+    },
+
+
+
+    async appointmentTimesBooked(searchBY?: {doctorId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
+    {
+        const appointmentTime = getRepository(Appointment)
+
+        const appointmentTimes = await appointmentTime.find({
+            select: ['startTime', 'endTime'],
+            where: searchBY,
+            order: { createdAt: 'DESC'}, 
+            skip: offset, 
+            take: limit
+        })
+
+        if(!appointmentTimes || !appointmentTimes.length)
+            throw ApiError.NotFound('No appointment time has been found for this doctor!')
+
+        return appointmentTimes
     }
 
+    
 
 }
