@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ProfilePageComponent implements OnInit {
   message: string = '';
   errors: boolean = false;
   user: any;
+  doc:any;
   fullAddress: string[] = [];
 
   constructor(private router: Router, private userService: UserService) {}
