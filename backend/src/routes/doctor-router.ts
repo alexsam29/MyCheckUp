@@ -138,9 +138,19 @@ DoctorRouter.get('/doctor/profile',
  */
 DoctorRouter.put('/doctor/availability/:weekDay',
    authorize(Role.DOCTOR),
-   body('availableFrom').isNumeric({ no_symbols: true }),
-   body('availableTo').isNumeric({ no_symbols: true }),
-   body('appointmentDuration').isNumeric({ no_symbols: true }),
+   body('isAvailable')
+      .isBoolean(),
+   body('availableFrom')
+      .optional({ nullable: true })
+      .isString().matches(/^\d\d:\d\d:\d\d$/)
+      .withMessage('Must be a string in hh:mm:ss format'),
+   body('availableTo')
+      .optional({ nullable: true })
+      .isString().matches(/^\d\d:\d\d:\d\d$/)
+      .withMessage('Must be a string in hh:mm:ss format'),
+   body('appointmentDuration')
+      .optional()
+      .isNumeric({ no_symbols: true }).withMessage('Must be an integer in the range [0-6]'),
    DoctorController.setAvailability)
 
 

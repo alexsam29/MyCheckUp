@@ -18,8 +18,8 @@ import { WeekDay } from './week-day'
  * - `id` - availability id.
  * - `doctorId` - doctor id.
  * - `weekDay` - availability week day.
- * - `availableFrom` - time available from in minutes after midnight (0-1440).
- * - `availableTo` - time available to in minutes after midnight (0-1440).
+ * - `availableFrom` - time available from as hh:mm:ss string.
+ * - `availableTo` - time available to as hh:mm:ss string.
  * - `appointmentDuration` - standard length of a single appointment in minutes (0-60).
  * - `doctor` - associated doctor.
  * - `createdAt` - creation date in the database.
@@ -36,13 +36,16 @@ export class Availability {
    @Column({ type: 'enum', enum: WeekDay })
    weekDay!: WeekDay
 
-   @Column('integer')
-   availableFrom!: number
+   @Column({ type: 'bool', default: false })
+   isAvailable!: boolean
 
-   @Column('integer')
-   availableTo!: number
+   @Column({ type: 'time', nullable: true })
+   availableFrom!: string | null
 
-   @Column('integer')
+   @Column({ type: 'time', nullable: true })
+   availableTo!: string | null
+
+   @Column({ type: 'integer', default: 0 })
    appointmentDuration!: number
 
    @ManyToOne(

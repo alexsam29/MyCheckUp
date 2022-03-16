@@ -201,10 +201,15 @@ export const DoctorService = {
    async setAvailability(details: {
       doctorId: string,
       weekDay: WeekDay,
-      availableFrom: number,
-      availableTo: number,
-      appointmentDuration: number
+      isAvailable: boolean,
+      availableFrom?: string | null,
+      availableTo?: string | null,
+      appointmentDuration?: number
    }): Promise<Availability> {
+      if (details.isAvailable && (!details.availableFrom || !details.availableTo || !details.appointmentDuration)) {
+         throw ApiError.BadRequest('Must specify available times and appointment duration if doctor is available')
+      }
+
       const availabilityRepo = getRepository(Availability)
 
       const candidate = await availabilityRepo.findOne({
@@ -214,9 +219,17 @@ export const DoctorService = {
 
       if (candidate) {
          candidate.weekDay = details.weekDay
-         candidate.availableFrom = details.availableFrom
-         candidate.availableTo = details.availableTo
-         candidate.appointmentDuration = details.appointmentDuration
+         candidate.isAvailable = details.isAvailable  
+         if (details.availableFrom !== undefined) {
+            candidate.availableFrom = details.availableFrom
+         }
+         if (details.availableTo !== undefined) {
+            candidate.availableTo = details.availableTo
+         }
+         if (details.appointmentDuration) {
+            candidate.appointmentDuration = details.appointmentDuration
+         }
+
          const updated = await availabilityRepo.save(candidate)
 
          return updated
@@ -230,9 +243,16 @@ export const DoctorService = {
       const availability = new Availability()
       availability.doctor = doctor
       availability.weekDay = details.weekDay
-      availability.availableFrom = details.availableFrom
-      availability.availableTo = details.availableTo
-      availability.appointmentDuration = details.appointmentDuration
+      availability.isAvailable = details.isAvailable
+      if (details.availableFrom !== undefined) {
+         availability.availableFrom = details.availableFrom
+      }
+      if (details.availableTo !== undefined) {
+         availability.availableTo = details.availableTo
+      }
+      if (details.appointmentDuration) {
+         availability.appointmentDuration = details.appointmentDuration
+      }
 
       const saved = await availabilityRepo.save(availability)
 
@@ -263,7 +283,7 @@ export const DoctorService = {
     * @param weekDay Day of the week (0-6).
     * @returns Found availability.
     */
-   async findAvailabilityByDay(doctorId: string, weekDay: number ): Promise<Availability> {
+   async findAvailabilityByDay(doctorId: string, weekDay: number): Promise<Availability> {
       const repository = getRepository(Availability)
 
       const availability = await repository.findOne({ doctorId, weekDay })

@@ -177,26 +177,21 @@ export const DoctorController = {
             throw ApiError.BadRequest('Invalid week day parameter. It must be an integer number between 0 and 6.')
          }
 
-         const timeFrom = Number(req.body.availableFrom)
-         const timeTo = Number(req.body.availableTo)
+         const timeFrom = req.body.availableFrom
+         const timeTo = req.body.availableTo
          const duration = Number(req.body.appointmentDuration)
 
-         if (isNaN(timeFrom) || timeFrom < 0 || timeFrom > 1440) {
-            throw ApiError.BadRequest('Invalid available from time. It must be a value in minutes after midnight (0-1440).')
-         }
-         if (isNaN(timeTo) || timeTo < 0 || timeTo > 1440) {
-            throw ApiError.BadRequest('Invalid available to time. It must be a value in minutes after midnight (0-1440).')
-         }
-         if (timeFrom > timeTo) {
+         if (timeFrom && timeTo && timeFrom > timeTo) {
             throw ApiError.BadRequest('Invalid time. Available from must be less than available to.')
          }
-         if (isNaN(duration) || duration < 0 || duration > 60) {
+         if (duration && isNaN(duration) || duration < 0 || duration > 60) {
             throw ApiError.BadRequest('Invalid appointment duration in minutes. It must be an integer number between 0 and 60.')
          }
 
          const availability = await DoctorService.setAvailability({
             doctorId: req.session.userId!,
             weekDay: weekDayNum,
+            isAvailable: req.body.isAvailable,
             availableFrom: timeFrom,
             availableTo: timeTo,
             appointmentDuration: duration,
