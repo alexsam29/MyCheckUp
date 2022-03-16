@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 import { ApiError } from "../exceptions/api-error"
 import { validationResult } from "express-validator"
 import { AppointmentService } from "../services/appointment-service"
+//import { DoctorService } from 'services/doctor-service'
+
 
 
 
@@ -53,15 +55,16 @@ export const AppointmentsController = {
       }
   },
 
+    /* Doctor ***********************************************************************************/
 
-
+    //Used in the doctor router to get all the appointment times.
     async getAppointmentTimes(req: Request, res: Response, next: NextFunction)
     {
         try
         {
             const { doctorId } = req.params
 
-            const appointmentTimes = await AppointmentService.appointmentTimesBooked({doctorId})
+            const appointmentTimes = await AppointmentService.appointmentTimesBooked(doctorId, {doctorId})
             return res.status(200).json(appointmentTimes)
         }
         catch(err: unknown)
@@ -69,6 +72,4 @@ export const AppointmentsController = {
             return next(err)
         }
     }
-
-    
 }
