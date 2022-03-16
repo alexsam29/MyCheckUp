@@ -4,7 +4,7 @@ import { Doctor } from "../models/doctor";
 import { Patient } from "../models/patient";
 import { getRepository } from "typeorm";
 import { Appointment } from "../models/appointment";
-
+import { DoctorService } from "./doctor-service";
 
 
 export const AppointmentService = {
@@ -100,8 +100,9 @@ export const AppointmentService = {
     },
 
 
+    /*Doctor***********************************************************************************************************/
 
-    async appointmentTimesBooked(searchBY?: {doctorId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
+    async appointmentTimesBooked(doctorId: string, searchBY?: {doctorId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
     {
         const appointmentTime = getRepository(Appointment)
 
@@ -112,6 +113,11 @@ export const AppointmentService = {
             skip: offset, 
             take: limit
         })
+
+        // Added
+        const availability = await DoctorService.findAvailability(doctorId)
+        console.log(availability)
+
 
         if(!appointmentTimes || !appointmentTimes.length)
             throw ApiError.NotFound('No appointment time has been found for this doctor!')
