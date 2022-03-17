@@ -4,7 +4,6 @@ import { Doctor } from "../models/doctor";
 import { Patient } from "../models/patient";
 import { getRepository } from "typeorm";
 import { Appointment } from "../models/appointment";
-import { DoctorService } from "./doctor-service";
 
 
 export const AppointmentService = {
@@ -102,21 +101,18 @@ export const AppointmentService = {
 
     /*Doctor***********************************************************************************************************/
 
-    async appointmentTimesBooked(doctorId: string, searchBY?: {doctorId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
+    async appointmentTimesBooked(searchBY?: {doctorId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
     {
         const appointmentTime = getRepository(Appointment)
 
         const appointmentTimes = await appointmentTime.find({
-            select: ['startTime', 'endTime'],
+            select: ['id', 'patientId', 'doctorId', 'selfAssessmentId', 'date' ,'startTime', 
+            'endTime', 'status', 'doctorNotes', 'createdAt', 'updatedAt'],
             where: searchBY,
             order: { createdAt: 'DESC'}, 
             skip: offset, 
             take: limit
         })
-
-        // Added
-        const availability = await DoctorService.findAvailability(doctorId)
-        console.log(availability)
 
 
         if(!appointmentTimes || !appointmentTimes.length)
@@ -124,7 +120,4 @@ export const AppointmentService = {
 
         return appointmentTimes
     }
-
-    
-
 }

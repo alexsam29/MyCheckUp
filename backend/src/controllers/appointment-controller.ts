@@ -64,7 +64,7 @@ export const AppointmentsController = {
         {
             const { doctorId } = req.params
 
-            const appointmentTimes = await AppointmentService.appointmentTimesBooked(doctorId, {doctorId})
+            const appointmentTimes = await AppointmentService.appointmentTimesBooked({doctorId})
             return res.status(200).json(appointmentTimes)
         }
         catch(err: unknown)

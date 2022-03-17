@@ -47,10 +47,10 @@ export class Appointment {
    @Column('date')
    date!: Date
 
-   @Column('time')
+   @Column({type:'time', nullable: false})
    startTime!: string
 
-   @Column('time')
+   @Column({type: 'time', nullable: false})
    endTime!: string
 
    @Column({
