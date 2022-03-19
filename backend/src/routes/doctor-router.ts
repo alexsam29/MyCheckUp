@@ -171,3 +171,9 @@ DoctorRouter.put('/doctor/availability/:weekDay',
 DoctorRouter.get('/doctor/:doctorId/bookedTimes',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
    AppointmentsController.getAppointmentTimes)
+
+
+
+DoctorRouter.get('/doctor/:doctorId/availabileTimes/:date', 
+   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
+   AppointmentsController.getAvailableTimes)

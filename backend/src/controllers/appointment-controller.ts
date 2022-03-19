@@ -71,5 +71,22 @@ export const AppointmentsController = {
         {
             return next(err)
         }
-    }
+    },   
+
+    async getAvailableTimes(req: Request, res: Response, next: NextFunction)
+    {
+        try
+        {
+            const { doctorId, date } = req.params
+            const  status  = 'pending'
+
+            const appointmentTimes = await AppointmentService.appointmentTimesAvailable(doctorId, {doctorId, date, status})
+            return res.status(200).json(appointmentTimes)
+        }
+        catch(err: unknown)
+        {
+            return next(err)
+        }
+    }    
+
 }
