@@ -20,6 +20,10 @@ export class BookAppointmentComponent implements OnInit {
   doctorName: string = 'Select a Doctor';
   bookedTimes: any;
   availableTimes: any;
+  minDate: any = '';
+  calDisabled = true;
+  doctorProfile: any;
+  dateOfApp: any;
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
@@ -40,19 +44,50 @@ export class BookAppointmentComponent implements OnInit {
         this.errors = true;
       }
     );
+    this.getDate();
+  }
+
+  getDate() {
+    var date: any = new Date();
+    var day: any = date.getDate();
+    var month: any = date.getMonth() + 1;
+    var year: any = date.getFullYear();
+
+    if (day < 10) {
+      day = '0' + day;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    this.minDate = year + '-' + month + '-' + day;
   }
 
   selectedDoctor(doctor: any) {
     this.doctorName = doctor.firstName + ' ' + doctor.lastName;
-    this.userService.getDoctorAvailability(doctor.id).subscribe((avail) => {
-      this.availability = avail;
-      console.log(this.availability);
-    }, (error) => {
-      this.errors = true;
-    });
-    this.userService.bookedTimes(doctor.id).subscribe((booked) => {
+    this.userService.getDoctorbyID(doctor.id).subscribe(
+      (profile) => {
+        console.log(profile);
+        this.doctorProfile = profile;
+      }
+    )
+    this.calDisabled = false;
+    /* this.userService.getDoctorAvailability(doctor.id).subscribe(
+      (avail) => {
+        this.availability = avail;
+        this.calDisabled = false;
+        console.log(this.availability);
+      },
+      (error) => {
+        this.errors = true;
+      }
+    ); */
+   /*  this.userService.bookedTimes(doctor.id).subscribe((booked) => {
       this.bookedTimes = booked;
-    })
+    }); */
+  }
+
+  dateChange(){
+    
   }
 
   onSubmit(bookAppForm: NgForm) {

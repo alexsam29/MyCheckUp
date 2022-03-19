@@ -183,7 +183,7 @@ export class UserService {
 
   getDoctorbyID(doctorID: string): Observable<any> {
     return this.http
-      .get<any>(this.url + `doctor/${doctorID}`, { withCredentials: true })
+      .get<any>(this.url + `doctors/${doctorID}`, { withCredentials: true })
       .pipe(
         map((res) => {
           return res;
