@@ -42,7 +42,7 @@ DoctorRouter.get('/doctors',
  */
 DoctorRouter.get('/doctors/:doctorId',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   DoctorController.getAll)
+   DoctorController.getOneById)
 
 /**
  * @openapi
