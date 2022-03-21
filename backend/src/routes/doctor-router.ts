@@ -166,7 +166,7 @@ DoctorRouter.put(
 /**
  * @openapi
  * /doctor/{doctorId}/bookedTimes:
- *    put:
+ *    get:
  *       summary: collect all the times for the doctor
  *       tags:
  *          - Doctor
@@ -186,7 +186,7 @@ DoctorRouter.get(
 /**
  * @openapi
  * /doctor/{doctorId}/bookedTimes/{date}:
- *    put:
+ *    get:
  *       summary: collect all the times for the doctor
  *       tags:
  *          - Doctor
