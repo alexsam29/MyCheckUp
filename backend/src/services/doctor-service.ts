@@ -30,8 +30,9 @@ export const DoctorService = {
       const repository = getRepository(Doctor)
 
       const found = await repository.findOne({ email: doctorDto.email })
-      if (found)
+      if (found) {
          throw ApiError.BadRequest('Doctor account with this email already exists')
+      }
 
       const newDoctor = new Doctor()
       newDoctor.email = doctorDto.email
@@ -149,7 +150,7 @@ export const DoctorService = {
    /**
     * Finds one (first matching) doctor account in the database.
     *
-    * @param searchBy Search condition (optinal).
+    * @param searchBy Search condition (optional).
     * @returns Found doctor.
     */
    async findOne(searchBy?: {
