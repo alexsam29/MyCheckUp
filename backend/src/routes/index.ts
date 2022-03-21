@@ -5,6 +5,7 @@ import { AuthRouter } from './auth-router'
 import { AdminRouter } from './admin-router'
 import { DoctorRouter } from './doctor-router'
 import { PatientRouter } from './patient-router'
+import { SymptomRouter } from './symptom-router'
 
 /**
  * Provides routing for the whole API.
@@ -16,3 +17,4 @@ router.use(AuthRouter)
 router.use(AdminRouter)
 router.use(DoctorRouter)
 router.use(PatientRouter)
+router.use(SymptomRouter)
