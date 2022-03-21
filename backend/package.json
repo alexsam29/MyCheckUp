@@ -1,7 +1,7 @@
 {
-   "name": "api",
+   "name": "mycheckup-api",
    "version": "1.0.0",
-   "description": "API for Health App",
+   "description": "MyCheckUp API",
    "main": "main.js",
    "scripts": {
       "start": "node dist/main.js",
@@ -16,11 +16,13 @@
       "type": "git",
       "url": "git+https://github.com/SenecaCollegeCapstoneProject2021-2022/Group07.git"
    },
+   "author": "Seneca College Capstone Project - Group 7",
    "contributors": [
       "Nikita Mezhenskyi",
       "Rad Eshghi"
    ],
-   "license": "ISC",
+   "license": "UNLICENSED",
+   "private": true,
    "jest": {
       "preset": "ts-jest",
       "testEnvironment": "node"
