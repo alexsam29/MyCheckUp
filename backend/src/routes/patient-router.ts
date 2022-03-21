@@ -7,14 +7,6 @@ import { AppointmentsController } from '../controllers/appointment-controller'
 
 export const PatientRouter = express.Router()
 
-/*PatientRouter.post('/patient/login',
- body('email').isEmail(),
- body('password').isLength({ min: 6, max: 50 }),
- PatientController.login)
-
-
-PatientRouter.post('/patient/logout', PatientController.logout) */
-
 /**
  * @openapi
  * /patient/register:
