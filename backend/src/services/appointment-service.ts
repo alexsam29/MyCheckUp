@@ -1,280 +1,289 @@
-import { ApiError } from '../exceptions/api-error'
-import { AppointmentStatus } from '../models/appointment-status'
-import { Doctor } from '../models/doctor'
-import { Patient } from '../models/patient'
-import { getRepository } from 'typeorm'
-import { Appointment } from '../models/appointment'
-import { DoctorService } from './doctor-service'
+import { ApiError } from "../exceptions/api-error";
+import { AppointmentStatus } from "../models/appointment-status";
+import { Doctor } from "../models/doctor";
+import { Patient } from "../models/patient";
+import { getRepository } from "typeorm";
+import { Appointment } from "../models/appointment";
+import { DoctorService } from "./doctor-service";
+
 
 export const AppointmentService = {
+
    /**
     * Booking and appointment for a patient.
-    *
-    * @param details set of passes parameters to book.
+    * 
+    * @param details set of passes parameters to book. 
     * @returns saved appointment.
     */
-   async setAppointment(details: {
-      patientId: string
-      doctorId: string
-      //selfAssessmentId: string,
-      date: Date
-      startTime: string
-      endTime: string
-      doctorNotes: string
-   }): Promise<Appointment> {
-      const appointmentRepo = getRepository(Appointment)
-      const patientRepo = getRepository(Patient)
-      const doctorRepo = getRepository(Doctor)
-      //const selfAssessmentRepo = getRepository(SelfAssessment)
+    async setAppointment(details: {
+    patientId: string, 
+    doctorId: string, 
+    //selfAssessmentId: string, 
+    date: Date, 
+    startTime: string, 
+    endTime: string, 
+    doctorNotes: string
+    }) : Promise<Appointment> {
 
-      const patient = await patientRepo.findOne(details.patientId)
-      const doctor = await doctorRepo.findOne(details.doctorId)
-      //const selfassessment = await selfAssessmentRepo.findOne(details.selfAssessmentId)
+        const appointmentRepo = getRepository(Appointment)
+        const patientRepo = getRepository(Patient)
+        const doctorRepo = getRepository(Doctor)
+        //const selfAssessmentRepo = getRepository(SelfAssessment)
 
-      // To find any appointment already book in the system
-      const appointments = await appointmentRepo.find({
-         select: [
-            'id',
-            'patientId',
-            'doctorId',
-            'selfAssessmentId',
-            'date',
-            'startTime',
-            'endTime',
-            'status',
-            'doctorNotes',
-         ],
-         where: { startTime: details.startTime },
-         order: { createdAt: 'DESC' },
-      })
+        const patient = await patientRepo.findOne(details.patientId)
+        const doctor = await doctorRepo.findOne(details.doctorId)
+        //const selfassessment = await selfAssessmentRepo.findOne(details.selfAssessmentId)
+        
+        // To find any appointment already book in the system
+        const appointments = await appointmentRepo.find({
+            select: ['id', 'patientId', 'doctorId', 'selfAssessmentId',
+            'date', 'startTime', 'endTime', 'status', 'doctorNotes'],
+            where: {startTime: details.startTime},
+            order: { createdAt: 'DESC'}, 
+        })
+        
 
-      if (!patient) throw ApiError.NotFound('Patient not found!')
+        if(!patient) 
+            throw ApiError.NotFound('Patient not found!')
 
-      if (!doctor) throw ApiError.NotFound('Doctor not found!')
+        if(!doctor) 
+            throw ApiError.NotFound('Doctor not found!') 
 
-      if (appointments.length != 0) throw 'This time has is already booked!'
-      //if(!selfassessment)
-      // throw ApiError.NotFound('SelfAssessment not found!')
+        if(appointments.length != 0)
+            throw "This time is already booked!"
+        //if(!selfassessment) 
+        // throw ApiError.NotFound('SelfAssessment not found!')
 
-      const appointment = new Appointment()
-      appointment.doctor = doctor
-      appointment.patient = patient
-      //appointment.selfAssessment = selfassessment
-      appointment.date = details.date
-      appointment.startTime = details.startTime
-      appointment.endTime = details.endTime
-      appointment.status = AppointmentStatus.PENDING
-      appointment.doctorNotes = details.doctorNotes
+        
 
-      const saved = await appointmentRepo.save(appointment)
+        const appointment = new Appointment()
+        appointment.doctor = doctor
+        appointment.patient = patient
+        //appointment.selfAssessment = selfassessment
+        appointment.date = details.date
+        appointment.startTime = details.startTime
+        appointment.endTime = details.endTime
+        appointment.status = AppointmentStatus.PENDING
+        appointment.doctorNotes = details.doctorNotes
 
-      return saved
-   },
 
-   /**
-    * Returns first appointment found for the patient.
-    * @param patientId
-    * @returns
-    */
-   async findAppointment(
-      searchBy?: { patientId?: string },
-      offset = 0,
-      limit = 100
-   ): Promise<Appointment[]> {
-      const repository = getRepository(Appointment)
+        const saved = await appointmentRepo.save(appointment)
 
-      const appointments = await repository.find({
-         select: [
-            'id',
-            'patientId',
-            'doctorId',
-            'selfAssessmentId',
-            'date',
-            'startTime',
-            'endTime',
-            'status',
-            'doctorNotes',
-         ],
-         where: searchBy,
-         order: { createdAt: 'DESC' },
-         skip: offset,
-         take: limit,
-      })
+        return saved 
+    },
 
-      if (!appointments || !appointments.length)
-         throw ApiError.NotFound('No appointment found for this patient!')
 
-      return appointments
-   },
+    /**
+     * Returns first appointment found for the patient.
+     * @param patientId 
+     * @returns 
+     */
+    async findAppointment(searchBy?: {patientId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
+    {
 
-   /*Doctor***********************************************************************************************************/
+        const repository = getRepository(Appointment)
 
-   async appointmentTimesBooked(
-      searchBy?: { doctorId?: string },
-      offset = 0,
-      limit = 100
-   ): Promise<Appointment[]> {
-      const appointmentTime = getRepository(Appointment)
+        const appointments = await repository.find({
+            select: ['id', 'patientId', 'doctorId', 'selfAssessmentId',
+            'date', 'startTime', 'endTime', 'status', 'doctorNotes'],
+            where: searchBy, 
+            order: { createdAt: 'DESC'}, 
+            skip: offset, 
+            take: limit
+        })
 
-      const appointmentTimes = await appointmentTime.find({
-         select: [
-            'id',
-            'patientId',
-            'doctorId',
-            'selfAssessmentId',
-            'date',
-            'startTime',
-            'endTime',
-            'status',
-            'doctorNotes',
-            'createdAt',
-            'updatedAt',
-         ],
-         where: searchBy,
-         order: { createdAt: 'DESC' },
-         skip: offset,
-         take: limit,
-      })
+        if(!appointments || !appointments.length)
+            throw ApiError.NotFound('No appointment found for this patient!')
 
-      if (!appointmentTimes || !appointmentTimes.length)
-         throw ApiError.NotFound(
-            'No appointment time has been found for this doctor!'
-         )
 
-      return appointmentTimes
-   },
+        return appointments
+    },
 
-   async appointmentTimesAvailable(
-      doctorId: string,
-      searchBy?: { doctorId?: string; date?: string; status?: string },
-      offset = 0,
-      limit = 100
-   ): Promise<Appointment[]> {
-      const appointmentTime = getRepository(Appointment)
 
-      const appointmentTimes = await appointmentTime.find({
-         select: [
-            'id',
-            'patientId',
-            'doctorId',
-            'selfAssessmentId',
-            'date',
-            'startTime',
-            'endTime',
-            'status',
-            'doctorNotes',
-            'createdAt',
-            'updatedAt',
-         ],
-         where: searchBy,
-         order: { createdAt: 'DESC' },
-         skip: offset,
-         take: limit,
-      })
+    /*Doctor***********************************************************************************************************/
 
-      if (!appointmentTimes || !appointmentTimes.length)
-         throw ApiError.NotFound(
-            'No appointment time has been found for this doctor!'
-         )
+    async appointmentTimesBooked(searchBy?: {doctorId?: string}, offset = 0, limit = 100): Promise<Appointment[]>
+    {
+        const appointmentTime = getRepository(Appointment)
 
-      /* -------------------------------------------------------------------------------------- */
-      const date = searchBy?.date
-      const dayOfWeek = this.getDayOfTheWeek(date)
+        const appointmentTimes = await appointmentTime.find({
+            select: ['id', 'patientId', 'doctorId', 'selfAssessmentId', 'date' ,'startTime', 
+            'endTime', 'status', 'doctorNotes', 'createdAt', 'updatedAt'],
+            where: searchBy,
+            order: { createdAt: 'DESC'}, 
+            skip: offset, 
+            take: limit
+        })
 
-      if (dayOfWeek == null) throw ApiError.NotFound('No week day has been found!')
 
-      const availability = await DoctorService.findAvailabilityByDay(
-         doctorId,
-         dayOfWeek
-      )
+        if(!appointmentTimes || !appointmentTimes.length)
+            throw ApiError.NotFound('No appointment time has been found for this doctor!')
 
-      if (availability.availableFrom == null || availability.availableTo == null)
-         throw ApiError.NotFound('Availibility is null!')
+        return appointmentTimes
+    },
 
-      // Returns the diffirence between two hours // 8
-      const difference = this.differenceInTimeString(
-         availability.availableFrom,
-         availability.availableTo
-      )
+    async appointmentTimesAvailable(doctorId: string ,searchBy?: {doctorId?: string, date?: string, status?: string}, offset = 0, limit = 100) 
+    {
+        const appointmentTime = getRepository(Appointment)
 
-      // Number of appointments that can be booked during the day. // 16
-      let numberOfAppointment = (difference * 60) / 30
+        const appointmentTimes = await appointmentTime.find({
+            select: ['id', 'patientId', 'doctorId', 'selfAssessmentId', 'date' ,'startTime', 
+            'endTime', 'status', 'doctorNotes', 'createdAt', 'updatedAt'],
+            where: searchBy, 
+            order: { createdAt: 'DESC'}, 
+            skip: offset, 
+            take: limit
+        })
 
-      // An object to store the available times
-      //let availibleTimes: {From: string, To: string, date: string}[];
+        if(!appointmentTimes || !appointmentTimes.length)
+        throw ApiError.NotFound('No appointment time has been found for this doctor!')
 
-      let startFrom = new Date(date + ' ' + availability.availableFrom)
-      //let endTo = new Date (date + " " + availability.availableTo)
+        
 
-      let startTimeString = this.TimeToString(startFrom)
-      //let endTimeString = this.TimeToString(endTo)
+        /* -------------------------------------------------------------------------------------- */
+        
+        if(searchBy?.date == null)
+            throw ApiError.NotFound("Date is null !")
 
-      let minToAdd = 30
+        const date = searchBy?.date
+        const dayOfWeek = this.getDayOfTheWeek(date)
 
-      for (let i = 0; i < numberOfAppointment; ++i) {
-         for (let j = 0; j < appointmentTimes.length; ++i) {
-            if (
-               appointmentTimes[j].startTime != startTimeString ||
-               appointmentTimes[j].startTime
-            ) {
-               let newDate = new Date(startFrom.getTime() + minToAdd * 60000)
-               console.log(newDate)
-            }
-         }
-      }
+        if(dayOfWeek == null)
+            throw ApiError.NotFound('No week day has been found!')                                      
 
-      return appointmentTimes
-   },
 
-   getDayOfTheWeek(date: any) {
-      const dayOfWeek = new Date(date).getDay()
-      return isNaN(dayOfWeek) ? null : [0, 1, 2, 3, 4, 5, 6][dayOfWeek + 1]
-   },
+        const availability = await DoctorService.findAvailabilityByDay(doctorId, dayOfWeek)
 
-   differenceInTimeString(_: string, __: string): number {
-      // let array = time1.split(":");
-      // let seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
-      // let hour = seconds / 3600
+      
+        
+        if(availability.availableFrom == null || availability.availableTo == null)
+            throw ApiError.NotFound("Availibility is null!")
 
-      // let array = time2.split(":");
-      // let seconds2 = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
-      // let hour2 = seconds2 / 3600
 
-      // return hour2 - hour // 8
-      return 0
-   },
+        // Returns the diffirence between two hours // 8      
+        const difference = this.differenceInTimeString(availability.availableFrom, availability.availableTo)
 
-   TimeToString(time: Date) {
-      let h = time.getHours()
-      let m = time.getMinutes()
+        
 
-      let newh = ''
+        // Number of appointments that can be booked during the day. // 16
+        var numberOfAppointment = (difference * 60) / 30
 
-      if (
-         h == 0 ||
-         h == 1 ||
-         h == 2 ||
-         h == 3 ||
-         h == 4 ||
-         h == 5 ||
-         h == 6 ||
-         h == 7 ||
-         h == 8 ||
-         h == 9
-      ) {
-         newh = '0' + h.toString() + ':'
-      } else {
-         newh = h.toString() + ':'
-      }
+        
 
-      if (m == 0) {
-         newh += '0' + m.toString() + ':' + '00'
-      } else {
-         newh += m.toString() + ':' + '00'
-      }
+        // An object array to store the available times
+        var availibleTimes: {From: string, To: string, Date: string, Available: boolean}[] = [{From: '', To: '', Date: '', Available: true}]; 
 
-      console.log(newh)
 
-      return newh
-   },
+        var startFrom = new Date (date + " " + availability.availableFrom)
+        var endTo = new Date (date + " " + availability.availableTo)
+        var startTimeString = this.TimeToString(startFrom)
+        var endTimeString = this.TimeToString(endTo)
+        
+
+        // Returns time with 30 min added to it as a string
+        var capturedAddedTime = this.AddHalfHour(startFrom)
+
+        // Initilizing the first time slot
+        var newTimeSlot 
+        let j
+        for(j = 0; j < appointmentTimes.length; ++j)
+        {
+            if(appointmentTimes[j].startTime == startTimeString)
+                newTimeSlot = {From: startTimeString, To: this.TimeToString(capturedAddedTime), Date: date, Available: false }
+            else
+                newTimeSlot = {From: startTimeString, To: this.TimeToString(capturedAddedTime), Date: date, Available: true }
+        }
+          
+        if(newTimeSlot != undefined)
+            availibleTimes.push(newTimeSlot)
+        
+        // temp variables to update times
+        var capturedAddedTime2
+        var capturedAddedTime3 = capturedAddedTime
+        
+        for(let i = 0; i < numberOfAppointment; ++i)
+        {   
+            capturedAddedTime2 = this.AddHalfHour(capturedAddedTime)  
+           
+            let flag = false
+            // Checking for the currnet booked times
+            for(j = 0; j < appointmentTimes.length; ++j)
+                if(appointmentTimes[j].startTime == this.TimeToString(capturedAddedTime3))
+                {
+                    newTimeSlot = {From: this.TimeToString(capturedAddedTime3), To: this.TimeToString(capturedAddedTime2) , Date: date, Available: false }
+                    flag = true
+                }
+                    
+            if(flag != true)
+                newTimeSlot = {From: this.TimeToString(capturedAddedTime3), To: this.TimeToString(capturedAddedTime2) , Date: date, Available: true }
+
+            if(newTimeSlot != undefined)
+                if(newTimeSlot.From != endTimeString)
+                    availibleTimes.push(newTimeSlot)
+
+            capturedAddedTime3 = capturedAddedTime2
+            capturedAddedTime = capturedAddedTime2
+            j++
+        } 
+
+        return availibleTimes
+    }, 
+
+    getDayOfTheWeek(date: any)
+    {
+        const dayOfWeek = new Date(date).getDay()
+        return isNaN(dayOfWeek) ? null : [0, 1, 2, 3, 4, 5, 6][dayOfWeek + 1]
+    }, 
+
+
+    differenceInTimeString(time1: string , time2: string)
+    {
+        var time1 = time1;
+        var array = time1.split(":");
+        var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10) 
+        var hour = seconds / 3600
+        
+
+        var time2 = time2;
+        var array = time2.split(":");
+        var seconds2 = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
+        var hour2 = seconds2 / 3600 
+
+        return hour2 - hour // 8 
+    }, 
+
+    TimeToString(time: Date)
+    {
+        var h = time.getHours()
+        var m = time.getMinutes()
+
+        var newh = ""
+
+        if(h==0 ||h==1 || h==2 || h==3 || h==4 || h==5 || h==6 || h==7 || h==8 || h==9)
+        {
+            newh = '0' + h.toString() + ':' 
+        }
+        else
+        {
+            newh = h.toString() + ':'
+        } 
+        
+        if(m==0)
+        {
+            newh += '0' + m.toString() + ':' + '00'  
+        }
+        else
+        {
+            newh += m.toString() + ':' + '00'
+        }
+
+        return newh
+    }, 
+
+    AddHalfHour(StartFrom: Date)
+    {
+        var minToAdd = 30;
+        var newDate = new Date (StartFrom.getTime() + minToAdd*60000)
+        return newDate
+    }
 }
