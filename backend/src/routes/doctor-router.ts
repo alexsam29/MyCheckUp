@@ -173,7 +173,20 @@ DoctorRouter.get('/doctor/:doctorId/bookedTimes',
    AppointmentsController.getAppointmentTimes)
 
 
-
+/**
+ * @openapi
+ * /doctor/{doctorId}/bookedTimes/{date}:
+ *    put: 
+ *       summary: collect all the times for the doctor 
+ *       tags: 
+ *          - Doctor
+ *       description: collect all the available and not available times for the doctor for that date.
+ *       security: 
+ *          - coockieAuth: []
+ *       responses: 
+ *          200:
+ *             description: OK
+ */
 DoctorRouter.get('/doctor/:doctorId/availabileTimes/:date', 
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
    AppointmentsController.getAvailableTimes)

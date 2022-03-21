@@ -50,7 +50,7 @@ export const AppointmentService = {
             throw ApiError.NotFound('Doctor not found!') 
 
         if(appointments.length != 0)
-            throw "This time has is already booked!"
+            throw "This time is already booked!"
         //if(!selfassessment) 
         // throw ApiError.NotFound('SelfAssessment not found!')
 
@@ -122,7 +122,7 @@ export const AppointmentService = {
         return appointmentTimes
     },
 
-    async appointmentTimesAvailable(doctorId: string ,searchBy?: {doctorId?: string, date?: string, status?: string}, offset = 0, limit = 100) : Promise<Appointment[]>
+    async appointmentTimesAvailable(doctorId: string ,searchBy?: {doctorId?: string, date?: string, status?: string}, offset = 0, limit = 100) 
     {
         const appointmentTime = getRepository(Appointment)
 
@@ -141,6 +141,10 @@ export const AppointmentService = {
         
 
         /* -------------------------------------------------------------------------------------- */
+        
+        if(searchBy?.date == null)
+            throw ApiError.NotFound("Date is null !")
+
         const date = searchBy?.date
         const dayOfWeek = this.getDayOfTheWeek(date)
 
@@ -166,38 +170,63 @@ export const AppointmentService = {
 
         
 
-        // An object to store the available times
-        //let availibleTimes: {From: string, To: string, date: string}[]; 
+        // An object array to store the available times
+        var availibleTimes: {From: string, To: string, Date: string, Available: boolean}[] = [{From: '', To: '', Date: '', Available: true}]; 
 
 
         var startFrom = new Date (date + " " + availability.availableFrom)
         var endTo = new Date (date + " " + availability.availableTo)
-        
         var startTimeString = this.TimeToString(startFrom)
         var endTimeString = this.TimeToString(endTo)
         
-        var minToAdd = 30;
-       
 
+        // Returns time with 30 min added to it as a string
+        var capturedAddedTime = this.AddHalfHour(startFrom)
+
+        // Initilizing the first time slot
+        var newTimeSlot 
+        let j
+        for(j = 0; j < appointmentTimes.length; ++j)
+        {
+            if(appointmentTimes[j].startTime == startTimeString)
+                newTimeSlot = {From: startTimeString, To: this.TimeToString(capturedAddedTime), Date: date, Available: false }
+            else
+                newTimeSlot = {From: startTimeString, To: this.TimeToString(capturedAddedTime), Date: date, Available: true }
+        }
+          
+        if(newTimeSlot != undefined)
+            availibleTimes.push(newTimeSlot)
+        
+        // temp variables to update times
+        var capturedAddedTime2
+        var capturedAddedTime3 = capturedAddedTime
+        
         for(let i = 0; i < numberOfAppointment; ++i)
         {   
-            for(let j = 0; j < appointmentTimes.length; ++i)
-            {
-                if(appointmentTimes[j].startTime != startTimeString || appointmentTimes[j].startTime)
+            capturedAddedTime2 = this.AddHalfHour(capturedAddedTime)  
+           
+            let flag = false
+            // Checking for the currnet booked times
+            for(j = 0; j < appointmentTimes.length; ++j)
+                if(appointmentTimes[j].startTime == this.TimeToString(capturedAddedTime3))
                 {
-                    var newDate = new Date (startFrom.getTime() + minToAdd*60000)
-                    console.log(newDate)
-            
+                    newTimeSlot = {From: this.TimeToString(capturedAddedTime3), To: this.TimeToString(capturedAddedTime2) , Date: date, Available: false }
+                    flag = true
                 }
-            }
+                    
+            if(flag != true)
+                newTimeSlot = {From: this.TimeToString(capturedAddedTime3), To: this.TimeToString(capturedAddedTime2) , Date: date, Available: true }
 
+            if(newTimeSlot != undefined)
+                if(newTimeSlot.From != endTimeString)
+                    availibleTimes.push(newTimeSlot)
+
+            capturedAddedTime3 = capturedAddedTime2
+            capturedAddedTime = capturedAddedTime2
+            j++
         } 
-        
-         
 
-
-
-        return appointmentTimes
+        return availibleTimes
     }, 
 
     getDayOfTheWeek(date: any)
@@ -238,7 +267,6 @@ export const AppointmentService = {
         {
             newh = h.toString() + ':'
         } 
-
         
         if(m==0)
         {
@@ -249,13 +277,15 @@ export const AppointmentService = {
             newh += m.toString() + ':' + '00'
         }
 
-        console.log(newh)
-
         return newh
+    }, 
+
+    AddHalfHour(StartFrom: Date)
+    {
+        var minToAdd = 30;
+        var newDate = new Date (StartFrom.getTime() + minToAdd*60000)
+        return newDate
     }
-  
-
-
 }
 
 

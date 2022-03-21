@@ -81,6 +81,7 @@ export const AppointmentsController = {
             const  status  = 'pending'
 
             const appointmentTimes = await AppointmentService.appointmentTimesAvailable(doctorId, {doctorId, date, status})
+            console.log(appointmentTimes)
             return res.status(200).json(appointmentTimes)
         }
         catch(err: unknown)
