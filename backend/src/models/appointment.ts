@@ -6,7 +6,7 @@ import {
    UpdateDateColumn,
    ManyToOne,
    OneToOne,
-   JoinColumn
+   JoinColumn,
 } from 'typeorm'
 import { AppointmentStatus } from './appointment-status'
 import { Patient } from './patient'
@@ -15,8 +15,8 @@ import { SelfAssessment } from './self-assessment'
 
 /**
  * Appointment database model.
- * 
- * Fields: 
+ *
+ * Fields:
  * - `id` - appointment id.
  * - `patientId` - patient id.
  * - `doctorId` - doctor id.
@@ -47,23 +47,25 @@ export class Appointment {
    @Column('date')
    date!: Date
 
-   @Column({type:'time', nullable: false})
+   @Column({ type: 'time', nullable: false })
    startTime!: string
 
-   @Column({type: 'time', nullable: false})
+   @Column({ type: 'time', nullable: false })
    endTime!: string
 
    @Column({
       type: 'enum',
       enum: AppointmentStatus,
-      default: AppointmentStatus.PENDING
+      default: AppointmentStatus.PENDING,
    })
    status!: AppointmentStatus
 
    @Column({ type: 'text', nullable: true })
    doctorNotes!: string | null
 
-   @ManyToOne(() => Patient, patient => patient.appointments, { onDelete: 'CASCADE' })
+   @ManyToOne(() => Patient, patient => patient.appointments, {
+      onDelete: 'CASCADE',
+   })
    patient!: Patient
 
    @ManyToOne(() => Doctor, doctor => doctor.appointments, { onDelete: 'SET NULL' })

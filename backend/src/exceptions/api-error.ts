@@ -1,6 +1,6 @@
 /**
  * Represents an API error.
- * 
+ *
  * Contains status code for the response and error message.
  */
 export class ApiError extends Error {

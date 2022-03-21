@@ -11,9 +11,9 @@ export const mailTransport = async () => {
       port: 587,
       auth: {
          user: testAccount.user,
-         pass: testAccount.pass
-      }
+         pass: testAccount.pass,
+      },
    })
-   
+
    return transport
 }

@@ -6,7 +6,6 @@ import { AdminRouter } from './admin-router'
 import { DoctorRouter } from './doctor-router'
 import { PatientRouter } from './patient-router'
 
-
 /**
  * Provides routing for the whole API.
  */

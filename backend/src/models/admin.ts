@@ -4,7 +4,7 @@ import { Role } from './role'
 
 /**
  * Admin database model.
- * 
+ *
  * Fields:
  * - `id` - Admin id.
  * - `firstName` - first name.
@@ -20,7 +20,7 @@ export class Admin extends User {
    @Column({
       type: 'enum',
       enum: Role,
-      default: Role.ADMIN
+      default: Role.ADMIN,
    })
    override role!: Role.ADMIN
 }

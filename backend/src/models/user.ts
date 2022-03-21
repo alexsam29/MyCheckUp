@@ -2,14 +2,13 @@ import {
    PrimaryGeneratedColumn,
    Column,
    CreateDateColumn,
-   UpdateDateColumn
+   UpdateDateColumn,
 } from 'typeorm'
 import { Role } from './role'
 
-
 /**
  * User abstract model.
- * 
+ *
  * Fields:
  * - `id` - id.
  * - `firstName` - first name.

@@ -7,11 +7,11 @@ import { PROD, SESSION_COOKIE, SESSION_COOKIE_MAXAGE } from './constants'
 
 /**
  * Configures and manages user sessions.
- * 
+ *
  * @param repository TypeORM Repository for Session model
  */
 export const userSession = (repository: Repository<Session>) => {
-   return (session({
+   return session({
       secret: config.get('secrets.session'),
       name: SESSION_COOKIE,
       store: new TypeormStore().connect(repository),
@@ -20,7 +20,7 @@ export const userSession = (repository: Repository<Session>) => {
       cookie: {
          maxAge: SESSION_COOKIE_MAXAGE,
          sameSite: PROD ? 'none' : 'lax',
-         secure: PROD
-      }
-   }))
+         secure: PROD,
+      },
+   })
 }

@@ -11,14 +11,15 @@ import { errorHandler } from './middleware/error-handler'
 import { PORT, PROD } from './common/constants'
 import { logger } from './common/logger'
 
-
 const app = express()
 if (PROD) app.set('trust proxy', 1)
 app.use(express.json())
-app.use(cors({
-   origin: config.get('client.origin'),
-   credentials: true
-}))
+app.use(
+   cors({
+      origin: config.get('client.origin'),
+      credentials: true,
+   })
+)
 
 const main = async () => {
    try {
@@ -32,7 +33,7 @@ const main = async () => {
          database: config.get('database.name'),
          entities: config.get('typeorm.entities'),
          synchronize: !PROD,
-         logging: false
+         logging: false,
       } as ConnectionOptions)
 
       app.use(userSession(getRepository(Session)))
@@ -41,8 +42,7 @@ const main = async () => {
       app.use(errorHandler)
 
       app.listen(PORT, () => logger.info(`Server started on port ${PORT}`))
-   }
-   catch (err: unknown) {
+   } catch (err: unknown) {
       logger.error(err)
    }
 }

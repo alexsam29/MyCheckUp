@@ -1,14 +1,9 @@
-import {
-   Entity,
-   PrimaryColumn,
-   Column,
-   Index
-} from 'typeorm'
+import { Entity, PrimaryColumn, Column, Index } from 'typeorm'
 import { ISession } from 'connect-typeorm'
 
 /**
  * User Session model.
- * 
+ *
  * Fields:
  * - `expiredAt`
  * - `id`
@@ -19,13 +14,13 @@ export class Session implements ISession {
    @Index()
    @Column({
       type: 'bigint',
-      default: Date.now()
+      default: Date.now(),
    })
    expiredAt!: number
 
    @PrimaryColumn({
       type: 'varchar',
-      length: 255
+      length: 255,
    })
    id!: string
 

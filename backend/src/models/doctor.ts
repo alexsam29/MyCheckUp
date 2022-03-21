@@ -8,7 +8,7 @@ import { Appointment } from './appointment'
 
 /**
  * Doctor database model.
- * 
+ *
  * Fields:
  * - `id` - Doctor id.
  * - `firstName` - first name.
@@ -32,35 +32,35 @@ export class Doctor extends User {
    @Column({
       type: 'enum',
       enum: Role,
-      default: Role.DOCTOR
+      default: Role.DOCTOR,
    })
    override role!: Role.DOCTOR
 
    @Column({
       type: 'varchar',
       length: 255,
-      nullable: true
+      nullable: true,
    })
    license!: string | null
 
    @Column({
       type: 'varchar',
       length: 255,
-      nullable: true
+      nullable: true,
    })
    specialty!: string | null
 
    @Column({
       type: 'varchar',
       length: 255,
-      nullable: true
+      nullable: true,
    })
    title!: string | null
 
    @Column({
       type: 'varchar',
       length: 20,
-      nullable: true
+      nullable: true,
    })
    phoneNumber!: string | null
 

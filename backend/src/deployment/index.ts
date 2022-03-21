@@ -15,7 +15,7 @@ const main = async () => {
          database: config.get('database.name'),
          entities: config.get('typeorm.entities'),
          synchronize: true,
-         logging: true
+         logging: true,
       } as ConnectionOptions)
 
       await setAdmin()
@@ -23,8 +23,7 @@ const main = async () => {
       await connection.close()
 
       logger.info('Deloyment process have been completed')
-   }
-   catch (err: unknown) {
+   } catch (err: unknown) {
       logger.error(err)
    }
 }

@@ -2,7 +2,6 @@ import express from 'express'
 import swaggerUi from 'swagger-ui-express'
 import { openApiSpec } from '../common/open-api-spec'
 
-
 export const RootRouter = express.Router()
 
 /**
@@ -18,8 +17,7 @@ export const RootRouter = express.Router()
  *         description: OK
  *         content:
  *           text/html:
- *             schema: 
+ *             schema:
  *               example: HTML
  */
 RootRouter.get('/', swaggerUi.setup(openApiSpec))
-

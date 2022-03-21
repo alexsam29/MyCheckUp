@@ -4,16 +4,14 @@ import {
    PrimaryGeneratedColumn,
    CreateDateColumn,
    UpdateDateColumn,
-   ManyToOne
+   ManyToOne,
 } from 'typeorm'
 import { Doctor } from './doctor'
 import { WeekDay } from './week-day'
 
-
-
 /**
  * Availability database model. Represents doctor's availability for the day.
- * 
+ *
  * Fields:
  * - `id` - availability id.
  * - `doctorId` - doctor id.
@@ -48,10 +46,7 @@ export class Availability {
    @Column({ type: 'integer', default: 0 })
    appointmentDuration!: number
 
-   @ManyToOne(
-      () => Doctor, doctor => doctor.availabilities,
-      { onDelete: 'CASCADE' }
-   )
+   @ManyToOne(() => Doctor, doctor => doctor.availabilities, { onDelete: 'CASCADE' })
    doctor!: Doctor
 
    @CreateDateColumn()

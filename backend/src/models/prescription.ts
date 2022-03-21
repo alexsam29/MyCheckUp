@@ -4,20 +4,20 @@ import {
    PrimaryGeneratedColumn,
    CreateDateColumn,
    UpdateDateColumn,
-   ManyToOne
+   ManyToOne,
 } from 'typeorm'
 import { Patient } from './patient'
 import { Doctor } from './doctor'
 
 /**
  * Patient prescription database model.
- * 
+ *
  * Fields:
- * - `id` - prescription id.  
- * - `patientId` - patient id.  
+ * - `id` - prescription id.
+ * - `patientId` - patient id.
  * - `doctorId` - doctor id.
- * - `description` - description of prescribed medicaments. 
- * - `numOfRefill` - number of times they can get the drug. 
+ * - `description` - description of prescribed medicaments.
+ * - `numOfRefill` - number of times they can get the drug.
  * - `expiryDate` - date of expiry.
  * - `patient` - associated patient object.
  * - `doctor` - associated doctor object.
@@ -44,7 +44,9 @@ export class Prescription {
    @Column()
    expiryDate!: Date
 
-   @ManyToOne(() => Patient, patient => patient.prescriptions, { onDelete: 'CASCADE' })
+   @ManyToOne(() => Patient, patient => patient.prescriptions, {
+      onDelete: 'CASCADE',
+   })
    patient!: Patient
 
    @ManyToOne(() => Doctor, doctor => doctor.prescriptions, { onDelete: 'SET NULL' })
