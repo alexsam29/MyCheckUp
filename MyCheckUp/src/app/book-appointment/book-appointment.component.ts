@@ -16,14 +16,18 @@ export class BookAppointmentComponent implements OnInit {
   errors: boolean = false;
   user: any;
   doctors: any;
-  availability: any;
   doctorName: string = 'Select a Doctor';
-  bookedTimes: any;
   availableTimes: any;
   minDate: any = '';
   calDisabled = true;
+  timePickerDisabled = true;
+  submitDisabled = true;
   doctorProfile: any;
+  timeLabel: string = 'Available Times';
   dateOfApp: any;
+  startTime: any;
+  endTime: any;
+  days: string[] = [];
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
@@ -64,59 +68,179 @@ export class BookAppointmentComponent implements OnInit {
 
   selectedDoctor(doctor: any) {
     this.doctorName = doctor.firstName + ' ' + doctor.lastName;
-    this.userService.getDoctorbyID(doctor.id).subscribe(
-      (profile) => {
-        console.log(profile);
-        this.doctorProfile = profile;
+    this.days = [];
+    this.userService.getDoctorbyID(doctor.id).subscribe((profile) => {
+      this.doctorProfile = profile;
+    });
+    this.userService.getDoctorAvailability(doctor.id).subscribe((available) => {
+      for (var i = 0; i < available.length; ++i) {
+        if (available[i].weekDay == 0 && available[i].isAvailable) {
+          this.days.push('Sunday');
+        } else if (available[i].weekDay == 1 && available[i].isAvailable) {
+          this.days.push('Monday');
+        } else if (available[i].weekDay == 2 && available[i].isAvailable) {
+          this.days.push('Tuesday');
+        } else if (available[i].weekDay == 3 && available[i].isAvailable) {
+          this.days.push('Wednesday');
+        } else if (available[i].weekDay == 4 && available[i].isAvailable) {
+          this.days.push('Thursday');
+        } else if (available[i].weekDay == 5 && available[i].isAvailable) {
+          this.days.push('Friday');
+        } else if (available[i].weekDay == 6 && available[i].isAvailable) {
+          this.days.push('Saturday');
+        }
       }
-    )
+    });
     this.calDisabled = false;
-    /* this.userService.getDoctorAvailability(doctor.id).subscribe(
-      (avail) => {
-        this.availability = avail;
-        this.calDisabled = false;
-        console.log(this.availability);
-      },
-      (error) => {
-        this.errors = true;
-      }
-    ); */
-   /*  this.userService.bookedTimes(doctor.id).subscribe((booked) => {
-      this.bookedTimes = booked;
-    }); */
   }
 
-  dateChange(){
-    
+  dateChange() {
+    this.userService
+      .getDoctorTimes(this.doctorProfile.id, this.dateOfApp)
+      .subscribe(
+        (times) => {
+          console.log(times);
+          this.availableTimes = times;
+        },
+        (error) => {
+          if (
+            error.error.error ==
+            'No appointment time has been found for this doctor!'
+          ) {
+            this.getAvailability();
+          }
+        }
+      );
+    this.timePickerDisabled = false;
+  }
+
+  getAvailability() {
+    var year = this.dateOfApp.substring(0, 4);
+    var month = this.dateOfApp.substring(5, 7);
+    var day = this.dateOfApp.substring(8, 10);
+    var date = new Date(year, month - 1, day);
+
+    this.userService
+      .getDoctorAvailabilityDay(this.doctorProfile.id, date.getDay().toString())
+      .subscribe(
+        (available) => {
+          if (available.isAvailable) {
+            var availableFrom = available.availableFrom.split(':');
+            var availableTo = available.availableTo.split(':');
+            var times = [];
+            var startTime = new Date(
+              year,
+              month - 1,
+              day,
+              availableFrom[0],
+              availableFrom[1],
+              availableFrom[2],
+              0
+            );
+            var endTime = new Date(
+              year,
+              month - 1,
+              day,
+              availableTo[0],
+              availableTo[1],
+              availableTo[2],
+              0
+            );
+
+            while (
+              startTime.toLocaleTimeString('en-US') !=
+              endTime.toLocaleTimeString('en-US')
+            ) {
+              var from =
+                (startTime.getHours() < 10
+                  ? '0' + startTime.getHours().toString() + ':'
+                  : startTime.getHours().toString() + ':') +
+                (startTime.getMinutes() < 10
+                  ? '0' + startTime.getMinutes().toString() + ':'
+                  : startTime.getMinutes().toString() + ':') +
+                (startTime.getMilliseconds() < 10
+                  ? '0' + startTime.getMilliseconds().toString()
+                  : startTime.getMilliseconds().toString());
+
+              startTime.setMinutes(startTime.getMinutes() + 30);
+
+              var to =
+                (startTime.getHours() < 10
+                  ? '0' + startTime.getHours().toString() + ':'
+                  : startTime.getHours().toString() + ':') +
+                (startTime.getMinutes() < 10
+                  ? '0' + startTime.getMinutes().toString() + ':'
+                  : startTime.getMinutes().toString() + ':') +
+                (startTime.getMilliseconds() < 10
+                  ? '0' + startTime.getMilliseconds().toString()
+                  : startTime.getMilliseconds().toString());
+
+              var slot = {
+                Available: true,
+                From: from,
+                To: to,
+              };
+              times.push(slot);
+            }
+            this.availableTimes = times;
+          } else {
+            this.fail = true;
+            this.message = 'This doctor is not avaialble on the selected day.';
+            this.timePickerDisabled = true;
+            this.submitDisabled = true;
+          }
+        },
+        (error) => {
+          this.fail = true;
+          this.message =
+            'This doctor has not made their schedule available. Please choose another one';
+          this.timePickerDisabled = true;
+          this.submitDisabled = true;
+        }
+      );
+  }
+
+  timeSelected(start: string, end: string) {
+    this.timeLabel = start.slice(0, -3) + ' - ' + end.slice(0, -3);
+    this.startTime = start;
+    this.endTime = end;
+    this.submitDisabled = false;
   }
 
   onSubmit(bookAppForm: NgForm) {
-    console.log(bookAppForm.value.firstName);
-    if (bookAppForm.valid) {
+    if (
+      bookAppForm.valid &&
+      this.dateOfApp &&
+      this.timeLabel != 'Available Times' &&
+      this.startTime &&
+      this.endTime
+    ) {
       this.userService
-        .book(
-          bookAppForm.value.firstName,
-          bookAppForm.value.lastName,
-          bookAppForm.value.phone,
-          bookAppForm.value.dateOfApp,
-          bookAppForm.value.timeOfApp,
-          bookAppForm.value.prefDoc,
+        .bookAppointment(
+          this.user.id,
+          this.doctorProfile.id,
+          this.dateOfApp,
+          this.startTime,
+          this.endTime,
           bookAppForm.value.reasonOfApp
         )
         .subscribe(
           (data) => {
             this.success = true;
+            this.fail = false;
             this.message = 'Appointment Successfully Booked!';
             setTimeout(() => {
-              this.router.navigate(['signin']);
+              this.router.navigate(['dashboard']);
             }, 3000);
           },
           (error) => {
-            console.log(error);
             this.message = error.error.error;
             this.fail = true;
           }
         );
+    } else {
+      this.message = 'Please fill out all fields.';
+      this.fail = true;
     }
   }
 }

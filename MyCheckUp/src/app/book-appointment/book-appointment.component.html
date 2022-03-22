@@ -1,9 +1,4 @@
-<div class="bg-dark">
-    <div class="text-light text-center">
-        <div *ngIf="fail" class="alert alert-danger" role="alert">
-            An error occured! {{message}}
-        </div>
-    </div>
+<div *ngIf="user" class="bg-dark">
     <br>
     <div class="container">
         <div class="row justify-content-center">
@@ -32,8 +27,8 @@
                             <div class="col-md">
                                 <p><b>Name: </b>{{doctorProfile.firstName}} {{doctorProfile.lastName}}</p>
                                 <p><b>Email: </b>{{doctorProfile.email}}</p>
-                                <p><b>License: </b>{{doctorProfile.License}}</p>
-                                <p><b>Specialty: </b>{{doctorProfile.Specialty}}</p>
+                                <p><b>License: </b>{{doctorProfile.license}}</p>
+                                <p><b>Specialty: </b>{{doctorProfile.specialty}}</p>
                                 <p><b>Title: </b>{{doctorProfile.title}}</p>
                                 <p><b>Phone #: </b>{{doctorProfile.phoneNumber}}</p>
                             </div>
@@ -44,7 +39,9 @@
                             <p class="card-text">Please select a doctor from the drop down menu above.</p>
                         </div>
                     </ng-template>
-
+                    <div class="card-footer" *ngIf="doctorName != 'Select a Doctor'">
+                        Days Available: <span *ngFor="let day of days">{{day}}, </span>
+                    </div>
                 </div>
             </div>
             <div class="col-xl-6">
@@ -62,15 +59,29 @@
                             </div>
                         </div>
                         <div class="col-md">
-                            <div class="dropdown">
+                            <label class="text-light"> Appointment Time </label> <br>
+                            <div *ngIf="!timePickerDisabled; else disableBlock" class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Available Times
+                                    {{timeLabel}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <button class="dropdown-item">9:00 AM - 10:00 PM</button>
+                                    <button *ngFor="let time of availableTimes" class="dropdown-item"
+                                        (click)="timeSelected(time.From, time.To)" type="button">
+                                        <p *ngIf="time.Available">{{time.From.slice(0, -3)}} - {{time.To.slice(0, -3)}}
+                                        </p>
+                                    </button>
                                 </div>
                             </div>
+                            <ng-template #disableBlock>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle disabled" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Available Times
+                                    </button>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
                     <div class="row">
@@ -85,20 +96,38 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <button *ngIf="!submitDisabled; else submitBlock"
+                                class="btn btn-success btn-lg btn-block text-center" type='submit'
+                                disable="submitDisabled">Book
+                                Appointment</button>
+                            <button routerLink="/dashboard" type="button" class="cancelbtn btn-block btn-danger">Go
+                                Back</button>
+                        </div>
+                        <ng-template #submitBlock>
+                            <button class="btn btn-success btn-lg btn-block text-center disabled" aria-disabled="true"
+                                type='button'>Book
+                                Appointment</button>
+                        </ng-template>
+                    </div>
                 </form>
             </div>
         </div>
         <br>
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <button class="btn btn-success btn-lg btn-block text-center" type='submit'>Book Appointment</button>
-                <button routerLink="/dashboard" type="button" class="cancelbtn btn-block btn-danger">Go
-                    Back</button>
-            </div>
-        </div>
-        <div *ngIf="success" class="alert alert-success" role="alert">
+        <div *ngIf="success" class="alert alert-success text-center" role="alert">
             {{message}}
+        </div>
+        <div *ngIf="fail" class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <br>
     </div>
+</div>
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
 </div>

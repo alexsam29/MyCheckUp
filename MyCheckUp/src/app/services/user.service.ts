@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -207,9 +208,7 @@ export class UserService {
       .put<any>(
         this.url + `admin/doctors/${doctorID}/activate`,
         {},
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       )
       .pipe(
         map((res) => {
@@ -219,7 +218,6 @@ export class UserService {
   }
 
   deactivateDoctor(doctorID: string): Observable<any> {
-    console.log(doctorID);
     return this.http
       .put<any>(
         this.url + `admin/doctors/${doctorID}/deactivate`,
@@ -247,9 +245,9 @@ export class UserService {
       );
   }
 
-  getDoctorAvailability(doctorID: string) {
+  getDoctorTimes(doctorID: string, date: string) {
     return this.http
-      .get<any>(this.url + `doctors/${doctorID}/availability`, {
+      .get<any>(this.url + `doctor/${doctorID}/availabileTimes/${date}`, {
         withCredentials: true,
       })
       .pipe(
@@ -267,6 +265,58 @@ export class UserService {
         {
           withCredentials: true,
         }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getDoctorAvailabilityDay(doctorID: string, day: string) {
+    return this.http
+      .get<any>(this.url + `doctors/${doctorID}/availability/${day}`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getDoctorAvailability(doctorID: string) {
+    return this.http
+      .get<any>(this.url + `doctors/${doctorID}/availability`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  bookAppointment(
+    patientId: string,
+    doctorId: string,
+    date: string,
+    startTime: string,
+    endTime: string,
+    doctorNotes: string
+  ) {
+    return this.http
+      .post<any>(
+        this.url + `patient/appointment`,
+        {
+          patientId: patientId,
+          doctorId: doctorId,
+          date: date,
+          startTime: startTime,
+          endTime: endTime,
+          doctorNotes: doctorNotes,
+        },
+        { withCredentials: true }
       )
       .pipe(
         map((res) => {
