@@ -10,6 +10,7 @@ export class ViewAppointmentsComponent implements OnInit {
   user: any;
   errors: boolean = false;
   appointments: any;
+  doctor: any;
 
   constructor(private userService: UserService) {}
 
@@ -29,5 +30,14 @@ export class ViewAppointmentsComponent implements OnInit {
         this.errors = true;
       }
     );
+  }
+
+  doctorDetails(doctorId: string){
+    console.log(doctorId);
+    this.userService.getDoctorbyID(doctorId).subscribe(
+      (profile)=>{
+        this.doctor = profile;
+      }
+    )
   }
 }
