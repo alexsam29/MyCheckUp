@@ -141,10 +141,16 @@ AppointmentRouter.get(
  *          200:
  *             description: OK
  */
-AppointmentRouter.delete(
-   '/deleteAppointment/:id',
+AppointmentRouter.put(
+   '/cancellingAppointment/:id',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   AppointmentsController.deleteAppointment
+   AppointmentsController.cancellingAppointment
+)
+
+AppointmentRouter.put(
+   '/reschedulingAppointment/:id/:date/:startTime/:endTime',
+   authorize([Role.ADMIN, Role.DOCTOR, Role.PATIENT]),
+   AppointmentsController.rescheduleAppointment
 )
 
 /** ~~~ Doctor: ~~~ */
