@@ -376,8 +376,10 @@ export const AppointmentService = {
             'No appointment time has been found for this doctor!'
          )
 
-      //appointmentTime.remove(appointmentTimes)
+      appointment.status = AppointmentStatus.CANCELLED
 
-      return appointment
+      const saved = await appointmentTime.save(appointment)
+
+      return saved
    },
 }
