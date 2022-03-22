@@ -1,5 +1,5 @@
 /**
- * Represents appointment status. 
+ * Represents appointment status.
  *
  * Statuses:
  * - `PENDING`
@@ -11,5 +11,5 @@ export enum AppointmentStatus {
    PENDING = 'pending',
    COMPLETED = 'completed',
    CANCELLED = 'cancelled',
-   MISSED = 'missed'
+   MISSED = 'missed',
 }

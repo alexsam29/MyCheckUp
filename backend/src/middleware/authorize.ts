@@ -20,18 +20,15 @@ export const authorize = (roles: Role | Role[] = []) => {
             let authorized = false
 
             roles.forEach(role => {
-               switch(role) {
+               switch (role) {
                   case Role.PATIENT:
-                     if (req.session?.role === Role.PATIENT)
-                        authorized = true
+                     if (req.session?.role === Role.PATIENT) authorized = true
                      break
                   case Role.DOCTOR:
-                     if (req.session?.role === Role.DOCTOR)
-                        authorized = true
+                     if (req.session?.role === Role.DOCTOR) authorized = true
                      break
                   case Role.ADMIN:
-                     if (req.session?.role === Role.ADMIN)
-                        authorized = true
+                     if (req.session?.role === Role.ADMIN) authorized = true
                      break
                   default:
                      authorized = false
@@ -42,6 +39,6 @@ export const authorize = (roles: Role | Role[] = []) => {
          }
 
          return next()
-      }
+      },
    ]
 }

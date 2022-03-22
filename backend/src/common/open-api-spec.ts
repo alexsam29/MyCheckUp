@@ -1,5 +1,5 @@
 import jsdoc from 'swagger-jsdoc'
-import { VERSION ,SESSION_COOKIE } from './constants'
+import { VERSION, SESSION_COOKIE } from './constants'
 
 const options: jsdoc.Options = {
    definition: {
@@ -13,12 +13,12 @@ const options: jsdoc.Options = {
             cookieAuth: {
                type: 'apiKey',
                in: 'cookie',
-               name: SESSION_COOKIE
-            }
-         }
-      }
+               name: SESSION_COOKIE,
+            },
+         },
+      },
    },
-   apis: ['./dist/routes/*.js']
+   apis: ['./dist/routes/*.js'],
 }
 
 export const openApiSpec = jsdoc(options)

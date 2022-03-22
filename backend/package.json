@@ -1,13 +1,14 @@
 {
-   "name": "api",
+   "name": "mycheckup-api",
    "version": "1.0.0",
-   "description": "API for Health App",
+   "description": "MyCheckUp API",
    "main": "main.js",
    "scripts": {
       "start": "node dist/main.js",
       "dev": "nodemon dist/main.js",
-      "build": "npx tsc",
+      "build": "npx prettier --write ./src && npx tsc",
       "watch": "npx tsc -w",
+      "prettier": "npx prettier --write ./src",
       "test": "jest",
       "deploy": "node dist/deployment/index.js"
    },
@@ -15,11 +16,13 @@
       "type": "git",
       "url": "git+https://github.com/SenecaCollegeCapstoneProject2021-2022/Group07.git"
    },
+   "author": "Seneca College Capstone Project - Group 7",
    "contributors": [
       "Nikita Mezhenskyi",
       "Rad Eshghi"
    ],
-   "license": "ISC",
+   "license": "UNLICENSED",
+   "private": true,
    "jest": {
       "preset": "ts-jest",
       "testEnvironment": "node"
@@ -40,8 +43,13 @@
       "@types/supertest": "^2.0.11",
       "@types/swagger-jsdoc": "^6.0.1",
       "@types/swagger-ui-express": "^4.1.3",
+      "@typescript-eslint/eslint-plugin": "^5.15.0",
+      "@typescript-eslint/parser": "^5.15.0",
+      "@typescript-eslint/typescript-estree": "^5.16.0",
+      "eslint": "^8.11.0",
       "jest": "^27.3.1",
       "nodemon": "^2.0.15",
+      "prettier": "2.6.0",
       "supertest": "^6.1.6",
       "ts-jest": "^27.0.7",
       "typescript": "^4.5.2"

@@ -15,7 +15,10 @@ export const DoctorController = {
       try {
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const { email, password } = req.body
@@ -26,8 +29,7 @@ export const DoctorController = {
          req.session.role = doctor.role
 
          return res.status(200).json({ success: true })
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -40,8 +42,7 @@ export const DoctorController = {
          req.session.destroy(() => {
             return res.clearCookie(SESSION_COOKIE).status(200).send()
          })
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -53,7 +54,10 @@ export const DoctorController = {
       try {
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const doctor = await DoctorService.create({
@@ -68,8 +72,7 @@ export const DoctorController = {
          })
 
          return res.status(200).json(doctor)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -81,7 +84,10 @@ export const DoctorController = {
       try {
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const doctor = await DoctorService.update({
@@ -97,8 +103,7 @@ export const DoctorController = {
          })
 
          return res.status(200).json(doctor)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -110,8 +115,7 @@ export const DoctorController = {
       try {
          const doctor = await DoctorService.findOne({ id: req.session.userId })
          return res.status(200).json(doctor)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -123,8 +127,7 @@ export const DoctorController = {
       try {
          const doctors = await DoctorService.find({ active: true })
          return res.status(200).json(doctors)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -142,8 +145,7 @@ export const DoctorController = {
          }
 
          return res.status(200).json(doctor)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -154,9 +156,10 @@ export const DoctorController = {
    async deleteSelf(req: Request, res: Response, next: NextFunction) {
       try {
          const doctor = await DoctorService.remove(req.session.userId || '')
-         return res.status(200).json({ message: `Doctor account ${doctor.id} has been deleted` })
-      }
-      catch (error: unknown) {
+         return res
+            .status(200)
+            .json({ message: `Doctor account ${doctor.id} has been deleted` })
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -168,13 +171,18 @@ export const DoctorController = {
       try {
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const { weekDay } = req.params
          const weekDayNum = Number(weekDay)
          if (isNaN(weekDayNum) || weekDayNum < 0 || weekDayNum > 6) {
-            throw ApiError.BadRequest('Invalid week day parameter. It must be an integer number between 0 and 6.')
+            throw ApiError.BadRequest(
+               'Invalid week day parameter. It must be an integer number between 0 and 6.'
+            )
          }
 
          const timeFrom = req.body.availableFrom
@@ -182,10 +190,14 @@ export const DoctorController = {
          const duration = Number(req.body.appointmentDuration)
 
          if (timeFrom && timeTo && timeFrom > timeTo) {
-            throw ApiError.BadRequest('Invalid time. Available from must be less than available to.')
+            throw ApiError.BadRequest(
+               'Invalid time. Available from must be less than available to.'
+            )
          }
-         if (duration && isNaN(duration) || duration < 0 || duration > 60) {
-            throw ApiError.BadRequest('Invalid appointment duration in minutes. It must be an integer number between 0 and 60.')
+         if ((duration && isNaN(duration)) || duration < 0 || duration > 60) {
+            throw ApiError.BadRequest(
+               'Invalid appointment duration in minutes. It must be an integer number between 0 and 60.'
+            )
          }
 
          const availability = await DoctorService.setAvailability({
@@ -198,14 +210,13 @@ export const DoctorController = {
          })
 
          return res.status(200).json(availability)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
 
    /**
-    * 
+    *
     */
    async getAvailabilityByDay(req: Request, res: Response, next: NextFunction) {
       try {
@@ -213,20 +224,24 @@ export const DoctorController = {
 
          const weekDayNum = Number(weekDay)
          if (isNaN(weekDayNum) || weekDayNum < 0 || weekDayNum > 6) {
-            throw ApiError.BadRequest('Invalid week day parameter. It must be an integer number between 0 and 6.')
+            throw ApiError.BadRequest(
+               'Invalid week day parameter. It must be an integer number between 0 and 6.'
+            )
          }
 
-         const availability = await DoctorService.findAvailabilityByDay(doctorId, weekDayNum)
+         const availability = await DoctorService.findAvailabilityByDay(
+            doctorId,
+            weekDayNum
+         )
 
          return res.status(200).json(availability)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
 
    /**
-    * 
+    *
     */
    async getFullAvailability(req: Request, res: Response, next: NextFunction) {
       try {
@@ -235,9 +250,8 @@ export const DoctorController = {
          const availability = await DoctorService.findAvailability(doctorId)
 
          return res.status(200).json(availability)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
-   }
+   },
 }

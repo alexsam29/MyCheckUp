@@ -7,7 +7,6 @@ import { SESSION_COOKIE } from '../common/constants'
 import { mailTransport } from '../common/mail-transport'
 import { GetDoctorsQuery } from './utils/admin-utils'
 
-
 /**
  * Handles operations on Admin account.
  */
@@ -20,7 +19,10 @@ export const AdminController = {
          // Validate incoming data:
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const { email, password } = req.body
@@ -32,8 +34,7 @@ export const AdminController = {
          req.session.role = admin.role
 
          return res.status(200).json({ success: true })
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -46,8 +47,7 @@ export const AdminController = {
          req.session.destroy(() => {
             return res.clearCookie(SESSION_COOKIE).status(200).send()
          })
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -59,8 +59,7 @@ export const AdminController = {
       try {
          const admin = await AdminService.findOne({ id: req.session.userId })
          return res.status(200).json(admin)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -72,19 +71,21 @@ export const AdminController = {
       try {
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const admin = await AdminService.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
          })
 
          return res.status(200).json(admin)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -92,22 +93,26 @@ export const AdminController = {
    /**
     * Get doctor profiles.
     */
-   async getDoctors(req: Request<unknown, unknown, unknown, GetDoctorsQuery>,
-         res: Response, next: NextFunction) {
+   async getDoctors(
+      req: Request<unknown, unknown, unknown, GetDoctorsQuery>,
+      res: Response,
+      next: NextFunction
+   ) {
       try {
          const { active } = req.query
          const searchBy: any = {}
-         
-         if (active === 'true')
-            searchBy.active = true
-         else if (active === 'false')
-            searchBy.active = false
 
-         const doctors = await DoctorService.find(searchBy, { exact: true, offset: 0, limit: 100 })
+         if (active === 'true') searchBy.active = true
+         else if (active === 'false') searchBy.active = false
+
+         const doctors = await DoctorService.find(searchBy, {
+            exact: true,
+            offset: 0,
+            limit: 100,
+         })
 
          return res.status(200).json(doctors)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -121,7 +126,7 @@ export const AdminController = {
 
          const updatedDoctor = await DoctorService.update({
             id: doctorId,
-            active: true
+            active: true,
          })
 
          const transport = await mailTransport()
@@ -129,12 +134,11 @@ export const AdminController = {
             from: 'MyCheckUp Team <info@mycheckup.com>',
             to: updatedDoctor.email,
             subject: 'Your doctor account have been activated!',
-            text: `Hello, ${updatedDoctor.firstName}, your doctor account have been activated!`
+            text: `Hello, ${updatedDoctor.firstName}, your doctor account have been activated!`,
          })
 
          return res.status(200).json(updatedDoctor)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -148,7 +152,7 @@ export const AdminController = {
 
          const updatedDoctor = await DoctorService.update({
             id: doctorId,
-            active: false
+            active: false,
          })
 
          const transport = await mailTransport()
@@ -156,12 +160,11 @@ export const AdminController = {
             from: 'MyCheckUp Team <info@mycheckup.com>',
             to: updatedDoctor.email,
             subject: 'Your doctor account have been deactivated',
-            text: `Hello, ${updatedDoctor.firstName}, your doctor account have been deactivated.`
+            text: `Hello, ${updatedDoctor.firstName}, your doctor account have been deactivated.`,
          })
 
          return res.status(200).json(updatedDoctor)
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
@@ -179,13 +182,12 @@ export const AdminController = {
             from: 'MyCheckUp Team <info@mycheckup.com>',
             to: removedDoctor.email,
             subject: 'Your doctor account have been deleted',
-            text: `Hello, ${removedDoctor.firstName}, your doctor have been deleted by the administration.`
+            text: `Hello, ${removedDoctor.firstName}, your doctor have been deleted by the administration.`,
          })
 
          return res.status(200).send()
-      }
-      catch (error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
-   }
+   },
 }
