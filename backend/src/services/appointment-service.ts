@@ -17,7 +17,6 @@ export const AppointmentService = {
    async setAppointment(details: {
       patientId: string
       doctorId: string
-      //selfAssessmentId: string,
       date: Date
       startTime: string
       endTime: string
@@ -26,11 +25,9 @@ export const AppointmentService = {
       const appointmentRepo = getRepository(Appointment)
       const patientRepo = getRepository(Patient)
       const doctorRepo = getRepository(Doctor)
-      //const selfAssessmentRepo = getRepository(SelfAssessment)
 
       const patient = await patientRepo.findOne(details.patientId)
       const doctor = await doctorRepo.findOne(details.doctorId)
-      //const selfassessment = await selfAssessmentRepo.findOne(details.selfAssessmentId)
 
       // To find any appointment already book in the system
       const appointments = await appointmentRepo.find({
@@ -45,7 +42,7 @@ export const AppointmentService = {
             'status',
             'doctorNotes',
          ],
-         where: { startTime: details.startTime },
+         where: { startTime: details.startTime, date: details.date },
          order: { createdAt: 'DESC' },
       })
 
@@ -54,13 +51,10 @@ export const AppointmentService = {
       if (!doctor) throw ApiError.NotFound('Doctor not found!')
 
       if (appointments.length != 0) throw 'This time is already booked!'
-      //if(!selfassessment)
-      // throw ApiError.NotFound('SelfAssessment not found!')
 
       const appointment = new Appointment()
       appointment.doctor = doctor
       appointment.patient = patient
-      //appointment.selfAssessment = selfassessment
       appointment.date = details.date
       appointment.startTime = details.startTime
       appointment.endTime = details.endTime
@@ -368,5 +362,22 @@ export const AppointmentService = {
       var minToAdd = 30
       var newDate = new Date(StartFrom.getTime() + minToAdd * 60000)
       return newDate
+   },
+
+   async deleteingAppointment(id: string): Promise<Appointment> {
+      const appointmentTime = getRepository(Appointment)
+
+      const appointment = await appointmentTime.findOne(id)
+
+      console.log(appointment)
+
+      if (!appointment)
+         throw ApiError.NotFound(
+            'No appointment time has been found for this doctor!'
+         )
+
+      //appointmentTime.remove(appointmentTimes)
+
+      return appointment
    },
 }
