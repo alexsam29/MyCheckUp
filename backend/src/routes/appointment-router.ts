@@ -68,7 +68,7 @@ AppointmentRouter.get(
  */
 AppointmentRouter.delete(
    '/deleteAppointment/:id',
-   authorize(Role.PATIENT),
+   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
    AppointmentsController.deleteAppointment
 )
 
