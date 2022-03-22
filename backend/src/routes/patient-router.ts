@@ -3,7 +3,6 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { PatientController } from '../controllers/patient-controller'
-import { AppointmentsController } from '../controllers/appointment-controller'
 
 export const PatientRouter = express.Router()
 
@@ -100,50 +99,4 @@ PatientRouter.put(
    body('id').notEmpty().isLength({ min: 1, max: 100 }),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    PatientController.updatecredentials
-)
-
-/**
- * @openapi
- * /patient/appointment:
- *    put:
- *       summary: Book appointment for patient
- *       tags:
- *          - Patient
- *       description: Book appointment for patient.
- *       security:
- *          - cookieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-PatientRouter.post(
-   '/patient/appointment',
-   body('patientId').notEmpty().isLength({ min: 1, max: 100 }),
-   body('doctorId').notEmpty().isLength({ min: 1, max: 100 }),
-   //body('selfAssessmentId').optional().isLength({min: 0, max: 100}),
-   body('date').optional().trim().isLength({ min: 1, max: 10 }),
-   body('startTime').optional().trim().isLength({ min: 1, max: 10 }),
-   body('endTime').optional().trim().isLength({ min: 1, max: 10 }),
-   body('doctorNotes').optional().isLength({ min: 0, max: 200 }),
-   AppointmentsController.setAppointment
-)
-
-/**
- * @openapi
- * /patient/{patientId}/appointments:
- *    put:
- *       summary: Get all patient appointments from the appointment tabel.
- *       tags:
- *          - Patient
- *       description: Get patient appointments from the appointment tabel.
- *       security:
- *          - cookieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-PatientRouter.get(
-   '/patient/:patientId/appointments',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   AppointmentsController.getAppointments
 )

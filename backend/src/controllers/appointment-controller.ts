@@ -19,7 +19,6 @@ export const AppointmentsController = {
          const Appointment = await AppointmentService.setAppointment({
             patientId: req.body.patientId,
             doctorId: req.body.doctorId,
-            //selfAssessmentId: req.body.selfAssessmentId,
             date: req.body.date,
             startTime: req.body.startTime,
             endTime: req.body.endTime,
@@ -39,6 +38,20 @@ export const AppointmentsController = {
 
          const appointments = await AppointmentService.findAppointment({ patientId })
          return res.status(200).json(appointments)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async deleteAppointment(req: Request, res: Response, next: NextFunction) {
+      try {
+         console.log(req.params.id)
+
+         const deletedAppointment = await AppointmentService.deleteingAppointment(
+            req.params.id
+         )
+
+         return res.status(200).json(deletedAppointment)
       } catch (err: unknown) {
          return next(err)
       }
