@@ -72,7 +72,7 @@ export const AppointmentService = {
     * @returns
     */
    async findAppointment(
-      searchBy?: { patientId?: string },
+      searchBy?: { patientId?: string; doctorId?: string },
       offset = 0,
       limit = 100
    ): Promise<Appointment[]> {

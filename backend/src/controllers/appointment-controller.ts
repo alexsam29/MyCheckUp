@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express'
 import { ApiError } from '../exceptions/api-error'
 import { validationResult } from 'express-validator'
 import { AppointmentService } from '../services/appointment-service'
-//import { DoctorService } from 'services/doctor-service'
 
 export const AppointmentsController = {
    // create appointment for patient
@@ -101,6 +100,17 @@ export const AppointmentsController = {
          return res.status(200).json(appointmentTimes)
       } catch (err: unknown) {
          return next(err)
+      }
+   },
+
+   async getDoctorAppointments(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { userId: doctorId } = req.session
+         const appointments = await AppointmentService.findAppointment({ doctorId })
+
+         return res.status(200).json(appointments)
+      } catch (error: unknown) {
+         return next(error)
       }
    },
 }
