@@ -71,7 +71,7 @@ export class Appointment {
    @ManyToOne(() => Doctor, doctor => doctor.appointments, { onDelete: 'SET NULL' })
    doctor!: Doctor
 
-   @OneToOne(() => SelfAssessment, { onDelete: 'SET NULL' })
+   @OneToOne(() => SelfAssessment, { onDelete: 'SET NULL', eager: true })
    @JoinColumn()
    selfAssessment!: SelfAssessment
 

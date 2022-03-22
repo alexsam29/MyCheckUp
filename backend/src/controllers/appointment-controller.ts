@@ -35,12 +35,27 @@ export const AppointmentsController = {
    // get all the booked "pending" appointments base on patientID
    async getAppointments(req: Request, res: Response, next: NextFunction) {
       try {
-         const { patientId } = req.params
+         const { userId: patientId } = req.session
 
          const appointments = await AppointmentService.findAppointment({ patientId })
          return res.status(200).json(appointments)
       } catch (err: unknown) {
          return next(err)
+      }
+   },
+
+   async getPatientAppointmentById(req: Request, res: Response, next: NextFunction) {
+      try {
+         const appointment = await AppointmentService.findAppointmentById(
+            req.params.appointmentId
+         )
+         if (appointment.patientId !== req.session.userId) {
+            throw ApiError.Forbidden()
+         }
+
+         return res.status(200).json(appointment)
+      } catch (error: unknown) {
+         return next(error)
       }
    },
 

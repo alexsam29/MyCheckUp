@@ -24,7 +24,7 @@ export class SelfAssessment {
    @PrimaryGeneratedColumn('uuid')
    id!: string
 
-   @ManyToMany(() => Symptom)
+   @ManyToMany(() => Symptom, { eager: true })
    @JoinTable({ name: 'self_assessment_symptom' })
    symptoms!: Symptom[]
 
