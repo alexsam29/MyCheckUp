@@ -43,15 +43,31 @@ export const AppointmentsController = {
       }
    },
 
-   async deleteAppointment(req: Request, res: Response, next: NextFunction) {
+   async cancellingAppointment(req: Request, res: Response, next: NextFunction) {
       try {
-         console.log(req.params.id)
-
          const deletedAppointment = await AppointmentService.deleteingAppointment(
             req.params.id
          )
 
          return res.status(200).json(deletedAppointment)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async rescheduleAppointment(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { id, date, startTime, endTime } = req.params
+
+         const rescheduledAppointment =
+            await AppointmentService.rescheduleAppointment(
+               id,
+               date,
+               startTime,
+               endTime
+            )
+
+         return res.status(200).json(rescheduledAppointment)
       } catch (err: unknown) {
          return next(err)
       }

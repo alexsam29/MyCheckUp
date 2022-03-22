@@ -357,4 +357,32 @@ export const AppointmentService = {
 
       return saved
    },
+
+   async rescheduleAppointment(
+      id: string,
+      date: string,
+      startFrom: string,
+      endTime: string
+   ): Promise<Appointment> {
+      const appointment = getRepository(Appointment)
+
+      const appointmentfound = await appointment.findOne(id)
+
+      if (!appointmentfound)
+         throw ApiError.NotFound(
+            'No appointment time has been found for this doctor!'
+         )
+
+      const dateConverted = new Date(date)
+
+      console.log(dateConverted)
+
+      appointmentfound.date = dateConverted
+      appointmentfound.startTime = startFrom
+      appointmentfound.endTime = endTime
+
+      const saved = await appointment.save(appointmentfound)
+
+      return saved
+   },
 }
