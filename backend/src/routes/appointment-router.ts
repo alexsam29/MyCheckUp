@@ -147,6 +147,20 @@ AppointmentRouter.put(
    AppointmentsController.cancellingAppointment
 )
 
+/**
+ * @openapi
+ * /reschedulingAppointment/{id}/{date}/{startTime}/{endTime}:
+ *   put:
+ *     summary: reschedule appointment
+ *     tags:
+ *       - Patient
+ *     description: Reschedule appointment. Requires to be authorized.
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 AppointmentRouter.put(
    '/reschedulingAppointment/:id/:date/:startTime/:endTime',
    authorize([Role.ADMIN, Role.DOCTOR, Role.PATIENT]),
