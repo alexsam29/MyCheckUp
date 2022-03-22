@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express'
 import { ApiError } from '../exceptions/api-error'
 import { validationResult } from 'express-validator'
 import { AppointmentService } from '../services/appointment-service'
-//import { DoctorService } from 'services/doctor-service'
 
 export const AppointmentsController = {
    // create appointment for patient
@@ -19,7 +18,6 @@ export const AppointmentsController = {
          const Appointment = await AppointmentService.setAppointment({
             patientId: req.body.patientId,
             doctorId: req.body.doctorId,
-            //selfAssessmentId: req.body.selfAssessmentId,
             date: req.body.date,
             startTime: req.body.startTime,
             endTime: req.body.endTime,
@@ -58,6 +56,35 @@ export const AppointmentsController = {
          return next(error)
       }
    },
+   async cancellingAppointment(req: Request, res: Response, next: NextFunction) {
+      try {
+         const deletedAppointment = await AppointmentService.deleteingAppointment(
+            req.params.id
+         )
+
+         return res.status(200).json(deletedAppointment)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async rescheduleAppointment(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { id, date, startTime, endTime } = req.params
+
+         const rescheduledAppointment =
+            await AppointmentService.rescheduleAppointment(
+               id,
+               date,
+               startTime,
+               endTime
+            )
+
+         return res.status(200).json(rescheduledAppointment)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
 
    /* Doctor ***********************************************************************************/
 
@@ -88,6 +115,17 @@ export const AppointmentsController = {
          return res.status(200).json(appointmentTimes)
       } catch (err: unknown) {
          return next(err)
+      }
+   },
+
+   async getDoctorAppointments(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { userId: doctorId } = req.session
+         const appointments = await AppointmentService.findAppointment({ doctorId })
+
+         return res.status(200).json(appointments)
+      } catch (error: unknown) {
+         return next(error)
       }
    },
 }

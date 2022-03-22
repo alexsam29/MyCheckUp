@@ -3,7 +3,6 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { DoctorController } from '../controllers/doctor-controller'
-import { AppointmentsController } from '../controllers/appointment-controller'
 
 export const DoctorRouter = express.Router()
 
@@ -161,44 +160,4 @@ DoctorRouter.put(
       .isNumeric({ no_symbols: true })
       .withMessage('Must be an integer in the range [0-6]'),
    DoctorController.setAvailability
-)
-
-/**
- * @openapi
- * /doctor/{doctorId}/bookedTimes:
- *    get:
- *       summary: collect all the times for the doctor
- *       tags:
- *          - Doctor
- *       description: collect all the times for the doctor.
- *       security:
- *          - coockieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-DoctorRouter.get(
-   '/doctor/:doctorId/bookedTimes',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   AppointmentsController.getAppointmentTimes
-)
-
-/**
- * @openapi
- * /doctor/{doctorId}/bookedTimes/{date}:
- *    get:
- *       summary: collect all the times for the doctor
- *       tags:
- *          - Doctor
- *       description: collect all the available and not available times for the doctor for that date.
- *       security:
- *          - coockieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-DoctorRouter.get(
-   '/doctor/:doctorId/availabileTimes/:date',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   AppointmentsController.getAvailableTimes
 )
