@@ -9,7 +9,7 @@ export const SymptomController = {
     */
    async getAll(_: Request, res: Response, next: NextFunction) {
       try {
-         const symptoms = await SymptomService.find()
+         const symptoms = await SymptomService.findAll()
          return res.status(200).json(symptoms)
       } catch (error: unknown) {
          return next(error)
@@ -21,7 +21,7 @@ export const SymptomController = {
     */
    async getOneById(req: Request, res: Response, next: NextFunction) {
       try {
-         const symptom = await SymptomService.findById(req.params.symptomId)
+         const symptom = await SymptomService.findOneById(req.params.symptomId)
          return res.status(200).json(symptom)
       } catch (error: unknown) {
          return next(error)

@@ -5,6 +5,7 @@ import { Patient } from '../models/patient'
 import { getRepository } from 'typeorm'
 import { Appointment } from '../models/appointment'
 import { DoctorService } from './doctor-service'
+import { SelfAssessment } from '../models/self-assessment'
 
 export const AppointmentService = {
    /**
@@ -96,7 +97,6 @@ export const AppointmentService = {
             'doctorNotes',
          ],
          where: searchBy,
-         order: { createdAt: 'DESC' },
          skip: offset,
          take: limit,
       })
@@ -105,6 +105,31 @@ export const AppointmentService = {
          throw ApiError.NotFound('No appointment found for this patient!')
 
       return appointments
+   },
+
+   async findAppointmentById(appointmentId: string): Promise<Appointment> {
+      const appointment = await getRepository(Appointment).findOne(appointmentId)
+      if (!appointment) {
+         throw ApiError.NotFound('Appointment not found')
+      }
+
+      return appointment
+   },
+
+   async setSelfAssessment(
+      appointmentId: string,
+      assessment: SelfAssessment
+   ): Promise<Appointment> {
+      const repository = getRepository(Appointment)
+
+      const appointment = await repository.findOne(appointmentId)
+      if (!appointment) {
+         throw ApiError.NotFound('Appointment not found')
+      }
+
+      appointment.selfAssessment = assessment
+
+      return repository.save(appointment)
    },
 
    /*Doctor***********************************************************************************************************/

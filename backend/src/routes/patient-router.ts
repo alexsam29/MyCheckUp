@@ -4,6 +4,7 @@ import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { PatientController } from '../controllers/patient-controller'
 import { AppointmentsController } from '../controllers/appointment-controller'
+import { SelfAssessmentController } from '../controllers/self-assessment-controller'
 
 export const PatientRouter = express.Router()
 
@@ -109,6 +110,7 @@ PatientRouter.put(
  *       summary: Book appointment for patient
  *       tags:
  *          - Patient
+ *          - Appointment
  *       description: Book appointment for patient.
  *       security:
  *          - cookieAuth: []
@@ -130,11 +132,12 @@ PatientRouter.post(
 
 /**
  * @openapi
- * /patient/{patientId}/appointments:
- *    put:
- *       summary: Get all patient appointments from the appointment tabel.
+ * /patient/appointments:
+ *    get:
+ *       summary: get all patient appointments from the appointment tabel.
  *       tags:
  *          - Patient
+ *          - Appointment
  *       description: Get patient appointments from the appointment tabel.
  *       security:
  *          - cookieAuth: []
@@ -143,7 +146,56 @@ PatientRouter.post(
  *             description: OK
  */
 PatientRouter.get(
-   '/patient/:patientId/appointments',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
+   '/patient/appointments',
+   authorize(Role.PATIENT),
    AppointmentsController.getAppointments
+)
+
+/**
+ * @openapi
+ * /patient/appointments/{appointmendId}:
+ *    get:
+ *       summary: get patient appointment by id
+ *       tags:
+ *          - Patient
+ *          - Appointment
+ *       description: Get patient appointment by id. Requires Patient authorization.
+ *       security:
+ *          - cookieAuth: []
+ *       responses:
+ *          200:
+ *             description: OK
+ */
+PatientRouter.get(
+   '/patient/appointments/:appointmentId',
+   authorize(Role.PATIENT),
+   AppointmentsController.getPatientAppointmentById
+)
+
+/**
+ * @openapi
+ * /patient/appointments/{appointmendId}/assessment:
+ *    post:
+ *       summary: send self-assessment for the appointment
+ *       tags:
+ *          - Patient
+ *          - Appointment
+ *          - Self-assessment
+ *       description: Creates self-assessment for the appointment. Requires Patient authorization.
+ *       security:
+ *          - cookieAuth: []
+ *       responses:
+ *          200:
+ *             description: OK
+ */
+PatientRouter.post(
+   '/patient/appointments/:appointmentId/assessment',
+   authorize(Role.PATIENT),
+   body('notes')
+      .isString()
+      .isLength({ min: 1, max: 255 })
+      .trim()
+      .withMessage('description must be a string between 1 and 255 characters'),
+   body('symptomIds').optional().isArray({ min: 0, max: 20 }),
+   SelfAssessmentController.create
 )
