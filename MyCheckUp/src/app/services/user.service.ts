@@ -327,7 +327,7 @@ export class UserService {
 
   getAppointments(patientID: string) {
     return this.http
-      .get<any>(this.url + `patient/${patientID}/appointments`, {
+      .get<any>(this.url + `patient/appointments`, {
         withCredentials: true,
       })
       .pipe(
