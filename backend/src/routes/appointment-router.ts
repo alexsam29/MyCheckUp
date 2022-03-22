@@ -3,16 +3,20 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { AppointmentsController } from '../controllers/appointment-controller'
+import { SelfAssessmentController } from '../controllers/self-assessment-controller'
 
 export const AppointmentRouter = express.Router()
+
+/** ~~~ Patient: ~~~ */
 
 /**
  * @openapi
  * /patient/appointment:
- *    put:
+ *    post:
  *       summary: Book appointment for patient
  *       tags:
- *          - Appointments
+ *          - Patient
+ *          - Appointment
  *       description: Book appointment for patient.
  *       security:
  *          - cookieAuth: []
@@ -24,6 +28,7 @@ AppointmentRouter.post(
    '/patient/appointment',
    body('patientId').notEmpty().isLength({ min: 1, max: 100 }),
    body('doctorId').notEmpty().isLength({ min: 1, max: 100 }),
+   //body('selfAssessmentId').optional().isLength({min: 0, max: 100}),
    body('date').optional().trim().isLength({ min: 1, max: 10 }),
    body('startTime').optional().trim().isLength({ min: 1, max: 10 }),
    body('endTime').optional().trim().isLength({ min: 1, max: 10 }),
@@ -33,8 +38,78 @@ AppointmentRouter.post(
 
 /**
  * @openapi
+ * /patient/appointments:
+ *    get:
+ *       summary: get all patient appointments
+ *       tags:
+ *          - Patient
+ *          - Appointment
+ *       description: Get patient appointments.
+ *       security:
+ *          - cookieAuth: []
+ *       responses:
+ *          200:
+ *             description: OK
+ */
+AppointmentRouter.get(
+   '/patient/appointments',
+   authorize(Role.PATIENT),
+   AppointmentsController.getAppointments
+)
+
+/**
+ * @openapi
+ * /patient/appointments/{appointmendId}:
+ *    get:
+ *       summary: get patient appointment by id
+ *       tags:
+ *          - Patient
+ *          - Appointment
+ *       description: Get patient appointment by id. Requires Patient authorization.
+ *       security:
+ *          - cookieAuth: []
+ *       responses:
+ *          200:
+ *             description: OK
+ */
+AppointmentRouter.get(
+   '/patient/appointments/:appointmentId',
+   authorize(Role.PATIENT),
+   AppointmentsController.getPatientAppointmentById
+)
+
+/**
+ * @openapi
+ * /patient/appointments/{appointmendId}/assessment:
+ *    post:
+ *       summary: send self-assessment for the appointment
+ *       tags:
+ *          - Patient
+ *          - Appointment
+ *          - Self-assessment
+ *       description: Creates self-assessment for the appointment. Requires Patient authorization.
+ *       security:
+ *          - cookieAuth: []
+ *       responses:
+ *          200:
+ *             description: OK
+ */
+AppointmentRouter.post(
+   '/patient/appointments/:appointmentId/assessment',
+   authorize(Role.PATIENT),
+   body('notes')
+      .isString()
+      .isLength({ min: 1, max: 255 })
+      .trim()
+      .withMessage('description must be a string between 1 and 255 characters'),
+   body('symptomIds').optional().isArray({ min: 0, max: 20 }),
+   SelfAssessmentController.create
+)
+
+/**
+ * @openapi
  * /patient/{patientId}/appointments:
- *    put:
+ *    get:
  *       summary: Get all patient appointments from the appointment tabel.
  *       tags:
  *          - Patient
@@ -48,7 +123,7 @@ AppointmentRouter.post(
  */
 AppointmentRouter.get(
    '/patient/:patientId/appointments',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
+   authorize([Role.DOCTOR, Role.ADMIN]),
    AppointmentsController.getAppointments
 )
 
@@ -71,6 +146,8 @@ AppointmentRouter.delete(
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
    AppointmentsController.deleteAppointment
 )
+
+/** ~~~ Doctor: ~~~ */
 
 /**
  * @openapi
@@ -112,4 +189,25 @@ AppointmentRouter.get(
    '/doctor/:doctorId/availabileTimes/:date',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
    AppointmentsController.getAvailableTimes
+)
+
+/**
+ * @openapi
+ * /doctor/appointments:
+ *    get:
+ *       summary: get all doctor appointments
+ *       tags:
+ *          - Doctor
+ *          - Appointments
+ *       description: Get all doctor appointments. Requires Doctor authorization.
+ *       security:
+ *          - coockieAuth: []
+ *       responses:
+ *          200:
+ *             description: OK
+ */
+AppointmentRouter.get(
+   '/doctor/appointments',
+   authorize(Role.DOCTOR),
+   AppointmentsController.getDoctorAppointments
 )

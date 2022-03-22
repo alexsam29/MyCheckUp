@@ -3,8 +3,6 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { PatientController } from '../controllers/patient-controller'
-import { AppointmentsController } from '../controllers/appointment-controller'
-import { SelfAssessmentController } from '../controllers/self-assessment-controller'
 
 export const PatientRouter = express.Router()
 
@@ -101,101 +99,4 @@ PatientRouter.put(
    body('id').notEmpty().isLength({ min: 1, max: 100 }),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
    PatientController.updatecredentials
-)
-
-/**
- * @openapi
- * /patient/appointment:
- *    put:
- *       summary: Book appointment for patient
- *       tags:
- *          - Patient
- *          - Appointment
- *       description: Book appointment for patient.
- *       security:
- *          - cookieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-PatientRouter.post(
-   '/patient/appointment',
-   body('patientId').notEmpty().isLength({ min: 1, max: 100 }),
-   body('doctorId').notEmpty().isLength({ min: 1, max: 100 }),
-   //body('selfAssessmentId').optional().isLength({min: 0, max: 100}),
-   body('date').optional().trim().isLength({ min: 1, max: 10 }),
-   body('startTime').optional().trim().isLength({ min: 1, max: 10 }),
-   body('endTime').optional().trim().isLength({ min: 1, max: 10 }),
-   body('doctorNotes').optional().isLength({ min: 0, max: 200 }),
-   AppointmentsController.setAppointment
-)
-
-/**
- * @openapi
- * /patient/appointments:
- *    get:
- *       summary: get all patient appointments from the appointment tabel.
- *       tags:
- *          - Patient
- *          - Appointment
- *       description: Get patient appointments from the appointment tabel.
- *       security:
- *          - cookieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-PatientRouter.get(
-   '/patient/appointments',
-   authorize(Role.PATIENT),
-   AppointmentsController.getAppointments
-)
-
-/**
- * @openapi
- * /patient/appointments/{appointmendId}:
- *    get:
- *       summary: get patient appointment by id
- *       tags:
- *          - Patient
- *          - Appointment
- *       description: Get patient appointment by id. Requires Patient authorization.
- *       security:
- *          - cookieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-PatientRouter.get(
-   '/patient/appointments/:appointmentId',
-   authorize(Role.PATIENT),
-   AppointmentsController.getPatientAppointmentById
-)
-
-/**
- * @openapi
- * /patient/appointments/{appointmendId}/assessment:
- *    post:
- *       summary: send self-assessment for the appointment
- *       tags:
- *          - Patient
- *          - Appointment
- *          - Self-assessment
- *       description: Creates self-assessment for the appointment. Requires Patient authorization.
- *       security:
- *          - cookieAuth: []
- *       responses:
- *          200:
- *             description: OK
- */
-PatientRouter.post(
-   '/patient/appointments/:appointmentId/assessment',
-   authorize(Role.PATIENT),
-   body('notes')
-      .isString()
-      .isLength({ min: 1, max: 255 })
-      .trim()
-      .withMessage('description must be a string between 1 and 255 characters'),
-   body('symptomIds').optional().isArray({ min: 0, max: 20 }),
-   SelfAssessmentController.create
 )
