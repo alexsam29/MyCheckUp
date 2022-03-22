@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 export class ViewAppointmentsComponent implements OnInit {
   user: any;
   errors: boolean = false;
+  appointments: any;
 
   constructor(private userService: UserService) {}
 
@@ -16,6 +17,13 @@ export class ViewAppointmentsComponent implements OnInit {
     this.userService.getPatientProfile().subscribe(
       (profile) => {
         this.user = profile;
+        this.userService
+          .getAppointments(this.user.id)
+          .subscribe((appointments) => {
+            this.appointments = appointments.sort((a: any, b: any) =>
+              a.date < b.date ? -1 : 1
+            );
+          });
       },
       (error) => {
         this.errors = true;

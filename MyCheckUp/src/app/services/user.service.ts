@@ -324,4 +324,16 @@ export class UserService {
         })
       );
   }
+
+  getAppointments(patientID: string) {
+    return this.http
+      .get<any>(this.url + `patient/${patientID}/appointments`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 }
