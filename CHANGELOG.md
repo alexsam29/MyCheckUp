@@ -122,3 +122,27 @@ Improvements:
 
 - Modified Availability model to reflect Doctor's availability for each day of the week
 - Replaced role-specific login and logout endpoints with universal ones
+
+## [0.5.0] - 2022-03-22
+
+### Backend API
+
+New Features:
+
+- Appointment booking
+- Appointment rescheduling
+- Appointment cancellation
+- Patients can now check their appointments
+- Doctor can now check their appointments
+- Self-assessment functionality
+- Added common medical symptoms to be used in Self-Assessments
+
+Improvements:
+
+- Updated Availability model to properly store start and end times
+- Enforced consistent formatting
+
+Bug Fixes:
+
+- Resolved minor routing issues
+
