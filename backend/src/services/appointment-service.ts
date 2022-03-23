@@ -42,7 +42,11 @@ export const AppointmentService = {
             'status',
             'doctorNotes',
          ],
-         where: { startTime: details.startTime, date: details.date },
+         where: {
+            startTime: details.startTime,
+            date: details.date,
+            status: AppointmentStatus.PENDING,
+         },
          order: { createdAt: 'DESC' },
       })
 
