@@ -1,0 +1,81 @@
+<div *ngIf="user" class="bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center">Reschedule Appointment</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card border-primary rounded bg-light">
+                    <div class="card-header border-dark">
+                        <h5 class="card-subtitle">Date: {{appointment.date}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title"> Current Appointment</h4>
+                        <div class="row align-items-center">
+                            <div class="col-sm">
+                                <p><b>Start Time: </b>{{appointment.startTime.slice(0, -3)}}</p>
+                                <p><b>End Time: </b>{{appointment.endTime.slice(0, -3)}}</p>
+                            </div>
+                            <div class="col-sm">
+                                <p><b>Status: </b>{{appointment.status}}</p>
+                                <p><b>Notes: </b>{{appointment.doctorNotes}}</p>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="card-footer">
+                        <h6>Selected Doctor</h6>
+                        <div class="row align-items-center">
+                            <div class="col-sm">
+                                <p><b>Name: </b>{{doctor.firstName}} {{doctor.lastName}}</p>
+                                <p><b>Email: </b>{{doctor.email}}</p>
+                                <p><b>License: </b>{{doctor.license}}</p>
+                            </div>
+                            <div class="col-sm">
+                                <p><b>Title: </b>{{doctor.title}}</p>
+                                <p><b>Specialty: </b>{{doctor.specialty}}</p>
+                                <p><b>Phone Number: </b>{{doctor.phoneNumber}}</p>
+                            </div>
+                        </div>
+                        <b>Days Available: </b><span *ngFor="let day of days">{{day}}, </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg text-light">
+                <form ngNativeValidate #bookAppForm="ngForm" (ngSubmit)="onSubmit(bookAppForm)">
+                    <div class="form-group">
+                        <label for="dateOfApp">New Appointment Date </label> <br>
+                        <input required ngModel name="dateOfApp" type="date" min="{{minDate}}" class="form-control"
+                            placeholder="Enter Date of Appointment Here" #title="ngModel" [(ngModel)]="dateOfApp"
+                            (ngModelChange)="dateChange()">
+                        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Date is Required
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeSelected">Available Times</label>
+                        <select class="form-control" name="timeSelected" required ngModel id="timeSelected">
+                            <option>Select a Time</option>
+                            <option *ngFor="let time of availableTimes">
+                                {{time.From.slice(0, -3)}}-{{time.To.slice(0, -3)}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block">Submit</button>
+                    <button routerLink="/view-appointments" routerLinkActive="active" type="button"
+                        class="cancelbtn btn-danger btn-block">Go Back</button>
+                </form>
+                <br>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+
+        </div>
+        <br>
+    </div>
+</div>
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
+</div>

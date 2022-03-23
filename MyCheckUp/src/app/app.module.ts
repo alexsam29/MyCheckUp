@@ -13,10 +13,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
-import { SelfAssessmentComponent } from './self-assessment/self-assessment.component';
-import { PrescriptionComponent } from './prescription/prescription.component';
-import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
+import { BookAppointmentComponent } from './patient/book-appointment/book-appointment.component';
+import { SelfAssessmentComponent } from './patient/self-assessment/self-assessment.component';
+import { PrescriptionComponent } from './patient/prescription/prescription.component';
+import { ViewAppointmentsComponent } from './patient/view-appointments/view-appointments.component';
 import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
 import { CreatePatientComponent } from './sign-up-page/create-patient/create-patient.component';
 import { CreateDoctorComponent } from './sign-up-page/create-doctor/create-doctor.component';
@@ -25,7 +25,8 @@ import { DashboardPatientComponent } from './dashboards/dashboard-patient/dashbo
 import { DashboardDoctorComponent } from './dashboards/dashboard-doctor/dashboard-doctor.component';
 import { DashboardAdminComponent } from './dashboards/dashboard-admin/dashboard-admin.component';
 import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
-import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component'; 
+import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component';
+import { RescheduleAppointmentComponent } from './patient/reschedule-appointment/reschedule-appointment.component'; 
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.componen
     DashboardDoctorComponent,
     DashboardAdminComponent,
     ApproveDoctorsComponent,
-    ViewDoctorsComponent
+    ViewDoctorsComponent,
+    RescheduleAppointmentComponent
   ],
   imports: [
     BrowserModule,

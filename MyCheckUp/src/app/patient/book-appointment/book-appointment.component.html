@@ -1,0 +1,133 @@
+<div *ngIf="user" class="bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center"> Book an Appointment</h3>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card border-primary rounded bg-light">
+                    <div class="card-header text-center border">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{doctorName}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button *ngFor="let doctor of doctors" class="dropdown-item"
+                                    (click)="selectedDoctor(doctor)">{{doctor.firstName}}
+                                    {{doctor.lastName}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="doctorName != 'Select a Doctor'; else elseBlock" class="card-body">
+                        <h1 class="card-title">Doctor Info:</h1>
+                        <div class="row">
+                            <div class="col-md">
+                                <p><b>Name: </b>{{doctorProfile.firstName}} {{doctorProfile.lastName}}</p>
+                                <p><b>Email: </b>{{doctorProfile.email}}</p>
+                                <p><b>License: </b>{{doctorProfile.license}}</p>
+                                <p><b>Specialty: </b>{{doctorProfile.specialty}}</p>
+                                <p><b>Title: </b>{{doctorProfile.title}}</p>
+                                <p><b>Phone #: </b>{{doctorProfile.phoneNumber}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #elseBlock>
+                        <div class="card-body">
+                            <p class="card-text">Please select a doctor from the drop down menu above.</p>
+                        </div>
+                    </ng-template>
+                    <div class="card-footer" *ngIf="doctorName != 'Select a Doctor'">
+                        Days Available: <span *ngFor="let day of days">{{day}}, </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <form ngNativeValidate #bookAppForm="ngForm" (ngSubmit)="onSubmit(bookAppForm)" class="p-3" action="#"
+                    method="post">
+                    <div class="row align-items-center">
+                        <div class="col-md">
+                            <div class="form-group text-light">
+                                <label for="dateOfApp"> Appointment Date </label> <br>
+                                <input required ngModel name="dateOfApp" type="date" min="{{minDate}}"
+                                    class="form-control" placeholder="Enter Date of Appointment Here" #title="ngModel"
+                                    disabled="{{calDisabled}}" [(ngModel)]="dateOfApp" (ngModelChange)="dateChange()">
+                                <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Date is Required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <label class="text-light"> Appointment Time </label> <br>
+                            <div *ngIf="!timePickerDisabled; else disableBlock" class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{timeLabel}}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <button *ngFor="let time of availableTimes" class="dropdown-item"
+                                        (click)="timeSelected(time.From, time.To)" type="button">
+                                        <p *ngIf="time.Available">{{time.From.slice(0, -3)}} - {{time.To.slice(0, -3)}}
+                                        </p>
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-template #disableBlock>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle disabled" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Available Times
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group text-light">
+                                <label for="reasonOfApp"> Reason of Appointment</label><br>
+                                <input required ngModel name="reasonOfApp" type="text" class="form-control"
+                                    placeholder="input reason of Appointment here" #reasonOfApp="ngModel">
+                                <div class="alert alert-danger" *ngIf="reasonOfApp.touched && reasonOfApp.invalid">
+                                    Reason is
+                                    Required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <button *ngIf="!submitDisabled; else submitBlock"
+                                class="btn btn-success btn-lg btn-block text-center" type='submit'
+                                disable="submitDisabled">Book
+                                Appointment</button>
+                            <button routerLink="/dashboard" type="button" class="cancelbtn btn-block btn-danger">Go
+                                Back</button>
+                        </div>
+                        <ng-template #submitBlock>
+                            <button class="btn btn-success btn-lg btn-block text-center disabled" aria-disabled="true"
+                                type='button'>Book
+                                Appointment</button>
+                        </ng-template>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div *ngIf="success" class="alert alert-success text-center" role="alert">
+            {{message}}
+        </div>
+        <div *ngIf="fail" class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <br>
+    </div>
+</div>
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
+</div>
