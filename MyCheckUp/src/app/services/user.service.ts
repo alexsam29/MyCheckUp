@@ -336,4 +336,16 @@ export class UserService {
         })
       );
   }
+
+  deleteAppointment(appointmentId: string) {
+    return this.http
+      .put<any>(this.url + `cancellingAppointment/${appointmentId}`, {}, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 }

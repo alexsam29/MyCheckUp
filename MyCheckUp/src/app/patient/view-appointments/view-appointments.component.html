@@ -5,7 +5,7 @@
             <h3 class="col text-white text-center">Appointments</h3>
         </div>
         <div *ngFor="let appointment of appointments">
-            <div class="row justify-content-center">
+            <div *ngIf="appointment.status != 'cancelled'" class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="card border-primary rounded bg-light">
                         <div class="card-header border-dark">
@@ -22,21 +22,21 @@
                                 </div>
                                 <div class="col-md">
                                     <button class="btn btn-warning btn-block"> Reschedule</button>
-                                    <button class="btn btn-danger btn-block">Cancel</button>
+                                    <button class="btn btn-danger btn-block" (click)="deleteAppointment(appointment.id)">Cancel</button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md">
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal" (click)="doctorDetails(appointment.doctorId)">
+                                        data-target="#doctorModal" (click)="doctorDetails(appointment.doctorId)">
                                         Doctor Info
                                     </button>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div *ngIf="showDoctor" class="modal fade" id="doctorModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="doctorModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Doctor Details</h5>
+                                                    <h5 class="modal-title" id="doctorModalLabel">Doctor Details</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>

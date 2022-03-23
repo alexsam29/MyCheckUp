@@ -11,6 +11,7 @@ export class ViewAppointmentsComponent implements OnInit {
   errors: boolean = false;
   appointments: any;
   doctor: any;
+  showDoctor = false;
 
   constructor(private userService: UserService) {}
 
@@ -19,11 +20,14 @@ export class ViewAppointmentsComponent implements OnInit {
       (profile) => {
         this.user = profile;
         this.userService
-          .getAppointments(this.user.id)
+          .getAppointments(profile.id)
           .subscribe((appointments) => {
+            console.log('hello')
             this.appointments = appointments.sort((a: any, b: any) =>
               a.date < b.date ? -1 : 1
             );
+          },(error) => {
+            this.errors = true;
           });
       },
       (error) => {
@@ -33,11 +37,16 @@ export class ViewAppointmentsComponent implements OnInit {
   }
 
   doctorDetails(doctorId: string){
-    console.log(doctorId);
+    this.showDoctor = true;
     this.userService.getDoctorbyID(doctorId).subscribe(
       (profile)=>{
         this.doctor = profile;
       }
     )
+  }
+
+  deleteAppointment(appointmentId: string){
+    this.userService.deleteAppointment(appointmentId).subscribe();
+    window.location.reload();
   }
 }
