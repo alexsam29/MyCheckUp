@@ -125,6 +125,18 @@ Improvements:
 
 ## [0.5.0] - 2022-03-22
 
+### Web Application
+
+New Features:
+
+- Ability for a patient to book an appointment with a doctor of their choosing
+- A patient can now view all current appointments 
+- Appointments can be cancelled or rescheduled by a patient
+
+Improvements:
+
+-  Added working links in the header
+
 ### Backend API
 
 New Features:
