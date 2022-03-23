@@ -13,8 +13,14 @@ import { ViewAppointmentsComponent } from './patient/view-appointments/view-appo
 import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
 import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
 import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component';
+import { RescheduleAppointmentComponent } from './patient/reschedule-appointment/reschedule-appointment.component';
 
 const routes: Routes = [
+  {
+    path: 'reschedule-appointments/:id/:doctorid/:date/:start/:end',
+    component: RescheduleAppointmentComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'view-doctors',
     component: ViewDoctorsComponent,

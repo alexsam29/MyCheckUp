@@ -325,7 +325,7 @@ export class UserService {
       );
   }
 
-  getAppointments(patientID: string) {
+  getAppointments() {
     return this.http
       .get<any>(this.url + `patient/appointments`, {
         withCredentials: true,
@@ -339,7 +339,45 @@ export class UserService {
 
   deleteAppointment(appointmentId: string) {
     return this.http
-      .put<any>(this.url + `cancellingAppointment/${appointmentId}`, {}, {
+      .put<any>(
+        this.url + `cancellingAppointment/${appointmentId}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  rescheduleAppointment(
+    appointmentId: string,
+    date: string,
+    start: string,
+    end: string
+  ) {
+    return this.http
+      .put<any>(
+        this.url +
+          `reschedulingAppointment/${appointmentId}/${date}/${start}/${end}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getAppointment(id: string){
+    return this.http
+      .get<any>(this.url + `patient/appointments/${id}`, {
         withCredentials: true,
       })
       .pipe(

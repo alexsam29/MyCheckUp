@@ -99,7 +99,6 @@ export class BookAppointmentComponent implements OnInit {
       .getDoctorTimes(this.doctorProfile.id, this.dateOfApp)
       .subscribe(
         (times) => {
-          console.log(times);
           this.availableTimes = times;
         },
         (error) => {
