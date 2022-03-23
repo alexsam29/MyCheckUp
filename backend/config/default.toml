@@ -2,6 +2,11 @@
 
 title = "API Config"
 
+[environment]
+host = "localhost"
+port = "5000"
+secure = false
+
 [database]
 type = "postgres"
 host = "fanny.db.elephantsql.com"

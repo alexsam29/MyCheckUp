@@ -1,6 +1,6 @@
 /**
  * Role reflects different authorization level.
- * 
+ *
  * Roles:
  * - `ADMIN`
  * - `DOCTOR`
@@ -9,6 +9,5 @@
 export enum Role {
    ADMIN = 'admin',
    DOCTOR = 'doctor',
-   PATIENT = 'patient'
+   PATIENT = 'patient',
 }
-

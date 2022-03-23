@@ -5,14 +5,14 @@ import {
    CreateDateColumn,
    UpdateDateColumn,
    ManyToMany,
-   JoinTable
+   JoinTable,
 } from 'typeorm'
 import { Symptom } from './symptom'
 
 /**
- * Self Assessment database model. 
- * 
- * Fields: 
+ * Self Assessment database model.
+ *
+ * Fields:
  * - `id` - self assessment id.
  * - `symptoms` - array of symptoms experienced by patient.
  * - `notes` - notes added by patient.
@@ -24,7 +24,7 @@ export class SelfAssessment {
    @PrimaryGeneratedColumn('uuid')
    id!: string
 
-   @ManyToMany(() => Symptom)
+   @ManyToMany(() => Symptom, { eager: true })
    @JoinTable({ name: 'self_assessment_symptom' })
    symptoms!: Symptom[]
 

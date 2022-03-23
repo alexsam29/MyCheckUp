@@ -2,7 +2,6 @@ import express from 'express'
 import { body } from 'express-validator'
 import { AuthController } from '../controllers/auth-controller'
 
-
 export const AuthRouter = express.Router()
 
 /**
@@ -38,7 +37,7 @@ export const AuthRouter = express.Router()
  *           description: Success + set session cookie
  *           content:
  *             application/json:
- *               schema: 
+ *               schema:
  *                 type: object
  *                 properties:
  *                   success:
@@ -49,11 +48,13 @@ export const AuthRouter = express.Router()
  *         404:
  *           description: Account not found / incorrect credentials
  */
-AuthRouter.post('/auth/login',
+AuthRouter.post(
+   '/auth/login',
    body('role').isLength({ min: 4, max: 10 }).withMessage('Invalid role'),
    body('email').isEmail(),
    body('password').isLength({ min: 6, max: 50 }),
-   AuthController.login)
+   AuthController.login
+)
 
 /**
  * @openapi

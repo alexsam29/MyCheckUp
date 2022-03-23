@@ -7,21 +7,23 @@ import { AdminController } from './admin-controller'
 import { DoctorController } from './doctor-controller'
 import { PatientController } from './patient-controller'
 
-
 /**
  * Handles authentication operations.
  */
 export const AuthController = {
    /**
     * Log in and get session cookie.
-    * 
+    *
     * Requires additional `role` property in the body.
     */
    async login(req: Request, res: Response, next: NextFunction) {
       try {
          const errors = validationResult(req)
          if (!errors.isEmpty()) {
-            throw ApiError.BadRequest('Invalid data in the request body', errors.array())
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
          }
 
          const { role } = req.body
@@ -39,15 +41,14 @@ export const AuthController = {
             default:
                throw ApiError.BadRequest('Invalid role property in the request body')
          }
-      }
-      catch(error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
    },
 
    /**
     * Log out and destroy session.
-    * 
+    *
     * This method works universally for all roles.
     */
    async logout(req: Request, res: Response, next: NextFunction) {
@@ -55,9 +56,8 @@ export const AuthController = {
          req.session.destroy(() => {
             return res.clearCookie(SESSION_COOKIE).status(200).send()
          })
-      }
-      catch(error: unknown) {
+      } catch (error: unknown) {
          return next(error)
       }
-   }
+   },
 }

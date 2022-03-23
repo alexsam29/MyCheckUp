@@ -3,12 +3,12 @@ import {
    Column,
    PrimaryGeneratedColumn,
    CreateDateColumn,
-   UpdateDateColumn
+   UpdateDateColumn,
 } from 'typeorm'
 
 /**
- * Symptom database model. 
- * 
+ * Symptom database model.
+ *
  * Fields:
  * - `id` - symptom id.
  * - `description` - short description of the symptom (i.e. fever, runny nose).

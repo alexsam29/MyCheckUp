@@ -13,5 +13,5 @@ export const MainController = {
     */
    ping(_: Request, res: Response, __: NextFunction) {
       return res.status(200).json({ success: true })
-   }
+   },
 }

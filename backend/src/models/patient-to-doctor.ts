@@ -4,16 +4,16 @@ import {
    PrimaryColumn,
    CreateDateColumn,
    UpdateDateColumn,
-   ManyToOne
+   ManyToOne,
 } from 'typeorm'
 import { Patient } from './patient'
 import { Doctor } from './doctor'
 
 /**
  * Bridge entity for `Patient` and `Doctor` models.
- * 
+ *
  * `Patient` : `Doctor` = M : N
- * 
+ *
  * Fields:
  * - `patientId` - Patient id.
  * - `doctorId` - Doctor id.

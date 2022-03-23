@@ -3,8 +3,6 @@ import { body } from 'express-validator'
 import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { DoctorController } from '../controllers/doctor-controller'
-import { AppointmentsController } from '../controllers/appointment-controller'
-
 
 export const DoctorRouter = express.Router()
 
@@ -22,9 +20,11 @@ export const DoctorRouter = express.Router()
  *       200:
  *         description: OK
  */
-DoctorRouter.get('/doctors',
+DoctorRouter.get(
+   '/doctors',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   DoctorController.getAll)
+   DoctorController.getAll
+)
 
 /**
  * @openapi
@@ -40,9 +40,11 @@ DoctorRouter.get('/doctors',
  *       200:
  *         description: OK
  */
-DoctorRouter.get('/doctors/:doctorId',
+DoctorRouter.get(
+   '/doctors/:doctorId',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   DoctorController.getAll)
+   DoctorController.getOneById
+)
 
 /**
  * @openapi
@@ -58,9 +60,11 @@ DoctorRouter.get('/doctors/:doctorId',
  *       200:
  *         description: OK
  */
-DoctorRouter.get('/doctors/:doctorId/availability',
+DoctorRouter.get(
+   '/doctors/:doctorId/availability',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   DoctorController.getFullAvailability)
+   DoctorController.getFullAvailability
+)
 
 /**
  * @openapi
@@ -76,10 +80,11 @@ DoctorRouter.get('/doctors/:doctorId/availability',
  *       200:
  *         description: OK
  */
-DoctorRouter.get('/doctors/:doctorId/availability/:weekDay',
+DoctorRouter.get(
+   '/doctors/:doctorId/availability/:weekDay',
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   DoctorController.getAvailabilityByDay)
-
+   DoctorController.getAvailabilityByDay
+)
 
 /**
  * @openapi
@@ -93,16 +98,18 @@ DoctorRouter.get('/doctors/:doctorId/availability/:weekDay',
  *       200:
  *         description: OK
  */
-DoctorRouter.post('/doctor/register',
+DoctorRouter.post(
+   '/doctor/register',
    body('email').isEmail(),
    body('password').isLength({ min: 6, max: 50 }),
-   body('firstName').trim().isLength({ min: 1, max: 50}),
-   body('lastName').trim().isLength({ min: 1, max: 50}),
+   body('firstName').trim().isLength({ min: 1, max: 50 }),
+   body('lastName').trim().isLength({ min: 1, max: 50 }),
    body('license').optional().trim().isLength({ min: 1, max: 100 }),
    body('specialty').optional().trim().isLength({ min: 1, max: 100 }),
    body('title').optional().trim().isLength({ min: 1, max: 100 }),
    body('phoneNumber').optional().trim().isLength({ min: 10, max: 20 }),
-   DoctorController.register)
+   DoctorController.register
+)
 
 /**
  * @openapi
@@ -118,9 +125,7 @@ DoctorRouter.post('/doctor/register',
  *       200:
  *         description: OK
  */
-DoctorRouter.get('/doctor/profile',
-   authorize(Role.DOCTOR),
-   DoctorController.getSelf)
+DoctorRouter.get('/doctor/profile', authorize(Role.DOCTOR), DoctorController.getSelf)
 
 /**
  * @openapi
@@ -136,28 +141,23 @@ DoctorRouter.get('/doctor/profile',
  *       200:
  *         description: OK
  */
-DoctorRouter.put('/doctor/availability/:weekDay',
+DoctorRouter.put(
+   '/doctor/availability/:weekDay',
    authorize(Role.DOCTOR),
-   body('availableFrom').isNumeric({ no_symbols: true }),
-   body('availableTo').isNumeric({ no_symbols: true }),
-   body('appointmentDuration').isNumeric({ no_symbols: true }),
-   DoctorController.setAvailability)
-
-
-/**
- * @openapi
- * /doctor/{doctorId}/bookedTimes:
- *    put: 
- *       summary: collect all the times for the doctor 
- *       tags: 
- *          - Doctor
- *       description: collect all the times for the doctor.
- *       security: 
- *          - coockieAuth: []
- *       responses: 
- *          200:
- *             description: OK
- */
-DoctorRouter.get('/doctor/:doctorId/bookedTimes',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   AppointmentsController.getAppointmentTimes)
+   body('isAvailable').isBoolean(),
+   body('availableFrom')
+      .optional({ nullable: true })
+      .isString()
+      .matches(/^\d\d:\d\d:\d\d$/)
+      .withMessage('Must be a string in hh:mm:ss format'),
+   body('availableTo')
+      .optional({ nullable: true })
+      .isString()
+      .matches(/^\d\d:\d\d:\d\d$/)
+      .withMessage('Must be a string in hh:mm:ss format'),
+   body('appointmentDuration')
+      .optional()
+      .isNumeric({ no_symbols: true })
+      .withMessage('Must be an integer in the range [0-6]'),
+   DoctorController.setAvailability
+)

@@ -4,7 +4,6 @@ import { authorize } from '../middleware/authorize'
 import { Role } from '../models/role'
 import { AdminController } from '../controllers/admin-controller'
 
-
 export const AdminRouter = express.Router()
 
 /**
@@ -21,14 +20,15 @@ export const AdminRouter = express.Router()
  *       200:
  *         description: OK
  */
-AdminRouter.post('/admin/register',
+AdminRouter.post(
+   '/admin/register',
    authorize(Role.ADMIN),
    body('email').notEmpty().isEmail(),
    body('password').notEmpty().isLength({ min: 6, max: 50 }),
-   body('firstName').notEmpty().trim().isLength({ min: 1, max: 50}),
-   body('lastName').notEmpty().trim().isLength({ min: 1, max: 50}),
-   AdminController.register)
-
+   body('firstName').notEmpty().trim().isLength({ min: 1, max: 50 }),
+   body('lastName').notEmpty().trim().isLength({ min: 1, max: 50 }),
+   AdminController.register
+)
 
 /**
  * @openapi
@@ -44,9 +44,7 @@ AdminRouter.post('/admin/register',
  *       200:
  *         description: OK
  */
-AdminRouter.get('/admin/profile',
-   authorize(Role.ADMIN),
-   AdminController.getSelf)
+AdminRouter.get('/admin/profile', authorize(Role.ADMIN), AdminController.getSelf)
 
 /**
  * @openapi
@@ -62,10 +60,7 @@ AdminRouter.get('/admin/profile',
  *       200:
  *         description: OK
  */
-AdminRouter.get('/admin/doctors',
-   authorize(Role.ADMIN),
-   AdminController.getDoctors)
-
+AdminRouter.get('/admin/doctors', authorize(Role.ADMIN), AdminController.getDoctors)
 
 /**
  * @openapi
@@ -89,9 +84,11 @@ AdminRouter.get('/admin/doctors',
  *       200:
  *         description: OK
  */
-AdminRouter.put('/admin/doctors/:doctorId/activate',
+AdminRouter.put(
+   '/admin/doctors/:doctorId/activate',
    authorize(Role.ADMIN),
-   AdminController.activateDoctorById)
+   AdminController.activateDoctorById
+)
 
 /**
  * @openapi
@@ -115,9 +112,11 @@ AdminRouter.put('/admin/doctors/:doctorId/activate',
  *       200:
  *         description: OK
  */
-AdminRouter.put('/admin/doctors/:doctorId/deactivate',
+AdminRouter.put(
+   '/admin/doctors/:doctorId/deactivate',
    authorize(Role.ADMIN),
-   AdminController.deactivateDoctorById)
+   AdminController.deactivateDoctorById
+)
 
 /**
  * @openapi
@@ -141,6 +140,8 @@ AdminRouter.put('/admin/doctors/:doctorId/deactivate',
  *       200:
  *         description: OK
  */
-AdminRouter.delete('/admin/doctors/:doctorId',
+AdminRouter.delete(
+   '/admin/doctors/:doctorId',
    authorize(Role.ADMIN),
-   AdminController.deleteDoctorById)
+   AdminController.deleteDoctorById
+)
