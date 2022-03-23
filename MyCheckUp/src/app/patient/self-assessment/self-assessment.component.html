@@ -1,1 +1,41 @@
-<p>self-assessment works!</p>
+<div *ngIf="user" class="bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center">Self Assessment Survey</h3>
+        </div>
+        <div *ngFor="let symptom of symptoms">
+            <div class="col-lg-7">
+                <div class="card border-primary rounded bg-light">
+                    <div class="card-body">
+                        <h4 class="card-title"> Details</h4>
+                        <div class="row align-items-center">
+                            <div class="col-md">
+                                <p><b>Id: </b>{{symptom.id}}</p>
+                                <p><b>desc </b>{{symptom.desc}}</p>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+
+<div class="row justify-content-center">
+    <button routerLink="/dashboard" routerLinkActive="active" type="button" class="cancelbtn btn-danger btn-lg">Go
+        Back</button>
+</div>
+
+
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
+</div>
