@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
   /* url = 'https://mycheckup-api.herokuapp.com/'; */
-  url = 'http://localhost:5050/';
+  url = 'http://localhost:5000/';
 
   constructor(private http: HttpClient) {}
   editprofile(
