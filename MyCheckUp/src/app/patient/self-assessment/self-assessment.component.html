@@ -50,10 +50,10 @@
                     <div class="form-group text-light">
                         <label for="symptom">Select all symptoms you are experiencing:</label> <br>
                         <div>
-                            <!-- <input type="checkbox" value="male" id="male" name="symptom" ngModel> {{symptom.description}} -->
                             <select ngModel multiple class="form-control" name="symptomsSelected" id="symptomsSelected"
                                 size="15" [(ngModel)]="symptomsSelected">
-                                <option *ngFor="let symptom of symptoms" value="{{symptom.id}}">{{symptom.description}}</option>
+                                <option *ngFor="let symptom of symptoms" value="{{symptom.id}}">{{symptom.description}}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -71,8 +71,10 @@
             <br>
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <button class="btn btn-success btn-lg btn-block text-center" type='submit'>Submit & Confirm Appointment</button>
-                    <button routerLink="/dashboard" type="button" class="cancelbtn btn-block btn-danger">Cancel Appointment</button>
+                    <button class="btn btn-success btn-lg btn-block text-center" type='submit'>Submit & Confirm
+                        Appointment</button>
+                    <button routerLink="/dashboard" type="button" class="cancelbtn btn-block btn-danger">Cancel
+                        Appointment</button>
                 </div>
             </div>
         </div>
