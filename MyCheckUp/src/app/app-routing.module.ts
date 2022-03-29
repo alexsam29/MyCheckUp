@@ -47,7 +47,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'self-assessment',
+    path: 'self-assessment/:id',
     component: SelfAssessmentComponent,
     canActivate: [AuthGuard],
   },

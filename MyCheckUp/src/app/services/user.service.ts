@@ -396,4 +396,21 @@ export class UserService {
         })
       );
   }
+
+  sendSelfassessment(selfassessment: any, appointmentId: string){
+    return this.http
+      .post<any>(
+        this.url + `patient/appointments/${appointmentId}/assessment`,
+        {
+          notes: selfassessment.notes,
+          symptomIds: selfassessment.symptomIds
+        },
+        { withCredentials: true }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 }
