@@ -19,13 +19,14 @@
                                     <p><b>Start Time: </b>{{appointment.startTime.slice(0, -3)}}</p>
                                     <p><b>End Time: </b>{{appointment.endTime.slice(0, -3)}}</p>
                                     <p><b>Status: </b>{{appointment.status}}</p>
-                                    <p><b>Notes: </b>{{appointment.selfAssessment.notes}}</p>
+                                    <p><b>Reason for Appointment: </b>{{appointment.doctorNotes}}</p>
                                     <p><b>Symptoms:</b></p>                                    
                                     <ul>
                                         <li *ngFor="let symptom of appointment.selfAssessment.symptoms"> {{symptom.description}}</li>
                                     </ul>
+                                    <p><b>Additional details: </b>{{appointment.selfAssessment.notes}}</p>
                                 </div>
-                                <div class="col-md">
+                                <div class="col-md-4">
                                     <button class="btn btn-danger btn-block"
                                         (click)="deleteAppointment(appointment.id)">Cancel</button>
                                 </div>
