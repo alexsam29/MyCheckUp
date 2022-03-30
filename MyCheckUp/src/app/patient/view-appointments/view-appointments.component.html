@@ -18,7 +18,11 @@
                                     <p><b>Start Time: </b>{{appointment.startTime.slice(0, -3)}}</p>
                                     <p><b>End Time: </b>{{appointment.endTime.slice(0, -3)}}</p>
                                     <p><b>Status: </b>{{appointment.status}}</p>
-                                    <p><b>Notes: </b>{{appointment.doctorNotes}}</p>
+                                    <p><b>Notes: </b>{{appointment.selfAssessment.notes}}</p>
+                                    <p><b>Symptoms:</b></p>                                    
+                                    <ul>
+                                        <li *ngFor="let symptom of appointment.selfAssessment.symptoms"> {{symptom.description}}</li>
+                                    </ul>
                                 </div>
                                 <div class="col-md">
                                     <button type="button" class="btn btn-warning btn-block"

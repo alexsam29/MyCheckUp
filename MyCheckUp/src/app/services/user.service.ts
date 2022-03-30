@@ -347,6 +347,18 @@ export class UserService {
       );
   }
 
+  getDoctorAppointments(){
+    return this.http
+      .get<any>(this.url + `doctor/appointments`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
   deleteAppointment(appointmentId: string) {
     return this.http
       .put<any>(

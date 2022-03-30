@@ -19,12 +19,14 @@ export class SelfAssessmentComponent implements OnInit, OnDestroy {
   doctor: any;
   complete: boolean = false;
   message: string = '';
+  success: boolean = false;
   id: any;
   desc: any;
   errors: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService
   ) {}
 
@@ -76,7 +78,13 @@ export class SelfAssessmentComponent implements OnInit, OnDestroy {
 
       this.userService
         .sendSelfassessment(assessment, this.appointmentId)
-        .subscribe();
+        .subscribe((res) => {
+          setTimeout(() => {
+            this.success = true;
+            this.message = 'Appointment Confirmed!'
+            this.router.navigate(['dashboard']);
+          }, 3000);
+        });
     }
   }
 }
