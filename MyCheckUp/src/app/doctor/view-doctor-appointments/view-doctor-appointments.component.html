@@ -1,8 +1,8 @@
-<!-- <div *ngIf="user" class="bg-dark">
+<div *ngIf="user" class="bg-dark">
     <br>
     <div class="container">
         <div class="row justify-content-center">
-            <h3 class="col text-white text-center">Appointments</h3>
+            <h3 class="col text-white text-center">View Appointments</h3>
         </div>
         <div *ngFor="let appointment of appointments">
             <div *ngIf="appointment.status != 'cancelled'" class="row justify-content-center">
@@ -15,16 +15,17 @@
                             <h4 class="card-title"> Appointment Details</h4>
                             <div class="row align-items-center">
                                 <div class="col-md">
+                                    <p><b>Patient ID: </b>{{appointment.patientId}}</p>
                                     <p><b>Start Time: </b>{{appointment.startTime.slice(0, -3)}}</p>
                                     <p><b>End Time: </b>{{appointment.endTime.slice(0, -3)}}</p>
                                     <p><b>Status: </b>{{appointment.status}}</p>
-                                    <p><b>Notes: </b>{{appointment.doctorNotes}}</p>
+                                    <p><b>Notes: </b>{{appointment.selfAssessment.notes}}</p>
+                                    <p><b>Symptoms:</b></p>                                    
+                                    <ul>
+                                        <li *ngFor="let symptom of appointment.selfAssessment.symptoms"> {{symptom.description}}</li>
+                                    </ul>
                                 </div>
                                 <div class="col-md">
-                                    <button type="button" class="btn btn-warning btn-block"
-                                        (click)="reschedulePage(appointment.id, appointment.doctorId, appointment.date, appointment.startTime, appointment.endTime)">
-                                        Reschedule
-                                    </button>
                                     <button class="btn btn-danger btn-block"
                                         (click)="deleteAppointment(appointment.id)">Cancel</button>
                                 </div>
@@ -44,4 +45,4 @@
 </div>
 <div *ngIf="errors === true">
     <app-sign-in></app-sign-in>
-</div> -->
+</div>

@@ -9,15 +9,23 @@ import { UserService } from 'src/app/services/user.service';
 export class ViewDoctorAppointmentsComponent implements OnInit {
   user: any;
   appointments: any;
+  errors: boolean = false;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getDoctorProfile().subscribe((profile) => {
       this.user = profile;
+    }, (errors)=>{
+      this.errors = true;
     });
     this.userService.getDoctorAppointments().subscribe((appointments) => {
       this.appointments = appointments;
     });
+  }
+
+  deleteAppointment(appointmentId: string){
+    this.userService.deleteAppointment(appointmentId).subscribe();
+    window.location.reload();
   }
 }
