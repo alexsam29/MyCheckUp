@@ -158,3 +158,12 @@ Bug Fixes:
 
 - Resolved minor routing issues
 
+## [0.5.1] - 2022-03-30
+
+### Web Application
+
+New Features:
+
+- Added patient self-assessment after booking appointment
+- Added ability for a doctor to view all appointments with an option to cancel
+
