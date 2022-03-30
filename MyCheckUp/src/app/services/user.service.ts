@@ -202,14 +202,14 @@ export class UserService {
       );
   }
 
-  getSelfAssessment():Observable<any>{
+  getSelfAssessment(): Observable<any> {
     return this.http
-    .get<any>(this.url + 'symptoms', {withCredentials: true})
-    .pipe(
-      map((res)=>{
-        return res;
-      })
-    );
+      .get<any>(this.url + 'symptoms', { withCredentials: true })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
   }
 
   approveDoctor(doctorID: string): Observable<any> {
@@ -347,6 +347,18 @@ export class UserService {
       );
   }
 
+  getDoctorAppointments(){
+    return this.http
+      .get<any>(this.url + `doctor/appointments`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
   deleteAppointment(appointmentId: string) {
     return this.http
       .put<any>(
@@ -385,11 +397,28 @@ export class UserService {
       );
   }
 
-  getAppointment(id: string){
+  getAppointment(id: string) {
     return this.http
       .get<any>(this.url + `patient/appointments/${id}`, {
         withCredentials: true,
       })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  sendSelfassessment(selfassessment: any, appointmentId: string) {
+    return this.http
+      .post<any>(
+        this.url + `patient/appointments/${appointmentId}/assessment`,
+        {
+          notes: selfassessment.notes,
+          symptomIds: selfassessment.symptomIds,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         map((res) => {
           return res;

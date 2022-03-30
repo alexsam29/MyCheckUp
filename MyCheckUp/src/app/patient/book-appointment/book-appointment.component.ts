@@ -228,8 +228,9 @@ export class BookAppointmentComponent implements OnInit {
             this.success = true;
             this.fail = false;
             this.message = 'Appointment Successfully Booked!';
+            console.log(data);
             setTimeout(() => {
-              this.router.navigate(['dashboard']);
+              this.router.navigate(['self-assessment', data.id]);
             }, 3000);
           },
           (error) => {

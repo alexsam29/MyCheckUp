@@ -26,7 +26,8 @@ import { DashboardDoctorComponent } from './dashboards/dashboard-doctor/dashboar
 import { DashboardAdminComponent } from './dashboards/dashboard-admin/dashboard-admin.component';
 import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
 import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component';
-import { RescheduleAppointmentComponent } from './patient/reschedule-appointment/reschedule-appointment.component'; 
+import { RescheduleAppointmentComponent } from './patient/reschedule-appointment/reschedule-appointment.component';
+import { ViewDoctorAppointmentsComponent } from './doctor/view-doctor-appointments/view-doctor-appointments.component'; 
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { RescheduleAppointmentComponent } from './patient/reschedule-appointment
     DashboardAdminComponent,
     ApproveDoctorsComponent,
     ViewDoctorsComponent,
-    RescheduleAppointmentComponent
+    RescheduleAppointmentComponent,
+    ViewDoctorAppointmentsComponent
   ],
   imports: [
     BrowserModule,
