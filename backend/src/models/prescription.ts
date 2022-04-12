@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { Patient } from './patient'
 import { Doctor } from './doctor'
+import { PStatus } from './prescription_enum'
 
 /**
  * Patient prescription database model.
@@ -43,6 +44,15 @@ export class Prescription {
 
    @Column()
    expiryDate!: Date
+
+   @Column({
+      type: 'enum',
+      enum: PStatus,
+   })
+   status!: PStatus
+
+   @Column()
+   RequestedBy!: Boolean
 
    @ManyToOne(() => Patient, patient => patient.prescriptions, {
       onDelete: 'CASCADE',
