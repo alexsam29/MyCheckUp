@@ -37,7 +37,14 @@ export const PrescriptionController = {
             )
          }
 
-         const date = new Date(req.body.expiryDate)
+         let date: Date
+         if (req.body.expiryDate !== '') {
+            date = new Date(req.body.expiryDate)
+         } else {
+            date = new Date()
+            date.setDate(date.getDate() + 10)
+         }
+
          const status =
             req.session.role === 'patient'
                ? PrescriptionStatus.PENDING

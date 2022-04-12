@@ -8,8 +8,8 @@
  * - `DENIED`
  */
 export enum PrescriptionStatus {
-   PENDING = 'Pending',
-   APPROVED = 'Approved',
-   DENIED = 'Denied',
-   CANCELED = 'Canceled',
+   PENDING = 'pending',
+   APPROVED = 'approved',
+   DENIED = 'denied',
+   CANCELED = 'canceled',
 }
