@@ -5,13 +5,22 @@ import { ApiError } from '../exceptions/api-error'
 import { PrescriptionStatus } from '../models/prescription-status'
 
 export const PrescriptionController = {
-   async getPatientPrescription(req: Request, res: Response, next: NextFunction) {
+   async getPatientPrescriptions(req: Request, res: Response, next: NextFunction) {
       try {
          const { userId: patientId } = req.session
+         const prescriptions = await PrescriptionService.find({ patientId })
 
-         const prescriptions = await PrescriptionService.find({
-            patientId,
-         })
+         return res.status(200).json(prescriptions)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async getDoctorPrescriptions(req: Request, res: Response, next: NextFunction) {
+      try {
+         const { userId: doctorId } = req.session
+         const prescriptions = await PrescriptionService.find({ doctorId })
+
          return res.status(200).json(prescriptions)
       } catch (err: unknown) {
          return next(err)

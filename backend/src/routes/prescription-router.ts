@@ -25,8 +25,29 @@ export const PrescriptionRouter = express.Router()
  */
 PrescriptionRouter.get(
    '/patient/prescriptions',
-   authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
-   PrescriptionController.getPatientPrescription
+   authorize(Role.PATIENT),
+   PrescriptionController.getPatientPrescriptions
+)
+
+/**
+ * @openapi
+ * /doctor/prescriptions:
+ *    get:
+ *      summary: get all doctor prescriptions.
+ *      tags:
+ *          - Doctor
+ *          - Prescription
+ *      description: Get all doctor prescriptions.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.get(
+   '/doctor/prescriptions',
+   authorize(Role.DOCTOR),
+   PrescriptionController.getDoctorPrescriptions
 )
 
 /**
