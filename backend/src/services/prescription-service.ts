@@ -1,16 +1,1 @@
-
-
-
-export const PrescriptionService = {
-
-
-    
-
-
-
-
-
-
-
-
-}
+export const PrescriptionService = {}

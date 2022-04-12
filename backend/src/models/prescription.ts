@@ -8,7 +8,7 @@ import {
 } from 'typeorm'
 import { Patient } from './patient'
 import { Doctor } from './doctor'
-import { PStatus } from './prescription_enum'
+import { PrescriptionStatus } from './prescription-status'
 
 /**
  * Patient prescription database model.
@@ -47,9 +47,10 @@ export class Prescription {
 
    @Column({
       type: 'enum',
-      enum: PStatus,
+      enum: PrescriptionStatus,
+      default: PrescriptionStatus.PENDING,
    })
-   status!: PStatus
+   status!: PrescriptionStatus
 
    @Column()
    RequestedBy!: Boolean

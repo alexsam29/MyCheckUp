@@ -1,11 +1,1 @@
-
-
-export const PrescriptionController = {
-
-
-
-
-    
-
-
-}
+export const PrescriptionController = {}

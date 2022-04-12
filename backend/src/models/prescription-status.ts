@@ -7,7 +7,7 @@
  * - `CANCELLED`
  * - `DENIED`
  */
-export enum PStatus {
+export enum PrescriptionStatus {
    PENDING = 'Pending',
    APPROVED = 'Approved',
    DENIED = 'Denied',
