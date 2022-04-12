@@ -20,6 +20,8 @@ import { PrescriptionStatus } from './prescription-status'
  * - `description` - description of prescribed medicaments.
  * - `numOfRefill` - number of times they can get the drug.
  * - `expiryDate` - date of expiry.
+ * - `status` - prescription status.
+ * - `requestedByPatient` - true if requested by patient.
  * - `patient` - associated patient object.
  * - `doctor` - associated doctor object.
  * - `createdAt` - creation date in the database.
@@ -53,7 +55,7 @@ export class Prescription {
    status!: PrescriptionStatus
 
    @Column()
-   RequestedBy!: Boolean
+   requestedByPatient!: boolean
 
    @ManyToOne(() => Patient, patient => patient.prescriptions, {
       onDelete: 'CASCADE',
