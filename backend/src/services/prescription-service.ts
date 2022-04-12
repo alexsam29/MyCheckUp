@@ -84,7 +84,7 @@ export const PrescriptionService = {
     * @returns Array of found prescriptions.
     */
    async find(
-      searchBy: {
+      searchBy?: {
          patientId?: string
          doctorId?: string
          description?: string

@@ -75,3 +75,63 @@ PrescriptionRouter.post(
    body('expiryDate').optional().isString(),
    PrescriptionController.create
 )
+
+/**
+ * @openapi
+ * /prescriptions:
+ *    get:
+ *      summary: get all prescriptions.
+ *      tags:
+ *          - Prescription
+ *      description: Get all prescriptions.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.get(
+   '/prescriptions',
+   authorize([Role.ADMIN, Role.DOCTOR]),
+   PrescriptionController.getAll
+)
+
+/**
+ * @openapi
+ * /prescriptions/{id}:
+ *    get:
+ *      summary: get prescription by id.
+ *      tags:
+ *          - Prescription
+ *      description: Get prescription by id.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.get(
+   '/prescriptions/:id',
+   authorize([Role.ADMIN, Role.DOCTOR, Role.PATIENT]),
+   PrescriptionController.getPrescriptionById
+)
+
+/**
+ * @openapi
+ * /prescriptions/{id}:
+ *    delete:
+ *      summary: delete prescription by id.
+ *      tags:
+ *          - Prescription
+ *      description: Delete prescription by id. Requires Doctor or Admin authorization.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.delete(
+   '/prescriptions/:id',
+   authorize([Role.ADMIN, Role.DOCTOR]),
+   PrescriptionController.delete
+)

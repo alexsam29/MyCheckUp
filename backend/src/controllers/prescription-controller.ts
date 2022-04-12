@@ -27,6 +27,33 @@ export const PrescriptionController = {
       }
    },
 
+   async getPrescriptionById(req: Request, res: Response, next: NextFunction) {
+      try {
+         const prescription = await PrescriptionService.findById(req.params.id)
+
+         if (
+            req.session.role === 'patient' &&
+            prescription.patientId !== req.session.userId
+         ) {
+            throw ApiError.Forbidden()
+         }
+
+         return res.status(200).json(prescription)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async getAll(_: Request, res: Response, next: NextFunction) {
+      try {
+         const prescriptions = await PrescriptionService.find()
+
+         return res.status(200).json(prescriptions)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
    async create(req: Request, res: Response, next: NextFunction) {
       try {
          const errors = validationResult(req)
@@ -65,6 +92,15 @@ export const PrescriptionController = {
             requestedByPatient: req.session.role === 'patient',
          })
 
+         return res.status(200).json(prescription)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async delete(req: Request, res: Response, next: NextFunction) {
+      try {
+         const prescription = await PrescriptionService.remove(req.params.id)
          return res.status(200).json(prescription)
       } catch (err: unknown) {
          return next(err)
