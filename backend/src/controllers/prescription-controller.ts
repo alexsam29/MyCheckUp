@@ -3,6 +3,8 @@ import { validationResult } from 'express-validator'
 import { PrescriptionService } from '../services/prescription-service'
 import { ApiError } from '../exceptions/api-error'
 import { PrescriptionStatus } from '../models/prescription-status'
+import { GetDoctorPrescriptionsQuery } from './utils/queries'
+import { paramToInt } from '../common/utils'
 
 export const PrescriptionController = {
    async getPatientPrescriptions(req: Request, res: Response, next: NextFunction) {
@@ -16,10 +18,31 @@ export const PrescriptionController = {
       }
    },
 
-   async getDoctorPrescriptions(req: Request, res: Response, next: NextFunction) {
+   async getDoctorPrescriptions(
+      req: Request<unknown, unknown, unknown, GetDoctorPrescriptionsQuery>,
+      res: Response,
+      next: NextFunction
+   ) {
       try {
+         const offset = paramToInt(req.query.offset) || 0
+         const limit = paramToInt(req.query.limit) || 10
          const { userId: doctorId } = req.session
-         const prescriptions = await PrescriptionService.find({ doctorId })
+         const patientId = req.query.patientId
+         const status = req.query.status
+
+         const searchBy: { [key: string]: any } = {}
+         searchBy.doctorId = doctorId
+         if (patientId !== undefined) {
+            if (!patientId.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)) {
+               throw ApiError.BadRequest('Invalid patient id')
+            }
+            searchBy.patientId = patientId
+         }
+         if (status !== undefined) {
+            searchBy.status = status
+         }
+
+         const prescriptions = await PrescriptionService.find(searchBy, { offset, limit })
 
          return res.status(200).json(prescriptions)
       } catch (err: unknown) {
