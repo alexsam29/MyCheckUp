@@ -7,7 +7,7 @@ export const PrescriptionController = {
          const { userId: patientId } = req.session
 
          const prescriptions = await PrescriptionService.find({
-            patientId
+            patientId,
          })
          return res.status(200).json(prescriptions)
       } catch (err: unknown) {

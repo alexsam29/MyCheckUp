@@ -156,5 +156,5 @@ export const PrescriptionService = {
       }
 
       return getRepository(Prescription).remove(presc)
-   }
+   },
 }

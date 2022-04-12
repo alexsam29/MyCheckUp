@@ -27,5 +27,3 @@ PrescriptionRouter.get(
    authorize([Role.PATIENT, Role.DOCTOR, Role.ADMIN]),
    PrescriptionController.getPatientPrescription
 )
-
-
