@@ -71,8 +71,8 @@ PrescriptionRouter.post(
    body('doctorId').notEmpty().isUUID,
    body('description').isString().isLength({ min: 1, max: 255 }),
    body('numOfRefill').notEmpty().isInt(),
-   body('status').notEmpty(),
    body('requestedByPatient').notEmpty().isBoolean(),
+   body('status').optional().isString(),
    body('expiryDate').optional().isString(),
    PrescriptionController.create
 )
