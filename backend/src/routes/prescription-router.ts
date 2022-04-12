@@ -33,10 +33,10 @@ PrescriptionRouter.get(
  * @openapi
  * /prescriptions:
  *   post:
- *     summary: register admin
+ *     summary: create new prescription
  *     tags:
  *       - Prescription
- *     description: Create prescrition either as Doctor or as Patient.
+ *     description: Create prescription either as Doctor or as Patient.
  *     security:
  *       - cookieAuth: []
  *     responses:

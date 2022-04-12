@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { validationResult } from 'express-validator'
 import { PrescriptionService } from '../services/prescription-service'
 import { ApiError } from '../exceptions/api-error'
-import { PrescriptionStatus } from 'models/prescription-status'
+import { PrescriptionStatus } from '../models/prescription-status'
 
 export const PrescriptionController = {
    async getPatientPrescription(req: Request, res: Response, next: NextFunction) {
