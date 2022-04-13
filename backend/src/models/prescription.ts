@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { Patient } from './patient'
 import { Doctor } from './doctor'
+import { PrescriptionStatus } from './prescription-status'
 
 /**
  * Patient prescription database model.
@@ -19,6 +20,8 @@ import { Doctor } from './doctor'
  * - `description` - description of prescribed medicaments.
  * - `numOfRefill` - number of times they can get the drug.
  * - `expiryDate` - date of expiry.
+ * - `status` - prescription status.
+ * - `requestedByPatient` - true if requested by patient.
  * - `patient` - associated patient object.
  * - `doctor` - associated doctor object.
  * - `createdAt` - creation date in the database.
@@ -43,6 +46,16 @@ export class Prescription {
 
    @Column()
    expiryDate!: Date
+
+   @Column({
+      type: 'enum',
+      enum: PrescriptionStatus,
+      default: PrescriptionStatus.PENDING,
+   })
+   status!: PrescriptionStatus
+
+   @Column()
+   requestedByPatient!: boolean
 
    @ManyToOne(() => Patient, patient => patient.prescriptions, {
       onDelete: 'CASCADE',
