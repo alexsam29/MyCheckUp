@@ -62,13 +62,14 @@
       "express": "^4.17.1",
       "express-session": "^1.17.2",
       "express-validator": "^6.13.0",
+      "jsdoc": "^3.6.10",
       "nodemailer": "^6.7.2",
       "pg": "^8.7.1",
       "reflect-metadata": "^0.1.13",
       "swagger-jsdoc": "^6.1.0",
       "swagger-ui-express": "^4.3.0",
       "toml": "^3.0.0",
-      "typeorm": "^0.2.41",
+      "typeorm": "^0.2.45",
       "winston": "^3.3.3"
    }
 }
