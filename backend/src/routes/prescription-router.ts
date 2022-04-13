@@ -118,6 +118,27 @@ PrescriptionRouter.get(
 
 /**
  * @openapi
+ * /prescriptions/{id}/status:
+ *    put:
+ *      summary: set prescription status (i.e., approve).
+ *      tags:
+ *          - Prescription
+ *      description: Set prescription status.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.put(
+   '/prescriptions/:id/status',
+   authorize([Role.ADMIN, Role.DOCTOR]),
+   body('status').notEmpty().isString(),
+   PrescriptionController.setStatus
+)
+
+/**
+ * @openapi
  * /prescriptions/{id}:
  *    delete:
  *      summary: delete prescription by id.

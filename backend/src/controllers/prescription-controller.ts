@@ -33,7 +33,11 @@ export const PrescriptionController = {
          const searchBy: { [key: string]: any } = {}
          searchBy.doctorId = doctorId
          if (patientId !== undefined) {
-            if (!patientId.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)) {
+            if (
+               !patientId.match(
+                  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+               )
+            ) {
                throw ApiError.BadRequest('Invalid patient id')
             }
             searchBy.patientId = patientId
@@ -42,7 +46,10 @@ export const PrescriptionController = {
             searchBy.status = status
          }
 
-         const prescriptions = await PrescriptionService.find(searchBy, { offset, limit })
+         const prescriptions = await PrescriptionService.find(searchBy, {
+            offset,
+            limit,
+         })
 
          return res.status(200).json(prescriptions)
       } catch (err: unknown) {
@@ -115,6 +122,18 @@ export const PrescriptionController = {
             requestedByPatient: req.session.role === 'patient',
          })
 
+         return res.status(200).json(prescription)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async setStatus(req: Request, res: Response, next: NextFunction) {
+      try {
+         const prescription = await PrescriptionService.update({
+            id: req.params.id,
+            status: req.body.status,
+         })
          return res.status(200).json(prescription)
       } catch (err: unknown) {
          return next(err)
