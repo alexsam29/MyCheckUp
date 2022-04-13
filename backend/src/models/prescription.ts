@@ -54,7 +54,9 @@ export class Prescription {
    })
    status!: PrescriptionStatus
 
-   @Column()
+   @Column({
+      nullable: true,
+   })
    requestedByPatient!: boolean
 
    @ManyToOne(() => Patient, patient => patient.prescriptions, {
