@@ -17,7 +17,7 @@ import { BookAppointmentComponent } from './patient/book-appointment/book-appoin
 import { SelfAssessmentComponent } from './patient/self-assessment/self-assessment.component';
 import { PrescriptionComponent } from './patient/prescription/prescription.component';
 import { ViewAppointmentsComponent } from './patient/view-appointments/view-appointments.component';
-import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
+import { ViewPrescriptionsComponent } from './doctor/view-prescriptions/view-prescriptions.component';
 import { CreatePatientComponent } from './sign-up-page/create-patient/create-patient.component';
 import { CreateDoctorComponent } from './sign-up-page/create-doctor/create-doctor.component';
 import { CreateAdminComponent } from './sign-up-page/create-admin/create-admin.component';

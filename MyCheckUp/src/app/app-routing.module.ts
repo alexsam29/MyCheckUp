@@ -10,7 +10,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SelfAssessmentComponent } from './patient/self-assessment/self-assessment.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ViewAppointmentsComponent } from './patient/view-appointments/view-appointments.component';
-import { ViewPrescriptionsComponent } from './view-prescriptions/view-prescriptions.component';
+import { ViewPrescriptionsComponent } from './doctor/view-prescriptions/view-prescriptions.component';
 import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors.component';
 import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component';
 import { RescheduleAppointmentComponent } from './patient/reschedule-appointment/reschedule-appointment.component';
