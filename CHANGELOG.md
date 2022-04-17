@@ -158,3 +158,27 @@ Bug Fixes:
 
 - Resolved minor routing issues
 
+## [0.5.1] - 2022-03-30
+
+### Web Application
+
+New Features:
+
+- Added patient self-assessment after booking appointment
+- Added ability for a doctor to view all appointments with an option to cancel
+
+## [0.6.0] - 2022-04-13
+
+### Backend API
+
+New Features:
+
+- Doctors can issue prescriptions to patients
+- Patients can request prescriptions from doctors
+- Doctors can approve or deny requested prescriptions
+- Doctors can view prescriptions issued by them
+- Patients can view prescriptions they received and requested
+
+Improvements:
+
+- Added status field to the Prescription model
