@@ -1,1 +1,115 @@
-<p>view-prescriptions works!</p>
+<div *ngIf="user" class="bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center">Prescriptions</h3>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal"
+                    data-target="#exampleModal">
+                    New Prescription
+                </button>
+            </div>
+        </div>
+        <br>
+        <div *ngFor="let prescription of prescriptions">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card border-primary rounded bg-light">
+                        <div class="card-header border-dark">
+                            <h4 class="card-subtitle">Prescription Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <!-- <h4 class="card-title"> Prescription Details</h4> -->
+                            <div class="row align-items-center">
+                                <div class="col-md">
+                                    <p><b>Patient: </b>{{prescription.patient.firstName}} {{prescription.patient.lastName}}</p>
+                                    <p><b>Patient Email: </b>{{prescription.patient.email}}</p>
+                                    <p><b>Description: </b>{{prescription.description}}</p>
+                                    <p><b>Number of Refills: </b>{{prescription.numOfRefill}}</p>
+                                    <p><b>Status: </b>{{prescription.status}}</p>
+                                    <p><b>Date Prescribed: </b>{{prescription.createdAt.slice(0, 10)}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <button *ngIf="prescription.status === 'pending'" class="btn btn-success btn-block"
+                                        (click)="approve(prescription.id)">Approve</button>
+                                    <button class="btn btn-danger btn-block"
+                                        (click)="deletePrescription(prescription.id)">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <button routerLink="/dashboard" routerLinkActive="active" type="button"
+                    class="cancelbtn btn-danger btn-lg btn-block">Go Back</button>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Prescription</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form ngNativeValidate #prescriptionForm="ngForm" (ngSubmit)="onSubmit(prescriptionForm)" class="p-3"
+                action="#" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="patientEmail">Patient Email</label><br>
+                        <input required ngModel name="patientEmail" type="email" class="form-control"
+                            placeholder="Enter Patient Email" #patientEmail="ngModel">
+                        <div class="alert alert-danger" *ngIf="patientEmail.touched && patientEmail.invalid">
+                            Patient Email is
+                            Required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label><br>
+                        <input required ngModel name="description" type="text" class="form-control"
+                            placeholder="Enter Description of Prescription" #description="ngModel">
+                        <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+                            Description is
+                            Required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="numOfRefill">Number of Refills</label><br>
+                        <input required ngModel name="numOfRefill" type="number" class="form-control"
+                            placeholder="Enter Number of Refills Allowed" #numOfRefill="ngModel">
+                        <div class="alert alert-danger" *ngIf="numOfRefill.touched && numOfRefill.invalid">
+                            Number is
+                            Required</div>
+                    </div>
+                </div>
+                <div *ngIf="!success" class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                    <button type="submit" class="btn btn-success">Create Prescription</button>
+                </div>
+                <div *ngIf="success" class="modal-footer">
+                    <!-- <button disabled type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                    <button disabled type="submit" class="btn btn-success">Create Prescription</button> -->
+                    <div class="alert alert-success" role="alert">
+                        {{message}}
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
+</div>

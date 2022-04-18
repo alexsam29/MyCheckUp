@@ -6,7 +6,12 @@
         </div>
         <div *ngIf="user.active; else elseBlock">
             <div class="row justify-content-end">
-                <button routerLink="/view-doctor-appointments"class="col btn btn-primary btn-lg">View Appointments</button>
+                <div class="col p-3">
+                    <button routerLink="/view-doctor-appointments"class="col btn btn-primary btn-lg">View Appointments</button>
+                </div>
+                <div class="col p-3">
+                    <button routerLink="/view-prescriptions"class="col btn btn-primary btn-lg">View Patient Prescriptions</button>
+                </div>
             </div>
         </div>
         <ng-template #elseBlock>
