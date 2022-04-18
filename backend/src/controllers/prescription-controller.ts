@@ -113,7 +113,7 @@ export const PrescriptionController = {
          }
 
          const prescription = await PrescriptionService.create({
-            patientId: req.body.patientId,
+            patientEmail: req.body.patientEmail,
             doctorId: req.body.doctorId,
             description: req.body.description,
             numOfRefill: req.body.numOfRefill,
