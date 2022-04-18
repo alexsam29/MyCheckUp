@@ -61,6 +61,7 @@ export class Prescription {
 
    @ManyToOne(() => Patient, patient => patient.prescriptions, {
       onDelete: 'CASCADE',
+      eager: true,
    })
    patient!: Patient
 
