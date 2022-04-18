@@ -24,8 +24,9 @@ export const PatientService = {
 
       // Check for existing email.
       const found = await repository.findOne({ email: patientData.email })
-      if (found)
-         throw ApiError.BadRequest('Patient account with this email already exists!')
+      if (found) {
+         throw ApiError.BadRequest('Patient account with this email already exists')
+      }
 
       // Create new patient
       const newPatient = new Patient()
@@ -104,7 +105,7 @@ export const PatientService = {
       // Find pateint account by id:
       const patient = await repository.findOne(patientData.id)
 
-      if (!patient) throw ApiError.NotFound('Pateint not found')
+      if (!patient) throw ApiError.NotFound('Patient not found')
 
       if (patientData.password)
          patient.password = await bcrypt.hash(patientData.password, 10)
@@ -141,8 +142,9 @@ export const PatientService = {
          take: limit,
       })
 
-      if (!patients || !patients.length)
+      if (!patients || !patients.length) {
          throw ApiError.NotFound(`No patient profiles were found`)
+      }
 
       return patients
    },
@@ -174,7 +176,9 @@ export const PatientService = {
          where: searchBy,
       })
 
-      if (!patient) throw ApiError.NotFound('Patient account not found')
+      if (!patient) {
+         throw ApiError.NotFound('Patient account not found')
+      }
 
       // No need to reset password, because we didn't specify it in select, so it'll be empty
       return patient

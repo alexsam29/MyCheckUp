@@ -67,7 +67,7 @@ PrescriptionRouter.get(
 PrescriptionRouter.post(
    '/prescriptions',
    authorize([Role.DOCTOR, Role.PATIENT]),
-   body('patientId').notEmpty().isString(),
+   body('patientEmail').notEmpty().isEmail(),
    body('doctorId').notEmpty().isString(),
    body('description').isString().isLength({ min: 1, max: 255 }),
    body('numOfRefill').notEmpty().isInt(),
