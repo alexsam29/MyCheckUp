@@ -15,6 +15,7 @@ import { ApproveDoctorsComponent } from './admin/approve-doctors/approve-doctors
 import { ViewDoctorsComponent } from './admin/view-doctors/view-doctors.component';
 import { RescheduleAppointmentComponent } from './patient/reschedule-appointment/reschedule-appointment.component';
 import { ViewDoctorAppointmentsComponent } from './doctor/view-doctor-appointments/view-doctor-appointments.component';
+import { ViewPrescriptionComponent } from './patient/view-prescription/view-prescription.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'view-prescriptions',
     component: ViewPrescriptionsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-prescription',
+    component: ViewPrescriptionComponent,
     canActivate: [AuthGuard],
   },
   {

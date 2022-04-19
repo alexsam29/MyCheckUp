@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
   /* url = 'https://mycheckup-api.herokuapp.com/'; */
-  url = 'http://localhost:5000/';
+  url = 'http://localhost:5050/';
 
   constructor(private http: HttpClient) {}
   editprofile(
@@ -423,6 +423,16 @@ export class UserService {
           return res;
         })
       );
+  }
+
+  getAllPatientPrescriptions(){
+    return this.http.get<any>(this.url + `patient/prescriptions`,{withCredentials:true,
+    })
+    .pipe(
+      map((res)=>{
+        return res;
+      })
+    );
   }
 
   getAllDoctorPrecriptions(){
