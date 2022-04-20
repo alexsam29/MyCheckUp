@@ -169,6 +169,13 @@ New Features:
 
 ## [0.6.0] - 2022-04-13
 
+### Web Application
+
+New Features:
+
+- Added ability for a Doctor to view all patient prescriptions, create new ones, and approve patient refill requests
+- Added ability for Patient to view all their current prescriptions and request a new refill
+
 ### Backend API
 
 New Features:
