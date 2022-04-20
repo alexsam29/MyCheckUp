@@ -1,0 +1,59 @@
+<div class="bg-dark">
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="col text-white text-center">Prescriptions</h3>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+        </div>
+        <br>
+        <div *ngFor="let prescription of prescriptions">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card border-primary rounded bg-light">
+                        <div class="card-header border-dark">
+                            <h4 class="card-subtitle">Prescription Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md">
+                                    <p><b>Prescription Date: </b>{{prescription.createdAt.slice(0,10)}}</p>
+                                    <p><b>Doctor ID: </b>{{prescription.doctorId}}</p>
+                                    <p><b>Patient: </b>{{prescription.patient.firstName}}
+                                        {{prescription.patient.lastName}}</p>
+                                    <p><b>Patient Email: </b>{{prescription.patient.email}}</p>
+                                    <p><b>Description: </b>{{prescription.description}}</p>
+                                    <p><b>Number of Refills: </b>{{prescription.numOfRefill}}</p>
+                                    <p><b>Status: </b>{{prescription.status}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <button *ngIf="prescription.numOfRefill > 0" class="btn btn-success btn-block"
+                                        (click)="requestRefill(prescription.id)">Request Refill</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <button routerLink="/dashboard" routerLinkActive="active" type="button"
+                    class="cancelbtn btn-danger btn-lg btn-block">Go Back</button>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+
+
+
+
+
+<div *ngIf="errors === true">
+    <app-sign-in></app-sign-in>
+</div>

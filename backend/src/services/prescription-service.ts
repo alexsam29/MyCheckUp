@@ -15,7 +15,7 @@ export const PrescriptionService = {
     * @returns Created prescription.
     */
    async create(dto: {
-      patientId: string
+      patientEmail: string
       doctorId: string
       description: string
       numOfRefill: number
@@ -24,7 +24,7 @@ export const PrescriptionService = {
       requestedByPatient: boolean
    }): Promise<Prescription> {
       const [patient, doctor] = await Promise.all([
-         PatientService.findOne({ id: dto.patientId }),
+         PatientService.findOne({ email: dto.patientEmail }),
          DoctorService.findOne({ id: dto.doctorId }),
       ])
 

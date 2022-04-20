@@ -67,7 +67,7 @@ PrescriptionRouter.get(
 PrescriptionRouter.post(
    '/prescriptions',
    authorize([Role.DOCTOR, Role.PATIENT]),
-   body('patientId').notEmpty().isString(),
+   body('patientEmail').notEmpty().isEmail(),
    body('doctorId').notEmpty().isString(),
    body('description').isString().isLength({ min: 1, max: 255 }),
    body('numOfRefill').notEmpty().isInt(),
@@ -135,6 +135,26 @@ PrescriptionRouter.put(
    authorize([Role.ADMIN, Role.DOCTOR]),
    body('status').notEmpty().isString(),
    PrescriptionController.setStatus
+)
+
+/**
+ * @openapi
+ * /prescriptions/{id}/refill:
+ *    put:
+ *      summary: request the refill.
+ *      tags:
+ *          - Prescription
+ *      description: Request the refill.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.put(
+   '/prescriptions/:id/refill',
+   authorize([Role.PATIENT]),
+   PrescriptionController.requestRefill
 )
 
 /**

@@ -33,7 +33,6 @@ export class ViewAppointmentsComponent implements OnInit {
             );
           },
           (error) => {
-            this.errors = true;
           }
         );
       },

@@ -113,7 +113,7 @@ export const PrescriptionController = {
          }
 
          const prescription = await PrescriptionService.create({
-            patientId: req.body.patientId,
+            patientEmail: req.body.patientEmail,
             doctorId: req.body.doctorId,
             description: req.body.description,
             numOfRefill: req.body.numOfRefill,
@@ -130,11 +130,35 @@ export const PrescriptionController = {
 
    async setStatus(req: Request, res: Response, next: NextFunction) {
       try {
+         const errors = validationResult(req)
+         if (!errors.isEmpty()) {
+            throw ApiError.BadRequest(
+               'Invalid data in the request body',
+               errors.array()
+            )
+         }
+
          const prescription = await PrescriptionService.update({
             id: req.params.id,
             status: req.body.status,
          })
+
          return res.status(200).json(prescription)
+      } catch (err: unknown) {
+         return next(err)
+      }
+   },
+
+   async requestRefill(req: Request, res: Response, next: NextFunction) {
+      try {
+         const prescription = await PrescriptionService.findById(req.params.id)
+         const updated = await PrescriptionService.update({
+            id: prescription.id,
+            status: 'pending' as any,
+            numOfRefill: prescription.numOfRefill + 1,
+         })
+
+         return res.status(200).json(updated)
       } catch (err: unknown) {
          return next(err)
       }

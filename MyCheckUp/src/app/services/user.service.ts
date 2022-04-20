@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
   /* url = 'https://mycheckup-api.herokuapp.com/'; */
-  url = 'http://localhost:5000/';
+  url = 'http://localhost:5050/';
 
   constructor(private http: HttpClient) {}
   editprofile(
@@ -213,7 +213,6 @@ export class UserService {
   }
 
   approveDoctor(doctorID: string): Observable<any> {
-    console.log(doctorID);
     return this.http
       .put<any>(
         this.url + `admin/doctors/${doctorID}/activate`,
@@ -419,6 +418,87 @@ export class UserService {
         },
         { withCredentials: true }
       )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  getAllPatientPrescriptions(){
+    return this.http.get<any>(this.url + `patient/prescriptions`,{withCredentials:true,
+    })
+    .pipe(
+      map((res)=>{
+        return res;
+      })
+    );
+  }
+
+  getAllDoctorPrecriptions(){
+    return this.http
+      .get<any>(this.url + `doctor/prescriptions`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  createPrecription(patientEmail: string, doctorID: string, description: string, refill: number){
+    return this.http
+      .post<any>(
+        this.url + `prescriptions`,
+        {
+          patientEmail: patientEmail,
+          doctorId: doctorID,
+          description: description,
+          numOfRefill: refill
+        },
+        { withCredentials: true }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  deletePrescription(id: string){
+    return this.http
+      .delete<any>(this.url + `prescriptions/${id}`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  approvePrescription(id: string){
+    return this.http
+      .put<any>(
+        this.url + `prescriptions/${id}/status`,
+        {
+          status: 'approved'
+        },
+        { withCredentials: true }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  requestRefill(id: string){
+    return this.http
+      .put<any>(this.url + `prescriptions/${id}/refill`,{}, {
+        withCredentials: true,
+      })
       .pipe(
         map((res) => {
           return res;
