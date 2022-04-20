@@ -155,8 +155,7 @@ export const PrescriptionController = {
          const updated = await PrescriptionService.update({
             id: prescription.id,
             status: 'pending' as any,
-            numOfRefill:
-               prescription.numOfRefill > 0 ? prescription.numOfRefill - 1 : 0,
+            numOfRefill: prescription.numOfRefill + 1,
          })
 
          return res.status(200).json(updated)
