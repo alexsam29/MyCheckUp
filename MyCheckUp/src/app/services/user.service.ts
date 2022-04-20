@@ -496,7 +496,7 @@ export class UserService {
 
   requestRefill(id: string){
     return this.http
-      .delete<any>(this.url + `prescriptions/${id}`, {
+      .put<any>(this.url + `prescriptions/${id}/refill`,{}, {
         withCredentials: true,
       })
       .pipe(
