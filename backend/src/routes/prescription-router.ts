@@ -139,6 +139,26 @@ PrescriptionRouter.put(
 
 /**
  * @openapi
+ * /prescriptions/{id}/refill:
+ *    put:
+ *      summary: request the refill.
+ *      tags:
+ *          - Prescription
+ *      description: Request the refill.
+ *      security:
+ *          - cookieAuth: []
+ *      responses:
+ *          200:
+ *              description: OK
+ */
+PrescriptionRouter.put(
+   '/prescriptions/:id/refill',
+   authorize([Role.PATIENT]),
+   PrescriptionController.requestRefill
+)
+
+/**
+ * @openapi
  * /prescriptions/{id}:
  *    delete:
  *      summary: delete prescription by id.
