@@ -20,5 +20,9 @@ export class ViewPrescriptionComponent implements OnInit {
     console.log(this.prescriptions);
   });
 }
+requestRefill(id: string){
+  this.userService.requestRefill(id).subscribe();
+    window.location.reload();
+}
 
 }

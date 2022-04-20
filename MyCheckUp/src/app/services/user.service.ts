@@ -493,4 +493,16 @@ export class UserService {
         })
       );
   }
+
+  requestRefill(id: string){
+    return this.http
+      .delete<any>(this.url + `prescriptions/${id}`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 }
